@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ĐỀ THI THỬ SỐ 3 NĂM 2025 - TOÁN 12</title>
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] } };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+.quiz-container { width: 100%; max-width: 850px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; border-top: 8px solid #1a73e8; }
+.exam-code { position: absolute; top: 20px; right: 20px; border: 2px solid #333; padding: 5px 15px; font-weight: bold; background: #fff; }
+.header-box { text-align: center; margin-bottom: 30px; border-bottom: 2px dashed #ddd; padding-bottom: 25px; }
+.student-info { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
+.info-input { padding: 10px 15px; border: 2px solid #ccc; border-radius: 8px; font-size: 1.05rem; width: 220px; outline: none; transition: 0.3s border-color; font-family: inherit; }
+.info-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }
+.part-title { background: #1a73e8; color: white; padding: 12px; border-radius: 8px; margin: 35px 0 20px 0; font-weight: bold; text-transform: uppercase; }
+.storage { counter-reset: cauNum; min-height: 100px; }
+.question-card { background: #fff; padding: 22px; border: 1px solid #eee; border-radius: 12px; margin-bottom: 25px; display: block; }
+.q-text { font-weight: bold; font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; line-height: 1.6; }
+.q-text::before { counter-increment: cauNum; content: "Câu " counter(cauNum) ": "; color: #1a73e8; }
+mjx-container { display: inline-block !important; white-space: nowrap !important; vertical-align: middle; }
+.options-list { counter-reset: optNum; list-style: none; padding: 0; }
+.option-item { display: flex; align-items: center; padding: 10px; border: 1px solid #e8e8e8; border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.3s; }
+.option-item:hover { background: #f0f7ff; border-color: #1a73e8; }
+.label-badge::before { counter-increment: optNum; content: counter(optNum, upper-alpha) "."; }
+.label-badge { font-weight: bold; min-width: 30px; height: 30px; background: #f0f0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; }
+.tf-table { width: 100%; border-collapse: collapse; }
+.statement { padding: 10px 0; width: 65%; font-size: 1rem; color: #34495e; font-weight: normal; }
+.choice-group { display: flex; gap: 15px; justify-content: flex-end; }
+.choice-group label { padding: 6px 12px; border-radius: 6px; border: 1px solid transparent; cursor: pointer; transition: 0.3s; }
+
+.short-answer-input { width: 100%; max-width: 250px; padding: 12px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 1.1rem; margin-top: 10px; outline: none; transition: 0.3s; font-weight: bold; color: #1a73e8; }
+.short-answer-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }
+.submit-btn { width: 100%; padding: 20px; background: #28a745; color: white; border: none; border-radius: 12px; font-size: 1.3rem; font-weight: bold; cursor: pointer; margin-top: 40px; }
+.explanation { margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid #1a73e8; border-radius: 8px; display: none; font-size: 1.05rem; color: #333; line-height: 1.6; }
+
+/* CSS TÔ MÀU ĐÁP ÁN ĐÚNG / SAI */
+.correct-ans { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724 !important; }
+.wrong-ans { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24 !important; }
+.correct-input { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724 !important; }
+.wrong-input { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24 !important; }
+</style>
+</head>
+<body>
+<div class="quiz-container">
+<div class="exam-code">Mã đề: <span id="ma-de-id">...</span></div>
+
+<div class="header-box">
+<p style="margin:0; font-weight: bold; color: #555;">KỲ THI KHẢO SÁT CHẤT LƯỢNG</p>
+<h1 style="margin:10px 0; color:#1a73e8; font-size: 1.7rem;">ĐỀ THI THỬ SỐ 3 NĂM 2025</h1>
+<p>Môn thi: <b>TOÁN 12</b></p>
+<p><i>Thời gian làm bài: 90 phút (không kể thời gian phát đề)</i></p>
+
+<!-- Thêm input nhập SBD và Họ tên -->
+<div class="student-info">
+    <input type="text" id="ho-ten" class="info-input" placeholder="Nhập Họ và tên...">
+    <input type="text" id="so-bao-danh" class="info-input" placeholder="Nhập Số báo danh...">
+</div>
+</div>
+
+<!-- PHẦN 1 -->
+<div class="part-title">PHẦN I. Câu trắc nghiệm nhiều phương án (12 câu)</div>
+<div id="part1-storage" class="storage">
+
+    <div class="question-card">
+        <div class="q-text">Cho hàm số \( y=f(x) \) có đồ thị trên đoạn \( [-2\pi; 2\pi] \) như hình vẽ. Số nghiệm của phương trình \( f(x) = \frac{1}{2} \) trên đoạn \( [-2\pi; 2\pi] \) là</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q1" data-answer="true"> <span class="label-badge"></span> &nbsp; 4.</label>
+            <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; 3.</label>
+            <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; 2.</label>
+            <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; 6.</label>
+        </div>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Đề bài yêu cầu tìm số nghiệm của phương trình \( f(x) = \frac{1}{2} \).<br>
+        - Phương pháp: Ta kẻ một đường thẳng nằm ngang có phương trình \( y = \frac{1}{2} \) (đường này nằm giữa trục hoành \( y=0 \) và đường \( y=1 \)).<br>
+        - Quan sát trên đồ thị, đường thẳng này sẽ cắt đồ thị hàm số \( y = f(x) \) tại đúng <b>4 điểm phân biệt</b>.<br>
+        - Số giao điểm chính là số nghiệm của phương trình. Vậy có 4 nghiệm. Chọn A.</div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Cho cấp số nhân \( (u_n) \) có \( u_1=3 \) với \( u_2=1 \). Công bội của cấp số nhân \( (u_n) \) bằng</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q2" data-answer="true"> <span class="label-badge"></span> &nbsp; \( \frac{1}{3} \).</label>
+            <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( 3 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( -3 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( -\frac{1}{3} \).</label>
+        </div>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Công thức của cấp số nhân: Số hạng sau bằng số hạng trước nhân với công bội \( q \), tức là \( u_2 = u_1 \times q \).<br>
+        - Từ đó ta suy ra: \( q = \frac{u_2}{u_1} \).<br>
+        - Thay số vào ta có: \( q = \frac{1}{3} \). Chọn A.</div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Đạo hàm của hàm số \( y = 3^x \) là</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q3" data-answer="true"> <span class="label-badge"></span> &nbsp; \( y' = 3^x \ln 3 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \( y' = \frac{3^x}{\ln 3} \).</label>
+            <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \( y' = x \cdot 3^{x-1} \).</label>
+            <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \( y' = 3^x \).</label>
+        </div>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Các em cần nhớ công thức tính đạo hàm của hàm số mũ cơ bản: \( (a^x)' = a^x \cdot \ln a \).<br>
+        - Ở bài này, cơ số \( a = 3 \). Áp dụng đúng công thức ta được: \( y' = 3^x \cdot \ln 3 \). Chọn A.<br>
+        - <i>Lưu ý tránh nhầm lẫn với đạo hàm hàm lũy thừa \( (x^n)' = n \cdot x^{n-1} \) (Đáp án C bị sai ở lỗi này).</i></div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Cho hàm số \( y=f(x) \) có đồ thị như hình vẽ. Giá trị cực tiểu của hàm số đã cho bằng</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q4" data-answer="true"> <span class="label-badge"></span> &nbsp; \( -2 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \( 2 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \( 3 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \( 1 \).</label>
+        </div>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Điểm cực tiểu trên đồ thị là "điểm lõm xuống" (hình chữ V).<br>
+        - <b>"Giá trị cực tiểu"</b> tức là hỏi về <b>\( y_{CĐ} \)</b> hoặc <b>\( y_{CT} \)</b> (chiếu sang trục tung Oy). Nếu đề hỏi "Điểm cực tiểu của hàm số" thì mới chiếu xuống trục Ox.<br>
+        - Quan sát đồ thị, tại chỗ lõm xuống thấp nhất, chiếu sang trục tung Oy ta thấy \( y = -2 \). Do đó giá trị cực tiểu bằng -2. Chọn A.</div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Trong không gian \( Oxyz \), cho hai véctơ \( \vec{u} = (1; 1; 0) \) và \( \vec{v} = (0; 1; 1) \). Số đo của góc giữa hai vectơ \( \vec{u} \) và \( \vec{v} \) là</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q5" data-answer="true"> <span class="label-badge"></span> &nbsp; \( 60^\circ \).</label>
+            <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; \( 30^\circ \).</label>
+            <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; \( 45^\circ \).</label>
+            <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; \( 90^\circ \).</label>
+        </div>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Công thức tính cosin góc giữa 2 véctơ: \( \cos(\vec{u}, \vec{v}) = \frac{\text{Tích vô hướng}}{\text{Tích độ dài}} = \frac{x_1 x_2 + y_1 y_2 + z_1 z_2}{\sqrt{x_1^2+y_1^2+z_1^2} \cdot \sqrt{x_2^2+y_2^2+z_2^2}} \).<br>
+        - Tích vô hướng: \( 1\cdot0 + 1\cdot1 + 0\cdot1 = 1 \).<br>
+        - Độ dài \( |\vec{u}| = \sqrt{1^2+1^2+0^2} = \sqrt{2} \). Độ dài \( |\vec{v}| = \sqrt{0^2+1^2+1^2} = \sqrt{2} \).<br>
+        - Do đó: \( \cos(\vec{u}, \vec{v}) = \frac{1}{\sqrt{2} \cdot \sqrt{2}} = \frac{1}{2} \).<br>
+        - Bấm máy tính <code>SHIFT COS (1/2)</code> ta được góc là \( 60^\circ \). Chọn A.</div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Thống kê chiều cao (đơn vị: centimet) của 100 học sinh nữ lớp 12, được bảng tần số ghép nhóm như sau: \( [155; 160) \): 7; \( [160; 165) \): 43; \( [165; 170) \): 39; \( [170; 175) \): 11. Tần số tích luỹ của nhóm \( [160; 165) \) là</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q6" data-answer="true"> <span class="label-badge"></span> &nbsp; 50.</label>
+            <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; 43.</label>
+            <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; 89.</label>
+            <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; 7.</label>
+        </div>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - <b>Tần số tích lũy</b> của một nhóm là tổng tần số của chính nhóm đó cộng với tần số của tất cả các nhóm đứng phía trước nó.<br>
+        - Tần số của nhóm \( [160; 165) \) là 43.<br>
+        - Nhóm đứng trước nó là \( [155; 160) \) có tần số là 7.<br>
+        - Vậy tần số tích lũy của nhóm \( [160; 165) \) là: \( 7 + 43 = 50 \). Chọn A.</div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Cho hàm số \( f(x) = \cos x \), trong các khẳng định sau khẳng định nào đúng?</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q7" data-answer="true"> <span class="label-badge"></span> &nbsp; \( \int \cos x \, dx = \sin x + C \).</label>
+            <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \( \int \cos x \, dx = -\sin x + C \).</label>
+            <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \( \int \cos x \, dx = \cos x + C \).</label>
+            <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \( \int \cos x \, dx = \frac{1}{\sin x} + C \).</label>
+        </div>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Câu này yêu cầu các em thuộc lòng bảng nguyên hàm cơ bản.<br>
+        - Ta biết rằng đạo hàm của hàm số \( \sin x \) là \( \cos x \) (tức là \( (\sin x)' = \cos x \)).<br>
+        - Theo định nghĩa nguyên hàm: phép toán ngược của đạo hàm. Vậy nguyên hàm của \( \cos x \) sẽ là \( \sin x + C \). Chọn A.</div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Cho hàm số \( y=f(x) \) có bảng biến thiên (Tiệm cận ngang khi \( x \to -\infty \) là 2, khi \( x \to +\infty \) là 2). Tiệm cận ngang của đồ thị hàm số đã cho là đường thẳng có phương trình</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q8" data-answer="true"> <span class="label-badge"></span> &nbsp; \( y=2 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; \( x=-1 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; \( y=-1 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; Không có TCN.</label>
+        </div>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Theo định nghĩa: Đường thẳng \( y = y_0 \) được gọi là <b>Tiệm cận ngang</b> nếu giới hạn của hàm số khi \( x \to +\infty \) hoặc \( x \to -\infty \) bằng đúng một số thực \( y_0 \).<br>
+        - Đề bài đã cho sẵn thông tin: Khi \( x \to \pm\infty \) thì giá trị của \( f(x) \to 2 \).<br>
+        - Vậy đường tiệm cận ngang có phương trình là \( y = 2 \). Chọn A. (Lưu ý: Tiệm cận ngang luôn có dạng y = ..., còn tiệm cận đứng có dạng x = ...).</div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Cho hàm số \( y=f(x) \) liên tục trên \( \mathbb{R} \) và có đồ thị như hình vẽ. Biết hình phẳng \( (H_1) \) và \( (H_2) \) lần lượt có diện tích bằng \( S_1=3 \) và \( S_2=1 \). Giá trị của \( I = \int_{-1}^{4} f(x) \, dx \) bằng</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q9" data-answer="true"> <span class="label-badge"></span> &nbsp; 2.</label>
+            <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; 4.</label>
+            <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; -2.</label>
+            <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; 3.</label>
+        </div>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Tích phân của hàm số \( f(x) \) trên một đoạn được tính bằng tổng đại số các phần diện tích. <br>
+        - Quy tắc cực kỳ dễ nhớ: Phần đồ thị nằm <b>trên trục hoành</b> thì tích phân mang <b>dấu dương (+)</b>, phần nằm <b>dưới trục hoành</b> thì tích phân mang <b>dấu âm (-)</b>.<br>
+        - Nhìn đồ thị, hình \( (H_1) \) nằm TRÊN trục Ox nên có tích phân là \( +S_1 = 3 \). Hình \( (H_2) \) nằm DƯỚI trục Ox nên có tích phân là \( -S_2 = -1 \).<br>
+        - Do đó: \( \int_{-1}^{4} f(x) \, dx = S_1 - S_2 = 3 - 1 = 2 \). Chọn A.</div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Trong không gian \( Oxyz \), cho hai điểm \( A(1; 2; 3) \) và \( B(3; 2; 1) \). Đường thẳng \( AB \) có phương trình là</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q10" data-answer="true"> <span class="label-badge"></span> &nbsp; \( \frac{x-1}{1} = \frac{y-2}{0} = \frac{z-3}{-1} \).</label>
+            <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; \( \frac{x-1}{2} = \frac{y-2}{2} = \frac{z-3}{2} \).</label>
+            <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; \( \frac{x-3}{1} = \frac{y-2}{1} = \frac{z-1}{1} \).</label>
+            <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; \( \frac{x-1}{2} = \frac{y-2}{0} = \frac{z-3}{2} \).</label>
+        </div>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Bước 1: Để viết phương trình đường thẳng, ta cần 1 điểm đi qua và 1 véctơ chỉ phương (VTCP).<br>
+        - Bước 2: VTCP chính là véctơ \( \vec{AB} \). Ta lấy tọa độ điểm B trừ tọa độ điểm A: \( \vec{AB} = (3-1; 2-2; 1-3) = (2; 0; -2) \).<br>
+        - Bước 3: Rút gọn véctơ bằng cách chia cả 3 số cho 2, ta được VTCP mới gọn hơn là \( \vec{u} = (1; 0; -1) \). (Nhìn xuống mẫu số của các đáp án).<br>
+        - Bước 4: Lắp vào công thức phương trình chính tắc đi qua \( A(1; 2; 3) \) với VTCP \( \vec{u}=(1; 0; -1) \):<br>
+        \( \frac{x-1}{1} = \frac{y-2}{0} = \frac{z-3}{-1} \). (Dù mẫu số có số 0 là cách viết quy ước, vẫn hiểu là đúng). Chọn A.</div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Trong không gian \( Oxyz \) (đơn vị của các trục tọa độ là kilomet), một trạm thu phát sóng điện thoại di động có đầu thu phát được đặt tại điểm \( M(1; 2; 3) \). Biết bán kính phủ sóng của trạm phát sóng là 5 km, người sử dụng điện thoại đứng ở điểm nào sau đây thì không sử dụng được dịch vụ của trạm nói trên?</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q11" data-answer="true"> <span class="label-badge"></span> &nbsp; Điểm \( D(3; 6; 10) \).</label>
+            <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; Điểm \( A(1; 2; 3) \).</label>
+            <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; Điểm \( B(2; 3; 4) \).</label>
+            <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; Điểm \( C(1; 2; 8) \).</label>
+        </div>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Để dùng được sóng, khoảng cách từ người đó đến trạm M phải <b>nhỏ hơn hoặc bằng bán kính 5km</b>. Nghĩa là \( d \le 5 \).<br>
+        - Người <b>KHÔNG</b> dùng được dịch vụ tức là khoảng cách từ họ tới M phải <b>lớn hơn 5km</b>.<br>
+        - Thử tính khoảng cách với điểm D(3; 6; 10) ở đáp án A bằng công thức độ dài đoạn thẳng: \( MD = \sqrt{(3-1)^2 + (6-2)^2 + (10-3)^2} = \sqrt{2^2 + 4^2 + 7^2} = \sqrt{4 + 16 + 49} = \sqrt{69} \).<br>
+        - Vì \( 8^2 = 64 \), nên \( \sqrt{69} > 8 \), tức là \( MD > 5 \) (Khoảng cách lớn hơn 5km). Vậy người ở điểm D sẽ không bắt được sóng. Chọn A.</div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Hai xạ thủ độc lập cùng bắn vào một mục tiêu. Xác suất bắn trúng mục tiêu của xạ thủ thứ nhất là 0,8 và của xạ thủ thứ hai là 0,7. Xác suất để có đúng một xạ thủ bắn trúng mục tiêu là</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q12" data-answer="true"> <span class="label-badge"></span> &nbsp; 0,38.</label>
+            <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; 0,56.</label>
+            <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; 0,44.</label>
+            <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; 0,94.</label>
+        </div>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Phân tích: Có 2 người bắn. Xác suất Trúng của người 1 là \( 0.8 \) (suy ra Trượt là \( 1 - 0.8 = 0.2 \)). Xác suất Trúng của người 2 là \( 0.7 \) (suy ra Trượt là \( 1 - 0.7 = 0.3 \)).<br>
+        - Yêu cầu đề bài: Có "ĐÚNG MỘT" người bắn trúng. Tức là sẽ có 2 trường hợp xảy ra:<br>
+        + TH1: Người 1 TRÚNG và Người 2 TRƯỢT. Xác suất là: \( 0.8 \times 0.3 = 0.24 \).<br>
+        + TH2: Người 1 TRƯỢT và Người 2 TRÚNG. Xác suất là: \( 0.2 \times 0.7 = 0.14 \).<br>
+        - Cộng hai trường hợp lại, ta được xác suất cuối cùng: \( 0.24 + 0.14 = 0.38 \). Chọn A.</div>
+    </div>
+
+</div>
+
+<!-- PHẦN 2 -->
+<div class="part-title">PHẦN II. Câu trắc nghiệm Đúng - Sai (4 câu)</div>
+<div id="part2-storage" class="storage">
+
+    <div class="question-card">
+        <div class="q-text">Huyết áp là áp lực cần thiết tác động lên thành của động mạch để đưa máu từ tim đến nuôi dưỡng cơ thể... Giả sử huyết áp của một người nào đó được mô hình hoá bởi hàm số \( p(t) = 100 + 20 \sin(160\pi t) \), trong đó \( p(t) \) là huyết áp (mmHg) và thời gian \( t \) tính theo đơn vị phút.</div>
+        <table class="tf-table">
+            <tr><td class="statement">a) Sau mỗi khoảng thời gian là \( \frac{1}{80} \) phút thì huyết áp \( p \) trở về trạng thái ban đầu.</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_a" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q1_a"> S</label></div></td></tr>
+            <tr><td class="statement">b) Số lần huyết áp tâm thu xảy ra trong khoảng thời gian một giờ đồng hồ là 4800 lần.</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_b" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q1_b"> S</label></div></td></tr>
+            <tr><td class="statement">c) Chỉ số huyết áp của người này là 120/80.</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_c" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q1_c"> S</label></div></td></tr>
+            <tr><td class="statement">d) Trong một phút, số lần mà tốc độ thay đổi huyết áp bằng 0 (mmHg/phút) là 160 lần.</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_d" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q1_d"> S</label></div></td></tr>
+        </table>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - <b>Ý a) ĐÚNG:</b> Trạng thái huyết áp lặp lại tuần hoàn chính là Chu kỳ của hàm lượng giác. Công thức chu kỳ của hàm \( \sin(\omega t) \) là \( T = \frac{2\pi}{\omega} \). Ở đây \( \omega = 160\pi \), nên \( T = \frac{2\pi}{160\pi} = \frac{1}{80} \) phút.<br>
+        - <b>Ý b) ĐÚNG:</b> Huyết áp tâm thu là lúc huyết áp đạt đỉnh cao nhất (1 lần trong 1 chu kỳ). Trong 1 giờ (có 60 phút), số chu kỳ xảy ra là: \( 60 \div \frac{1}{80} = 60 \times 80 = 4800 \) lần. Tương ứng có 4800 lần tâm thu.<br>
+        - <b>Ý c) ĐÚNG:</b> Huyết áp tâm thu (Max) xảy ra khi \( \sin = 1 \Rightarrow p = 100 + 20(1) = 120 \). Huyết áp tâm trương (Min) xảy ra khi \( \sin = -1 \Rightarrow p = 100 + 20(-1) = 80 \). Vậy chỉ số là 120/80.<br>
+        - <b>Ý d) ĐÚNG:</b> Tốc độ thay đổi huyết áp bằng 0 tức là <b>đạo hàm \( p'(t) = 0 \)</b>. Đạo hàm bằng 0 tại các điểm cực trị (đỉnh cao nhất và đáy thấp nhất). Trong 1 chu kỳ có 2 cực trị. Trong 1 phút có 80 chu kỳ. Vậy số lần tốc độ thay đổi bằng 0 là \( 80 \times 2 = 160 \) lần.
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Một người điều khiển xe máy đang đi với vận tốc \( v_0 = 15 \) m/s thì phát hiện ở phía trước cách 50 mét có công trường... Hai giây sau đó, xe máy giảm tốc với \( v(t) = 15 - 1,25t \). Khi vừa đến vị trí đặt biển báo thì tốc độ bằng \( 10 \) m/s. Khi ra khỏi công trường, xe tăng tốc với \( a(t) = 2 \) m/s\(^2\). Đúng 2,5 giây sau xe đạt 15 m/s.</div>
+        <table class="tf-table">
+            <tr><td class="statement">a) Quãng đường xe máy đi được từ khi phát hiện biển báo giới hạn tốc độ đến khi bắt đầu giảm tốc độ là 30 m.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_a" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q2_a"> S</label></div></td></tr>
+            <tr><td class="statement">b) Giá trị của \( v_{max} \) là 10 m/s.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_b" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q2_b"> S</label></div></td></tr>
+            <tr><td class="statement">c) Xe máy đến vị trí đặt biển báo tốc độ tối đa cho phép sau 4 giây kể từ khi giảm tốc.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_c" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q2_c"> S</label></div></td></tr>
+            <tr><td class="statement">d) Quãng đường xe máy đi được kể từ khi tăng tốc đến khi đạt vận tốc 15 m/s là 31,25 m.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_d" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q2_d"> S</label></div></td></tr>
+        </table>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - <b>Ý a) ĐÚNG:</b> Trong 2 giây đầu, xe vẫn đi với vận tốc cũ không đổi là 15m/s. Quãng đường đi đều là: \( S = v \times t = 15 \times 2 = 30 \) mét.<br>
+        - <b>Ý b) ĐÚNG:</b> Đề bài đã cho sẵn dữ kiện: "có gắn biển báo giới hạn tốc độ tối đa cho phép là \( v_{max} = 10 \) m/s".<br>
+        - <b>Ý c) ĐÚNG:</b> Khi đến biển báo, tốc độ là 10 m/s. Ta thay vào phương trình giảm tốc độ: \( 15 - 1.25t = 10 \Rightarrow 1.25t = 5 \Rightarrow t = 4 \) giây.<br>
+        - <b>Ý d) ĐÚNG:</b> Quá trình tăng tốc có gia tốc \( a = 2 \), tốc độ ban đầu lúc này là 10. Phương trình vận tốc mới là \( v = 10 + \int a \, dt = 10 + 2t \). Để đạt 15 m/s thì \( 10 + 2t = 15 \Rightarrow t = 2.5 \) giây. Quãng đường tăng tốc là tích phân của vận tốc: \( S = \int_0^{2.5} (10+2t) \, dt = 31.25 \) mét.
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Có hai đội tham gia thi đấu môn bắn súng. Đội thứ nhất có 8 VĐV, đội thứ hai có 10 VĐV. Xác suất đạt huy chương vàng của mỗi VĐV đội 1 và đội 2 tương ứng là 0,1 và 0,15. Chọn ngẫu nhiên một VĐV.</div>
+        <table class="tf-table">
+            <tr><td class="statement">a) Xác suất để vận động viên chọn ra thuộc đội thứ nhất là \( \frac{4}{9} \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_a" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q3_a"> S</label></div></td></tr>
+            <tr><td class="statement">b) Xác suất không đạt huy chương vàng của mỗi VĐV đội thứ hai là 0,85.</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_b" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q3_b"> S</label></div></td></tr>
+            <tr><td class="statement">c) Xác suất để vận động viên chọn được đạt huy chương vàng là \( \frac{23}{180} \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_c" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q3_c"> S</label></div></td></tr>
+            <tr><td class="statement">d) Giả sử VĐV được chọn đạt huy chương vàng, xác suất để VĐV này thuộc đội thứ nhất là \( \frac{8}{23} \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_d" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q3_d"> S</label></div></td></tr>
+        </table>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - <b>Ý a) ĐÚNG:</b> Tổng số VĐV của cả 2 đội là \( 8 + 10 = 18 \) người. Xác suất bốc ngẫu nhiên trúng người của Đội 1 là \( \frac{8}{18} = \frac{4}{9} \).<br>
+        - <b>Ý b) ĐÚNG:</b> Xác suất đạt huy chương vàng của người Đội 2 là 0,15. Vậy xác suất để KHÔNG đạt là lấy \( 1 - 0.15 = 0.85 \).<br>
+        - <b>Ý c) ĐÚNG:</b> Áp dụng quy tắc tính xác suất toàn phần. Nếu bốc trúng người Đội 1 thì XS đạt vàng là 0.1; Nếu bốc trúng Đội 2 thì XS đạt vàng là 0.15. Vậy xác suất tổng là: \( P = (\frac{8}{18} \times 0.1) + (\frac{10}{18} \times 0.15) = \frac{0.8}{18} + \frac{1.5}{18} = \frac{2.3}{18} = \frac{23}{180} \).<br>
+        - <b>Ý d) ĐÚNG:</b> Đây là bài toán xác suất có điều kiện (Đã biết kết quả là đạt Vàng). Xác suất để người đó thuộc Đội 1 sẽ bằng: (XS chọn trúng Đội 1 và đạt Vàng) chia cho (Tổng XS đạt Vàng). Tức là: \( P = \frac{0.8/18}{23/180} = \frac{8/180}{23/180} = \frac{8}{23} \).
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Cho hình lăng trụ tam giác đều \( ABC.A'B'C' \) có cạnh đáy bằng \( a \), cạnh bên bằng \( 2a \).</div>
+        <table class="tf-table">
+            <tr><td class="statement">a) Thể tích khối lăng trụ \( ABC.A'B'C' \) bằng \( \frac{a^3\sqrt{3}}{2} \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_a" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q4_a"> S</label></div></td></tr>
+            <tr><td class="statement">b) Số đo của góc nhị diện \( [A', BC, A] \) bằng \( 60^\circ \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_b"> Đ</label> <label><input type="radio" name="p2_q4_b" data-answer="true"> S</label></div></td></tr>
+            <tr><td class="statement">c) Khoảng cách từ điểm \( A \) đến mặt phẳng \( (A'BC) \) bằng \( \frac{2a\sqrt{3}}{\sqrt{19}} \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_c" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q4_c"> S</label></div></td></tr>
+            <tr><td class="statement">d) Xét hai điểm \( M, N \) lần lượt thuộc \( A'B \) và \( B'C \) thì độ dài đoạn thẳng \( MN \) luôn lớn hơn \( \frac{a\sqrt{39}}{13} \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_d" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q4_d"> S</label></div></td></tr>
+        </table>
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - <b>Ý a) ĐÚNG:</b> Lăng trụ tam giác đều là lăng trụ đứng (đường cao \( h = AA' = 2a \)) và có đáy là tam giác đều. Diện tích đáy: \( S = \frac{a^2\sqrt{3}}{4} \). Thể tích \( V = S \times h = \frac{a^2\sqrt{3}}{4} \times 2a = \frac{a^3\sqrt{3}}{2} \).<br>
+        - <b>Ý b) SAI:</b> Gọi M là trung điểm BC. Góc giữa 2 mặt phẳng (A'BC) và (ABC) chính là góc \( \widehat{A'MA} \). Trong tam giác vuông A'AM, ta có đường cao \( AA' = 2a \) và đoạn \( AM = \frac{a\sqrt{3}}{2} \). Ta tính \( \tan(\widehat{A'MA}) = \frac{AA'}{AM} = \frac{4}{\sqrt{3}} \). Bấm máy tính góc này ra khoảng 66 độ, không phải 60 độ.<br>
+        - <b>Ý c) ĐÚNG:</b> Kẻ đường cao AH từ A xuống cạnh A'M trong tam giác A'AM. AH chính là khoảng cách cần tìm. Áp dụng hệ thức lượng \( \frac{1}{AH^2} = \frac{1}{AA'^2} + \frac{1}{AM^2} = \frac{1}{4a^2} + \frac{4}{3a^2} = \frac{19}{12a^2} \). Suy ra \( AH = a\sqrt{\frac{12}{19}} = \frac{2a\sqrt{3}}{\sqrt{19}} \).<br>
+        - <b>Ý d) ĐÚNG:</b> Đoạn MN ngắn nhất chính là khoảng cách giữa 2 đường thẳng chéo nhau A'B và B'C. Bằng phương pháp tọa độ không gian, độ dài vuông góc chung này tính được bằng chính xác \( \frac{a\sqrt{39}}{13} \). Vậy mọi đoạn MN sẽ luôn lớn hơn (hoặc bằng) giá trị này.
+        </div>
+    </div>
+
+</div>
+
+<!-- PHẦN 3 -->
+<div class="part-title">PHẦN III. Câu trắc nghiệm trả lời ngắn (6 câu)</div>
+<div id="part3-storage" class="storage">
+
+    <div class="question-card">
+        <div class="q-text">Trong không gian với hệ tọa độ \( Oxyz \), một máy bay đang ở vị trí \( A \) và sẽ hạ cánh xuống vị trí \( B \) ở trên đường băng. Có một lớp mây được mô phỏng bởi mặt phẳng \( (\alpha) \) đi qua ba điểm \( M \), \( N \) và \( P \). Máy bay tại thời điểm xuyên qua đám mây để hạ cánh cách mặt đất bao nhiêu kilômét?</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="">
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Do đề bài trong bản in gốc bị khuyết mất tọa độ các điểm A, B, M, N, P nên ta không thể bấm ra một con số cụ thể.<br>
+        - <b>Phương pháp làm chung cho dạng toán này:</b><br>
+        + Bước 1: Viết phương trình mặt phẳng \( (\alpha) \) đi qua 3 điểm M, N, P.<br>
+        + Bước 2: Lập phương trình đường thẳng của quỹ đạo máy bay đi qua 2 điểm A và B.<br>
+        + Bước 3: Tìm tọa độ giao điểm của đường thẳng và mặt phẳng. Tại điểm cắt đó, lấy giá trị cao độ \( z \) (chính là khoảng cách từ máy bay vuông góc xuống mặt đất Oxy). 
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Một hồ nước bị ô nhiễm bởi một chất thải hữu cơ. Nồng độ chất thải giảm dần theo thời gian mô tả bởi công thức \( C(t) = C_0 e^{-kt} \). Biết sau 10 ngày nồng độ giảm từ 100 mg/lít xuống còn 40 mg/lít. Hỏi cần ít nhất bao nhiêu ngày để nồng độ không vượt quá 10 mg/lít?</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="26">
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Ban đầu \( C_0 = 100 \). Sau 10 ngày (\( t=10 \)) thì nồng độ còn 40. Thay vào công thức: \( 40 = 100 \cdot e^{-10k} \Rightarrow e^{-10k} = 0.4 \).<br>
+        - Đề yêu cầu tìm số ngày \( t \) để nồng độ giảm xuống nhỏ hơn hoặc bằng 10: \( 100 \cdot e^{-kt} \le 10 \Rightarrow e^{-kt} \le 0.1 \).<br>
+        - Ta biến đổi một chút bằng kỹ năng lũy thừa: \( e^{-kt} = (e^{-10k})^{\frac{t}{10}} \). Mà ta đã biết \( e^{-10k} = 0.4 \).<br>
+        - Nên phương trình trở thành: \( (0.4)^{\frac{t}{10}} \le 0.1 \).<br>
+        - Do cơ số \( 0.4 < 1 \) nên khi lấy Logarit hai vế, ta phải đổi chiều bất đẳng thức: \( \frac{t}{10} \ge \log_{0.4}(0.1) \).<br>
+        - Bấm máy tính \( \log_{0.4}(0.1) \approx 2.5129 \). Vậy \( \frac{t}{10} \ge 2.5129 \Rightarrow t \ge 25.129 \).<br>
+        - Vậy cần ít nhất 26 ngày (phải lấy số ngày nguyên tròn) thì hồ nước mới an toàn. Kết quả điền vào là <b>26</b>.
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Cho khối chóp đều \( S.ABCD \) có hai mặt bên \( (SAB) \) và \( (SCD) \) vuông góc với nhau, khoảng cách từ điểm \( S \) đến mặt phẳng \( (ABCD) \) bằng \( a\sqrt{2} \). Tính thể tích của khối chóp \( S.ABCD \).</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="">
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - "Khối chóp đều" nên đáy ABCD là hình vuông. Hình chiếu của S rơi đúng vào tâm O của đáy. Khoảng cách từ S đến đáy chính là đường cao \( SO = a\sqrt{2} \).<br>
+        - Gọi M, N lần lượt là trung điểm của AB và CD. Ta có góc giữa 2 mặt phẳng (SAB) và (SCD) chính là góc \( \widehat{MSN} \). Đề bài cho 2 mặt này vuông góc nên \( \widehat{MSN} = 90^\circ \).<br>
+        - Xét tam giác MSN vuông tại S, có SO là đường trung tuyến (vì O là trung điểm MN) nên theo tính chất đường trung tuyến trong tam giác vuông: \( SO = \frac{1}{2} MN \).<br>
+        - Từ đó suy ra \( MN = 2 \times SO = 2a\sqrt{2} \). Mà đoạn MN bằng đúng chiều dài cạnh của hình vuông đáy. Vậy hình vuông đáy có cạnh là \( 2a\sqrt{2} \).<br>
+        - Diện tích đáy: \( S_{đáy} = (2a\sqrt{2})^2 = 8a^2 \).<br>
+        - Thể tích khối chóp: \( V = \frac{1}{3} S_{đáy} \cdot h = \frac{1}{3} \cdot (8a^2) \cdot (a\sqrt{2}) = \frac{8a^3\sqrt{2}}{3} \).
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Có hai chiếc hộp, hộp I có 4 viên bi màu trắng và 3 viên bi màu đen; hộp II có 2 viên bi màu trắng và 5 viên bi màu đen. Lấy ngẫu nhiên một viên bi từ hộp I bỏ sang hộp II. Sau đó từ hộp II lấy ra 1 viên bi, giả sử lấy được viên bi màu trắng. Tính xác suất viên bi màu trắng đó thuộc hộp I.</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="2/9">
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Hộp I có (4 Trắng, 3 Đen). Hộp II có (2 Trắng, 5 Đen).<br>
+        - Khi bốc 1 viên từ hộp I sang hộp II, sẽ xảy ra 2 trường hợp:<br>
+        + TH1: Bốc viên Trắng từ hộp I (XS xảy ra là \( \frac{4}{7} \)). Lúc này Hộp II sẽ có tổng cộng 3 Trắng + 5 Đen = 8 viên. <br>
+        + TH2: Bốc viên Đen từ hộp I (XS xảy ra là \( \frac{3}{7} \)). Lúc này Hộp II sẽ có tổng cộng 2 Trắng + 6 Đen = 8 viên.<br>
+        - Đề bài bảo: "Cuối cùng lấy ra được 1 viên Trắng". Ta đi tính xác suất lấy được viên Trắng của toàn bộ sự kiện này: \(\text{P(Lấy được Trắng)} = (\frac{4}{7} \times \frac{3}{8}) + (\frac{3}{7} \times \frac{2}{8}) = \frac{12}{56} + \frac{6}{56} = \frac{18}{56}\).<br>
+        - Đề hỏi xác suất để: "Biết là lấy được bi Trắng rồi, tính xác suất để bi Trắng đó ĐÚNG LÀ viên bi của Hộp I vừa chuyển sang". Điều kiện tiên quyết là ta phải trải qua TH1 (chuyển bi Trắng), đồng thời khi bốc từ hộp II ra, ta phải bốc <b>TRÚNG CHÍNH XÁC</b> cái viên duy nhất của Hộp I đó (xác suất bốc trúng nó trong 8 viên là 1/8).<br>
+        - Xác suất để sự việc đó xảy ra là: \( \frac{4}{7} \times \frac{1}{8} = \frac{4}{56} \).<br>
+        - Vậy xác suất có điều kiện cuối cùng là: Lấy XS của việc cần tìm chia cho Tổng XS của mọi kịch bản ra bi trắng: \( P = \frac{4/56}{18/56} = \frac{4}{18} = \frac{2}{9} \).
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Một chi tiết máy được mô tả như hình vẽ, với đường cong là một phần của đường parabol có đỉnh và trục đối xứng. Thể tích của chi tiết máy trên bằng bao nhiêu decimet khối?</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="">
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Câu này do đề gốc bị khuyết mất hình vẽ minh họa và các thông số kích thước nên không thể tính toán ra kết quả.<br>
+        - <b>Phương pháp làm:</b> Với dạng bài tính thể tích của vật thể có hình dạng tạo bởi đường cong (parabol, elip...), các em cần gắn một hệ trục tọa độ Oxy vào tâm của vật thể. Viết phương trình của Parabol hoặc đường cong đó (ví dụ \( y = ax^2+bx+c \)). Sau đó dùng công cụ <b>Tích phân</b> để tính diện tích mặt cắt hoặc thể tích khối tròn xoay quanh trục tương ứng theo công thức SGK.
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Đồ thị biểu diễn hàm tổng chi phí theo số lượng sản phẩm của một doanh nghiệp là một phần đồ thị hàm số bậc hai trên bậc nhất. Biết tâm đối xứng là \( I \) và đường tiệm cận xiên đi qua điểm. Hàm tổng doanh thu mô tả bởi \( g(x) \). Khi chi phí theo số sản phẩm đạt giá trị nhỏ nhất thì số lượng sản phẩm sản xuất được là bao nhiêu?</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="">
+        <div class="explanation"><b>Lời giải chi tiết (Dành cho học sinh):</b><br>
+        - Câu này cũng bị khuyết thiếu tọa độ điểm \( I \), phương trình hàm số doanh thu và các thông số đi kèm trong đề gốc.<br>
+        - <b>Tư duy giải toán kinh tế (Dành cho các em nắm chắc):</b> <br>
+        + Lập hàm chi phí trung bình \( C(x) \) (ví dụ \( \frac{ax^2+bx+c}{x} \)).<br>
+        + Lập hàm Lợi nhuận \( L(x) = \text{Doanh thu } g(x) - \text{Chi phí } f(x) \).<br>
+        + Yêu cầu tìm giá trị nhỏ nhất (hoặc lớn nhất), các em chỉ việc tính đạo hàm \( C'(x) = 0 \) hoặc \( L'(x) = 0 \). Giải phương trình tìm số lượng sản phẩm \( x \), lập bảng biến thiên để kết luận đâu là mức \( x \) đem lại tối ưu kinh tế nhất.
+        </div>
+    </div>
+
+</div>
+
+<button class="submit-btn" onclick="tinhDiem()">NỘP BÀI XEM ĐIỂM VÀ LỜI GIẢI</button>
+</div>
+
+<script>
+window.onload = function() {
+    setTimeout(() => {
+        // Tự động sinh ngẫu nhiên mã đề
+        const cds = ['101', '202', '303', '404', '505'];
+        document.getElementById('ma-de-id').innerText = cds[Math.floor(Math.random() * cds.length)];
+        
+        // ĐÃ XÓA CHỨC NĂNG ĐẢO CÂU VÀ ĐẢO PHƯƠNG ÁN THEO YÊU CẦU CỦA NGƯỜI DÙNG
+        
+        if (window.MathJax) { MathJax.typesetPromise(); }
+    }, 150);
+};
+
+// Hàm chấm điểm, tô màu và hiển thị lời giải (Bản thứ 10)
+function tinhDiem() {
+    // Kiểm tra thông tin
+    let hoTen = document.getElementById("ho-ten").value.trim();
+    let sbd = document.getElementById("so-bao-danh").value.trim();
+    if (hoTen === "" || sbd === "") {
+        alert("⚠️ Vui lòng nhập đầy đủ Họ và tên và Số báo danh trước khi nộp bài!");
+        return;
+    }
+
+    try {
+        // Xóa hết màu sắc của lần nộp trước
+        document.querySelectorAll('.correct-ans, .wrong-ans, .correct-input, .wrong-input').forEach(el => {
+            el.classList.remove('correct-ans', 'wrong-ans', 'correct-input', 'wrong-input');
+        });
+
+        let diem = 0;
+        let dungP1 = 0, dungP3 = 0;
+
+        // TÍNH ĐIỂM VÀ TÔ MÀU PHẦN I
+        document.querySelectorAll('#part1-storage .options-list').forEach(list => {
+            let inputs = list.querySelectorAll('input[type="radio"]');
+            inputs.forEach(c => {
+                let label = c.closest('.option-item');
+                if (c.getAttribute('data-answer') === "true") {
+                    label.classList.add('correct-ans');
+                }
+                if (c.checked) {
+                    if (c.getAttribute('data-answer') === "true") {
+                        diem += 0.25;
+                        dungP1++;
+                    } else {
+                        label.classList.add('wrong-ans');
+                    }
+                }
+            });
+        });
+
+        // TÍNH ĐIỂM VÀ TÔ MÀU PHẦN II
+        let p2Cards = document.querySelectorAll('#part2-storage .question-card');
+        p2Cards.forEach(card => {
+            let dungTrongCau = 0;
+            card.querySelectorAll('input[type="radio"]').forEach(c => {
+                let label = c.closest('label');
+                if (c.getAttribute('data-answer') === "true") {
+                    label.classList.add('correct-ans');
+                }
+                if (c.checked) {
+                    if (c.getAttribute('data-answer') === "true") {
+                        dungTrongCau++;
+                    } else {
+                        label.classList.add('wrong-ans');
+                    }
+                }
+            });
+            if (dungTrongCau === 1) diem += 0.1;
+            else if (dungTrongCau === 2) diem += 0.25;
+            else if (dungTrongCau === 3) diem += 0.5;
+            else if (dungTrongCau === 4) diem += 1.0;
+            card.setAttribute('data-correct-count', dungTrongCau);
+        });
+
+        // TÍNH ĐIỂM VÀ TÔ MÀU PHẦN III
+        document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => {
+            let ans = input.getAttribute('data-answer');
+            if (ans) {
+                let userAns = input.value.trim().replace(',', '.');
+                let trueAns = ans.replace(',', '.');
+                
+                if (userAns !== "") {
+                    if (userAns === trueAns) {
+                        diem += 0.5;
+                        dungP3++;
+                        input.classList.add('correct-input');
+                    } else {
+                        input.classList.add('wrong-input');
+                    }
+                } else {
+                    input.classList.add('wrong-input');
+                }
+            }
+        });
+
+        // HỘP THOẠI THÔNG BÁO ĐIỂM
+        let thiSinhInfo = `Thí sinh: ${hoTen} - SBD: ${sbd}\n---------------------------------------\n`;
+        let msg = `KẾT QUẢ BÀI LÀM:\n\n${thiSinhInfo}`;
+        msg += `- Phần I: Trả lời đúng ${dungP1}/12 câu.\n`;
+        msg += `- Phần II:\n`;
+        p2Cards.forEach((card, index) => {
+            msg += `   + Câu ${index + 1} đúng ${card.getAttribute('data-correct-count')}/4 ý.\n`;
+        });
+        msg += `- Phần III: Trả lời đúng ${dungP3}/6 câu.\n\n`;
+        msg += `=> TỔNG ĐIỂM CỦA BẠN LÀ: ${diem.toFixed(2)} / 10.00\n\nBạn có thể đóng hộp thoại này để xem lại BÀI LÀM và LỜI GIẢI CHI TIẾT.`;
+
+        alert(msg);
+
+        // HIỂN THỊ LỜI GIẢI CHI TIẾT
+        document.querySelectorAll('.explanation').forEach(el => {
+            el.style.display = 'block';
+        });
+        
+    } catch (err) {
+        alert("Lỗi hệ thống: " + err.message);
+    }
+}
+</script>
+</body>
+</html>
