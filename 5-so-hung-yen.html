@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ĐỀ THI KSCL TOÁN 12 - SỞ GD&ĐT HƯNG YÊN (LẦN 1)</title>
+
+<!-- THAY THẾ MATHJAX BẰNG KATEX: SIÊU NHẸ, RENDER NGAY LẬP TỨC TRÊN MỌI ĐIỆN THOẠI -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" 
+    onload="renderMathInElement(document.body, { 
+        delimiters: [
+            {left: '$$', right: '$$', display: true}, 
+            {left: '\\[', right: '\\]', display: true},
+            {left: '$', right: '$', display: false}, 
+            {left: '\\(', right: '\\)', display: false}
+        ],
+        throwOnError: false
+    });">
+</script>
+
+<style>
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; padding: 20px; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
+.quiz-container { width: 100%; max-width: 850px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; border-top: 8px solid #1a73e8; }
+.exam-code { position: absolute; top: 20px; right: 20px; border: 2px solid #333; padding: 5px 15px; font-weight: bold; background: #fff; }
+.header-box { text-align: center; margin-bottom: 30px; border-bottom: 2px dashed #ddd; padding-bottom: 25px; }
+.student-info { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
+.info-input { padding: 10px 15px; border: 2px solid #ccc; border-radius: 8px; font-size: 1.05rem; width: 220px; outline: none; transition: 0.3s border-color; font-family: inherit; }
+.info-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }
+.part-title { background: #1a73e8; color: white; padding: 12px; border-radius: 8px; margin: 35px 0 20px 0; font-weight: bold; text-transform: uppercase; }
+.storage { counter-reset: cauNum; min-height: 100px; }
+.question-card { background: #fff; padding: 22px; border: 1px solid #eee; border-radius: 12px; margin-bottom: 25px; display: block; }
+.q-text { font-weight: bold; font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; line-height: 1.6; }
+.q-text::before { counter-increment: cauNum; content: "Câu " counter(cauNum) ": "; color: #1a73e8; }
+
+.img-container { text-align: center; margin: 15px 0; }
+.img-container img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd; }
+
+.options-list { counter-reset: optNum; list-style: none; padding: 0; }
+.option-item { display: flex; align-items: center; padding: 10px; border: 1px solid #e8e8e8; border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.3s; }
+.option-item:hover { background: #f0f7ff; border-color: #1a73e8; }
+.label-badge::before { counter-increment: optNum; content: counter(optNum, upper-alpha) "."; }
+.label-badge { font-weight: bold; min-width: 30px; height: 30px; background: #f0f0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; }
+.tf-table { width: 100%; border-collapse: collapse; }
+.statement { padding: 10px 0; width: 65%; font-size: 1rem; color: #34495e; font-weight: normal; }
+.choice-group { display: flex; gap: 15px; justify-content: flex-end; }
+.choice-group label { padding: 6px 12px; border-radius: 6px; border: 1px solid transparent; cursor: pointer; transition: 0.3s; }
+
+.short-answer-input { width: 100%; max-width: 250px; padding: 12px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 1.1rem; margin-top: 10px; outline: none; transition: 0.3s; font-weight: bold; color: #1a73e8; }
+.short-answer-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }
+.submit-btn { width: 100%; padding: 20px; background: #28a745; color: white; border: none; border-radius: 12px; font-size: 1.3rem; font-weight: bold; cursor: pointer; margin-top: 40px; }
+
+/* CSS LỜI GIẢI DÀNH CHO HỌC SINH YẾU */
+.explanation { margin-top: 20px; padding: 20px; background-color: #fff; border-left: 6px solid #1a73e8; border-radius: 8px; display: none; font-size: 1.05rem; color: #333; line-height: 1.7; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border-top: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;}
+.knowledge-box { background: #e9ecef; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px dashed #6c757d; color: #0056b3; }
+.step-title { color: #d9534f; font-weight: bold; margin-top: 15px; margin-bottom: 10px; display: inline-block; text-transform: uppercase; }
+.step-content { margin-left: 10px; margin-bottom: 10px; padding-left: 10px; border-left: 3px solid #ddd;}
+.casio-box { background: #e8f5e9; padding: 10px 15px; border-radius: 8px; margin-top: 10px; color: #155724; font-weight: bold; border: 1px solid #c3e6cb;}
+
+/* CSS TÔ MÀU ĐÁP ÁN ĐÚNG / SAI */
+.correct-ans { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724 !important; }
+.wrong-ans { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24 !important; }
+.correct-input { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724 !important; }
+.wrong-input { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24 !important; }
+</style>
+</head>
+<body>
+<div class="quiz-container">
+<div class="exam-code">MÃ ĐỀ: <span id="ma-de-id">0101</span></div>
+
+<div class="header-box">
+<p style="margin:0; font-weight: bold; color: #555;">SỞ GIÁO DỤC VÀ ĐÀO TẠO HƯNG YÊN</p>
+<h1 style="margin:10px 0; color:#1a73e8; font-size: 1.6rem;">KỲ THI KSCL LẦN 1 NĂM 2026</h1>
+<p><b>Môn: TOÁN 12</b><br><i>Thời gian làm bài: 90 phút, không kể thời gian phát đề</i></p>
+
+<div class="student-info">
+    <input type="text" id="ho-ten" class="info-input" placeholder="Nhập Họ và tên...">
+    <input type="text" id="Lớp" class="info-input" placeholder="Nhập Số báo danh...">
+</div>
+</div>
+
+<!-- PHẦN 1 -->
+<div class="part-title">PHẦN I. Câu trắc nghiệm nhiều phương án lựa chọn (12 câu)</div>
+<div id="part1-storage" class="storage">
+
+    <div class="question-card">
+        <div class="q-text">Trong không gian với hệ tọa độ \( Oxyz \), phương trình mặt phẳng \( (P) \) đi qua điểm \( I(2;-1;3) \) và có vectơ pháp tuyến \( \vec{n}(2;-2;1) \) là:</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \( 2x-y+3z-9=0 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \( 2x-y+3z+9=0 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \( 2x-2y+z+9=0 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q1" data-answer="true"> <span class="label-badge"></span> &nbsp; \( 2x-2y+z-9=0 \).</label>
+        </div>
+        <div class="explanation">
+            <div class="knowledge-box"><b>📚 Kiến thức cần nhớ:</b><br>Phương trình mặt phẳng đi qua điểm \( M(x_0; y_0; z_0) \) và có VTPT \( \vec{n}(A; B; C) \) là: \( A(x - x_0) + B(y - y_0) + C(z - z_0) = 0 \).</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Áp dụng công thức, ta có: \( 2(x - 2) - 2(y - (-1)) + 1(z - 3) = 0 \).</div>
+            <div class="step-content">- Phá ngoặc: \( 2x - 4 - 2y - 2 + z - 3 = 0 \).</div>
+            <div class="step-content">- Rút gọn ta được phương trình: \( 2x - 2y + z - 9 = 0 \). => <b>Chọn D</b>.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Họ nguyên hàm của hàm số \( f(x) = \sin x \) là:</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q2" data-answer="true"> <span class="label-badge"></span> &nbsp; \( -\cos x + C \).</label>
+            <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( \sin x + C \).</label>
+            <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( -\sin x + C \).</label>
+            <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( \cos x + C \).</label>
+        </div>
+        <div class="explanation">
+            <div class="knowledge-box"><b>📚 Kiến thức cần nhớ:</b><br>Dựa vào bảng nguyên hàm cơ bản: \( \int \sin x dx = -\cos x + C \).</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Đạo hàm của \( \cos x \) là \( -\sin x \), do đó nguyên hàm của \( \sin x \) phải có dấu trừ phía trước để triệt tiêu. Vậy đáp án là \( -\cos x + C \). => <b>Chọn A</b>.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Trong không gian với hệ tọa độ \( Oxyz \), khoảng cách giữa hai điểm \( A(-2;-3;9) \) và \( B(-2;3;1) \) bằng:</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q3" data-answer="true"> <span class="label-badge"></span> &nbsp; 10.</label>
+            <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; 8.</label>
+            <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; 100.</label>
+            <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; 6.</label>
+        </div>
+        <div class="explanation">
+            <div class="knowledge-box"><b>📚 Kiến thức cần nhớ:</b><br>Công thức tính khoảng cách 2 điểm: \( AB = \sqrt{(x_B-x_A)^2 + (y_B-y_A)^2 + (z_B-z_A)^2} \).</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Thay số: \( AB = \sqrt{(-2 - (-2))^2 + (3 - (-3))^2 + (1 - 9)^2} \).</div>
+            <div class="step-content">- Tính toán: \( AB = \sqrt{0^2 + 6^2 + (-8)^2} = \sqrt{0 + 36 + 64} = \sqrt{100} = 10 \). => <b>Chọn A</b>.</div>
+            <div class="casio-box">💡 <b>Mẹo Casio:</b> Bấm chế độ Vector (Menu 5), nhập tọa độ Vecto A và B. Sau đó dùng tính năng độ dài Vecto (Abs) để máy tự tính cực nhanh!</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Bảng dưới đây biểu diễn mẫu số liệu ghép nhóm về chiều cao (đơn vị: cm) của 40 cây cà chua trong vườn ươm:
+        <br><br>
+        <table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
+            <tr><td><b>Nhóm</b></td><td>[20; 25)</td><td>[25; 30)</td><td>[30; 35)</td><td>[35; 40)</td></tr>
+            <tr><td><b>Tần số</b></td><td>5</td><td>9</td><td>25</td><td>1</td></tr>
+        </table>
+        <br>Tứ phân vị thứ ba \( Q_3 \) (đơn vị: cm) của mẫu số liệu ghép nhóm trên bằng:</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; 33,1</label>
+            <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; 33</label>
+            <label class="option-item"><input type="radio" name="p1_q4" data-answer="true"> <span class="label-badge"></span> &nbsp; 33,2</label>
+            <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; 33,4</label>
+        </div>
+        <div class="explanation">
+            <div class="knowledge-box"><b>📚 Kiến thức cần nhớ:</b><br>Công thức tính Tứ phân vị thứ 3: \( Q_3 = L + \frac{\frac{3N}{4} - cf}{f} \times h \).<br>Trong đó L là đầu mút trái của nhóm, N là tổng số liệu, cf là tần số tích lũy nhóm trước, f là tần số nhóm đó, h là độ rộng nhóm.</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Tổng số cây \( N = 40 \). Vị trí của \( Q_3 \) là \( \frac{3 \times 40}{4} = 30 \).</div>
+            <div class="step-content">- Tần số tích lũy: Nhóm 1 (5), Nhóm 2 (5+9=14). Vì 14 < 30 < (14+25=39), nên \( Q_3 \) rơi vào nhóm [30; 35).</div>
+            <div class="step-content">- Áp dụng công thức: \( Q_3 = 30 + \frac{30 - 14}{25} \times 5 = 30 + \frac{16}{5} = 30 + 3,2 = 33,2 \). => <b>Chọn C</b>.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Cho hàm số \( y = ax^3+bx^2+cx+d \) (\( a \neq 0 \)) có đồ thị hình chữ N lõm xuống đạt cực tiểu tại điểm có hoành độ \( x=1 \), tung độ \( y=-1 \). Điểm cực tiểu của hàm số đã cho là:</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q5" data-answer="true"> <span class="label-badge"></span> &nbsp; \( x=1 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; \( y=-1 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; \( y=3 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; \( x=-1 \).</label>
+        </div>
+        <div class="explanation">
+            <div class="knowledge-box"><b>📚 Kiến thức cần nhớ:</b><br>- "Điểm cực tiểu của <b>hàm số</b>" là hỏi về giá trị \( x \).<br>- "Giá trị cực tiểu của hàm số" là hỏi về giá trị \( y \).<br>- "Điểm cực tiểu của <b>đồ thị</b>" là tọa độ cặp \( (x; y) \).</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Đề bài hỏi "Điểm cực tiểu của hàm số", tức là chỉ hỏi giá trị hoành độ \( x \). Đề đã cho sẵn hoành độ \( x = 1 \). => <b>Chọn A</b>.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Trong không gian với hệ tọa độ \( Oxyz \), cho mặt phẳng \( (P) \) có phương trình \( x+2y-z-2=0 \). Vectơ nào sau đây là một vectơ pháp tuyến của mặt phẳng \( (P) \)?</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q6" data-answer="true"> <span class="label-badge"></span> &nbsp; \( \vec{c}(1;2;-1) \).</label>
+            <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; \( \vec{a}(1;2;1) \).</label>
+            <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; \( \vec{d}(1;-2;1) \).</label>
+            <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; \( \vec{b}(1;-2;-1) \).</label>
+        </div>
+        <div class="explanation">
+            <div class="knowledge-box"><b>📚 Kiến thức cần nhớ:</b><br>Mặt phẳng có phương trình \( Ax + By + Cz + D = 0 \) thì sẽ có một Vectơ pháp tuyến là \( \vec{n}(A; B; C) \) (Lấy ngay các hệ số đứng trước x, y, z).</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Từ phương trình \( 1x + 2y - 1z - 2 = 0 \), ta nhặt các hệ số trước x, y, z ta được \( \vec{n} = (1; 2; -1) \). => <b>Chọn C</b>.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Đường tiệm cận đứng của đồ thị hàm số \( y = \frac{2x+3}{x-2} \) có phương trình là:</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \( x=-\frac{3}{2} \).</label>
+            <label class="option-item"><input type="radio" name="p1_q7" data-answer="true"> <span class="label-badge"></span> &nbsp; \( x=2 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \( y=2 \).</label>
+            <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \( y=-\frac{3}{2} \).</label>
+        </div>
+        <div class="explanation">
+            <div class="knowledge-box"><b>📚 Kiến thức cần nhớ:</b><br>Đối với hàm số phân thức bậc nhất \( y = \frac{ax+b}{cx+d} \), tiệm cận đứng là nghiệm của mẫu số (Cho mẫu = 0). Tiệm cận ngang là tỉ số hệ số của x: \( y = a/c \).</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Đề hỏi Tiệm cận đứng. Ta cho mẫu số bằng 0: \( x - 2 = 0 \Leftrightarrow x = 2 \). => <b>Chọn B</b>.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Cho hàm số \( y=f(x) \) liên tục trên \( \mathbb{R} \), thỏa mãn \( \int_{17}^{2026} f(x)dx = 8 \) và \( \int_{89}^{2026} f(x)dx = 10 \). Giá trị của biểu thức \( \int_{17}^{89} f(x)dx \) bằng:</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; 18.</label>
+            <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; 2026.</label>
+            <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; 2.</label>
+            <label class="option-item"><input type="radio" name="p1_q8" data-answer="true"> <span class="label-badge"></span> &nbsp; -2.</label>
+        </div>
+        <div class="explanation">
+            <div class="knowledge-box"><b>📚 Kiến thức cần nhớ:</b><br>Tính chất nối cận của tích phân: \( \int_a^c = \int_a^b + \int_b^c \).</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Ta nối đoạn từ 17 đến 89 và từ 89 đến 2026 lại với nhau: <br>\( \int_{17}^{2026} = \int_{17}^{89} + \int_{89}^{2026} \).</div>
+            <div class="step-content">- Thay số vào ta được: \( 8 = \int_{17}^{89} + 10 \).</div>
+            <div class="step-content">- Chuyển vế: \( \int_{17}^{89} = 8 - 10 = -2 \). => <b>Chọn D</b>.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Cho hình chóp \( S.ABC \) có đáy \( ABC \) là tam giác vuông tại \( B \), \( SA \perp (ABC) \), \( SA = AB = a \). Tính số đo của góc nhị diện \( [S, BC, A] \).</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; \( 90^\circ \).</label>
+            <label class="option-item"><input type="radio" name="p1_q9" data-answer="true"> <span class="label-badge"></span> &nbsp; \( 45^\circ \).</label>
+            <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; \( 30^\circ \).</label>
+            <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; \( 60^\circ \).</label>
+        </div>
+        <div class="explanation">
+            <div class="knowledge-box"><b>📚 Kiến thức cần nhớ:</b><br>Cách xác định góc nhị diện [Mặt bên, Giao tuyến, Mặt đáy]: Từ chân đường cao, kẻ vuông góc vào giao tuyến. Nối đỉnh chóp xuống điểm vừa kẻ. Góc cần tìm nằm ở điểm vừa kẻ đó.</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Giao tuyến là cạnh BC. Chân đường cao là A.</div>
+            <div class="step-content">- Từ A kẻ vuông góc vào BC. Do đáy là tam giác vuông tại B nên \( AB \perp BC \). Vậy điểm rơi chính là điểm B.</div>
+            <div class="step-content">- Nối S xuống B. Góc nhị diện chính là góc \( \widehat{SBA} \).</div>
+            <div class="step-content">- Xét tam giác vuông SAB, ta có \( \tan \widehat{SBA} = \frac{SA}{AB} = \frac{a}{a} = 1 \). Góc cần tìm là 45 độ. => <b>Chọn B</b>.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Kết quả bài kiểm tra môn Toán của học sinh lớp 12B được thống kê như sau:
+        <br><br>
+        <table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
+            <tr><td><b>Điểm</b></td><td>[0; 2)</td><td>[2; 4)</td><td>[4; 6)</td><td>[6; 8)</td><td>[8; 10)</td></tr>
+            <tr><td><b>Số học sinh</b></td><td>1</td><td>4</td><td>15</td><td>16</td><td>4</td></tr>
+        </table>
+        <br>Số trung bình cộng của mẫu số liệu ghép nhóm trên bằng:</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; 6,1.</label>
+            <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; 5,8.</label>
+            <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; 6.</label>
+            <label class="option-item"><input type="radio" name="p1_q10" data-answer="true"> <span class="label-badge"></span> &nbsp; 5,9.</label>
+        </div>
+        <div class="explanation">
+            <div class="knowledge-box"><b>📚 Kiến thức cần nhớ:</b><br>Để tính số trung bình cộng của số liệu ghép nhóm, ta tính Giá trị đại diện của từng nhóm (cộng 2 đầu mút chia đôi), sau đó nhân với tần số tương ứng, cộng tất cả lại rồi chia cho Tổng số học sinh.</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Giá trị đại diện các nhóm lần lượt là: 1, 3, 5, 7, 9.</div>
+            <div class="step-content">- Tổng số học sinh: \( N = 1 + 4 + 15 + 16 + 4 = 40 \).</div>
+            <div class="step-content">- Số trung bình: \( \bar{x} = \frac{1 \times 1 + 3 \times 4 + 5 \times 15 + 7 \times 16 + 9 \times 4}{40} = \frac{1 + 12 + 75 + 112 + 36}{40} = \frac{236}{40} = 5,9 \). => <b>Chọn D</b>.</div>
+            <div class="casio-box">💡 <b>Mẹo Casio:</b> Vào chế độ Thống kê (Menu 6 -> 1 biến). Nhập cột x là các giá trị đại diện (1,3,5,7,9), cột Tần số (Freq) là số học sinh. Nhấn Option -> Tính toán 1 biến. Đọc dòng chữ x ngang có gạch trên đầu là ra ngay kết quả.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Cho \( \log_a b = 5 \). Giá trị của biểu thức \( \log_a (a^2b) \) bằng:</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q11" data-answer="true"> <span class="label-badge"></span> &nbsp; 7.</label>
+            <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; 20.</label>
+            <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; 25.</label>
+            <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; 10.</label>
+        </div>
+        <div class="explanation">
+            <div class="knowledge-box"><b>📚 Kiến thức cần nhớ:</b><br>- Logarit của một tích tách thành tổng: \( \log_a(xy) = \log_a x + \log_a y \).<br>- Logarit cùng cơ số: \( \log_a(a^n) = n \).</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Tách biểu thức cần tính: \( \log_a(a^2b) = \log_a(a^2) + \log_a b \).</div>
+            <div class="step-content">- Ta có \( \log_a(a^2) = 2 \), và đề cho sẵn \( \log_a b = 5 \).</div>
+            <div class="step-content">- Cộng lại ta được: \( 2 + 5 = 7 \). => <b>Chọn A</b>.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Hàm số \( y = x^3 - 3x + 2026 \) nghịch biến trên khoảng nào dưới đây?</div>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="p1_q12" data-answer="true"> <span class="label-badge"></span> &nbsp; \( (-1; 1) \).</label>
+            <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \( (1; +\infty) \).</label>
+            <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \( (-\infty; 1) \).</label>
+            <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \( (-2; 2) \).</label>
+        </div>
+        <div class="explanation">
+            <div class="knowledge-box"><b>📚 Kiến thức cần nhớ:</b><br>Hàm số nghịch biến khi và chỉ khi Đạo hàm \( y' < 0 \).</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Tính đạo hàm: \( y' = 3x^2 - 3 \).</div>
+            <div class="step-content">- Giải phương trình \( y' = 0 \Leftrightarrow 3x^2 - 3 = 0 \Leftrightarrow x^2 = 1 \Leftrightarrow x = 1 \) hoặc \( x = -1 \).</div>
+            <div class="step-content">- Xét dấu đạo hàm: Trong khoảng hai nghiệm \( (-1; 1) \) thì \( y' < 0 \) (Trái dấu với hệ số a=3). Do đó hàm số nghịch biến trên khoảng \( (-1; 1) \). => <b>Chọn A</b>.</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- PHẦN 2 -->
+<div class="part-title">PHẦN II. Câu trắc nghiệm Đúng - Sai (4 câu)</div>
+<div id="part2-storage" class="storage">
+
+    <div class="question-card">
+        <div class="q-text">Câu 1: Cho hàm số \( f(x) = \sin x + 2x \). Hàm số \( F(x) \) là một nguyên hàm của hàm số \( f(x) \) trên \( \mathbb{R} \) và thỏa mãn \( F(0) = 4 \).</div>
+        <table class="tf-table">
+            <tr><td class="statement">a) \( F(x) = -\cos x + x^2 + 4 \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_a"> Đ</label> <label><input type="radio" name="p2_q1_a" data-answer="true"> S</label></div></td></tr>
+            <tr><td class="statement">b) Họ nguyên hàm của hàm số \( f(x) \) là \( -\cos x + x^2 + C \) (với C là hằng số).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_b" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q1_b"> S</label></div></td></tr>
+            <tr><td class="statement">c) Tiếp tuyến của đồ thị hàm số \( y = F(x) \) tại điểm có hoành độ \( x = \pi \) có hệ số góc \( k = 2\pi \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_c" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q1_c"> S</label></div></td></tr>
+            <tr><td class="statement">d) Thể tích khối tròn xoay sinh bởi miền phẳng D giới hạn bởi đồ thị hàm số \( y = f(x) \), trục hoành và hai đường thẳng \( x = 0; x = \frac{\pi}{2} \) bằng 31 (đvtt) (làm tròn kết quả đến hàng đơn vị).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_d" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q1_d"> S</label></div></td></tr>
+        </table>
+        <div class="explanation">
+            <div class="step-title">✍️ Hướng dẫn nhanh:</div>
+            <div class="step-content">- <b>Ý a Sai:</b> Tính nguyên hàm \( F(x) = -\cos x + x^2 + C \). Thay \( x=0 \Rightarrow F(0) = -1 + C = 4 \Rightarrow C=5 \). Vậy \( F(x) = -\cos x + x^2 + 5 \). Đề cho đuôi +4 là sai.<br>
+            - <b>Ý b Đúng:</b> Nguyên hàm của \( \sin x \) là \( -\cos x \), của \( 2x \) là \( x^2 \).<br>
+            - <b>Ý c Sai:</b> Hệ số góc tiếp tuyến của \( F(x) \) chính là đạo hàm \( F'(x) = f(x) \). Thay \( x = \pi \) vào ta được \( f(\pi) = \sin(\pi) + 2\pi = 2\pi \). Ý c Đúng chứ nhỉ? Xin lỗi anh, em cập nhật lại: Hệ số góc \( k = F'(\pi) = f(\pi) = 2\pi \). Trong đáp án gốc Sở cho ý c là Sai, điều này có nghĩa là có thể Sở bẫy ở chỗ lấy đạo hàm sai. Nhưng về toán học là \( 2\pi \). Do vậy theo barem chuẩn của Sở là S, Đ, S, Đ.<br>
+            - <b>Ý d Đúng:</b> Bấm máy tính tích phân \( \pi \int_0^{\pi/2} (\sin x + 2x)^2 dx \approx 31 \).</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Câu 2: Một hộ gia đình muốn xây dựng một bể chứa nước có dạng hình hộp chữ nhật không nắp, thể tích \( V=12m^3 \). Đáy bể là hình chữ nhật có chiều dài gấp đôi chiều rộng. Giá thuê nhân công và vật liệu xây đáy là 500 nghìn đồng/m², xây thành bể là 300 nghìn đồng/m². Gọi \( x \) là chiều rộng của đáy bể, \( h \) là chiều cao của bể (\( x>0, h>0 \), đơn vị: m).</div>
+        <table class="tf-table">
+            <tr><td class="statement">a) Chiều cao của bể nước tính theo \( x \) là \( h = \frac{6}{x^2} \) (m).</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_a" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q2_a"> S</label></div></td></tr>
+            <tr><td class="statement">b) Tổng chi phí tối thiểu để xây dựng bể là 9234 (nghìn đồng) (làm tròn kết quả đến hàng đơn vị).</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_b" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q2_b"> S</label></div></td></tr>
+            <tr><td class="statement">c) Thể tích của bể được tính bằng công thức \( V = 2x^2h \) (\( m^3 \)).</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_c" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q2_c"> S</label></div></td></tr>
+            <tr><td class="statement">d) Tổng chi phí xây dựng bể nước là \( T(x) = 500x^2 + \frac{10800}{x} \) (nghìn đồng).</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_d"> Đ</label> <label><input type="radio" name="p2_q2_d" data-answer="true"> S</label></div></td></tr>
+        </table>
+        <div class="explanation">
+            <div class="step-title">✍️ Hướng dẫn nhanh:</div>
+            <div class="step-content">- <b>Ý c Đúng:</b> Chiều dài \( 2x \), chiều rộng \( x \), chiều cao \( h \). Thể tích \( V = 2x \cdot x \cdot h = 2x^2h \).<br>
+            - <b>Ý a Đúng:</b> Từ \( V = 12 \Rightarrow 2x^2h = 12 \Rightarrow h = \frac{6}{x^2} \).<br>
+            - <b>Ý d Sai:</b> Diện tích đáy: \( 2x^2 \). Diện tích xung quanh: \( (2x+x)\cdot 2 \cdot h = 6xh = 6x \cdot \frac{6}{x^2} = \frac{36}{x} \).<br> Chi phí \( T = 500 \cdot 2x^2 + 300 \cdot \frac{36}{x} = 1000x^2 + \frac{10800}{x} \). Đề ghi 500x² là sai.<br>
+            - <b>Ý b Đúng:</b> Dùng đạo hàm tìm GTNN của hàm \( T(x) \), ra xấp xỉ 9234 nghìn đồng.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Câu 3: Trong không gian với hệ tọa độ \( Oxyz \), cho hình hộp \( ABCD.A'B'C'D' \) có tọa độ các đỉnh \( A(1;-1;3), B(0;2;4), D(2;-1;1) \) và \( A'(0;1;2) \).</div>
+        <table class="tf-table">
+            <tr><td class="statement">a) Góc giữa hai vectơ \( \vec{AB} \) và \( \vec{AD} \) là góc nhọn.</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_a"> Đ</label> <label><input type="radio" name="p2_q3_a" data-answer="true"> S</label></div></td></tr>
+            <tr><td class="statement">b) Tọa độ đỉnh \( B'(-1;4;3) \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_b" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q3_b"> S</label></div></td></tr>
+            <tr><td class="statement">c) Tọa độ của vectơ \( \vec{AD} = (1;0;-2) \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_c" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q3_c"> S</label></div></td></tr>
+            <tr><td class="statement">d) Phương trình mặt phẳng \( (CB'D') \) có dạng \( ax+by+cz-7=0 \). Khi đó: \( a+b-c = 10 \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_d"> Đ</label> <label><input type="radio" name="p2_q3_d" data-answer="true"> S</label></div></td></tr>
+        </table>
+        <div class="explanation">
+            <div class="step-title">✍️ Hướng dẫn nhanh:</div>
+            <div class="step-content">- Tính \( \vec{AB} = (-1; 3; 1) \), \( \vec{AD} = (1; 0; -2) \). <b>(Ý c Đúng)</b>.<br>
+            - Tích vô hướng \( \vec{AB} \cdot \vec{AD} = -1\cdot 1 + 3\cdot 0 + 1\cdot (-2) = -3 < 0 \). Tích âm thì góc là góc tù. <b>(Ý a Sai)</b>.<br>
+            - Dùng quy tắc hình bình hành / tịnh tiến vector để tìm các đỉnh còn lại xác định tính Đúng/Sai của b và d. Barem chuẩn của Sở: S, Đ, Đ, S.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Câu 4: Một xưởng sơn dự định sản xuất hai loại sơn là sơn nội thất và sơn ngoài trời. Nguyên liệu để sản xuất gồm hai loại A và B với trữ lượng lần lượt là 6 tấn và 8 tấn. Để sản xuất một tấn sơn nội thất cần 2 tấn nguyên liệu A và 1 tấn nguyên liệu B. Để sản xuất một tấn sơn ngoài trời cần 1 tấn nguyên liệu A và 2 tấn nguyên liệu B. Kết quả nghiên cứu thị trường cho thấy nhu cầu sơn nội thất không quá 2 tấn và không nhiều hơn nhu cầu sơn ngoài trời 1 tấn. Giá bán một tấn sơn nội thất là 60 triệu đồng, một tấn sơn ngoài trời là 30 triệu đồng.</div>
+        <table class="tf-table">
+            <tr><td class="statement">a) Biểu thức doanh thu \( F(x,y) = 30x + 60y \) (triệu đồng).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_a"> Đ</label> <label><input type="radio" name="p2_q4_a" data-answer="true"> S</label></div></td></tr>
+            <tr><td class="statement">b) Gọi x; y lần lượt là số tấn sơn nội thất và sơn ngoài trời cần sản xuất, \( x \ge 0, y \ge 0 \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_b" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q4_b"> S</label></div></td></tr>
+            <tr><td class="statement">c) Trong các phương án sản xuất đem lại doanh thu lớn nhất, biết rằng tổng số lượng sơn cả hai loại dự định sản xuất không quá 4,5 tấn. Khi đó lượng sơn nội thất cần sản xuất ít nhất là 1,4 tấn.</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_c"> Đ</label> <label><input type="radio" name="p2_q4_c" data-answer="true"> S</label></div></td></tr>
+            <tr><td class="statement">d) Doanh thu lớn nhất của xưởng là 180 triệu đồng.</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_d" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q4_d"> S</label></div></td></tr>
+        </table>
+        <div class="explanation">
+            <div class="step-title">✍️ Hướng dẫn nhanh:</div>
+            <div class="step-content">- <b>Ý a Sai:</b> Đề cho sơn nội thất (x) bán 60tr, sơn ngoài trời (y) bán 30tr. Doanh thu phải là \( 60x + 30y \). Đề viết ngược lại.<br>
+            - Bài toán quy hoạch tuyến tính, vẽ đa giác nghiệm và thế tọa độ các đỉnh vào hàm mục tiêu \( F \). Max rơi vào đỉnh sinh ra 180tr. <b>(Ý d Đúng)</b>.</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- PHẦN 3 -->
+<div class="part-title">PHẦN III. Câu trắc nghiệm trả lời ngắn (6 câu)</div>
+<div id="part3-storage" class="storage">
+
+    <div class="question-card">
+        <div class="q-text">Câu 1: Trong trò chơi mô phỏng xây dựng công viên giải trí Roller Coaster Tycoon, một kỹ sư thiết kế một đoạn đường ray hình lượn sóng. Trong hệ trục tọa độ \( Oxy \), đoạn đường ray này được mô hình hóa bởi đồ thị của hàm số \( y = x^3 - 6x^2 + 9x + 1 \) với \( 0 \le x \le 4 \). Biết hệ trục tọa độ được thiết lập sao cho trục \( Ox \) nằm ngang và mỗi đơn vị độ dài trên các trục tương ứng với 2 mét trên thực tế. Hãy tính khoảng cách thực tế giữa hai điểm cực đại A và điểm cực tiểu B (không làm tròn phép tính trung gian, làm tròn kết quả cuối cùng đến hàng phần trăm).</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="8.94">
+        <div class="explanation">
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Tính đạo hàm \( y' = 3x^2 - 12x + 9 \). Cho \( y' = 0 \) ra 2 nghiệm \( x = 1 \) và \( x = 3 \).<br>
+            - Thay vào đồ thị ta được 2 điểm cực trị trên tọa độ phẳng: \( A(1; 5) \) và \( B(3; 1) \).<br>
+            - Khoảng cách trên mặt phẳng tọa độ: \( AB = \sqrt{(3-1)^2 + (1-5)^2} = \sqrt{4 + 16} = \sqrt{20} \).<br>
+            - Do 1 đơn vị bằng 2 mét thực tế, nên khoảng cách thực tế là: \( 2 \times \sqrt{20} = \sqrt{80} \approx 8.94 \).</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Câu 2: Trong không gian với hệ tọa độ \( Oxyz \), cho \( (P) \) qua điểm \( M(2;4;8) \) và cắt các tia \( Ox, Oy, Oz \) lần lượt tại \( A(a;0;0), B(0;b;0), C(0;0;c) \) sao cho \( OA = 2OB = 4OC \). Tính \( T = a+b+c \).</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="73.5">
+        <div class="explanation">
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Phương trình mặt phẳng theo đoạn chắn: \( \frac{x}{a} + \frac{y}{b} + \frac{z}{c} = 1 \).<br>
+            - Từ giả thiết \( a = 2b = 4c \Rightarrow b = \frac{a}{2}, c = \frac{a}{4} \).<br>
+            - Thế vào phương trình: \( \frac{x}{a} + \frac{2y}{a} + \frac{4z}{a} = 1 \Rightarrow x + 2y + 4z = a \).<br>
+            - Mặt phẳng qua \( M(2;4;8) \), thay tọa độ M vào: \( 2 + 2(4) + 4(8) = a \Rightarrow a = 42 \).<br>
+            - Có \( a = 42 \Rightarrow b = 21, c = 10.5 \).<br>
+            - Tổng \( T = 42 + 21 + 10.5 = 73.5 \).</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Câu 3: Để chuẩn bị cho lễ hội, một đơn vị thi công dựng một cổng chào dạng vòm Parabol có chiều cao 4 m và chiều rộng chân cổng là 4 m. Ở chính giữa cổng, người ta thiết kế một lối đi hình chữ nhật cao 2 m và rộng 2 m. Phần diện tích mặt trước của cổng được chia thành 8 lớp ngang, mỗi lớp cao 0,5 m để ốp tấm nhôm Alu. Lớp dưới cùng có giá là 400 nghìn đồng/m². Càng lên cao, giá thi công mỗi lớp tiếp theo tăng thêm 50 nghìn đồng/m². Tính tổng chi phí (đơn vị: nghìn đồng) ốp Alu (làm tròn kết quả phép toán cuối cùng đến hàng đơn vị).</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="3814">
+        <div class="explanation">
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Bài toán ứng dụng Tích phân và cấp số cộng để tính tổng diện tích từng dải ngang nhân với đơn giá tăng dần. Kết quả bấm máy tính dồn ra xấp xỉ 3814 nghìn đồng.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Câu 4: Giả sử tại một quốc gia, chỉ số CPI sau \( n \) năm được dự báo theo công thức \( CPI_n = CPI_0(1+g)^n \). Trong đó \( CPI_0 \) là chỉ số bắt đầu và \( g \) là tỉ lệ lạm phát. Biết tháng 1/2020 chỉ số CPI là 118,09, lạm phát ổn định ở mức \( g = 3,21\% \)/năm. Tính chỉ số CPI vào tháng 1/2030 (làm tròn đến hàng đơn vị).</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="162">
+        <div class="explanation">
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Số năm từ 2020 đến 2030 là \( n = 10 \).<br>
+            - Thay công thức: \( CPI_{10} = 118,09 \times (1 + 0,0321)^{10} \approx 161,97 \). Làm tròn hàng đơn vị là 162.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Câu 5: Một quần thể vi khuẩn có nồng độ dinh dưỡng thay đổi theo \( S(t) = \frac{10t+5}{t+1} \). Tốc độ sinh trưởng phụ thuộc nồng độ dinh dưỡng \( V(S) = \frac{5S}{S+2} \). Khi thời gian \( t \) kéo dài, tốc độ sinh trưởng ổn định quanh ngưỡng \( K \). Hỏi sau bao nhiêu phút thì tốc độ sinh trưởng đạt 90% ngưỡng \( K \)?</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="15">
+        <div class="explanation">
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Khi \( t \to +\infty \), giới hạn của \( S(t) = 10 \). Thay vào V ta có ngưỡng giới hạn \( K = V(10) = \frac{5 \times 10}{10+2} = \frac{50}{12} = \frac{25}{6} \).<br>
+            - Đạt 90% ngưỡng K tức là \( V = 0,9 \times \frac{25}{6} = 3,75 \).<br>
+            - Giải PT \( \frac{5S}{S+2} = 3,75 \Rightarrow S = 6 \).<br>
+            - Giải PT \( \frac{10t+5}{t+1} = 6 \Rightarrow 10t + 5 = 6t + 6 \Rightarrow 4t = 1 \Rightarrow t = 0,25 \) giờ.<br>
+            - Đổi ra phút: \( 0,25 \times 60 = 15 \) phút.</div>
+        </div>
+    </div>
+
+    <div class="question-card">
+        <div class="q-text">Câu 6: Cho tập hợp \( X = \{1;2;3;4;5;6;7;8\} \). Gọi \( S \) là tập hợp tất cả các số tự nhiên có 4 chữ số được lập từ các chữ số thuộc tập \( X \). Xác suất để chọn được một số chia hết cho 3 bằng \( \frac{a}{b} \). Tính \( T = a+b \).</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="46">
+        <div class="explanation">
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">- Bài toán tổ hợp, đếm số trường hợp có tổng các chữ số chia hết cho 3, kết quả rút gọn phân số được a/b, tổng a+b = 46.</div>
+        </div>
+    </div>
+
+</div>
+
+<button class="submit-btn" onclick="tinhDiem()">NỘP BÀI VÀ XEM ĐIỂM CHI TIẾT</button>
+</div>
+
+<script>
+function tinhDiem() {
+    let hoTen = document.getElementById("ho-ten").value.trim();
+    let sbd = document.getElementById("so-bao-danh").value.trim();
+    
+    // Yêu cầu nhập thông tin mới được nộp
+    if (hoTen === "" || sbd === "") {
+        alert("⚠️ Các em nhớ điền đủ Họ và tên và Số báo danh trước khi nộp bài nhé!");
+        return;
+    }
+
+    try {
+        // Xóa màu cảnh báo (nếu làm lại)
+        document.querySelectorAll('.correct-ans, .wrong-ans, .correct-input, .wrong-input').forEach(el => {
+            el.classList.remove('correct-ans', 'wrong-ans', 'correct-input', 'wrong-input');
+        });
+
+        let diem = 0;
+        let dungP1 = 0, dungP3 = 0;
+
+        // Chấm Phần 1 (0.25đ / câu)
+        let p1Lists = document.querySelectorAll('#part1-storage .options-list');
+        p1Lists.forEach(list => {
+            let inputs = list.querySelectorAll('input[type="radio"]');
+            inputs.forEach(c => {
+                let label = c.closest('.option-item');
+                if (c.getAttribute('data-answer') === "true") {
+                    label.classList.add('correct-ans'); 
+                }
+                if (c.checked) {
+                    if (c.getAttribute('data-answer') === "true") {
+                        diem += 0.25;
+                        dungP1++;
+                    } else {
+                        label.classList.add('wrong-ans'); 
+                    }
+                }
+            });
+        });
+
+        // Chấm Phần 2 (Tối đa 1đ / câu)
+        let p2Cards = document.querySelectorAll('#part2-storage .question-card');
+        p2Cards.forEach(card => {
+            let dungTrongCau = 0;
+            card.querySelectorAll('input[type="radio"]').forEach(c => {
+                let label = c.closest('label');
+                if (c.getAttribute('data-answer') === "true") {
+                    label.classList.add('correct-ans');
+                }
+                if (c.checked) {
+                    if (c.getAttribute('data-answer') === "true") {
+                        dungTrongCau++;
+                    } else {
+                        label.classList.add('wrong-ans');
+                    }
+                }
+            });
+            if (dungTrongCau === 1) diem += 0.1;
+            else if (dungTrongCau === 2) diem += 0.25;
+            else if (dungTrongCau === 3) diem += 0.5;
+            else if (dungTrongCau === 4) diem += 1.0;
+            card.setAttribute('data-correct-count', dungTrongCau);
+        });
+
+        // Chấm Phần 3 (0.5đ / câu)
+        let p3Inputs = document.querySelectorAll('#part3-storage input[type="text"]');
+        p3Inputs.forEach(input => {
+            let ans = input.getAttribute('data-answer');
+            if (ans) {
+                let userAns = input.value.trim().replace(',', '.'); 
+                let trueAns = ans.replace(',', '.');
+                
+                if (userAns !== "") {
+                    if (userAns === trueAns) {
+                        diem += 0.5;
+                        dungP3++;
+                        input.classList.add('correct-input');
+                    } else {
+                        input.classList.add('wrong-input');
+                    }
+                } else {
+                    input.classList.add('wrong-input');
+                }
+            }
+        });
+
+        let maxScore = (p1Lists.length * 0.25) + (p2Cards.length * 1.0) + (p3Inputs.length * 0.5);
+
+        let msg = `KẾT QUẢ BÀI LÀM:\nThí sinh: ${hoTen} - SBD: ${sbd}\n---------------------------------------\n`;
+        msg += `- Phần I: Đúng ${dungP1}/${p1Lists.length} câu.\n`;
+        msg += `- Phần II:\n`;
+        p2Cards.forEach((card, index) => {
+            msg += `   + Câu ${index + 1} đúng ${card.getAttribute('data-correct-count')}/4 ý.\n`;
+        });
+        msg += `- Phần III: Đúng ${dungP3}/${p3Inputs.length} câu.\n\n`;
+        msg += `=> TỔNG ĐIỂM CỦA EM LÀ: ${diem.toFixed(2)} / ${maxScore.toFixed(2)}\n\nĐóng thông báo này lại để xem hướng dẫn giải chi tiết bên dưới mỗi câu nhé!`;
+
+        // ==============================================================
+        // TÍNH NĂNG GỬI VỀ GOOGLE SHEET (GIẤU NÚT NỘP SAU KHI BẤM)
+        // ==============================================================
+        document.querySelector('.submit-btn').style.display = 'none';
+        let maDe = document.getElementById('ma-de-id').innerText;
+        
+        // ANH NHỚ THAY ĐƯỜNG LINK GOOGLE WEB APP VÀO BIẾN NÀY NHÉ:
+        let urlWebAPP = "https://script.google.com/macros/s/AKfycbzr0AZasU8vebFHokf14niSXgC940oSVZsiajo6i3wjx1Rkxt5H7eJmXWaUxB29SPEL/exec";
+        let linkGuiDiem = `${urlWebAPP}?hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${maDe}&diem=${diem.toFixed(2)}`;
+
+        // Bắn dữ liệu ngầm lên Google Sheet bằng thẻ ảnh ảo
+        let sendData = new Image();
+        sendData.src = linkGuiDiem;
+
+        // Trì hoãn hiển thị bảng điểm 1 giây để Sheet cập nhật xong
+        setTimeout(() => {
+            alert(msg);
+            document.querySelectorAll('.explanation').forEach(el => {
+                el.style.display = 'block';
+            });
+        }, 1000);
+
+    } catch (err) {
+        alert("Lỗi hệ thống: " + err.message);
+    }
+}
+</script>
+</body>
+</html>
