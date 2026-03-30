@@ -3,107 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ Thống Đề Thi - Thầy Dương Math</title>
+    <title>Thư Viện Toán - Thầy Dương</title>
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --bg-color: #f8f9fa;
-        }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: var(--bg-color); 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            padding: 20px;
-        }
-        .container { 
-            width: 100%; 
-            max-width: 500px; 
-            background: white; 
-            padding: 30px; 
-            border-radius: 15px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
-        }
-        h1 { 
-            color: var(--primary-color); 
-            text-align: center; 
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-        .subtitle {
-            text-align: center;
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-        .menu-list { list-style: none; padding: 0; }
-        .menu-item { margin-bottom: 15px; }
+        :root { --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 600px; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        h1 { color: var(--primary); text-align: center; font-size: 22px; margin-bottom: 25px; border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
+        
+        .class-group { margin-bottom: 20px; border: 1px solid #eee; border-radius: 10px; overflow: hidden; }
+        .class-header { background: #e8f4fd; padding: 12px 20px; font-weight: bold; color: var(--primary); display: flex; align-items: center; }
+        
+        .sub-menu { padding: 10px 20px; background: #fff; }
+        .sub-header { font-size: 14px; color: #7f8c8d; margin: 10px 0 5px 0; font-style: italic; border-left: 3px solid var(--accent); padding-left: 10px; }
+        
         .menu-link { 
-            display: flex; 
-            align-items: center;
-            padding: 15px 20px; 
-            background: #fff; 
-            border: 1px solid #e0e0e0;
-            color: var(--primary-color); 
-            text-decoration: none; 
-            border-radius: 10px; 
-            font-weight: 500;
-            transition: all 0.3s ease;
+            display: block; padding: 10px 0; color: #34495e; text-decoration: none; 
+            border-bottom: 1px dashed #eee; font-size: 15px; transition: 0.2s;
         }
-        .menu-link:hover { 
-            background-color: var(--accent-color); 
-            color: white; 
-            border-color: var(--accent-color);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-        }
-        .icon { margin-right: 15px; font-size: 20px; }
-        footer { 
-            text-align: center; 
-            margin-top: 30px; 
-            font-size: 12px; 
-            color: #bdc3c7; 
-        }
+        .menu-link:last-child { border-bottom: none; }
+        .menu-link:hover { color: var(--accent); padding-left: 5px; }
+        footer { text-align: center; margin-top: 20px; font-size: 12px; color: #bdc3c7; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>📚 THẦY DƯƠNG MATH</h1>
-    <p class="subtitle">Hệ thống tài liệu và đề thi trực tuyến</p>
+    <h1>📚 THƯ VIỆN TOÁN THẦY DƯƠNG</h1>
 
-    <div class="menu-list">
-        <div class="menu-item">
-            <a href="1lc.html" class="menu-link">
-                <span class="icon">📍</span> 1. Đề thi Lào Cai
-            </a>
+    <div class="class-group">
+        <div class="class-header">🎓 LỚP 12</div>
+        <div class="sub-menu">
+            <div class="sub-header">Đề thi thử</div>
+            <a href="lop12/1lc.html" class="menu-link">📝 Đề thi Lào Cai (Lớp 12)</a>
+            <a href="lop12/2ltt.html" class="menu-link">📝 Đề thi Lê Thánh Tông (Lớp 12)</a>
+            <a href="lop12/3na.html" class="menu-link">📝 Đề thi Nghệ An (Lớp 12)</a>
+            <a href="lop12/4tppt.html" class="menu-link">📝 Đề thi Trần Phú - Phú Thọ (Lớp 12)</a>
         </div>
-        <div class="menu-item">
-            <a href="2ltt.html" class="menu-link">
-                <span class="icon">🏫</span> 2. Đề thi Lê Thánh Tông
-            </a>
-        </div>
-        <div class="menu-item">
-            <a href="3na.html" class="menu-link">
-                <span class="icon">📜</span> 3. Đề thi Nghệ An
-            </a>
-        </div>
-        <div class="menu-item">
-            <a href="4tppt.html" class="menu-link">
-                <span class="icon">🖋️</span> 4. Đề thi Trần Phú - Phú Thọ
-            </a>
-        </div>
-        <div class="menu-item">
-            <a href="11 de cuong giua ki 2.html" class="menu-link">
-                <span class="icon">📘</span> 5. Đề cương Giữa kì 2 - Lớp 11
-            </a>
+    </div>
+
+    <div class="class-group">
+        <div class="class-header">🎓 LỚP 11</div>
+        <div class="sub-menu">
+            <a href="11 de cuong giua ki 2.html" class="menu-link">📘 Đề cương Giữa kì 2</a>
         </div>
     </div>
 
     <footer>
-        &copy; 2026 - Thiết kế bởi Dương Math
+        &copy; 2026 - Thầy Dương Math
     </footer>
 </div>
 
