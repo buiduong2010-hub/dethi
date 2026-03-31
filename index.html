@@ -6,92 +6,164 @@
     <title>Thư Viện Toán - Thầy Dương Math</title>
     <style>
         :root { --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; --zalo: #0068ff; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .container { width: 100%; max-width: 600px; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 80px; }
-        h1 { color: var(--primary); text-align: center; font-size: 22px; margin-bottom: 25px; border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 0; }
         
-        /* Hiệu ứng Accordion */
-        .class-group { margin-bottom: 15px; border: 1px solid #eee; border-radius: 10px; overflow: hidden; transition: all 0.3s; }
-        .class-header { 
-            background: #f8fbfe; padding: 15px 20px; font-weight: bold; color: var(--primary); 
-            cursor: pointer; display: flex; justify-content: space-between; align-items: center; 
+        /* Header & Banner */
+        header { background: white; padding: 25px 10px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        h1 { color: var(--primary); font-size: 26px; margin: 0; letter-spacing: 1px; }
+        h1 span { color: var(--accent); }
+
+        /* Menu Hàng Ngang */
+        nav { 
+            background: var(--primary); 
+            display: flex; 
+            justify-content: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
         }
-        .class-header::after { content: '▼'; font-size: 10px; transition: 0.3s; }
-        .class-group.active { border-color: var(--accent); box-shadow: 0 3px 10px rgba(52, 152, 219, 0.1); }
-        .class-group.active .class-header { background: #e8f4fd; color: var(--accent); }
-        .class-group.active .class-header::after { transform: rotate(180deg); }
-
-        .sub-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: #fff; }
-        .class-group.active .sub-menu { max-height: 1000px; padding: 10px 20px; }
+        .nav-container { 
+            display: flex; 
+            list-style: none; 
+            margin: 0; 
+            padding: 0; 
+            width: 100%; 
+            max-width: 1000px; 
+        }
+        .nav-item { position: relative; flex: 1; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
+        .nav-item:last-child { border-right: none; }
         
-        .sub-header { font-size: 13px; color: #e67e22; margin: 15px 0 8px 0; font-weight: bold; text-transform: uppercase; border-left: 3px solid #e67e22; padding-left: 10px; }
-        .menu-link { display: block; padding: 12px 0; color: #34495e; text-decoration: none; border-bottom: 1px dashed #eee; font-size: 15px; transition: 0.2s; }
-        .menu-link:hover { color: var(--accent); padding-left: 8px; background: #fafafa; }
+        .nav-link { 
+            display: block; 
+            padding: 15px 10px; 
+            color: white; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 14px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .nav-link:hover { background: var(--accent); }
 
-        /* Nút Chia sẻ Zalo dưới Menu */
-        .zalo-share { margin-top: 25px; display: flex; justify-content: center; }
+        /* Menu con (Dropdown) */
+        .dropdown { 
+            position: absolute; 
+            top: 100%; 
+            left: 50%; 
+            transform: translateX(-50%);
+            background: white; 
+            width: 280px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
+            display: none; 
+            text-align: left;
+            border-radius: 0 0 10px 10px;
+            padding: 10px 0;
+        }
+        /* Hiển thị dropdown khi hover hoặc có class active */
+        .nav-item:hover .dropdown, .nav-item.active .dropdown { display: block; }
+        
+        .sub-header { background: #f8f9fa; font-size: 11px; font-weight: bold; padding: 8px 15px; color: #e67e22; text-transform: uppercase; margin-top: 5px; }
+        .menu-link { 
+            display: block; 
+            padding: 12px 15px; 
+            color: #34495e; 
+            text-decoration: none; 
+            border-bottom: 1px solid #f1f1f1;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .menu-link:hover { background: #e8f4fd; color: var(--accent); padding-left: 20px; }
+        .menu-link:last-child { border-bottom: none; }
+
+        /* Nội dung chào mừng */
+        .welcome-section { max-width: 800px; margin: 50px auto; padding: 20px; text-align: center; }
+        .welcome-card { background: white; padding: 40px 20px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .welcome-card h2 { color: var(--primary); margin-top: 0; }
+        .welcome-card p { color: #7f8c8d; line-height: 1.6; }
+
+        /* Nút Chia sẻ Zalo */
+        .zalo-share { margin-top: 30px; }
         .zalo-btn { 
-            background-color: var(--zalo); color: white; padding: 10px 20px; border-radius: 25px; 
-            text-decoration: none; font-weight: bold; font-size: 14px; display: flex; align-items: center;
-            box-shadow: 0 4px 12px rgba(0, 104, 255, 0.2); transition: 0.3s;
+            display: inline-flex; align-items: center; background: var(--zalo); color: white; 
+            padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; 
+            box-shadow: 0 4px 15px rgba(0, 104, 255, 0.2); transition: 0.3s;
         }
-        .zalo-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0, 104, 255, 0.3); }
+        .zalo-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0, 104, 255, 0.3); }
 
-        /* Nút Chat Zalo nổi cố định */
+        /* Nút Chat Zalo cố định */
         .zalo-chat-fixed {
-            position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+            position: fixed; bottom: 25px; right: 25px; z-index: 2000;
             display: flex; align-items: center; background: var(--zalo); color: white;
-            padding: 12px 20px; border-radius: 30px; text-decoration: none; font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 104, 255, 0.4); transition: 0.3s;
+            padding: 12px 22px; border-radius: 35px; text-decoration: none; font-weight: bold;
+            box-shadow: 0 4px 20px rgba(0, 104, 255, 0.4); transition: 0.3s;
         }
         .zalo-chat-fixed:hover { transform: scale(1.1); }
-        .zalo-chat-fixed img { width: 22px; height: 22px; margin-right: 8px; filter: brightness(0) invert(1); }
+        .zalo-chat-fixed img { width: 24px; height: 24px; margin-right: 10px; filter: brightness(0) invert(1); }
 
-        footer { text-align: center; margin-top: 30px; font-size: 12px; color: #bdc3c7; }
+        footer { text-align: center; padding: 40px 20px; font-size: 13px; color: #bdc3c7; border-top: 1px solid #eee; margin-top: 50px; }
+
+        /* Tối ưu cho điện thoại */
+        @media (max-width: 600px) {
+            .nav-container { flex-wrap: wrap; }
+            .nav-item { flex: none; width: 33.33%; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .dropdown { width: 100vw; position: fixed; left: 0; transform: none; top: auto; border-radius: 0; }
+            h1 { font-size: 20px; }
+            .nav-link { font-size: 12px; padding: 12px 5px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>📚 THƯ VIỆN TOÁN </h1>
+<header>
+    <h1>📚 THƯ VIỆN TOÁN <span>THẦY DƯƠNG</span></h1>
+</header>
 
-    <div class="class-group">
-        <div class="class-header" onclick="toggleMenu(this)">🎓 LỚP 10</div>
-        <div class="sub-menu">
-            <p style="color: #95a5a6; font-size: 14px; font-style: italic; padding: 15px 0; text-align: center;">Đang cập nhật nội dung...</p>
+<nav>
+    <div class="nav-container">
+        <div class="nav-item">
+            <a class="nav-link" onclick="toggleDropdown(this)">🎓 LỚP 10</a>
+            <div class="dropdown">
+                <p style="padding: 15px; color: #95a5a6; font-style: italic; font-size: 13px; text-align: center;">Đang cập nhật nội dung...</p>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <a class="nav-link" onclick="toggleDropdown(this)">🎓 LỚP 11</a>
+            <div class="dropdown">
+                <div class="sub-header">📍 Đề cương</div>
+                <a href="11 de cuong giua ki 2.html" class="menu-link">📘 11 Đề cương giữa kì 2</a>
+                <div class="sub-header">📍 Chương VII: Xác suất</div>
+                <a href="#" class="menu-link">📘 Bài tập quy tắc tính</a>
+            </div>
+        </div>
+
+        <div class="nav-item">
+            <a class="nav-link" onclick="toggleDropdown(this)">🎓 LỚP 12</a>
+            <div class="dropdown">
+                <div class="sub-header">📍 Chuyên đề ôn tập</div>
+                <a href="#" class="menu-link">📝 Chuyên đề Hàm số</a>
+                <div class="sub-header">📍 Đề thi thử THPT</div>
+                <a href="1-chuyen-lao-cai.html" class="menu-link">📝 Đề thi Chuyên Lào Cai</a>
+                <a href="2-le-thanh-tong.html" class="menu-link">📝 Đề thi Lê Thánh Tông</a>
+                <a href="3-so-nghe-an.html" class="menu-link">📝 Đề thi Sở Nghệ An</a>
+                <a href="4-tran-phu-phu-tho.html" class="menu-link">📝 Đề thi Trần Phú - Phú Thọ</a>
+                <a href="5-so-hung-yen.html" class="menu-link">📝 Đề thi Sở Hưng Yên</a>
+                <a href="6-cum-hai-phong.html" class="menu-link">📝 Đề thi cụm Hải Phòng</a>
+            </div>
         </div>
     </div>
+</nav>
 
-    <div class="class-group">
-        <div class="class-header" onclick="toggleMenu(this)">🎓 LỚP 11</div>
-        <div class="sub-menu">
-            <div class="sub-header">📍 Đề cương</div>
-            <a href="11 de cuong giua ki 2.html" class="menu-link">📘 11 Đề cương giữa kì 2</a>
-            <div class="sub-header">📍 Chương VII Các quy tắc tính xác xuất</div>
-            <a href="11 de cuong giua ki 2.html" class="menu-link">📘 Bài tập</a>
+<div class="welcome-section">
+    <div class="welcome-card">
+        <h2>Chào mừng các em học sinh!</h2>
+        <p>Hệ thống cung cấp kho tài liệu, chuyên đề và đề thi thử trắc nghiệm Toán có lời giải chi tiết.</p>
+        <p><b>Hướng dẫn:</b> Di chuột (trên máy tính) hoặc Bấm (trên điện thoại) vào các lớp phía trên để chọn bài học.</p>
+        
+        <div class="zalo-share">
+            <a href="#" id="shareZalo" class="zalo-btn">🚀 Chia sẻ cho bạn bè qua Zalo</a>
         </div>
     </div>
-
-    <div class="class-group">
-        <div class="class-header" onclick="toggleMenu(this)">🎓 LỚP 12</div>
-        <div class="sub-menu">
-            <div class="sub-header">📍 Chyên đề ôn tập</div>
-            <a href="1-chuyen-lao-cai.html" class="menu-link">📝 Hàm số</a>
-            <div class="sub-header">📍 Đề thi thử THPT</div>
-            <a href="1-chuyen-lao-cai.html" class="menu-link">📝 Đề thi Chuyên Lào Cai</a>
-            <a href="2-le-thanh-tong.html" class="menu-link">📝 Đề thi Lê Thánh Tông</a>
-            <a href="3-so-nghe-an.html" class="menu-link">📝 Đề thi Sở Nghệ An</a>
-            <a href="4-tran-phu-phu-tho.html" class="menu-link">📝 Đề thi Trần Phú - Phú Thọ</a>
-            <a href="5-so-hung-yen.html" class="menu-link">📝 Đề thi Sở Hưng Yên</a>
-            <a href="6-cum-hai-phong.html" class="menu-link">📝 Đề thi cụm Hải Phòng</a>
-        </div>
-    </div>
-
-    <div class="zalo-share">
-        <a href="#" id="shareZalo" class="zalo-btn">🚀 Chia sẻ cho bạn bè qua Zalo</a>
-    </div>
-
-    <footer>&copy; 2026 - Thầy Dương Math</footer>
 </div>
 
 <a href="https://zalo.me/0989532111" target="_blank" class="zalo-chat-fixed">
@@ -99,17 +171,25 @@
     <span>Chat với Thầy</span>
 </a>
 
+<footer>&copy; 2026 - Thầy Dương Math - Học Toán để thay đổi tương lai</footer>
+
 <script>
-    // Hàm đóng mở menu: Mở 1 cái, tự đóng cái còn lại
-    function toggleMenu(header) {
-        const currentGroup = header.parentElement;
-        document.querySelectorAll('.class-group').forEach(group => {
-            if (group === currentGroup) {
-                group.classList.toggle('active');
-            } else {
-                group.classList.remove('active');
+    // Xử lý cho điện thoại: Bấm vào mới hiện, bấm cái khác tự đóng
+    function toggleDropdown(element) {
+        if (window.innerWidth <= 600) {
+            const parent = element.parentElement;
+            const isActive = parent.classList.contains('active');
+            
+            // Đóng tất cả
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Nếu chưa mở thì mở cái được bấm
+            if (!isActive) {
+                parent.classList.add('active');
             }
-        });
+        }
     }
 
     // Xử lý nút chia sẻ Zalo
@@ -118,6 +198,15 @@
         const shareUrl = `https://sp.zalo.me/share/base?url=${encodeURIComponent(window.location.href)}`;
         window.open(shareUrl, '_blank', 'width=600,height=500');
     };
+
+    // Đóng menu nếu bấm ra ngoài vùng menu (trên điện thoại)
+    window.onclick = function(event) {
+        if (!event.target.matches('.nav-link')) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+    }
 </script>
 
 </body>
