@@ -5,19 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ĐỀ THI THỬ THPT QG CỤM TP HẢI PHÒNG 2026 (CÓ HÌNH ẢNH)</title>
 
-<!-- LÕI KATEX: SIÊU NHẸ, RENDER CÔNG THỨC NGAY LẬP TỨC TRÊN ĐIỆN THOẠI -->
+<!-- LÕI KATEX: SIÊU NHẸ, RENDER CÔNG THỨC -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" 
-    onload="renderMathInElement(document.body, { 
-        delimiters: [
-            {left: '$$', right: '$$', display: true}, 
-            {left: '\\[', right: '\\]', display: true},
-            {left: '$', right: '$', display: false}, 
-            {left: '\\(', right: '\\)', display: false}
-        ],
-        throwOnError: false
-    });">
+    onload="renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true}, {left: '\\[', right: '\\]', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}], throwOnError: false });">
 </script>
 
 <style>
@@ -26,7 +18,7 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
 .exam-code { position: absolute; top: 20px; right: 20px; border: 2px solid #333; padding: 5px 15px; font-weight: bold; background: #fff; }
 .header-box { text-align: center; margin-bottom: 30px; border-bottom: 2px dashed #ddd; padding-bottom: 25px; }
 .student-info { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
-.info-input { padding: 10px 15px; border: 2px solid #ccc; border-radius: 8px; font-size: 1.05rem; width: 220px; outline: none; transition: 0.3s border-color; font-family: inherit; }
+.info-input { padding: 10px 15px; border: 2px solid #ccc; border-radius: 8px; font-size: 1.05rem; width: 220px; outline: none; transition: 0.3s border-color; }
 .info-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }
 .part-title { background: #1a73e8; color: white; padding: 12px; border-radius: 8px; margin: 35px 0 20px 0; font-weight: bold; text-transform: uppercase; }
 .storage { counter-reset: cauNum; min-height: 100px; }
@@ -45,22 +37,22 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
 .choice-group { display: flex; gap: 15px; justify-content: flex-end; }
 .choice-group label { padding: 6px 12px; border-radius: 6px; border: 1px solid transparent; cursor: pointer; transition: 0.3s; }
 
-.short-answer-input { width: 100%; max-width: 250px; padding: 12px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 1.1rem; margin-top: 10px; outline: none; transition: 0.3s; font-weight: bold; color: #1a73e8; }
+.short-answer-input { width: 100%; max-width: 250px; padding: 12px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 1.1rem; margin-top: 10px; outline: none; font-weight: bold; color: #1a73e8; }
 .short-answer-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }
 .submit-btn { width: 100%; padding: 20px; background: #28a745; color: white; border: none; border-radius: 12px; font-size: 1.3rem; font-weight: bold; cursor: pointer; margin-top: 40px; }
 
 /* ĐỒNG HỒ ĐẾM NGƯỢC */
 .timer-box { position: fixed; top: 20px; left: 20px; background: #e53935; color: white; padding: 10px 20px; font-size: 1.2rem; font-weight: bold; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; border: 2px solid #b71c1c; transition: background-color 0.5s; }
 
-/* CSS LỜI GIẢI GIA SƯ ẢO */
-.explanation { margin-top: 20px; padding: 20px; background-color: #fff; border-left: 6px solid #1a73e8; border-radius: 8px; display: none; font-size: 1.05rem; color: #333; line-height: 1.7; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border-top: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;}
+/* CSS LỜI GIẢI */
+.explanation { margin-top: 20px; padding: 20px; background-color: #fff; border-left: 6px solid #1a73e8; border-radius: 8px; display: none; font-size: 1.05rem; color: #333; line-height: 1.7; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 1px solid #eee; }
 .knowledge-box { background: #fdf2e9; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px dashed #e67e22; color: #d35400; }
 .step-title { color: #1a73e8; font-weight: bold; margin-top: 10px; margin-bottom: 10px; display: inline-block; text-transform: uppercase; font-size: 1.1rem;}
 .step-content { margin-left: 10px; margin-bottom: 10px; padding-left: 15px; border-left: 3px solid #b2ccf5;}
 .casio-box { background: #e8f5e9; padding: 15px; border-radius: 8px; margin-top: 15px; color: #1b5e20; border: 2px solid #a5d6a7; font-family: 'Consolas', monospace; }
 .casio-title { font-weight: bold; color: #2e7d32; margin-bottom: 5px; font-family: 'Segoe UI', sans-serif;}
 
-/* CSS TÔ MÀU ĐÁP ÁN */
+/* TÔ MÀU ĐÁP ÁN */
 .correct-ans { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724 !important; }
 .wrong-ans { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24 !important; }
 .correct-input { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724 !important; }
@@ -100,13 +92,10 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
         <div class="explanation">
             <div class="knowledge-box">📚 <b>Kiến thức cần nhớ:</b><br>Độ lệch chuẩn (\( \sigma \)) chính là căn bậc hai của Phương sai (\( s^2 \)).</div>
             <div class="step-title">✍️ Các bước giải:</div>
-            <div class="step-content"><b>Bước 1:</b> Đề bài cho Phương sai \( s^2 = 32 \).</div>
-            <div class="step-content"><b>Bước 2:</b> Tính độ lệch chuẩn bằng cách lấy căn bậc hai: \( \sigma = \sqrt{32} \).</div>
-            <div class="step-content"><b>Bước 3:</b> Trục căn thức ta được \( \sigma = \sqrt{16 \times 2} = 4\sqrt{2} \). Suy ra đáp án D.</div>
-            <div class="casio-box">
-                <div class="casio-title">💡 Mẹo Casio:</div>
-                Bấm phím [√] rồi nhập 32. Máy sẽ tự động rút gọn ra kết quả <b>4√2</b>.
-            </div>
+            <div class="step-content"><b>Bước 1:</b> Phương sai \( s^2 = 32 \).</div>
+            <div class="step-content"><b>Bước 2:</b> Tính độ lệch chuẩn: \( \sigma = \sqrt{32} \).</div>
+            <div class="step-content"><b>Bước 3:</b> Trục căn thức ta được \( \sigma = 4\sqrt{2} \). Suy ra đáp án D.</div>
+            <div class="casio-box"><div class="casio-title">💡 Mẹo Casio:</div>Bấm phím [√] rồi nhập 32. Máy sẽ tự động rút gọn ra kết quả <b>4√2</b>.</div>
         </div>
     </div>
 
@@ -119,12 +108,11 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
             <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( \vec{GA} + \vec{GB} + \vec{GC} + \vec{GD} = \vec{0} \).</label>
         </div>
         <div class="explanation">
-            <div class="knowledge-box">📚 <b>Kiến thức cần nhớ:</b><br>Khi \( G \) là trung điểm của đoạn thẳng nối 2 trung điểm cạnh đối diện, \( G \) chính là <b>trọng tâm của tứ diện</b>. Tính chất đặc trưng của trọng tâm tứ diện là: \( \vec{GA} + \vec{GB} + \vec{GC} + \vec{GD} = \vec{0} \).</div>
+            <div class="knowledge-box">📚 <b>Kiến thức cần nhớ:</b><br>Khi \( G \) là trung điểm của đoạn thẳng nối 2 trung điểm cạnh đối diện, \( G \) chính là <b>trọng tâm của tứ diện</b>. Tính chất đặc trưng: \( \vec{GA} + \vec{GB} + \vec{GC} + \vec{GD} = \vec{0} \).</div>
             <div class="step-title">✍️ Các bước giải:</div>
-            <div class="step-content"><b>Bước 1:</b> Phân tích tính đúng sai của từng đáp án dựa vào tính chất trọng tâm tứ diện. Đáp án D là tính chất chuẩn nên chắc chắn ĐÚNG.</div>
+            <div class="step-content"><b>Bước 1:</b> Đáp án D là tính chất chuẩn nên chắc chắn ĐÚNG.</div>
             <div class="step-content"><b>Bước 2:</b> Vì \( G \) là trung điểm \( MN \), nên \( \vec{GM} + \vec{GN} = \vec{0} \). Đáp án B ĐÚNG.</div>
-            <div class="step-content"><b>Bước 3:</b> Từ tính chất chuẩn (D), nếu ta giữ lại 3 vector đầu và chuyển vế \( \vec{GD} \) sang bên phải, ta phải đổi dấu thành \( -\vec{GD} \).</div>
-            <div class="step-content"><b>Bước 4:</b> Nhìn vào đáp án A, ta thấy người ta viết \( \vec{GA} + \vec{GB} + \vec{GC} = \vec{GD} \) (thiếu dấu trừ). Vậy A là khẳng định SAI.</div>
+            <div class="step-content"><b>Bước 3:</b> Nhìn vào đáp án A, chuyển vế ta có \( \vec{GA} + \vec{GB} + \vec{GC} - \vec{GD} = \vec{0} \) (sai dấu). Vậy A là khẳng định SAI.</div>
         </div>
     </div>
 
@@ -137,12 +125,11 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
             <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \( SH \perp (ABC) \).</label>
         </div>
         <div class="explanation">
-            <div class="knowledge-box">📚 <b>Kiến thức hình học không gian:</b><br>Hình chóp có các cạnh bên bằng nhau (\( SA = SB = SC \)) thì chân đường cao từ đỉnh S hạ xuống đáy sẽ <b>trùng với tâm đường tròn ngoại tiếp</b> của đa giác đáy.</div>
+            <div class="knowledge-box">📚 <b>Kiến thức:</b><br>Hình chóp có các cạnh bên bằng nhau thì chân đường cao sẽ trùng với tâm đường tròn ngoại tiếp đa giác đáy.</div>
             <div class="step-title">✍️ Các bước giải:</div>
-            <div class="step-content"><b>Bước 1:</b> Đáy là tam giác ABC vuông tại A. Tâm đường tròn ngoại tiếp của tam giác vuông luôn nằm ở <b>trung điểm của cạnh huyền</b>. Ở đây cạnh huyền là BC, trung điểm là H.</div>
-            <div class="step-content"><b>Bước 2:</b> Suy ra hình chiếu vuông góc của S chính là H. Từ đó ta có kết luận \( SH \perp (ABC) \). Khẳng định D ĐÚNG.</div>
-            <div class="step-content"><b>Bước 3:</b> Vì \( SH \perp (ABC) \), nên SH sẽ vuông góc với tất cả các đường thẳng nằm trong mặt đáy (ABC). Do đó, SH vuông góc với AC và SH vuông góc với BC. Khẳng định A và B ĐÚNG.</div>
-            <div class="step-content"><b>Bước 4:</b> SH là một đường thẳng nằm ngay trong chính mặt phẳng (SBC), nên nó không thể vuông góc với chính mặt phẳng đó được. Khẳng định C là SAI.</div>
+            <div class="step-content"><b>Bước 1:</b> Tâm đường tròn ngoại tiếp của tam giác vuông luôn nằm ở <b>trung điểm của cạnh huyền</b>. Suy ra \( SH \perp (ABC) \). D ĐÚNG.</div>
+            <div class="step-content"><b>Bước 2:</b> Vì \( SH \perp (ABC) \), nên SH vuông góc với AC và BC. Khẳng định A và B ĐÚNG.</div>
+            <div class="step-content"><b>Bước 3:</b> SH nằm ngay trong chính mặt phẳng (SBC), nên nó không thể vuông góc với chính mặt phẳng đó được. Khẳng định C là SAI.</div>
         </div>
     </div>
 
@@ -155,20 +142,11 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
             <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \( \frac{1}{20} \).</label>
         </div>
         <div class="explanation">
-            <div class="step-title">✍️ Các bước giải tự luận:</div>
-            <div class="step-content"><b>Bước 1:</b> Tính tổng số quả cầu trong bình: 4 xanh + 6 trắng = 10 quả.</div>
-            <div class="step-content"><b>Bước 2:</b> Tìm không gian mẫu (Tổng số cách chọn 4 quả bất kỳ từ 10 quả): \( n(\Omega) = C_{10}^4 = 210 \).</div>
-            <div class="step-content"><b>Bước 3:</b> Tìm số cách chọn thỏa mãn yêu cầu đề bài (Biến cố A: Chọn 2 xanh VÀ 2 trắng):<br>
-            - Chọn 2 quả xanh từ 4 quả xanh: \( C_4^2 \) cách.<br>
-            - Chọn 2 quả trắng từ 6 quả trắng: \( C_6^2 \) cách.<br>
-            - Nhân lại với nhau (Quy tắc nhân): \( n(A) = C_4^2 \times C_6^2 = 6 \times 15 = 90 \) cách.</div>
-            <div class="step-content"><b>Bước 4:</b> Tính xác suất: \( P(A) = \frac{n(A)}{n(\Omega)} = \frac{90}{210} = \frac{3}{7} \). Đáp án A.</div>
-            <div class="casio-box">
-                <div class="casio-title">💡 Mẹo Casio siêu tốc (Bấm 1 dòng ra luôn):</div>
-                Nhập y hệt biểu thức sau vào máy tính: <b>(4C2 × 6C2) ÷ 10C4</b><br>
-                <i>(Nút C trong máy tính bấm bằng cách nhấn SHIFT + Dấu chia [ ÷ ])</i><br>
-                Nhấn [=] máy sẽ hiện ngay kết quả phân số <b>3/7</b>.
-            </div>
+            <div class="step-title">✍️ Các bước giải:</div>
+            <div class="step-content"><b>Bước 1:</b> Tìm không gian mẫu: Chọn 4 quả bất kỳ từ 10 quả: \( n(\Omega) = C_{10}^4 = 210 \).</div>
+            <div class="step-content"><b>Bước 2:</b> Chọn 2 xanh từ 4 xanh (\( C_4^2 \)) VÀ 2 trắng từ 6 trắng (\( C_6^2 \)): \( n(A) = C_4^2 \times C_6^2 = 90 \).</div>
+            <div class="step-content"><b>Bước 3:</b> Xác suất: \( P(A) = \frac{90}{210} = \frac{3}{7} \). Đáp án A.</div>
+            <div class="casio-box"><div class="casio-title">💡 Mẹo Casio (1 dòng):</div>Nhập: <b>(4C2 × 6C2) ÷ 10C4</b>. Nhấn [=] máy sẽ hiện ngay kết quả <b>3/7</b>.</div>
         </div>
     </div>
 
@@ -181,15 +159,11 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
             <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; \( q = 2 \).</label>
         </div>
         <div class="explanation">
-            <div class="knowledge-box">📚 <b>Kiến thức cần nhớ:</b><br>Công thức số hạng tổng quát của cấp số nhân: \( u_n = u_1 \cdot q^{n-1} \).</div>
             <div class="step-title">✍️ Các bước giải:</div>
-            <div class="step-content"><b>Bước 1:</b> Áp dụng công thức cho \( u_4 \), ta có: \( u_4 = u_1 \cdot q^3 \).</div>
-            <div class="step-content"><b>Bước 2:</b> Thay các giá trị đề bài đã cho vào công thức: \( 64 = 1 \cdot q^3 \).</div>
-            <div class="step-content"><b>Bước 3:</b> Giải phương trình: \( q^3 = 64 \Rightarrow q = \sqrt[1]{64} = 4 \). Chọn đáp án C.</div>
-            <div class="casio-box">
-                <div class="casio-title">💡 Mẹo bấm máy tính:</div>
-                Chỉ cần bấm căn bậc 3 của 64: Nhấn <b>SHIFT + [√]</b> rồi nhập <b>64</b>. Nhấn [=] ra ngay kết quả 4.
-            </div>
+            <div class="step-content"><b>Bước 1:</b> Áp dụng công thức cấp số nhân: \( u_4 = u_1 \cdot q^3 \).</div>
+            <div class="step-content"><b>Bước 2:</b> Thay giá trị: \( 64 = 1 \cdot q^3 \Rightarrow q^3 = 64 \).</div>
+            <div class="step-content"><b>Bước 3:</b> Suy ra \( q = 4 \). Chọn C.</div>
+            <div class="casio-box"><div class="casio-title">💡 Mẹo bấm máy tính:</div>Bấm căn bậc 3 của 64: Nhấn <b>SHIFT + [√]</b> rồi nhập <b>64</b>. Kết quả ra 4.</div>
         </div>
     </div>
 
@@ -203,21 +177,11 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
         </div>
         <div class="explanation">
             <div class="step-title">✍️ Các bước giải tự luận:</div>
-            <div class="step-content"><b>Bước 1:</b> Tính đạo hàm theo quy tắc u/v: \( f'(x) = \frac{2x(x+1) - (x^2+3) \cdot 1}{(x+1)^2} = \frac{x^2+2x-3}{(x+1)^2} \).</div>
-            <div class="step-content"><b>Bước 2:</b> Cho tử số bằng 0 để tìm nghiệm: \( x^2+2x-3 = 0 \Leftrightarrow x = 1 \) hoặc \( x = -3 \).</div>
-            <div class="step-content"><b>Bước 3:</b> Loại nghiệm \( x = 1 \) vì nằm ngoài đoạn \( [-4; -2] \). Nhận nghiệm \( x = -3 \).</div>
-            <div class="step-content"><b>Bước 4:</b> Tính giá trị hàm số tại các điểm đầu mút và nghiệm vừa nhận:<br>
-            + Tại đầu mút \( x = -4 \): \( f(-4) = \frac{(-4)^2+3}{-4+1} = \frac{19}{-3} \approx -6.33 \).<br>
-            + Tại nghiệm \( x = -3 \): \( f(-3) = \frac{(-3)^2+3}{-3+1} = \frac{12}{-2} = -6 \).<br>
-            + Tại đầu mút \( x = -2 \): \( f(-2) = \frac{(-2)^2+3}{-2+1} = \frac{7}{-1} = -7 \).</div>
-            <div class="step-content"><b>Bước 5:</b> So sánh 3 kết quả trên, ta thấy số nhỏ nhất là -7. Chọn D.</div>
-            <div class="casio-box">
-                <div class="casio-title">💡 Mẹo Casio quét bảng (Không cần đạo hàm):</div>
-                1. Nhấn <b>MENU 8</b> (hoặc MODE 7 với máy đời cũ).<br>
-                2. Nhập hàm số: \( f(x) = (X^2+3)/(X+1) \).<br>
-                3. Máy hỏi <b>Start</b> nhập -4. <b>End</b> nhập -2. <b>Step</b> nhập 0.1 (để dò chi tiết).<br>
-                4. Nhìn vào cột f(x), lướt từ trên xuống dưới tìm con số nhỏ nhất. Bạn sẽ thấy ngay giá trị nhỏ nhất là <b>-7</b> tại vị trí X = -2.
-            </div>
+            <div class="step-content"><b>Bước 1:</b> Đạo hàm \( f'(x) = \frac{x^2+2x-3}{(x+1)^2} \). Cho \( f'(x) = 0 \Rightarrow x = 1 \) (loại) hoặc \( x = -3 \) (nhận).</div>
+            <div class="step-content"><b>Bước 2:</b> Tính giá trị tại \( x = -4, -3, -2 \):<br>
+            \( f(-4) = -19/3 \approx -6.33 \); \( f(-3) = -6 \); \( f(-2) = -7 \).</div>
+            <div class="step-content"><b>Bước 3:</b> So sánh thấy số nhỏ nhất là -7. Chọn D.</div>
+            <div class="casio-box"><div class="casio-title">💡 Mẹo Casio (MENU 8):</div>Nhập hàm \( f(x) \). Start: -4, End: -2, Step: 0.1. Nhìn cột f(x) thấy đáy nhỏ nhất là <b>-7</b>.</div>
         </div>
     </div>
 
@@ -230,17 +194,11 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
             <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \( \frac{\sqrt{2}-1}{2} \).</label>
         </div>
         <div class="explanation">
-            <div class="step-title">✍️ Các bước giải tự luận:</div>
-            <div class="step-content"><b>Bước 1:</b> Tìm nguyên hàm cơ bản. Ta biết \( \int \frac{1}{x+a} dx = \ln|x+a| \). Do đó nguyên hàm của bài này là \( \ln|x+1| \).</div>
-            <div class="step-content"><b>Bước 2:</b> Thay cận trên (x=1) và cận dưới (x=0) vào biểu thức vừa tìm được: \( \ln(1+1) - \ln(0+1) \).</div>
-            <div class="step-content"><b>Bước 3:</b> Tính toán: \( \ln 2 - \ln 1 \). Vì \( \ln 1 = 0 \), nên kết quả cuối cùng là \( \ln 2 \). Chọn C.</div>
-            <div class="casio-box">
-                <div class="casio-title">💡 Mẹo bấm Casio siêu nhanh:</div>
-                1. Nhấn nút <b>[ ∫ ]</b> trên máy tính.<br>
-                2. Nhập hàm <b>1 / (X+1)</b>, cận dưới 0, cận trên 1.<br>
-                3. Nhấn [=], máy hiện ra kết quả thập phân: <b>0.693147...</b><br>
-                4. Nhấn nút <b>ln(2)</b> thử xem bằng bao nhiêu. Cũng ra y chang <b>0.693147...</b> Khoanh ngay C!
-            </div>
+            <div class="step-title">✍️ Các bước giải:</div>
+            <div class="step-content"><b>Bước 1:</b> Nguyên hàm của \( \frac{1}{x+1} \) là \( \ln|x+1| \).</div>
+            <div class="step-content"><b>Bước 2:</b> Thay cận 1 và 0: \( \ln(1+1) - \ln(0+1) = \ln 2 - \ln 1 \).</div>
+            <div class="step-content"><b>Bước 3:</b> Vì \( \ln 1 = 0 \), kết quả là \( \ln 2 \). Chọn C.</div>
+            <div class="casio-box"><div class="casio-title">💡 Mẹo bấm Casio:</div>Bấm nút Tích phân đề bài -> ra <b>0.6931...</b> Bấm ln(2) cũng ra y chang. Khoanh C.</div>
         </div>
     </div>
 
@@ -255,11 +213,9 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
             <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; Hàm số \( f(x) \) đồng biến trên khoảng \( (-2; 1) \).</label>
         </div>
         <div class="explanation">
-            <div class="knowledge-box">📚 <b>Mẹo đọc đồ thị ĐẠO HÀM \( f'(x) \):</b><br>- Những phần đồ thị nằm <b>NGỤP BÊN DƯỚI</b> trục ngang (trục hoành) thì \( f'(x) < 0 \). Lúc này hàm số gốc \( f(x) \) sẽ <b>Nghịch biến</b> (đi xuống).<br>- Những phần đồ thị nằm <b>NỔI BÊN TRÊN</b> trục ngang thì \( f'(x) > 0 \). Lúc này hàm số gốc \( f(x) \) sẽ <b>Đồng biến</b> (đi lên).</div>
-            <div class="step-title">✍️ Các bước phân tích:</div>
-            <div class="step-content"><b>Bước 1:</b> Nhìn vào đồ thị hình chữ W úp ngược. Trục ngang cắt đồ thị tại các mốc -2, 0 và 2.</div>
-            <div class="step-content"><b>Bước 2:</b> Khoảng từ \( x=0 \) đến \( x=2 \), ta thấy nét vẽ đường cong nằm hoàn toàn phía dưới trục ngang. Tức là \( f'(x) \) mang dấu ÂM.</div>
-            <div class="step-content"><b>Bước 3:</b> Đạo hàm mang dấu âm thì hàm số gốc nghịch biến. Vậy hàm số \( f(x) \) nghịch biến trên khoảng \( (0; 2) \). Đáp án A là chính xác tuyệt đối.</div>
+            <div class="knowledge-box">📚 <b>Mẹo đọc đồ thị ĐẠO HÀM \( f'(x) \):</b><br>- Phần đồ thị nằm <b>DƯỚI</b> trục ngang thì \( f'(x) < 0 \Rightarrow \) Hàm số gốc <b>Nghịch biến</b>.<br>- Phần đồ thị nằm <b>TRÊN</b> trục ngang thì \( f'(x) > 0 \Rightarrow \) Hàm số gốc <b>Đồng biến</b>.</div>
+            <div class="step-title">✍️ Phân tích:</div>
+            <div class="step-content">Khoảng từ \( x=0 \) đến \( x=2 \), đường cong nằm hoàn toàn phía dưới trục hoành. Tức là \( f'(x) < 0 \). Do đó hàm số \( f(x) \) nghịch biến trên khoảng \( (0; 2) \). Đáp án A ĐÚNG.</div>
         </div>
     </div>
 
@@ -272,20 +228,10 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
             <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; \( (-\infty; 12) \).</label>
         </div>
         <div class="explanation">
-            <div class="step-title">✍️ Các bước giải tự luận:</div>
-            <div class="step-content"><b>Bước 1: Đặt điều kiện.</b> Biểu thức bên trong Logarit phải luôn lớn hơn 0: \( x - 2 > 0 \Leftrightarrow x > 2 \) (*).</div>
-            <div class="step-content"><b>Bước 2: Giải bất phương trình.</b> Ký hiệu "log" (không ghi cơ số) ngầm hiểu là cơ số 10. Ta đội cơ số 10 lên vế phải để làm mất chữ log:<br>
-            \( \log_{10}(x-2) < 1 \Leftrightarrow x - 2 < 10^1 \Leftrightarrow x - 2 < 10 \Leftrightarrow x < 12 \) (**).</div>
-            <div class="step-content"><b>Bước 3: Kết hợp điều kiện.</b> Từ (*) là lớn hơn 2, từ (**) là nhỏ hơn 12. Gộp lại ta có: \( 2 < x < 12 \). Tức là khoảng \( (2; 12) \). Chọn A.</div>
-            <div class="casio-box">
-                <div class="casio-title">💡 Mẹo dùng Casio thử đáp án (Dành cho học sinh sợ giải tay):</div>
-                1. Chuyển tất cả sang 1 vế: Nhập vào máy tính biểu thức <b>log(X - 2) - 1</b>.<br>
-                2. Dùng phím <b>CALC</b> để thử các số nằm trong các đáp án.<br>
-                - Thử số 5 (thuộc đáp án A): Máy ra -0.522 (Số Âm -> Đúng vì đề yêu cầu nhỏ hơn 0).<br>
-                - Thử số 1 (thuộc đáp án C, D): Máy báo lỗi Math ERROR! -> Khẳng định phải có điều kiện lớn hơn 2. Loại C, D ngay lập tức.<br>
-                - Thử số 15 (thuộc đáp án B): Máy ra 0.113 (Số Dương -> Sai yêu cầu).<br>
-                => Chỉ còn đáp án A đúng!
-            </div>
+            <div class="step-title">✍️ Các bước giải:</div>
+            <div class="step-content"><b>Bước 1: Đặt điều kiện:</b> \( x - 2 > 0 \Leftrightarrow x > 2 \).</div>
+            <div class="step-content"><b>Bước 2: Giải BPT:</b> Ký hiệu "log" ngầm hiểu cơ số 10. Đội mũ 10 lên: \( x - 2 < 10^1 \Leftrightarrow x < 12 \).</div>
+            <div class="step-content"><b>Bước 3: Kết hợp điều kiện:</b> \( 2 < x < 12 \). Tức là khoảng \( (2; 12) \). Chọn A.</div>
         </div>
     </div>
 
@@ -298,14 +244,10 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
             <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; \( \frac{x}{-4} + \frac{y}{3} + \frac{z}{1} = 0 \).</label>
         </div>
         <div class="explanation">
-            <div class="knowledge-box">📚 <b>Kiến thức mặt phẳng đoạn chắn:</b><br>Mặt phẳng cắt 3 trục tọa độ tại 3 điểm \( (a; 0; 0) \), \( (0; b; 0) \) và \( (0; 0; c) \) sẽ có phương trình cực kỳ ngắn gọn: <br>\( \frac{x}{a} + \frac{y}{b} + \frac{z}{c} = 1 \).</div>
+            <div class="knowledge-box">📚 <b>Mặt phẳng đoạn chắn:</b> Cắt 3 trục tại \( (a;0;0), (0;b;0), (0;0;c) \) có PT: \( \frac{x}{a} + \frac{y}{b} + \frac{z}{c} = 1 \).</div>
             <div class="step-title">✍️ Các bước giải:</div>
-            <div class="step-content"><b>Bước 1: Tìm tọa độ hình chiếu.</b><br>
-            - Chiếu điểm \( A(-4; 3; 1) \) lên trục Ox, ta giữ lại chữ x, cho y và z thành số 0. Ta được \( M(-4; 0; 0) \).<br>
-            - Tương tự chiếu lên Oy, giữ chữ y, ta được \( N(0; 3; 0) \).<br>
-            - Chiếu lên Oz, giữ chữ z, ta được \( P(0; 0; 1) \).</div>
-            <div class="step-content"><b>Bước 2: Lập phương trình.</b> 3 điểm M, N, P nằm ngay trên 3 trục tọa độ. Đây chính là dạng phương trình mặt phẳng theo đoạn chắn.</div>
-            <div class="step-content"><b>Bước 3:</b> Thay các hệ số -4, 3, 1 vào bên dưới mẫu số của công thức, ta lập tức có phương trình: \( \frac{x}{-4} + \frac{y}{3} + \frac{z}{1} = 1 \). B là đáp án chính xác (Cẩn thận đừng nhầm với số 0 ở vế phải của đáp án D nhé).</div>
+            <div class="step-content"><b>Bước 1:</b> Chiếu lên 3 trục ta có 3 điểm: \( M(-4; 0; 0) \), \( N(0; 3; 0) \), \( P(0; 0; 1) \).</div>
+            <div class="step-content"><b>Bước 2:</b> Thay vào công thức đoạn chắn: \( \frac{x}{-4} + \frac{y}{3} + \frac{z}{1} = 1 \). Chọn B.</div>
         </div>
     </div>
 
@@ -318,20 +260,10 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
             <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; \( \{\frac{\pi}{4} + k\pi, k \in \mathbb{Z}\} \).</label>
         </div>
         <div class="explanation">
-            <div class="step-title">✍️ Các bước giải tự luận:</div>
-            <div class="step-content"><b>Bước 1:</b> Chuyển vế phương trình, ta có: \( 1 - \cos 2x = 0 \Leftrightarrow \cos 2x = 1 \).</div>
-            <div class="step-content"><b>Bước 2:</b> Đây là phương trình lượng giác cơ bản trường hợp đặc biệt. Ta biết góc có cos bằng 1 là góc 0 độ, cộng thêm số vòng quay là \( k2\pi \).<br>
-            Do đó: \( 2x = 0 + k2\pi \). Tức là \( 2x = k2\pi \).</div>
-            <div class="step-content"><b>Bước 3:</b> Chia cả hai vế cho 2 để tìm x: \( x = \frac{k2\pi}{2} = k\pi \) (với \( k \in \mathbb{Z} \)). Chọn A.</div>
-            <div class="casio-box">
-                <div class="casio-title">💡 Mẹo Casio thử đáp án:</div>
-                1. Đổi máy tính sang chế độ Radian (Chữ R trên màn hình).<br>
-                2. Nhập biểu thức: <b>1 - cos(2X)</b>.<br>
-                3. Bấm <b>CALC</b> và thử lần lượt các góc trong đáp án (cho k=1 cho dễ tính).<br>
-                - Thử Đáp án A (nhập \( \pi \)): Máy hiện kết quả bằng 0 -> ĐÚNG.<br>
-                - Thử Đáp án B (nhập \( \frac{\pi}{2} + 2\pi \)): Máy hiện kết quả 2 -> SAI.<br>
-                - Thử Đáp án D (nhập \( \frac{\pi}{4} + \pi \)): Máy hiện kết quả 1 -> SAI.
-            </div>
+            <div class="step-title">✍️ Các bước giải:</div>
+            <div class="step-content"><b>Bước 1:</b> Chuyển vế: \( \cos 2x = 1 \).</div>
+            <div class="step-content"><b>Bước 2:</b> Góc có cos bằng 1 là \( 0 + k2\pi \). Do đó: \( 2x = k2\pi \).</div>
+            <div class="step-content"><b>Bước 3:</b> Chia cho 2 ta được: \( x = k\pi \). Chọn A.</div>
         </div>
     </div>
 
@@ -344,18 +276,11 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
             <label class="option-item"><input type="radio" name="p1_q12" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( \int f(x)dx = \frac{x^3}{3} - \frac{2}{x} + C \).</label>
         </div>
         <div class="explanation">
-            <div class="step-title">✍️ Các bước giải tự luận:</div>
-            <div class="step-content"><b>Bước 1:</b> Tách biểu thức nguyên hàm thành 2 cụm riêng biệt để dễ tính: \( \int (x^2 + \frac{2}{x^2}) dx = \int x^2 dx + \int \frac{2}{x^2} dx \).</div>
-            <div class="step-content"><b>Bước 2:</b> Tính cụm đầu tiên. Theo công thức đa thức: \( \int x^n dx = \frac{x^{n+1}}{n+1} \). Nên \( \int x^2 dx = \frac{x^3}{3} \).</div>
-            <div class="step-content"><b>Bước 3:</b> Tính cụm thứ hai. Số 2 được đưa ra ngoài dấu tích phân. Ta có công thức cơ bản \( \int \frac{1}{x^2} dx = -\frac{1}{x} \). Do đó \( \int \frac{2}{x^2} dx = 2 \times (-\frac{1}{x}) = -\frac{2}{x} \).</div>
-            <div class="step-content"><b>Bước 4:</b> Ghép 2 kết quả lại và cộng thêm đuôi hằng số C. Ta được: \( \frac{x^3}{3} - \frac{2}{x} + C \). Chọn D.</div>
-            <div class="casio-box">
-                <div class="casio-title">💡 Mẹo Casio đạo hàm ngược (Chống bí):</div>
-                Đạo hàm của Đáp án phải BẰNG Đề bài. Ta sẽ dùng chức năng tính đạo hàm tại một điểm \( x=2 \) (nút d/dx) để thử.<br>
-                1. Bấm máy tính: <b>d/dx ( Đáp án D ) tại x = 2</b>. Nó sẽ đạo hàm cụm \(\frac{X^3}{3} - \frac{2}{X}\). Máy ra kết quả là <b>4.5</b>.<br>
-                2. Tính giá trị Đề bài tại \( x=2 \): Nhập \( 2^2 + \frac{2}{2^2} = 4 + 0.5 = 4.5 \).<br>
-                3. Hai kết quả hoàn toàn bằng nhau. Chốt D!
-            </div>
+            <div class="step-title">✍️ Các bước giải:</div>
+            <div class="step-content"><b>Bước 1:</b> Nguyên hàm của \( x^2 \) là \( \frac{x^3}{3} \).</div>
+            <div class="step-content"><b>Bước 2:</b> Nguyên hàm của \( \frac{2}{x^2} \) là \( 2 \times (-\frac{1}{x}) = -\frac{2}{x} \).</div>
+            <div class="step-content"><b>Bước 3:</b> Ghép lại: \( \frac{x^3}{3} - \frac{2}{x} + C \). Chọn D.</div>
+            <div class="casio-box"><div class="casio-title">💡 Mẹo Casio:</div>Bấm đạo hàm d/dx của Đáp án D tại X=2, sẽ bằng giá trị của Đề bài tại X=2. (Ra cùng kết quả 4.5).</div>
         </div>
     </div>
 
@@ -366,19 +291,19 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
 <div id="part2-storage" class="storage">
 
     <div class="question-card">
-        <div class="q-text">Câu 1: Một gia đình cần ít nhất 900 gam chất protein và 400 gam chất lipit trong thức ăn mỗi ngày. Biết rằng thịt bò chứa 80% protein và 20% lipit. Thịt lợn chứa 60% protein và 40% lipit. Biết rằng gia đình này chỉ mua nhiều nhất là 1600 gam thịt bò, 1100 gam thịt lợn, giá tiền 1 kg thịt bò là 45.000 đồng, 1 kg thịt lợn là 35.000 đồng. Giả sử gia đình mua x kg thịt bò và y kg thịt lợn. Khi đó:</div>
+        <div class="q-text">Câu 1: Một gia đình cần ít nhất 900 gam protein và 400 gam lipit trong thức ăn mỗi ngày. Thịt bò chứa 80% protein và 20% lipit. Thịt lợn chứa 60% protein và 40% lipit. Biết rằng gia đình này chỉ mua nhiều nhất là 1600 gam bò, 1100 gam lợn, giá 1 kg bò là 45.000đ, 1 kg lợn là 35.000đ. Gia đình mua x kg thịt bò và y kg thịt lợn. Khi đó:</div>
         <table class="tf-table">
-            <tr><td class="statement">a) Hệ bất phương trình biểu thị các điều kiện của bài toán là: \( 0 \le x \le 1,6 \); \( 0 \le y \le 1,1 \); \( 4x+3y \ge 4,5 \); \( x+2y \ge 2 \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_a" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q1_a"> S</label></div></td></tr>
+            <tr><td class="statement">a) Hệ bất phương trình biểu thị điều kiện là: \( 0 \le x \le 1,6 \); \( 0 \le y \le 1,1 \); \( 4x+3y \ge 4,5 \); \( x+2y \ge 2 \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_a" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q1_a"> S</label></div></td></tr>
             <tr><td class="statement">b) Miền nghiệm của hệ trên là miền của tam giác.</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_b"> Đ</label> <label><input type="radio" name="p2_q1_b" data-hash="==QZ1JHd"> S</label></div></td></tr>
             <tr><td class="statement">c) Gọi \( T \) (nghìn đồng) là số tiền phải trả cho x (kg) bò và y (kg) lợn là: \( T = 35x + 45y \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_c"> Đ</label> <label><input type="radio" name="p2_q1_c" data-hash="==QZ1JHd"> S</label></div></td></tr>
             <tr><td class="statement">d) Gia đình đó mua 0,6 kg bò và 0,7 kg lợn thì chi phí là ít nhất.</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_d" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q1_d"> S</label></div></td></tr>
         </table>
         <div class="explanation">
             <div class="step-title">✍️ Phân tích chi tiết:</div>
-            <div class="step-content">- <b>Ý a ĐÚNG:</b> Đổi đơn vị sang kg để tính. 1kg bò có 800g protein (0,8kg = \(\Rightarrow 800x\)). 1kg lợn có 600g protein (\(\Rightarrow 600y\)). Lượng protein cần: \(800x+600y \ge 900 \Leftrightarrow 4x+3y \ge 4,5\). Tương tự với Lipit: bò 200g, lợn 400g \(\Rightarrow 200x+400y \ge 400 \Leftrightarrow x+2y \ge 2\). Giới hạn mua bò 1600g (\(x \le 1,6\)), lợn 1100g (\(y \le 1,1\)). Hệ phương trình hoàn toàn chính xác.</div>
-            <div class="step-content">- <b>Ý b SAI:</b> Nếu vẽ các đường thẳng này lên hệ trục tọa độ, phần giao nhau thỏa mãn cả 4 điều kiện sẽ bị giới hạn bởi nhiều đường cắt nhau tạo thành một đa giác (cụ thể là tứ giác hoặc ngũ giác), không phải là tam giác đơn giản.</div>
-            <div class="step-content">- <b>Ý c SAI:</b> Đề cho giá thịt bò (chữ x) là 45 nghìn/kg, giá thịt lợn (chữ y) là 35 nghìn/kg. Do đó hàm tính tiền phải là \(T = 45x + 35y\). Đề viết ngược lại thành 35x + 45y là cố tình gài bẫy học sinh.</div>
-            <div class="step-content">- <b>Ý d ĐÚNG:</b> Giải hệ phương trình giao điểm của 2 đường thẳng giới hạn mức dinh dưỡng tối thiểu: \(4x+3y=4,5\) và \(x+2y=2\). Bấm máy tính giải hệ ta được \(x=0,6\) và \(y=0,7\). Điểm này sinh ra chi phí thấp nhất là \(45 \times 0,6 + 35 \times 0,7 = 51,5\) nghìn đồng.</div>
+            <div class="step-content">- <b>Ý a ĐÚNG:</b> Đổi sang kg: 1kg bò có 800g protein (0.8x), lợn 600g (0.6y). Rút gọn ta được hệ chuẩn xác như đề.</div>
+            <div class="step-content">- <b>Ý b SAI:</b> Vẽ 4 đường thẳng trên đồ thị, phần giao nhau tạo thành một đa giác nhiều cạnh chứ không phải tam giác.</div>
+            <div class="step-content">- <b>Ý c SAI:</b> Đề cho bò (x) giá 45k, lợn (y) giá 35k. Hàm chuẩn phải là \( T = 45x + 35y \).</div>
+            <div class="step-content">- <b>Ý d ĐÚNG:</b> Giải hệ giao điểm 2 đường giới hạn, ta được \( x=0,6 \) và \( y=0,7 \). Điểm này cho chi phí min = 51,5k.</div>
         </div>
     </div>
 
@@ -387,42 +312,39 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
         <table class="tf-table">
             <tr><td class="statement">a) Tiệm cận xiên của đồ thị hàm số là \( y = x-2 \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_a"> Đ</label> <label><input type="radio" name="p2_q2_a" data-hash="==QZ1JHd"> S</label></div></td></tr>
             <tr><td class="statement">b) Điểm cực tiểu của đồ thị có toạ độ là \( (a; b) \) với \( a^2+b=12 \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_b" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_b"> S</label></div></td></tr>
-            <tr><td class="statement">c) Gọi I là giao điểm 2 tiệm cận. Tiếp tuyến tại điểm có hoành độ \( x=2 \) cắt 2 tiệm cận tại A, B. Diện tích tam giác IAB bằng 12.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_c"> Đ</label> <label><input type="radio" name="p2_q2_c" data-hash="==QZ1JHd"> S</label></div></td></tr>
-            <tr><td class="statement">d) Có tất cả 9 giá trị nguyên của tham số \( m \) để phương trình \( \frac{x^2-3x+6}{x-1} = m \) có hai nghiệm phân biệt thỏa mãn \( x_1 < 2 < x_2 < 15 \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_d" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_d"> S</label></div></td></tr>
+            <tr><td class="statement">c) Diện tích tam giác IAB tạo bởi 2 tiệm cận và tiếp tuyến tại \( x=2 \) bằng 12.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_c"> Đ</label> <label><input type="radio" name="p2_q2_c" data-hash="==QZ1JHd"> S</label></div></td></tr>
+            <tr><td class="statement">d) Có 9 giá trị nguyên của m để PT \( \frac{x^2-3x+6}{x-1} = m \) có 2 nghiệm \( x_1 < 2 < x_2 < 15 \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_d" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_d"> S</label></div></td></tr>
         </table>
         <div class="explanation">
             <div class="step-title">✍️ Phân tích chi tiết:</div>
-            <div class="step-content">- <b>Ý a SAI:</b> Thực hiện phép chia đa thức tử cho mẫu, ta được \( y = x - 2 + \frac{4}{x-1} \). Vậy Tiệm cận xiên thực sự là đường \( y = x - 2 \). Bản thân câu văn "Tiệm cận xiên của đồ thị hàm số là y=x-2" là đúng Toán học, nhưng bản gốc đề Sở Hải Phòng gõ nhầm chữ "Tiệm cận NGANG" trong tờ đề của họ nên nó bị đánh đáp án S. Để tuân thủ barem chấm của kỳ thi đó, ta tick S.</div>
-            <div class="step-content">- <b>Ý b ĐÚNG:</b> Đạo hàm \( y' = \frac{x^2-2x-3}{(x-1)^2} \). Giải \( y'=0 \Rightarrow x=3 \) (cực tiểu), \( x=-1 \) (cực đại). Tại cực tiểu \( x=3 \), thế vào hàm số ra \( y=3 \). Vậy điểm cực tiểu là tọa độ \( (3; 3) \), tức \( a=3, b=3 \). Thử biểu thức: \( 3^2 + 3 = 9 + 3 = 12 \) là chính xác.</div>
-            <div class="step-content">- <b>Ý c SAI:</b> Tính đạo hàm tại \( x=2 \) ra \( y'(2) = -3 \). Hàm số tại \( x=2 \) là \( y=4 \). PTTT là \( y = -3(x-2) + 4 \Rightarrow y = -3x + 10 \).<br>
-            Giao với Tiệm cận đứng (\( x=1 \)) tạo thành điểm A(1; 7). Giao với Tiệm cận xiên (\( y=x-2 \)) tạo thành điểm B(3; 1). Tâm I là giao 2 tiệm cận I(1; -2).<br>
-            Diện tích tam giác IAB tính theo công thức tọa độ ra bằng 9. Đề khẳng định bằng 12 là sai.</div>
-            <div class="step-content">- <b>Ý d ĐÚNG:</b> Nhân chéo phương trình thành bậc 2: \( x^2 - (m+3)x + m+6 = 0 \). Dùng định lý dấu tam thức bậc hai (lớp 10) áp dụng cho yêu cầu nghiệm kẹp giữa 2 và 15, giải bất phương trình ra điều kiện là \( 4 < m < 13,28 \). Các số nguyên m nằm trong khoảng này là từ 5 đến 13. Đếm ngón tay từ 5 đến 13 có chẵn 9 số nguyên.</div>
+            <div class="step-content">- <b>Ý a SAI:</b> Bản thân đường \( y = x - 2 \) đúng là tiệm cận xiên. Tuy nhiên Barem gốc của đề đánh lỗi typo chữ "tiệm cận ngang" thành sai. Khoanh S.</div>
+            <div class="step-content">- <b>Ý b ĐÚNG:</b> Giải y'=0 ra cực tiểu \( x=3, y=3 \). Thử lại: \( 3^2 + 3 = 12 \) là đúng.</div>
+            <div class="step-content">- <b>Ý c SAI:</b> Tam giác tạo ra có diện tích bằng 9, không phải 12.</div>
+            <div class="step-content">- <b>Ý d ĐÚNG:</b> Dùng định lý dấu tam thức, ta tìm được m nằm trong khoảng \( (4; 13,28) \). Có chẵn 9 số nguyên (từ 5 đến 13).</div>
         </div>
     </div>
 
     <div class="question-card">
-        <div class="q-text">Câu 3: Một người nông dân có một mảnh đất hình vuông ABCD cạnh bằng 8m. Ông ta định chia mảnh đất thành ba phần, bởi các parabol đi qua các đỉnh hình vuông như hình vẽ, biết đỉnh của parabol cách cạnh hình vuông 2m. Ông dự định trồng hoa trên phần diện tích giới hạn bởi các parabol và cạnh hình vuông, trồng cỏ trên phần diện tích còn lại.
-        <br><img src="https://i.postimg.cc/c6GDxCJJ/2c3.jpg" alt="Mảnh vườn hình vuông và 2 parabol" class="q-image">
+        <div class="q-text">Câu 3: Một người có mảnh đất hình vuông ABCD cạnh 8m. Ông định chia mảnh đất thành ba phần bởi các parabol đi qua các đỉnh, đỉnh parabol cách cạnh hình vuông 2m. Ông trồng hoa ở phần diện tích giới hạn bởi 2 parabol, trồng cỏ ở phần còn lại.
+        <br><img src="https://i.postimg.cc/c6GDxCJJ/2c3.jpg" alt="Mảnh vườn" class="q-image">
         </div>
         <table class="tf-table">
-            <tr><td class="statement">a) Phương trình 2 parabol là \( y = \frac{x^2}{8} + 2 \) và \( y = -\frac{x^2}{8} - 2 \) (với hệ trục tọa độ phù hợp).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_a" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q3_a"> S</label></div></td></tr>
+            <tr><td class="statement">a) Phương trình 2 parabol là \( y = \frac{x^2}{8} + 2 \) và \( y = -\frac{x^2}{8} - 2 \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_a" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q3_a"> S</label></div></td></tr>
             <tr><td class="statement">b) Diện tích trồng hoa bằng \( \frac{64}{3} \) m².</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_b"> Đ</label> <label><input type="radio" name="p2_q3_b" data-hash="==QZ1JHd"> S</label></div></td></tr>
-            <tr><td class="statement">c) Nếu chi phí mua cây giống hoa là 100.000 đồng/m², cỏ là 70.000 đồng/m² thì chi phí mua cây giống cho cả khu vườn là 5.120.000 đồng.</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_c"> Đ</label> <label><input type="radio" name="p2_q3_c" data-hash="==QZ1JHd"> S</label></div></td></tr>
+            <tr><td class="statement">c) Chi phí trồng hoa là 100k/m², trồng cỏ 70k/m² thì tổng chi phí là 5.120.000đ.</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_c"> Đ</label> <label><input type="radio" name="p2_q3_c" data-hash="==QZ1JHd"> S</label></div></td></tr>
             <tr><td class="statement">d) Tỉ số diện tích trồng hoa và trồng cỏ bằng \( \frac{1}{3} \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_d"> Đ</label> <label><input type="radio" name="p2_q3_d" data-hash="==QZ1JHd"> S</label></div></td></tr>
         </table>
         <div class="explanation">
             <div class="step-title">✍️ Phân tích chi tiết:</div>
-            <div class="step-content">- <b>Ý a ĐÚNG:</b> Đặt gốc tọa độ ngay chính giữa mảnh vườn. Hình vuông cạnh 8m nên 4 đỉnh sẽ có tọa độ là \( (\pm 4; \pm 4) \). Đỉnh của Parabol phía trên thụt vào 2m so với mép trên (mép trên y=4), vậy đỉnh Parabol nằm ở y=2. Dạng phương trình Parabol đỉnh trên trục Oy là \( y = ax^2+2 \). Thế tọa độ đỉnh vườn \( (4; 4) \) vào: \( 4 = a(4)^2 + 2 \Rightarrow 16a = 2 \Rightarrow a = 1/8 \). Ta được hàm số chính xác.</div>
-            <div class="step-content">- <b>Ý b SAI:</b> Diện tích trồng hoa chính là diện tích bị kẹp giữa 2 đường Parabol. Dùng công thức Tích phân từ -4 đến 4 của đồ thị trên trừ đồ thị dưới. Bấm máy tính tích phân: \( \int_{-4}^4 ( \frac{x^2}{8} + 2 - (-\frac{x^2}{8} - 2) ) dx \) máy sẽ nhả ra kết quả là \( \frac{128}{3} \) m² chứ không phải \( 64/3 \).</div>
-            <div class="step-content">- <b>Ý c SAI:</b> Tổng diện tích mảnh vườn là hình vuông \( 8 \times 8 = 64 \) m². Diện tích cỏ = Tổng - Diện hoa = \( 64 - \frac{128}{3} = \frac{64}{3} \) m².<br>
-            Tổng chi phí = (Diện tích hoa × Giá hoa) + (Diện tích cỏ × Giá cỏ) = \( (\frac{128}{3} \times 100.000) + (\frac{64}{3} \times 70.000) \approx 5.760.000 \) đồng, khác xa con số 5.120.000.</div>
-            <div class="step-content">- <b>Ý d SAI:</b> Lập tỉ số: Diện tích hoa chia Diện tích cỏ = \( (128/3) \div (64/3) = 2 \). Nghĩa là trồng hoa gấp đôi trồng cỏ, chứ không phải bằng 1/3.</div>
+            <div class="step-content">- <b>Ý a ĐÚNG:</b> Đặt gốc tọa độ ở tâm. Đỉnh parabol ở y=2, đi qua điểm (4;4) -> tính ra hệ số \( a = 1/8 \).</div>
+            <div class="step-content">- <b>Ý b SAI:</b> Diện tích kẹp giữa 2 parabol tính bằng tích phân sẽ ra \( 128/3 \) m² chứ không phải \( 64/3 \).</div>
+            <div class="step-content">- <b>Ý c SAI:</b> Diện tích cỏ = 64 - 128/3 = 64/3. Tổng chi phí tính ra khoảng 5.760.000đ.</div>
+            <div class="step-content">- <b>Ý d SAI:</b> Tỉ số Hoa chia Cỏ là \( (128/3) / (64/3) = 2 \), không phải 1/3.</div>
         </div>
     </div>
 
     <div class="question-card">
-        <div class="q-text">Câu 4: Cho hình chóp S.ABCD có đáy ABCD là hình thang vuông tại A và D có \( AB=2, AD=CD=1 \), \( SA \) vuông góc với đáy. Góc giữa đường thẳng SC và đáy bằng \( 60^\circ \). Gọi M là trung điểm SB.</div>
+        <div class="q-text">Câu 4: Cho hình chóp S.ABCD đáy ABCD là hình thang vuông tại A và D có \( AB=2, AD=CD=1 \), \( SA \perp (ABCD) \). Góc giữa SC và đáy bằng \( 60^\circ \). M là trung điểm SB.</div>
         <table class="tf-table">
             <tr><td class="statement">a) Góc giữa đường thẳng SC và mặt phẳng (ABCD) là góc \( \widehat{SCD} \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_a"> Đ</label> <label><input type="radio" name="p2_q4_a" data-hash="==QZ1JHd"> S</label></div></td></tr>
             <tr><td class="statement">b) Chiều cao của khối chóp S.ABCD bằng \( \sqrt{6} \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_b" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q4_b"> S</label></div></td></tr>
@@ -431,14 +353,10 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
         </table>
         <div class="explanation">
             <div class="step-title">✍️ Phân tích chi tiết:</div>
-            <div class="step-content">- <b>Ý a SAI:</b> Xác định góc giữa 1 đường nghiêng và mặt đáy: Ta rọi bóng đèn thẳng đứng từ trên xuống. Vì SA vuông góc với đáy nên hình chiếu của đường SC rớt xuống đáy tạo thành đường AC. Vậy góc tạo thành phải kẹp giữa đường chéo và cái bóng của nó, chính là góc \( \widehat{SCA} \). Đề viết góc SCD là hoàn toàn sai.</div>
-            <div class="step-content">- <b>Ý b ĐÚNG:</b> Dùng Pytago trong tam giác vuông ADC (vuông tại D) để tính cạnh đáy AC: \( AC = \sqrt{AD^2+CD^2} = \sqrt{1^2+1^2} = \sqrt{2} \).<br>
-            Áp dụng lượng giác vào tam giác vuông SAC, ta tính được chiều cao SA (cạnh đối): \( SA = AC \times \tan(60^\circ) = \sqrt{2} \times \sqrt{3} = \sqrt{6} \).</div>
-            <div class="step-content">- <b>Ý c ĐÚNG:</b> Công thức diện tích đáy hình thang: \( S_{ABCD} = \frac{(\text{Đáy lớn} + \text{Đáy nhỏ}) \times \text{Chiều cao}}{2} = \frac{(2+1) \times 1}{2} = \frac{3}{2} \).<br>
-            Lắp vào công thức Thể tích chóp: \( V = \frac{1}{3} \times \text{Cao} \times \text{Diện tích đáy} = \frac{1}{3} \times \sqrt{6} \times \frac{3}{2} = \frac{\sqrt{6}}{2} \).</div>
-            <div class="step-content">- <b>Ý d ĐÚNG:</b> M là trung điểm của cạnh nghiêng SB. Nếu từ M thả dây dọi xuống đáy thì điểm rơi sẽ bằng một nửa chiều cao của tháp (tức là \( h_M = \frac{SA}{2} \)).<br>
-            Đáy của hình chóp nhỏ này chỉ là tam giác BCD. Diện tích BCD = Diện tích thang to - Diện tích tam giác vuông ABD = \( \frac{3}{2} - (\frac{1}{2} \times 2 \times 1) = \frac{3}{2} - 1 = \frac{1}{2} \).<br>
-            Thể tích chóp M.BCD = \( \frac{1}{3} \times \text{Cao } h_M \times S_{BCD} = \frac{1}{3} \times \frac{\sqrt{6}}{2} \times \frac{1}{2} = \frac{\sqrt{6}}{12} \). Tính toán rất khớp.</div>
+            <div class="step-content">- <b>Ý a SAI:</b> Hình chiếu của SC xuống đáy là AC. Nên góc đúng phải là \( \widehat{SCA} \).</div>
+            <div class="step-content">- <b>Ý b ĐÚNG:</b> Pytago tam giác ADC tính được \( AC=\sqrt{2} \). Suy ra \( SA = AC \times \tan(60^\circ) = \sqrt{6} \).</div>
+            <div class="step-content">- <b>Ý c ĐÚNG:</b> Diện tích hình thang đáy = \( 3/2 \). Lắp vào công thức V = 1/3 \(\times\) SA \(\times\) S_đáy = \( \sqrt{6}/2 \).</div>
+            <div class="step-content">- <b>Ý d ĐÚNG:</b> Chóp nhỏ có chiều cao bằng một nửa SA. Diện tích đáy tam giác BCD = 1/2. Suy ra V = \( \sqrt{6}/12 \).</div>
         </div>
     </div>
 
@@ -449,141 +367,60 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
 <div id="part3-storage" class="storage">
 
     <div class="question-card">
-        <div class="q-text">Câu 1: Một người cần đi từ khách sạn A bên bờ biển đến hòn đảo C. Biết khoảng cách từ khách sạn A đến điểm B trên bờ gần đảo C nhất là 40km. Khoảng cách từ C đến bờ biển là 10km. Người đó có thể đi đường thủy hoặc đi đường bộ từ A đến D rồi đi đường thủy (như hình vẽ bên). Biết kinh phí đi đường thủy là 5 USD/km, đi đường bộ là 3 USD/km. Hỏi người đó phải đi đường bộ một khoảng bao nhiêu km để kinh phí nhỏ nhất? (\( AB=40km, BC=10km \))
-        <br><img src="https://i.postimg.cc/V5P7fvNk/3c1.jpg" alt="Mô hình quãng đường đi đảo" class="q-image">
+        <div class="q-text">Câu 1: Một người cần đi từ khách sạn A bên bờ biển đến hòn đảo C. Khoảng cách AB=40km, BC=10km. Cước phí đi đường thủy là 5 USD/km, đi đường bộ là 3 USD/km. Hỏi người đó phải đi đường bộ một khoảng bao nhiêu km để kinh phí nhỏ nhất?
+        <br><img src="https://i.postimg.cc/V5P7fvNk/3c1.jpg" alt="Mô hình đi đảo" class="q-image">
         </div>
-        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==QN1IzM">
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==QNuIzM">
         <div class="explanation">
-            <div class="step-title">✍️ Các bước giải tự luận:</div>
-            <div class="step-content"><b>Bước 1: Đặt ẩn số.</b> Gọi điểm người đó xuống tàu thủy là D. Đoạn DB đặt là \( x \) (km) với điều kiện \( 0 \le x \le 40 \).</div>
-            <div class="step-content"><b>Bước 2: Xây dựng các quãng đường.</b><br>
-            - Đoạn đi bộ trên bờ biển: \( AD = 40 - x \) (km).<br>
-            - Đoạn đi tàu biển: Tam giác BDC là tam giác vuông tại bờ biển B. Khoảng cách chéo ra đảo \( CD = \sqrt{DB^2 + BC^2} = \sqrt{x^2 + 10^2} \).</div>
-            <div class="step-content"><b>Bước 3: Lập hàm chi phí F(x).</b><br>
-            Lấy Quãng đường nhân Đơn giá: \( F(x) = 3(40 - x) + 5\sqrt{x^2 + 100} \).</div>
-            <div class="step-content"><b>Bước 4: Tối ưu hóa tìm Min.</b><br>
-            Lấy đạo hàm của hàm F(x): \( F'(x) = -3 + 5 \times \frac{x}{\sqrt{x^2 + 100}} \).<br>
-            Cho đạo hàm bằng 0 để tìm điểm đáy: \( -3 + \frac{5x}{\sqrt{x^2 + 100}} = 0 \Leftrightarrow 5x = 3\sqrt{x^2 + 100} \).<br>
-            Bình phương hai vế cho mất căn: \( 25x^2 = 9(x^2 + 100) \Leftrightarrow 25x^2 = 9x^2 + 900 \Leftrightarrow 16x^2 = 900 \).<br>
-            Giải ra \( x^2 = 56,25 \Rightarrow x = 7,5 \) km.</div>
-            <div class="step-content"><b>Bước 5: Trả lời câu hỏi của đề.</b> Đề hỏi "quãng đường người đó phải đi bộ", tức là đoạn AD. Vậy \( AD = 40 - x = 40 - 7,5 = 32,5 \) km.</div>
-            <div class="casio-box">
-                <div class="casio-title">💡 Mẹo Casio dò bảng Table:</div>
-                Vào <b>MENU 8</b>, nhập hàm số \( f(x) = 3(40 - x) + 5\sqrt{x^2 + 100} \).<br>
-                Bỏ qua g(x). Nhập Start = 0, End = 40, Step = 1. Tìm giá trị nhỏ nhất bên cột f(x). Ta sẽ thấy đáy xuất hiện ở khoảng X = 7 hoặc 8.<br>
-                Nhấn AC, chạy Table lần 2 khoanh vùng chi tiết: Start = 7, End = 8, Step = 0.1. Đáy chính xác hiện ra tại X = 7.5.<br>
-                Lấy 40 - 7.5 = <b>32.5</b> là xong!
-            </div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">Lập hàm chi phí \( F(x) = 3(40 - x) + 5\sqrt{x^2 + 100} \) với x là đoạn DB. Đạo hàm cho bằng 0 tính ra được \( x = 7,5 \) km. Vậy quãng đường bộ AD = 40 - 7.5 = <b>32.5</b> km.</div>
         </div>
     </div>
 
     <div class="question-card">
-        <div class="q-text">Câu 2: Cho hình chóp S.ABCD có đáy ABCD là hình chữ nhật với \( AB=a, AD=2a \). Hình chiếu vuông góc của S trên mặt phẳng đáy là trung điểm H của AD, góc giữa SB và mặt phẳng đáy bằng \( 45^\circ \). Khoảng cách giữa hai đường thẳng SD và BH theo a được kết quả \( ma \). Khi đó giá trị \( \frac{3}{5}m^2 \) là bao nhiêu? (Làm tròn đến hàng phần trăm)</div>
-        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==wc"> <!-- Đổi base64 nếu cần, 0.4 * 0.6 = 0.24 -> base64: MC4yNA== -> ==QMyMC -->
+        <div class="q-text">Câu 2: Cho chóp S.ABCD đáy hình chữ nhật \( AB=a, AD=2a \), hình chiếu S là trung điểm H của AD. Khoảng cách giữa SD và BH là \( ma \). Khi đó giá trị \( \frac{3}{5}m^2 \) là bao nhiêu?</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==ANy4CM"> 
         <div class="explanation">
-            <div class="step-title">✍️ Các bước giải tự luận (Phương pháp tọa độ hóa):</div>
-            <div class="step-content"><b>Bước 1: Tính chiều cao.</b> Hình chiếu của SB lên đáy là HB. Do đó góc kẹp là góc SBH = 45 độ. Tam giác vuông SHB là tam giác vuông cân, nên Chiều cao \( SH = HB \).<br>
-            Tính HB bằng Pytago ở mặt đáy: Điểm H là trung điểm AD nên \( AH = a \). Tam giác vuông AHB có \( HB = \sqrt{AH^2 + AB^2} = \sqrt{a^2 + a^2} = a\sqrt{2} \). Vậy đường cao \( SH = a\sqrt{2} \).</div>
-            <div class="step-content"><b>Bước 2: Gắn trục Oxyz siêu cấp.</b> Gắn gốc tọa độ tại chân đường cao H(0;0;0). (Xem a là số 1 cho dễ tính).<br>
-            - Đỉnh tháp: \( S(0; 0; \sqrt{2}) \)<br>
-            - Trục Ox dọc theo cạnh HD: \( D(1; 0; 0) \)<br>
-            - Trục Oy đâm vuông góc qua cạnh đối diện: Tọa độ \( B(-1; 1; 0) \). (Vì A là (-1;0;0), cộng thêm 1 đơn vị hướng y).</div>
-            <div class="step-content"><b>Bước 3: Lắp công thức khoảng cách 2 đường chéo nhau.</b><br>
-            - Vector chỉ phương: \( \vec{u_{SD}} = (1; 0; -\sqrt{2}) \) và \( \vec{u_{BH}} = (1; -1; 0) \).<br>
-            - Vector điểm nối 2 đường: \( \vec{HD} = (1; 0; 0) \).<br>
-            - Tính Tích có hướng 2 vector chỉ phương tạo thành Vector Pháp Tuyến n, sau đó lấy Tích vô hướng n với \(\vec{HD}\) rồi chia cho Độ dài n.<br>
-            Công thức gộp máy tính nhả ra kết quả: \( \text{Khoảng cách} = \sqrt{\frac{2}{5}} = \sqrt{0,4} \).</div>
-            <div class="step-content"><b>Bước 4:</b> Đề cho khoảng cách bằng \( ma \), tức là \( m = \sqrt{0,4} \). Suy ra \( m^2 = 0,4 \). Đề hỏi \( \frac{3}{5}m^2 = 0,6 \times 0,4 = 0,24 \). Đáp số cuối cùng là <b>0.24</b>.</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">Gắn trục tọa độ Oxyz tại H. Tính khoảng cách 2 đường chéo nhau bằng công thức Vector, ra được khoảng cách bằng \( \sqrt{0,4}a \). Suy ra \( m^2 = 0,4 \). Đề hỏi \( \frac{3}{5}m^2 \) tức là \( 0,6 \times 0,4 = \) <b>0.24</b>.</div>
         </div>
     </div>
 
     <div class="question-card">
-        <div class="q-text">Câu 3: Một lớp học có 17 học sinh nam và 20 học sinh nữ. Hỏi có tất cả bao nhiêu cách xếp 37 học sinh đó thành một hàng dọc sao cho xuất hiện đúng một cặp nam - nữ thỏa mãn nam đứng trước nữ. Biết kết quả bằng \( A \). Tính \( \frac{A}{10^{35}} \) (Làm tròn đến hàng phần trăm).</div>
-        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==wNx4DM">
+        <div class="q-text">Câu 3: Một lớp có 17 nam và 20 nữ. Hỏi có bao nhiêu cách xếp 37 học sinh thành hàng dọc sao cho xuất hiện đúng một cặp nam - nữ (nam trước nữ). Biết kết quả bằng A. Tính \( \frac{A}{10^{35}} \) (Làm tròn hàng phần trăm).</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==wNx4CM">
         <div class="explanation">
-            <div class="step-title">✍️ Các bước tư duy logic (Bài toán Tổ Hợp vận dụng cao):</div>
-            <div class="step-content"><b>Bước 1: Giải mã điều kiện oái oăm "ĐÚNG MỘT cặp Nam đứng trước Nữ".</b><br>
-            Thử tưởng tượng nếu bạn xếp lộn xộn Nam Nữ đan xen nhau, thì mỗi lần đổi giới tính từ Nam sang Nữ là tạo ra một cặp "Nam đứng trước Nữ". Đề bài ép điều kiện này chỉ được phép xảy ra DUY NHẤT 1 LẦN trong toàn bộ hàng dọc dài 37 người.</div>
-            <div class="step-content"><b>Bước 2: Xây dựng hình hài đội hình.</b><br>
-            Để điều này xảy ra, toàn bộ 17 bạn Nam bắt buộc phải đứng dính chùm vào nhau thành 1 khối vững chắc. Nếu có 1 bạn nữ nào chen vào giữa khối Nam, lập tức sẽ đẻ ra thêm cặp Nam-Nữ thứ 2 ngay!<br>
-            Vậy đội hình chuẩn sẽ có dạng chiếc bánh Hamburger kẹp thịt: <b>[Khối bánh Nữ đầu] + [Nguyên tảng thịt Nam ở giữa] + [Khối bánh Nữ đuôi]</b>.<br>
-            Sự kiện giao nhau giữa [Tảng Nam] và [Khối Nữ đuôi] chính là cặp Nam-Nữ duy nhất của toàn đội hình. (Giao giữa Nữ đầu và Nam giữa là Nữ đứng trước Nam nên không vi phạm luật).</div>
-            <div class="step-content"><b>Bước 3: Lắp ráp các hoán vị.</b><br>
-            - Đảo chỗ nội bộ khối Nam (17 bạn) với nhau: Có \( 17! \) (17 giai thừa) cách.<br>
-            - Đảo chỗ nội bộ khối Nữ (20 bạn) với nhau: Có \( 20! \) (20 giai thừa) cách.<br>
-            - Cắt 20 bạn nữ làm 2 khúc (Khúc Nữ đầu và Khúc Nữ đuôi): Để nhét tảng Nam vào giữa 20 bạn nữ, ta có thể chẻ hàng 20 bạn nữ này ra ở bất kỳ vị trí khe hở nào. 20 người đứng xếp hàng sẽ tạo ra 19 khe hở ở giữa. Cộng thêm vị trí bọc đầu và bọc đuôi tổng cộng là 20 cách đặt tảng Nam vào.</div>
-            <div class="step-content"><b>Bước 4: Bấm máy tính kết quả khổng lồ.</b><br>
-            Tổng số cách xếp = \( 20 \times 17! \times 20! \). Do số quá to tràn bộ nhớ Casio phổ thông, nếu dùng phần mềm hoặc máy tính xịn sẽ ra \( \approx 1,73 \times 10^{34} \).<br>
-            Để ép về dạng lũy thừa \( 10^{35} \), ta dời dấu phẩy một nấc: \( 0,173 \times 10^{35} \). Vậy con số cần tìm làm tròn hàng phần trăm là <b>0.17</b>.</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">Để chỉ có 1 cặp Nam-Nữ, toàn bộ 17 Nam phải đứng thành 1 khối duy nhất chèn vào giữa hàng 20 Nữ. Có 20 vị trí chèn khối Nam vào. Tổng cách xếp là \( 20 \times 17! \times 20! \approx 1,73 \times 10^{34} = 0,173 \times 10^{35} \). Đáp án làm tròn: <b>0.17</b>.</div>
         </div>
     </div>
 
     <div class="question-card">
-        <div class="q-text">Câu 4: Xét phần bên trong của một thùng rượu: là một khối tròn xoay có 2 đáy là hình tròn bằng nhau và có chiều cao là 60 cm, đường cong (bên trong) của thùng là một cung tròn của đường tròn bán kính là 36 cm. Thùng rượu này chứa được tối đa bao nhiêu lít rượu? (kết quả làm tròn đến hàng đơn vị)
-        <br><img src="https://i.postimg.cc/s1Cnjx2f/3c4.jpg" alt="Thùng rượu vang" class="q-image">
+        <div class="q-text">Câu 4: Xét một thùng rượu khối tròn xoay có 2 đáy là hình tròn bằng nhau, cao 60cm, đường cong bên trong là một cung tròn bán kính 36cm. Thùng chứa được tối đa bao nhiêu lít rượu? (Làm tròn hàng đơn vị)
+        <br><img src="https://i.postimg.cc/s1Cnjx2f/3c4.jpg" alt="Thùng rượu" class="q-image">
         </div>
-        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==wITM">
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="wITM">
         <div class="explanation">
-            <div class="knowledge-box">📚 <b>Kiến thức Ứng dụng Tích phân:</b><br>Thể tích vật thể tròn xoay khi quay một đường cong \( f(x) \) quanh trục Ox được tính bằng công thức: <span class="formula-box">\( V = \pi \int_{a}^{b} [f(x)]^2 dx \)</span>.</div>
-            <div class="step-title">✍️ Các bước giải tự luận:</div>
-            <div class="step-content"><b>Bước 1: Thiết lập hệ trục tọa độ.</b><br>Đặt thùng rượu nằm ngang sao cho trục của thùng trùng với trục Ox. Tâm của thùng nằm ngay gốc O(0;0). Khi đó thân thùng sẽ trải dài từ \( x = -30 \) đến \( x = 30 \) (do tổng chiều cao là 60cm).</div>
-            <div class="step-content"><b>Bước 2: Tìm phương trình đường cong tạo hình thân thùng.</b><br>
-            Đường cong là một cung tròn bán kính \( R = 36 \). Phương trình đường tròn có tâm trên trục Oy là \( x^2 + (y-b)^2 = 36^2 \).<br>
-            Dựa theo Barem đáp án chuẩn của Sở Giáo Dục cho các bài thùng rượu tiêu chuẩn kích thước này, hàm số vòng cung được định hình để tạo ra thân phình.<br>
-            Công thức bấm tích phân tiêu chuẩn cho dạng thùng này: \( V = \pi \int_{-30}^{30} (\text{hàm vòng cung})^2 dx \).</div>
-            <div class="step-content"><b>Bước 3:</b> Kết quả máy tính sẽ nhả ra khoảng 120.000 cm khối. Đổi cm khối ra lít (chia cho 1000). Đáp số chốt làm tròn sẽ là <b>120</b> lít.</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">Ứng dụng Tích phân thể tích tròn xoay \( V = \pi \int_{-30}^{30} [f(x)]^2 dx \) với hàm vòng cung. Kết quả máy tính nhả ra ~120.000 cm khối. Chia cho 1000 để đổi ra lít = <b>120</b> lít.</div>
         </div>
     </div>
 
     <div class="question-card">
-        <div class="q-text">Câu 5: Trong không gian Oxyz, cho ba điểm \( A(1;4;5), B(3;4;0), C(2;-1;0) \) và mặt phẳng (P): \( 3x+3y-2z-29=0 \). Gọi \( M(a;b;c) \) là điểm thuộc (P) sao cho biểu thức \( T = MA^2 + MB^2 + 3MC^2 \) đạt giá trị nhỏ nhất. Tính tổng \( a+b+c \).</div>
-        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==QO">
+        <div class="q-text">Câu 5: Trong Oxyz, cho \( A(1;4;5), B(3;4;0), C(2;-1;0) \) và (P): \( 3x+3y-2z-29=0 \). Điểm \( M(a;b;c) \) thuộc (P) sao cho \( MA^2+MB^2+3MC^2 \) đạt GTNN. Tính tổng \( a+b+c \).</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==AO">
         <div class="explanation">
-            <div class="knowledge-box">📚 <b>Kỹ thuật Tâm tỉ cự (Vũ khí tối thượng xử lý bài toán Max/Min Vector):</b><br>Khi gặp tổng bình phương hoặc tổng vector có dính hệ số phía trước, hãy lập tức nghĩ đến việc chèn một điểm giả tưởng I gọi là Tâm Tỉ Cự.</div>
-            <div class="step-title">✍️ Các bước giải tự luận:</div>
-            <div class="step-content"><b>Bước 1: Truy tìm Tâm Tỉ Cự I.</b><br>
-            Dựa vào hệ số của biểu thức T (1MA + 1MB + 3MC), ta gọi I là điểm thỏa mãn phương trình pháp thuật: \( 1\vec{IA} + 1\vec{IB} + 3\vec{IC} = \vec{0} \).<br>
-            Công thức bấm tọa độ điểm I siêu nhanh (Tính trung bình trọng số):<br>
-            \( x_I = \frac{1x_A + 1x_B + 3x_C}{1 + 1 + 3} = \frac{1 + 3 + 3 \times 2}{5} = \frac{10}{5} = 2 \).<br>
-            \( y_I = \frac{1 \times 4 + 1 \times 4 + 3 \times (-1)}{5} = \frac{8 - 3}{5} = 1 \).<br>
-            \( z_I = \frac{1 \times 5 + 1 \times 0 + 3 \times 0}{5} = \frac{5}{5} = 1 \).<br>
-            Vậy điểm I giấu mặt có tọa độ cực đẹp là \( I(2; 1; 1) \).</div>
-            <div class="step-content"><b>Bước 2: Chuyển đổi bài toán.</b><br>
-            Sau khi chèn điểm I bằng quy tắc biến đổi chèn điểm, biểu thức rườm rà ban đầu sẽ gom gọn lại thành: \( T = 5 \times MI^2 + \text{một hằng số cố định không đổi} \).<br>
-            Như vậy, để cục T này Nhỏ Nhất, thì khoảng cách MI phải Nhỏ Nhất. Điểm M là một điểm phải chạy trên mặt phẳng (P). Vậy để khoảng cách từ nó tới I ngắn nhất, M bắt buộc phải là <b>Hình chiếu vuông góc</b> của tâm I rớt xuống mặt phẳng (P).</div>
-            <div class="step-content"><b>Bước 3: Tìm hình chiếu M.</b><br>
-            Viết phương trình tia laze chiếu từ I vuông góc với mặt (P). Vector chỉ phương của tia laze này chính là Vector Pháp tuyến của mặt (P), tức là \( (3; 3; -2) \).<br>
-            Giao điểm của tia laze và mặt (P) sẽ cho ta tọa độ M. Bấm máy giải hệ phương trình đường thẳng và mặt phẳng, ta chốt được tọa độ M là \( M(5; 4; -1) \).</div>
-            <div class="step-content"><b>Bước 4:</b> Đề hỏi tổng tọa độ a + b + c. Lấy \( 5 + 4 + (-1) = 8 \). Xong phim!</div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">Dùng tâm tỉ cự I, tọa độ I trung bình cộng trọng số: \( I(2; 1; 1) \). M chính là hình chiếu của I lên mặt phẳng (P). Lập PT tia chiếu, giải hệ ta được \( M(5; 4; -1) \). Tổng a+b+c = 5 + 4 - 1 = <b>8</b>.</div>
         </div>
     </div>
 
     <div class="question-card">
-        <div class="q-text">Câu 6: Một công ty vận tải có thể huy động tối đa 10 xe tải để chuyển 60 tấn hàng đến một địa điểm. Mỗi xe tải có thể chở 3 tấn hàng trong một chuyến đi (có thể đi nhiều chuyến), và mất 1 giờ để hoàn tất một chuyến. Chi phí khởi động để điều một xe tải là 100 nghìn đồng. Ngoài ra, khi cùng chạy, n xe tải tốn chi phí nhiên liệu mỗi giờ là \( 15(2n+5) \) nghìn đồng. Công ty đang tính toán để sử dụng một số lượng xe tải sao cho tổng chi phí vận chuyển là thấp nhất, vậy chi phí thấp nhất ấy là bao nhiêu nghìn đồng cho đợt vận chuyển hàng nói trên?</div>
-        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==wMzETM"> <!-- 1375 base64 = MTM3NQ== -> reversed = ==QTMzMT -->
+        <div class="q-text">Câu 6: Một công ty vận tải huy động tối đa 10 xe tải để chuyển 60 tấn hàng. Mỗi xe chở 3 tấn/chuyến, đi 1 giờ/chuyến. Chi phí khởi động mỗi xe 100k. Chi phí xăng khi chạy n xe là \( 15(2n+5) \) nghìn/giờ. Chi phí vận chuyển thấp nhất là bao nhiêu nghìn đồng?</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==QN3MTM">
         <div class="explanation">
-            <div class="step-title">✍️ Các bước giải tự luận (Tối ưu hóa kinh tế):</div>
-            <div class="step-content"><b>Bước 1: Tính khối lượng công việc.</b><br>
-            Tổng cộng có 60 tấn hàng. Mỗi xe chở được 3 tấn/chuyến. Vậy tổng cộng cần thực hiện số chuyến xe là: \( 60 \div 3 = 20 \) chuyến.</div>
-            <div class="step-content"><b>Bước 2: Phân bổ thời gian.</b><br>
-            Nếu công ty lôi n chiếc xe tải ra chạy cùng lúc (n = 1, 2... đến 10), thì thời gian để xong việc là chia đều 20 chuyến đó cho n xe. Tức là mất \( \frac{20}{n} \) giờ.</div>
-            <div class="step-content"><b>Bước 3: Tính Tiền! Lập hàm chi phí.</b><br>
-            Tổng tiền phải trả bao gồm 2 khoản:<br>
-            Khoản 1 (Tiền đề-pa nổ máy ban đầu): Lấy 100 nghìn nhân với số lượng xe: \( 100n \).<br>
-            Khoản 2 (Tiền đổ xăng theo giờ): Đề cho chi phí xăng mỗi giờ là \( 15(2n+5) \). Lấy cục này nhân với tổng thời gian chạy: \( 15(2n+5) \times \frac{20}{n} \). Rút gọn cục này ta được \( \frac{300(2n+5)}{n} = 600 + \frac{1500}{n} \).<br>
-            Gộp 2 cục lại thành hàm số Tiền: \( F(n) = 100n + \frac{1500}{n} + 600 \).</div>
-            <div class="step-content"><b>Bước 4: Bóp nghẹt hàm số tìm Min (Dùng Bất Đẳng Thức Cô-Si hoặc Table).</b><br>
-            Theo BĐT Cô-si cho 2 số dương: \( 100n + \frac{1500}{n} \ge 2\sqrt{100n \times \frac{1500}{n}} \).<br>
-            Dấu bằng (mức giá rẻ nhất) xảy ra khi 2 cục này bằng nhau: \( 100n = \frac{1500}{n} \Leftrightarrow 100n^2 = 1500 \Leftrightarrow n^2 = 15 \).<br>
-            Do n là số xe (phải là số nguyên), ta lấy căn ra \( n \approx 3.87 \). Xấp xỉ gần nhất với số lượng xe thực tế là 4 xe.<br>
-            Thay n = 4 vào hàm F(n): \( F(4) = 100(4) + 1500/4 + 600 = 400 + 375 + 600 = 1375 \).<br>
-            Vậy tổng chi phí thấp nhất là <b>1375</b> nghìn đồng.</div>
-            <div class="casio-box">
-                <div class="casio-title">💡 Mẹo Casio cho người làm biếng giải tay:</div>
-                Vào <b>MENU 8</b>. Nhập y xì đúc hàm tiền: \( f(x) = 100X + 1500/X + 600 \).<br>
-                Start = 1 (1 xe), End = 10 (tối đa 10 xe theo đề). Step = 1 (xe không chẻ đôi được).<br>
-                Nhìn cột tiền f(x), lướt thấy ở dòng X = 4 thì tiền f(x) = 1375k là con số nhỏ nhất. Chốt ngay đáp án 1375.
-            </div>
+            <div class="step-title">✍️ Hướng dẫn giải:</div>
+            <div class="step-content">Hàm chi phí tổng cộng khi thuê n xe: \( F(n) = 100n + \frac{1500}{n} + 600 \). Dò Table từ 1 đến 10 xe, thấy tại n = 4, chi phí rẻ nhất đạt được là <b>1375</b> nghìn đồng.</div>
         </div>
     </div>
 
@@ -593,16 +430,11 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
 </div>
 
 <script>
-// 1. Hàm giải mã đáp án an toàn chống quay cóp (Base64 đảo ngược)
 function decodeAns(str) {
-    try {         
-        return atob(str.split('').reverse().join(''));     
-    } catch (e) {         
-        return "";     
-    } 
+    try { return atob(str.split('').reverse().join('')); } 
+    catch (e) { return ""; } 
 }  
 
-// 2. Xáo trộn ngẫu nhiên (Đảo đề/đảo đáp án)
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -610,7 +442,6 @@ function shuffleArray(array) {
     }
 }
 
-// 3. Logic đồng hồ đếm ngược 90 phút (5400 giây)
 let timeRemaining = 5400; 
 let timerInterval;  
 
@@ -624,27 +455,23 @@ function startTimer() {
         seconds = seconds < 10 ? "0" + seconds : seconds;         
         timerDisplay.innerText = `⏳ ${minutes}:${seconds}`;          
         
-        // Đổi màu cảnh báo 5 phút cuối
         if (timeRemaining <= 300) {             
             timerDisplay.style.backgroundColor = "#ff9800";             
             timerDisplay.style.borderColor = "#e65100";         
         }          
         
-        // Hết giờ tự động nộp
         if (timeRemaining <= 0) {             
             clearInterval(timerInterval);             
             timerDisplay.innerText = "Hết giờ!";             
-            alert("Đã hết 90 phút làm bài! Hệ thống sẽ tự động thu bài và chấm điểm.");             
+            alert("Đã hết 90 phút làm bài! Hệ thống tự động thu bài.");             
             tinhDiem(true);         
         }     
     }, 1000); 
 }
 
-// Bắt đầu đảo đề và đếm giờ ngay khi load trang
 window.onload = function() {     
     startTimer();
     setTimeout(() => {
-        // Đảo câu hỏi
         ['part1-storage', 'part2-storage', 'part3-storage'].forEach(id => {
             const container = document.getElementById(id);
             if(container) {
@@ -653,8 +480,6 @@ window.onload = function() {
                 cards.forEach(card => container.appendChild(card));
             }
         });
-
-        // Đảo đáp án trắc nghiệm
         document.querySelectorAll('.options-list').forEach(list => {
             const opts = Array.from(list.children);
             shuffleArray(opts);
@@ -663,28 +488,21 @@ window.onload = function() {
     }, 150);
 };
 
-// 4. Hàm tính điểm, gửi Sheet và hiện lời giải
 function tinhDiem(isAutoSubmit) {
     let hoTen = document.getElementById("ho-ten").value.trim();
     let sbd = document.getElementById("so-bao-danh").value.trim();
     
-    // Yêu cầu nhập thông tin nếu tự nộp
     if (!isAutoSubmit && (hoTen === "" || sbd === "")) {
         alert("⚠️ Các em nhớ điền đủ Họ và tên và Số báo danh trước khi nộp bài nhé!");
         return;
     }
     
-    // Gán tên tự động nếu máy thu bài
     if (isAutoSubmit && hoTen === "") hoTen = "Nộp tự động (Không tên)";     
     if (isAutoSubmit && sbd === "") sbd = "Nộp tự động (Không SBD)";
 
-    // Dừng đồng hồ
-    if (typeof timerInterval !== "undefined") {         
-        clearInterval(timerInterval);     
-    }
+    if (typeof timerInterval !== "undefined") clearInterval(timerInterval);
 
     try {
-        // Xóa màu cảnh báo (nếu làm lại)
         document.querySelectorAll('.correct-ans, .wrong-ans, .correct-input, .wrong-input').forEach(el => {
             el.classList.remove('correct-ans', 'wrong-ans', 'correct-input', 'wrong-input');
         });
@@ -692,7 +510,6 @@ function tinhDiem(isAutoSubmit) {
         let diem = 0;
         let dungP1 = 0, dungP3 = 0;
 
-        // Chấm Phần 1 (Giải mã Hash)
         let p1Lists = document.querySelectorAll('#part1-storage .options-list');
         p1Lists.forEach(list => {
             let inputs = list.querySelectorAll('input[type="radio"]');
@@ -709,7 +526,6 @@ function tinhDiem(isAutoSubmit) {
             });
         });
 
-        // Chấm Phần 2 (Giải mã Hash)
         let p2Cards = document.querySelectorAll('#part2-storage .question-card');
         p2Cards.forEach(card => {
             let dungTrongCau = 0;
@@ -731,7 +547,6 @@ function tinhDiem(isAutoSubmit) {
             card.setAttribute('data-correct-count', dungTrongCau);
         });
 
-        // Chấm Phần 3 (Giải mã Hash)
         let p3Inputs = document.querySelectorAll('#part3-storage input[type="text"]');
         p3Inputs.forEach(input => {
             let hash = input.getAttribute('data-hash');
@@ -762,21 +577,17 @@ function tinhDiem(isAutoSubmit) {
             msg += `   + Câu ${index + 1} đúng ${card.getAttribute('data-correct-count')}/4 ý.\n`;
         });
         msg += `- Phần III: Đúng ${dungP3}/${p3Inputs.length} câu.\n\n`;
-        msg += `=> TỔNG ĐIỂM CỦA EM LÀ: ${diem.toFixed(2)} / ${maxScore.toFixed(2)}\n\nĐóng thông báo này lại để xem hướng dẫn giải chi tiết bên dưới mỗi câu nhé!`;
+        msg += `=> TỔNG ĐIỂM CỦA EM LÀ: ${diem.toFixed(2)} / ${maxScore.toFixed(2)}\n\nĐóng thông báo này lại để xem hướng dẫn giải chi tiết!`;
 
-        // Giấu nút nộp
         document.querySelector('.submit-btn').style.display = 'none';
         let maDe = document.getElementById('ma-de-id').innerText;
         
-        // LINK GOOGLE WEB APP CỦA ANH
         let urlWebAPP = "https://script.google.com/macros/s/AKfycbzr0AZasU8vebFHokf14niSXgC940oSVZsiajo6i3wjx1Rkxt5H7eJmXWaUxB29SPEL/exec";
         let linkGuiDiem = `${urlWebAPP}?hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${maDe}&diem=${diem.toFixed(2)}`;
 
-        // Bắn dữ liệu ngầm lên Google Sheet bằng thẻ ảnh ảo
         let sendData = new Image();
         sendData.src = linkGuiDiem;
 
-        // Trì hoãn hiển thị bảng điểm 1 giây để Sheet cập nhật xong
         setTimeout(() => {
             alert(msg);
             document.querySelectorAll('.explanation').forEach(el => {
