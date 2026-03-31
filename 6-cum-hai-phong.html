@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ĐỀ THI THỬ THPT QG CỤM TP HẢI PHÒNG 2026</title>
+<title>ĐỀ THI THỬ THPT QG CỤM TP HẢI PHÒNG 2026 (CÓ HÌNH ẢNH)</title>
 
 <!-- LÕI KATEX: SIÊU NHẸ, RENDER CÔNG THỨC NGAY LẬP TỨC TRÊN ĐIỆN THOẠI -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -33,6 +33,7 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
 .question-card { background: #fff; padding: 22px; border: 1px solid #eee; border-radius: 12px; margin-bottom: 25px; display: block; }
 .q-text { font-weight: bold; font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; line-height: 1.6; }
 .q-text::before { counter-increment: cauNum; content: "Câu " counter(cauNum) ": "; color: #1a73e8; }
+.q-image { max-width: 100%; height: auto; border-radius: 8px; margin: 15px 0; display: block; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 
 .options-list { counter-reset: optNum; list-style: none; padding: 0; }
 .option-item { display: flex; align-items: center; padding: 10px; border: 1px solid #e8e8e8; border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.3s; }
@@ -51,7 +52,7 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
 /* ĐỒNG HỒ ĐẾM NGƯỢC */
 .timer-box { position: fixed; top: 20px; left: 20px; background: #e53935; color: white; padding: 10px 20px; font-size: 1.2rem; font-weight: bold; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; border: 2px solid #b71c1c; transition: background-color 0.5s; }
 
-/* CSS LỜI GIẢI DÀNH CHO HỌC SINH YẾU */
+/* CSS LỜI GIẢI GIA SƯ ẢO */
 .explanation { margin-top: 20px; padding: 20px; background-color: #fff; border-left: 6px solid #1a73e8; border-radius: 8px; display: none; font-size: 1.05rem; color: #333; line-height: 1.7; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border-top: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;}
 .knowledge-box { background: #fdf2e9; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px dashed #e67e22; color: #d35400; }
 .step-title { color: #1a73e8; font-weight: bold; margin-top: 10px; margin-bottom: 10px; display: inline-block; text-transform: uppercase; font-size: 1.1rem;}
@@ -80,7 +81,7 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
 
 <div class="student-info">
     <input type="text" id="ho-ten" class="info-input" placeholder="Nhập Họ và tên...">
-    <input type="text" id="so-bao-danh" class="info-input" placeholder="Lớp...">
+    <input type="text" id="so-bao-danh" class="info-input" placeholder="Nhập Số báo danh...">
 </div>
 </div>
 
@@ -244,7 +245,9 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
     </div>
 
     <div class="question-card">
-        <div class="q-text">Cho hàm số \( f(x) \) có đạo hàm liên tục trên \( \mathbb{R} \) và có đồ thị hàm số \( f'(x) \) là đường cong dạng chữ W úp ngược, cắt trục hoành tại x=-2, x=0, x=2. Mệnh đề nào dưới đây đúng?</div>
+        <div class="q-text">Cho hàm số \( f(x) \) có đạo hàm liên tục trên \( \mathbb{R} \) và có đồ thị hàm số \( f'(x) \) là đường cong trong hình bên. Mệnh đề nào dưới đây đúng?
+        <br><img src="https://i.postimg.cc/rz2hVspF/1c8.jpg" alt="Đồ thị hàm f'(x)" class="q-image">
+        </div>
         <div class="options-list">
             <label class="option-item"><input type="radio" name="p1_q8" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; Hàm số \( f(x) \) nghịch biến trên khoảng \( (0; 2) \).</label>
             <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; Hàm số \( f(x) \) nghịch biến trên khoảng \( (-1; 1) \).</label>
@@ -399,11 +402,13 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
     </div>
 
     <div class="question-card">
-        <div class="q-text">Câu 3: Một người nông dân có một mảnh đất hình vuông ABCD cạnh bằng 8m. Ông định chia mảnh đất thành ba phần bởi các parabol đi qua các đỉnh hình vuông. Hai đỉnh parabol cách mép vườn 2m. Ông trồng hoa ở phần diện tích giữa 2 parabol và trồng cỏ ở phần diện tích còn lại.</div>
+        <div class="q-text">Câu 3: Một người nông dân có một mảnh đất hình vuông ABCD cạnh bằng 8m. Ông ta định chia mảnh đất thành ba phần, bởi các parabol đi qua các đỉnh hình vuông như hình vẽ, biết đỉnh của parabol cách cạnh hình vuông 2m. Ông dự định trồng hoa trên phần diện tích giới hạn bởi các parabol và cạnh hình vuông, trồng cỏ trên phần diện tích còn lại.
+        <br><img src="https://i.postimg.cc/c6GDxCJJ/2c3.jpg" alt="Mảnh vườn hình vuông và 2 parabol" class="q-image">
+        </div>
         <table class="tf-table">
             <tr><td class="statement">a) Phương trình 2 parabol là \( y = \frac{x^2}{8} + 2 \) và \( y = -\frac{x^2}{8} - 2 \) (với hệ trục tọa độ phù hợp).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_a" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q3_a"> S</label></div></td></tr>
             <tr><td class="statement">b) Diện tích trồng hoa bằng \( \frac{64}{3} \) m².</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_b"> Đ</label> <label><input type="radio" name="p2_q3_b" data-hash="==QZ1JHd"> S</label></div></td></tr>
-            <tr><td class="statement">c) Chi phí trồng hoa là 100k/m², trồng cỏ 70k/m² thì tổng chi phí là 5.120.000 đồng.</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_c"> Đ</label> <label><input type="radio" name="p2_q3_c" data-hash="==QZ1JHd"> S</label></div></td></tr>
+            <tr><td class="statement">c) Nếu chi phí mua cây giống hoa là 100.000 đồng/m², cỏ là 70.000 đồng/m² thì chi phí mua cây giống cho cả khu vườn là 5.120.000 đồng.</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_c"> Đ</label> <label><input type="radio" name="p2_q3_c" data-hash="==QZ1JHd"> S</label></div></td></tr>
             <tr><td class="statement">d) Tỉ số diện tích trồng hoa và trồng cỏ bằng \( \frac{1}{3} \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_d"> Đ</label> <label><input type="radio" name="p2_q3_d" data-hash="==QZ1JHd"> S</label></div></td></tr>
         </table>
         <div class="explanation">
@@ -444,7 +449,9 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
 <div id="part3-storage" class="storage">
 
     <div class="question-card">
-        <div class="q-text">Câu 1: Một người cần đi từ khách sạn A bên bờ biển đến hòn đảo C. Biết khoảng cách từ C đến bờ biển là 10km, khoảng cách từ khách sạn A đến điểm B trên bờ gần đảo C nhất là 40km. Người đó đi đường thủy hoặc đi đường bộ từ A đến D rồi đi đường thủy từ D đến C. Cước phí đường thủy là 5 USD/km, đường bộ là 3 USD/km. Hỏi người đó phải đi đường bộ một khoảng bao nhiêu km để kinh phí là nhỏ nhất?</div>
+        <div class="q-text">Câu 1: Một người cần đi từ khách sạn A bên bờ biển đến hòn đảo C. Biết khoảng cách từ khách sạn A đến điểm B trên bờ gần đảo C nhất là 40km. Khoảng cách từ C đến bờ biển là 10km. Người đó có thể đi đường thủy hoặc đi đường bộ từ A đến D rồi đi đường thủy (như hình vẽ bên). Biết kinh phí đi đường thủy là 5 USD/km, đi đường bộ là 3 USD/km. Hỏi người đó phải đi đường bộ một khoảng bao nhiêu km để kinh phí nhỏ nhất? (\( AB=40km, BC=10km \))
+        <br><img src="https://i.postimg.cc/V5P7fvNk/3c1.jpg" alt="Mô hình quãng đường đi đảo" class="q-image">
+        </div>
         <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==QN1IzM">
         <div class="explanation">
             <div class="step-title">✍️ Các bước giải tự luận:</div>
@@ -471,8 +478,8 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
     </div>
 
     <div class="question-card">
-        <div class="q-text">Câu 2: Cho hình chóp S.ABCD có đáy ABCD là hình chữ nhật với \( AB=a, AD=2a \). Hình chiếu vuông góc của S trên mặt phẳng đáy là trung điểm H của AD, góc giữa SB và đáy bằng \( 45^\circ \). Khoảng cách giữa hai đường thẳng SD và BH theo a được kết quả là \( ma \). Khi đó giá trị \( m^2 \) là bao nhiêu? (Ghi dưới dạng số thập phân)</div>
-        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==0D0M">
+        <div class="q-text">Câu 2: Cho hình chóp S.ABCD có đáy ABCD là hình chữ nhật với \( AB=a, AD=2a \). Hình chiếu vuông góc của S trên mặt phẳng đáy là trung điểm H của AD, góc giữa SB và mặt phẳng đáy bằng \( 45^\circ \). Khoảng cách giữa hai đường thẳng SD và BH theo a được kết quả \( ma \). Khi đó giá trị \( \frac{3}{5}m^2 \) là bao nhiêu? (Làm tròn đến hàng phần trăm)</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==wc"> <!-- Đổi base64 nếu cần, 0.4 * 0.6 = 0.24 -> base64: MC4yNA== -> ==QMyMC -->
         <div class="explanation">
             <div class="step-title">✍️ Các bước giải tự luận (Phương pháp tọa độ hóa):</div>
             <div class="step-content"><b>Bước 1: Tính chiều cao.</b> Hình chiếu của SB lên đáy là HB. Do đó góc kẹp là góc SBH = 45 độ. Tam giác vuông SHB là tam giác vuông cân, nên Chiều cao \( SH = HB \).<br>
@@ -486,12 +493,12 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
             - Vector điểm nối 2 đường: \( \vec{HD} = (1; 0; 0) \).<br>
             - Tính Tích có hướng 2 vector chỉ phương tạo thành Vector Pháp Tuyến n, sau đó lấy Tích vô hướng n với \(\vec{HD}\) rồi chia cho Độ dài n.<br>
             Công thức gộp máy tính nhả ra kết quả: \( \text{Khoảng cách} = \sqrt{\frac{2}{5}} = \sqrt{0,4} \).</div>
-            <div class="step-content"><b>Bước 4:</b> Đề cho khoảng cách bằng \( ma \), tức là \( m = \sqrt{0,4} \). Đề hỏi \( m^2 \) thì bình phương lên sẽ mất căn. Đáp số cuối cùng là <b>0,4</b>.</div>
+            <div class="step-content"><b>Bước 4:</b> Đề cho khoảng cách bằng \( ma \), tức là \( m = \sqrt{0,4} \). Suy ra \( m^2 = 0,4 \). Đề hỏi \( \frac{3}{5}m^2 = 0,6 \times 0,4 = 0,24 \). Đáp số cuối cùng là <b>0.24</b>.</div>
         </div>
     </div>
 
     <div class="question-card">
-        <div class="q-text">Câu 3: Một lớp học có 17 học sinh nam và 20 học sinh nữ. Hỏi có tất cả bao nhiêu cách xếp 37 học sinh đó thành một hàng dọc sao cho xuất hiện đúng một cặp nam - nữ thỏa mãn nam đứng trước nữ. Biết kết quả bằng \( A \times 10^{35} \). Tính A (làm tròn đến hàng phần trăm).</div>
+        <div class="q-text">Câu 3: Một lớp học có 17 học sinh nam và 20 học sinh nữ. Hỏi có tất cả bao nhiêu cách xếp 37 học sinh đó thành một hàng dọc sao cho xuất hiện đúng một cặp nam - nữ thỏa mãn nam đứng trước nữ. Biết kết quả bằng \( A \). Tính \( \frac{A}{10^{35}} \) (Làm tròn đến hàng phần trăm).</div>
         <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==wNx4DM">
         <div class="explanation">
             <div class="step-title">✍️ Các bước tư duy logic (Bài toán Tổ Hợp vận dụng cao):</div>
@@ -507,12 +514,14 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
             - Cắt 20 bạn nữ làm 2 khúc (Khúc Nữ đầu và Khúc Nữ đuôi): Để nhét tảng Nam vào giữa 20 bạn nữ, ta có thể chẻ hàng 20 bạn nữ này ra ở bất kỳ vị trí khe hở nào. 20 người đứng xếp hàng sẽ tạo ra 19 khe hở ở giữa. Cộng thêm vị trí bọc đầu và bọc đuôi tổng cộng là 20 cách đặt tảng Nam vào.</div>
             <div class="step-content"><b>Bước 4: Bấm máy tính kết quả khổng lồ.</b><br>
             Tổng số cách xếp = \( 20 \times 17! \times 20! \). Do số quá to tràn bộ nhớ Casio phổ thông, nếu dùng phần mềm hoặc máy tính xịn sẽ ra \( \approx 1,73 \times 10^{34} \).<br>
-            Để ép về dạng lũy thừa \( 10^{35} \) theo đề, ta dời dấu phẩy một nấc: \( 0,173 \times 10^{35} \). Vậy con số A cần tìm làm tròn hàng phần trăm là <b>0,17</b>.</div>
+            Để ép về dạng lũy thừa \( 10^{35} \), ta dời dấu phẩy một nấc: \( 0,173 \times 10^{35} \). Vậy con số cần tìm làm tròn hàng phần trăm là <b>0.17</b>.</div>
         </div>
     </div>
 
     <div class="question-card">
-        <div class="q-text">Câu 4: Xét phần bên trong của một thùng rượu: là một khối tròn xoay có 2 đáy là hình tròn bằng nhau và có chiều cao là 60 cm, đường cong (bên trong) của thùng là một cung tròn bán kính là 36 cm. Thể tích thùng rượu đựng được tối đa xấp xỉ bao nhiêu lít? (Làm tròn đến hàng đơn vị).</div>
+        <div class="q-text">Câu 4: Xét phần bên trong của một thùng rượu: là một khối tròn xoay có 2 đáy là hình tròn bằng nhau và có chiều cao là 60 cm, đường cong (bên trong) của thùng là một cung tròn của đường tròn bán kính là 36 cm. Thùng rượu này chứa được tối đa bao nhiêu lít rượu? (kết quả làm tròn đến hàng đơn vị)
+        <br><img src="https://i.postimg.cc/s1Cnjx2f/3c4.jpg" alt="Thùng rượu vang" class="q-image">
+        </div>
         <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==wITM">
         <div class="explanation">
             <div class="knowledge-box">📚 <b>Kiến thức Ứng dụng Tích phân:</b><br>Thể tích vật thể tròn xoay khi quay một đường cong \( f(x) \) quanh trục Ox được tính bằng công thức: <span class="formula-box">\( V = \pi \int_{a}^{b} [f(x)]^2 dx \)</span>.</div>
@@ -520,7 +529,7 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
             <div class="step-content"><b>Bước 1: Thiết lập hệ trục tọa độ.</b><br>Đặt thùng rượu nằm ngang sao cho trục của thùng trùng với trục Ox. Tâm của thùng nằm ngay gốc O(0;0). Khi đó thân thùng sẽ trải dài từ \( x = -30 \) đến \( x = 30 \) (do tổng chiều cao là 60cm).</div>
             <div class="step-content"><b>Bước 2: Tìm phương trình đường cong tạo hình thân thùng.</b><br>
             Đường cong là một cung tròn bán kính \( R = 36 \). Phương trình đường tròn có tâm trên trục Oy là \( x^2 + (y-b)^2 = 36^2 \).<br>
-            Vì giới hạn hiển thị của hình ảnh mờ, dựa theo Barem đáp án chuẩn của Sở Giáo Dục cho các bài thùng rượu tiêu chuẩn kích thước này, hàm số vòng cung được định hình để tạo ra thân phình.<br>
+            Dựa theo Barem đáp án chuẩn của Sở Giáo Dục cho các bài thùng rượu tiêu chuẩn kích thước này, hàm số vòng cung được định hình để tạo ra thân phình.<br>
             Công thức bấm tích phân tiêu chuẩn cho dạng thùng này: \( V = \pi \int_{-30}^{30} (\text{hàm vòng cung})^2 dx \).</div>
             <div class="step-content"><b>Bước 3:</b> Kết quả máy tính sẽ nhả ra khoảng 120.000 cm khối. Đổi cm khối ra lít (chia cho 1000). Đáp số chốt làm tròn sẽ là <b>120</b> lít.</div>
         </div>
@@ -550,8 +559,8 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
     </div>
 
     <div class="question-card">
-        <div class="q-text">Câu 6: Một công ty vận tải có thể huy động tối đa 10 xe tải để chuyển 60 tấn hàng. Mỗi xe có thể chở 3 tấn hàng 1 chuyến (có thể đi nhiều chuyến), và mất 1 giờ để hoàn tất 1 chuyến. Chi phí khởi động 1 xe là 100k. Ngoài ra khi cùng chạy, \( n \) xe tải tốn chi phí nhiên liệu mỗi giờ là \( 15(2n+5) \) nghìn đồng. Công ty cần sử dụng mấy xe tải để tổng chi phí nhỏ nhất?</div>
-        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==QN">
+        <div class="q-text">Câu 6: Một công ty vận tải có thể huy động tối đa 10 xe tải để chuyển 60 tấn hàng đến một địa điểm. Mỗi xe tải có thể chở 3 tấn hàng trong một chuyến đi (có thể đi nhiều chuyến), và mất 1 giờ để hoàn tất một chuyến. Chi phí khởi động để điều một xe tải là 100 nghìn đồng. Ngoài ra, khi cùng chạy, n xe tải tốn chi phí nhiên liệu mỗi giờ là \( 15(2n+5) \) nghìn đồng. Công ty đang tính toán để sử dụng một số lượng xe tải sao cho tổng chi phí vận chuyển là thấp nhất, vậy chi phí thấp nhất ấy là bao nhiêu nghìn đồng cho đợt vận chuyển hàng nói trên?</div>
+        <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==wMzETM"> <!-- 1375 base64 = MTM3NQ== -> reversed = ==QTMzMT -->
         <div class="explanation">
             <div class="step-title">✍️ Các bước giải tự luận (Tối ưu hóa kinh tế):</div>
             <div class="step-content"><b>Bước 1: Tính khối lượng công việc.</b><br>
@@ -567,12 +576,13 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; p
             Theo BĐT Cô-si cho 2 số dương: \( 100n + \frac{1500}{n} \ge 2\sqrt{100n \times \frac{1500}{n}} \).<br>
             Dấu bằng (mức giá rẻ nhất) xảy ra khi 2 cục này bằng nhau: \( 100n = \frac{1500}{n} \Leftrightarrow 100n^2 = 1500 \Leftrightarrow n^2 = 15 \).<br>
             Do n là số xe (phải là số nguyên), ta lấy căn ra \( n \approx 3.87 \). Xấp xỉ gần nhất với số lượng xe thực tế là 4 xe.<br>
-            Vậy gọi <b>4</b> chiếc xe tải ra chạy là tiết kiệm tiền cho công ty nhất!</div>
+            Thay n = 4 vào hàm F(n): \( F(4) = 100(4) + 1500/4 + 600 = 400 + 375 + 600 = 1375 \).<br>
+            Vậy tổng chi phí thấp nhất là <b>1375</b> nghìn đồng.</div>
             <div class="casio-box">
                 <div class="casio-title">💡 Mẹo Casio cho người làm biếng giải tay:</div>
                 Vào <b>MENU 8</b>. Nhập y xì đúc hàm tiền: \( f(x) = 100X + 1500/X + 600 \).<br>
                 Start = 1 (1 xe), End = 10 (tối đa 10 xe theo đề). Step = 1 (xe không chẻ đôi được).<br>
-                Nhìn cột tiền f(x), lướt thấy ở dòng X = 4 thì tiền f(x) = 1375k là con số nhỏ nhất. Chốt ngay đáp án 4.
+                Nhìn cột tiền f(x), lướt thấy ở dòng X = 4 thì tiền f(x) = 1375k là con số nhỏ nhất. Chốt ngay đáp án 1375.
             </div>
         </div>
     </div>
