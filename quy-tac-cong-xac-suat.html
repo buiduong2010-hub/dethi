@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHUYÊN ĐỀ: QUY TẮC CỘNG XÁC SUẤT</title>
+    <script>
+        window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .quiz-container { width: 100%; max-width: 950px; background: white; padding: 35px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; border-top: 8px solid #1a73e8; }
+        .exam-code { position: absolute; top: 20px; right: 20px; border: 2px solid #333; padding: 5px 15px; font-weight: bold; background: #fff; }
+        .header-box { text-align: center; margin-bottom: 25px; border-bottom: 2px dashed #ddd; padding-bottom: 20px; }
+        .student-info { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
+        .info-input { padding: 10px 15px; border: 2px solid #ccc; border-radius: 8px; font-size: 1.05rem; width: 220px; outline: none; transition: 0.3s border-color; }
+        .info-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }
+        .part-title { background: #1a73e8; color: white; padding: 12px; border-radius: 8px; margin: 35px 0 20px 0; font-weight: bold; text-transform: uppercase; font-size: 1.2rem; text-align: center; }
+        .storage { counter-reset: cauNum; min-height: 50px; }
+        .question-card { background: #fff; padding: 22px; border: 1px solid #eee; border-radius: 12px; margin-bottom: 25px; display: block; }
+        .q-text { font-weight: bold; font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; line-height: 1.6; }
+        .q-text::before { counter-increment: cauNum; content: "Câu " counter(cauNum) ": "; color: #1a73e8; }
+        .sub-question { margin-top: 12px; padding-left: 15px; border-left: 3px solid #1a73e8; }
+        .sub-question span { font-weight: 500; display: block; margin-bottom: 8px; color: #34495e; }
+        mjx-container { display: inline-block !important; white-space: nowrap !important; }
+        .short-answer-input { width: 100%; max-width: 250px; padding: 10px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 1.05rem; outline: none; font-weight: bold; color: #1a73e8; }
+        .short-answer-input:focus { border-color: #1a73e8; }
+        .submit-btn { width: 100%; padding: 20px; background: #28a745; color: white; border: none; border-radius: 12px; font-size: 1.3rem; font-weight: bold; cursor: pointer; margin-top: 40px; }
+        .explanation { margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid #ff9800; border-radius: 8px; display: none; font-size: 1.05rem; color: #333; line-height: 1.7; }
+        .step-title { color: #d84315; font-weight: bold; }
+        .formula-box { background: #fff3e0; padding: 5px 10px; border-radius: 5px; display: inline-block; font-weight: bold; color: #e65100; margin: 5px 0; border: 1px dashed #ffb74d;}
+        .check-btn { margin-top: 15px; padding: 8px 15px; background: #17a2b8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.3s; display: block; }
+        .check-btn:hover { background: #138496; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="exam-code">Mã đề: <span id="ma-de-id">...</span></div>
+    
+    <div class="header-box">
+        <p style="margin:0; font-weight: bold; color: #555;">BÀI TẬP ĐẠI SỐ TỔ HỢP - XÁC SUẤT</p>
+        <h1 style="margin:10px 0; color:#1a73e8; font-size: 1.7rem;">CHUYÊN ĐỀ: QUY TẮC CỘNG XÁC SUẤT</h1>
+        <p><i>(Dạng bài: Điền đáp án ngắn)</i></p>
+        
+        <div class="student-info">
+            <input type="text" id="ho-ten" class="info-input" placeholder="Nhập Họ và tên...">
+            <input type="text" id="lop" class="info-input" placeholder="Nhập Lớp...">
+        </div>
+    </div>
+
+    <!-- ======================= PHẦN 1 ======================= -->
+    <div class="part-title">MỨC ĐỘ 1: NHẬN BIẾT - THÔNG HIỂU</div>
+    <div id="part1-storage" class="storage">
+
+        <div class="question-card">
+            <div class="q-text">Cho \( A \) và \( B \) là hai biến cố xung khắc. Chọn phát biểu đúng.<br>
+            A. \( P(A \cup B) = P(A) + P(B) \)<br>
+            B. \( P(A \cup B) = P(A) - P(B) \)<br>
+            C. \( P(A \cap B) = P(A) + P(B) \)<br>
+            D. \( P(A \cap B) = P(A) - P(B) \)</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập chữ cái A, B, C hoặc D..." data-hash="==QQ"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Vì \( A \) và \( B \) xung khắc nên không thể đồng thời xảy ra, tức là \( P(A \cap B) = 0 \). <br>Do đó quy tắc cộng xác suất là: \( P(A \cup B) = P(A) + P(B) \). Chọn A.</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Cho \( A \) và \( B \) là hai biến cố độc lập. Biết \( P(A) = 0,5 \); \( P(AB) = 0,2 \). Xác suất \( P(A \cup B) \) bằng bao nhiêu?</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số thập phân (VD: 0.1)..." data-hash="34CM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Vì \( A, B \) độc lập nên \( P(AB) = P(A)P(B) \Rightarrow 0,2 = 0,5 \cdot P(B) \Rightarrow P(B) = 0,4 \).<br>Khi đó: \( P(A \cup B) = P(A) + P(B) - P(AB) = 0,5 + 0,4 - 0,2 = 0,7 \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Một chiếc hộp có 10 chiếc thẻ cùng loại được đánh số từ 1 đến 10. Rút ngẫu nhiên từ hộp ra 1 thẻ. Xét các biến cố \( A \): “Số ghi trên thẻ được lấy ra là số lớn hơn 6”; \( B \): “Số ghi trên thẻ được lấy ra không vượt quá 5”. Tính xác suất của biến cố \( A \cup B \).</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số thập phân (VD: 0.1)..." data-hash="54CM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Tập \( A = \{7; 8; 9; 10\} \Rightarrow P(A) = 4/10 = 0,4 \).<br>Tập \( B = \{1; 2; 3; 4; 5\} \Rightarrow P(B) = 5/10 = 0,5 \).<br>\( A \) và \( B \) xung khắc (không có số nào vừa > 6 lại vừa \(\le\) 5).<br>Do đó \( P(A \cup B) = P(A) + P(B) = 0,4 + 0,5 = 0,9 \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Một chiếc hộp chứa 9 viên bi cùng kích thước và khối lượng, trong đó có 4 viên bi màu đỏ, 5 viên bi màu xanh. Lấy ngẫu nhiên từ hộp 2 viên bi. Xác suất của biến cố “lấy được 2 viên bi cùng màu” bằng bao nhiêu?</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập phân số tối giản (VD: 1/2)..." data-hash="58CN"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Lấy được 2 viên bi cùng màu có 2 trường hợp xung khắc: Cùng màu đỏ hoặc cùng màu xanh.<br>\( P = \frac{C^2_4 + C^2_5}{C^2_9} = \frac{6+10}{36} = \frac{16}{36} = \frac{4}{9} \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Một hộp đựng 20 tấm thẻ cùng loại được đánh số từ 1 đến 20. Rút ngẫu nhiên một tấm thẻ. Gọi \( A \) là biến cố “Rút được tấm thẻ ghi số chẵn lớn hơn 9”; \( B \) là biến cố “Rút được tấm thẻ ghi số không nhỏ hơn 8 và không lớn hơn 15”. Số phần tử của tập hợp biến cố hợp \( A \cup B \) là bao nhiêu?</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số nguyên..." data-hash="=ETM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Tập \( A = \{10; 12; 14; 16; 18; 20\} \).<br>Tập \( B = \{8; 9; 10; 11; 12; 13; 14; 15\} \).<br>Tập hợp \( A \cup B = \{8; 9; 10; 11; 12; 13; 14; 15; 16; 18; 20\} \). Đếm được tất cả có 11 phần tử.</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Lớp 11A của một trường có 40 học sinh, trong đó có 15 học sinh nam giỏi Toán và 8 học sinh nữ giỏi Văn. Chọn ngẫu nhiên một học sinh. Tính xác suất để chọn được một nam sinh giỏi Toán hoặc một nữ sinh giỏi Văn.</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập phân số tối giản (VD: 1/2)..." data-hash="=0DMvMjM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Gọi A là "chọn nam giỏi Toán" (\( n(A) = 15 \)), B là "chọn nữ giỏi Văn" (\( n(B) = 8 \)).<br>Hai biến cố A và B là xung khắc (vì học sinh không thể vừa là nam vừa là nữ).<br>Vậy \( P(A \cup B) = P(A) + P(B) = \frac{15}{40} + \frac{8}{40} = \frac{23}{40} \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Một hộp đựng 9 tấm thẻ cùng loại được ghi số từ 1 đến 9. Rút ngẫu nhiên đồng thời hai tấm thẻ từ trong hộp. Xác suất để “Tích hai số ghi trên hai tấm thẻ là một số chẵn” là bao nhiêu?</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập phân số tối giản (VD: 1/2)..." data-hash="=gTMvMTM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Tích 2 số là chẵn khi có ít nhất 1 số chẵn. Ta dùng biến cố đối: Tích là số lẻ \(\Leftrightarrow\) Cả 2 thẻ đều là số lẻ.<br>Từ 1 đến 9 có 5 thẻ lẻ. Xác suất biến cố đối: \( P(\overline{A}) = \frac{C^2_5}{C^2_9} = \frac{10}{36} \).<br>Xác suất cần tìm: \( P(A) = 1 - P(\overline{A}) = 1 - \frac{10}{36} = \frac{26}{36} = \frac{13}{18} \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Một đội tình nguyện gồm 9 học sinh khối 10 và 7 học sinh khối 11. Chọn ra ngẫu nhiên 3 người trong đội. Tính xác suất của biến cố "Cả 3 người được chọn học cùng một khối".</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập phân số tối giản (VD: 1/2)..." data-hash="=ADOvcTM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Biến cố "Cả 3 người cùng khối" bao gồm 2 trường hợp xung khắc: Cả 3 thuộc khối 10 hoặc Cả 3 thuộc khối 11.<br>\( P = \frac{C^3_9 + C^3_7}{C^3_{16}} = \frac{84+35}{560} = \frac{119}{560} = \frac{17}{80} \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Hộp A có 4 viên bi trắng, 5 viên bi đỏ và 6 viên bi xanh. Hộp B có 7 viên bi trắng, 6 viên bi đỏ và 5 viên bi xanh. Lấy ngẫu nhiên mỗi hộp một viên bi. Xác suất để hai viên bi được lấy ra có cùng màu là bao nhiêu?</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập phân số tối giản (VD: 1/2)..." data-hash="1MTvQDN"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Có 3 trường hợp xung khắc để lấy được 2 viên cùng màu:<br>- Cùng màu trắng: \( \frac{4}{15} \times \frac{7}{18} = \frac{28}{270} \).<br>- Cùng màu đỏ: \( \frac{5}{15} \times \frac{6}{18} = \frac{30}{270} \).<br>- Cùng màu xanh: \( \frac{6}{15} \times \frac{5}{18} = \frac{30}{270} \).<br>Tổng xác suất = \( \frac{28+30+30}{270} = \frac{88}{270} = \frac{44}{135} \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Cho \( A \) và \( B \) là hai biến cố độc lập với nhau. Biết \( P(A) = 0,8 \) và \( P(AB) = 0,2 \). Xác suất của biến cố \( P(A \cup B) \) bằng bao nhiêu?</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số thập phân (VD: 0.1)..." data-hash="==QN44CM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Từ \( P(A) = 0,8 \) và \( P(AB) = 0,2 \), do \( A, B \) độc lập nên \( P(B) = \frac{P(AB)}{P(A)} = \frac{0,2}{0,8} = 0,25 \).<br>Quy tắc cộng xác suất: \( P(A \cup B) = P(A) + P(B) - P(AB) = 0,8 + 0,25 - 0,2 = 0,85 \).</div>
+        </div>
+
+    </div>
+
+    <!-- ======================= PHẦN 2 ======================= -->
+    <div class="part-title">MỨC ĐỘ 2: VẬN DỤNG</div>
+    <div id="part2-storage" class="storage">
+
+        <div class="question-card">
+            <div class="q-text">Cho \( A \) và \( B \) là hai biến cố độc lập. Biết \( P(B) = 0,3 \) và \( P(A \cup B) = 0,6 \). Tính xác suất của biến cố \( A \).</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập phân số tối giản (VD: 1/2)..." data-hash="78yM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Độc lập nên \( P(AB) = P(A)P(B) = 0,3 \cdot P(A) \).<br>Ta có: \( P(A \cup B) = P(A) + P(B) - P(AB) \)<br>\(\Rightarrow 0,6 = P(A) + 0,3 - 0,3 \cdot P(A) \)<br>\(\Rightarrow 0,3 = 0,7 \cdot P(A) \Rightarrow P(A) = \frac{3}{7} \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Một hộp có chứa một số quả cầu gồm bốn màu xanh, vàng, đỏ, trắng. Lấy ngẫu nhiên một quả cầu từ hộp, biết xác suất để lấy được một quả cầu màu xanh bằng \( 1/4 \), xác suất để lấy được một quả cầu màu vàng bằng \( 1/3 \). Tính xác suất để lấy được một quả cầu xanh hoặc một quả cầu vàng.</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập phân số tối giản (VD: 1/2)..." data-hash="==gMx8yN"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Lấy ra 1 quả cầu thì không thể xảy ra đồng thời màu xanh và màu vàng (hai biến cố xung khắc).<br>Xác suất cần tìm là: \( P = P(Xanh) + P(Vang) = \frac{1}{4} + \frac{1}{3} = \frac{7}{12} \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Lớp 11A1 có 50 học sinh, trong đó có 32 bạn thích học môn Toán, 17 bạn thích học môn Lịch Sử và 8 bạn thích cả hai môn trên. Chọn ngẫu nhiên một bạn trong lớp. Xác suất để bạn đó không thích cả môn Toán và môn Lịch Sử là bao nhiêu?</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số thập phân (VD: 0.1)..." data-hash="==gQx4CM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Gọi A là biến cố thích Toán, B là thích Sử.<br>Xác suất thích ít nhất 1 môn: \( P(A \cup B) = \frac{32}{50} + \frac{17}{50} - \frac{8}{50} = \frac{41}{50} = 0,82 \).<br>Xác suất không thích môn nào (biến cố đối): \( 1 - P(A \cup B) = 1 - 0,82 = 0,18 \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Một khu phố có 50 hộ gia đình trong đó có 18 hộ nuôi chó, 16 hộ nuôi mèo và 7 hộ nuôi cả chó và mèo. Chọn ngẫu nhiên một hộ trong khu phố, tính xác suất để hộ đó nuôi chó hoặc nuôi mèo.</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số thập phân (VD: 0.1)..." data-hash="==QNx4CM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Áp dụng quy tắc cộng xác suất:<br>\( P(C \cup M) = \frac{18}{50} + \frac{16}{50} - \frac{7}{50} = \frac{27}{50} = 0,54 \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Một nhà xuất bản phát hành hai cuốn sách A và B. Thống kê cho thấy có 60% người mua sách A; 70% người mua sách B; 50% người mua cả sách A và sách B. Tính xác suất để một người được chọn ngẫu nhiên không mua cả sách A và sách B.</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số thập phân (VD: 0.1)..." data-hash="y4CM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Xác suất mua ít nhất một sách: \( P(A \cup B) = 0,6 + 0,7 - 0,5 = 0,8 \).<br>Xác suất không mua cả 2 sách (biến cố đối): \( 1 - P(A \cup B) = 1 - 0,8 = 0,2 \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Người ta thăm dò 100 học sinh tại một trường. Có 12 học sinh giỏi Toán, 35 học sinh giỏi Tiếng Anh và 8 học sinh giỏi cả hai môn. Tính xác suất để chọn được một học sinh không giỏi môn nào trong hai môn Toán, Tiếng Anh.</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số thập phân (VD: 0.1)..." data-hash="==QM24CM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Xác suất chọn sinh giỏi ít nhất một môn: \( P(T \cup A) = \frac{12 + 35 - 8}{100} = 0,39 \).<br>Xác suất không giỏi môn nào: \( 1 - P(T \cup A) = 1 - 0,39 = 0,61 \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Có 6 học sinh gồm 3 nam và 3 nữ xếp thành hàng ngang để chụp ảnh. Tính xác suất để các bạn nữ đứng cạnh nhau hoặc nam nữ đứng xen kẽ.</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập phân số tối giản (VD: 1/2)..." data-hash="==AMx8yM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Tổng số không gian mẫu: \( 6! = 720 \).<br>- Nữ đứng cạnh nhau: Coi 3 nữ là 1 cụm, xếp với 3 nam \(\Rightarrow 4! \times 3! = 144\) cách.<br>- Nam nữ xen kẽ: Có 2 trường hợp (Nam-Nữ-Nam-Nữ-Nam-Nữ hoặc Nữ-Nam-Nữ-Nam-Nữ-Nam) \(\Rightarrow 2 \times 3! \times 3! = 72\) cách.<br>Hai biến cố này xung khắc nhau, do đó: \( P = \frac{144 + 72}{720} = \frac{216}{720} = \frac{3}{10} \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Hai bạn An và Bình cùng dự một kì thi. Biết xác suất thi đỗ của mỗi người là 60%. Xác suất để chỉ có đúng một bạn thi đỗ là bao nhiêu?</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số thập phân (VD: 0.1)..." data-hash="==gQ04CM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>\( P(\text{đỗ}) = 0,6 \Rightarrow P(\text{trượt}) = 0,4 \).<br>Chỉ 1 bạn đỗ có 2 trường hợp: (An đỗ, Bình trượt) hoặc (An trượt, Bình đỗ).<br>Xác suất: \( P = (0,6 \times 0,4) + (0,4 \times 0,6) = 0,24 + 0,24 = 0,48 \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Lớp có 44 học sinh gồm 24 học sinh giỏi và 20 học sinh khá. Thầy giáo cần chọn ngẫu nhiên trong lớp một nhóm gồm 3 học sinh. Tính xác suất để chọn 3 bạn mà số học sinh giỏi nhiều hơn học sinh khá (Tức là chọn 3 giỏi hoặc 2 giỏi 1 khá). Tính tổng số kết quả thuận lợi cho biến cố trên (số cách chọn).</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số nguyên..." data-hash="==QNDU7N"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Số cách chọn = (Trường hợp 3 giỏi) + (Trường hợp 2 giỏi 1 khá)<br>\( = C^3_{24} + C^2_{24} \times C^1_{20} = 2024 + 276 \times 20 = 2024 + 5520 = 7544 \) cách.</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong phép thử T, cho \( A \) và \( B \) là hai biến cố độc lập nhau. Biết \( P(A) + P(B) = 1,1 \) và \( P(AB) = 0,3 \). Xác suất của biến cố \( P(A \cup B) \) là bao nhiêu?</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số thập phân (VD: 0.1)..." data-hash="84CM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Áp dụng công thức cộng xác suất mở rộng:<br>\( P(A \cup B) = P(A) + P(B) - P(AB) = 1,1 - 0,3 = 0,8 \).</div>
+        </div>
+
+    </div>
+
+    <!-- ======================= PHẦN 3 ======================= -->
+    <div class="part-title">MỨC ĐỘ 3: VẬN DỤNG CAO</div>
+    <div id="part3-storage" class="storage">
+
+        <div class="question-card">
+            <div class="q-text">Một hộp đựng 30 tấm thẻ có đánh số từ 1 đến 30. Lấy ngẫu nhiên một tấm thẻ từ hộp. Tính xác suất để tấm thẻ được chọn ghi số chia hết cho 3 hoặc chia hết cho 4.</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập phân số tối giản (VD: 1/2)..." data-hash="y8SM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Gọi A là biến cố chia hết cho 3 (từ 1 đến 30 có 10 số).<br>Gọi B là biến cố chia hết cho 4 (có 7 số).<br>Giao \( AB \) là chia hết cho BCNN(3,4) = 12 (từ 1 đến 30 có 12, 24 \(\Rightarrow\) 2 số).<br>\( P(A \cup B) = \frac{10}{30} + \frac{7}{30} - \frac{2}{30} = \frac{15}{30} = \frac{1}{2} \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Một chiếc máy có hai động cơ I và II hoạt động độc lập với nhau. Xác suất để động cơ I và II chạy tốt lần lượt là 0,9 và 0,95. Máy sẽ hoạt động được nếu có ít nhất một động cơ chạy tốt. Tính xác suất để máy hoạt động được.</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số thập phân..." data-hash="=UTOO4CM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>\( P(I \cup II) = P(I) + P(II) - P(I) \cdot P(II) \)<br>\( = 0,9 + 0,95 - 0,9 \times 0,95 = 1,85 - 0,855 = 0,995 \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Ba xạ thủ bắn vào mục tiêu một cách độc lập với nhau. Xác suất bắn trúng của xạ thủ thứ nhất, thứ hai và thứ ba lần lượt là 0,8; 0,6; 0,5. Tính xác suất để có đúng hai người bắn trúng đích.</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số thập phân..." data-hash="==gN04CM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Đúng 2 người trúng bao gồm 3 trường hợp:<br>TH1: (1 trúng, 2 trúng, 3 trượt) \(\Rightarrow 0,8 \times 0,6 \times (1-0,5) = 0,24\)<br>TH2: (1 trúng, 2 trượt, 3 trúng) \(\Rightarrow 0,8 \times (1-0,6) \times 0,5 = 0,16\)<br>TH3: (1 trượt, 2 trúng, 3 trúng) \(\Rightarrow (1-0,8) \times 0,6 \times 0,5 = 0,06\)<br>Cộng lại: \( 0,24 + 0,16 + 0,06 = 0,46 \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Một hộp có chứa 8 viên bi màu xanh và 6 viên bi màu đỏ. Bạn Sơn lấy ngẫu nhiên một viên bi từ hộp (lấy xong không trả lại). Tiếp đó bạn Tùng lấy ngẫu nhiên một viên bi từ hộp đó. Tính xác suất để bạn Tùng lấy được viên bi màu xanh.</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập phân số tối giản (VD: 1/2)..." data-hash="78CN"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Bạn Tùng bốc màu xanh sẽ có 2 trường hợp từ bạn Sơn bốc trước:<br>TH1 (Sơn xanh, Tùng xanh): \( \frac{8}{14} \times \frac{7}{13} = \frac{56}{182} \).<br>TH2 (Sơn đỏ, Tùng xanh): \( \frac{6}{14} \times \frac{8}{13} = \frac{48}{182} \).<br>Cộng lại: \( P = \frac{56+48}{182} = \frac{104}{182} = \frac{4}{7} \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Hai bạn Chiến và Công cùng chơi cờ với nhau. Trong một ván cờ, xác suất Chiến thắng Công là 0,3 và xác suất Công thắng Chiến là 0,4 (còn lại là hòa). Hai bạn dừng chơi khi có người thắng, người thua. Tính xác suất để hai bạn dừng chơi sau đúng hai ván cờ.</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số thập phân..." data-hash="==QMy4CM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Xác suất có người thắng ở 1 ván (phân thắng bại) là \( 0,3 + 0,4 = 0,7 \).<br>Xác suất ván hòa là \( 1 - 0,7 = 0,3 \).<br>Để dừng chơi sau ĐÚNG 2 ván, thì ván 1 phải Hòa, và ván 2 phải Phân thắng bại.<br>Xác suất cần tìm: \( P = 0,3 \times 0,7 = 0,21 \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Gieo một con xúc xắc 4 lần. Tính xác suất của biến cố: “Mặt 4 chấm xuất hiện ít nhất 1 lần”.<br>
+            A. \( 1 - (5/6)^4 \)<br>
+            B. \( (1/6)^4 \)<br>
+            C. \( 1 - (1/6)^4 \)<br>
+            D. \( (5/6)^4 \)</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập chữ cái A, B, C hoặc D..." data-hash="==QQ"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Sử dụng biến cố đối: "Mặt 4 chấm không xuất hiện lần nào trong 4 lần gieo".<br>Xác suất không ra mặt 4 chấm ở 1 lần gieo là \( 5/6 \). Trong 4 lần gieo là \( (5/6)^4 \).<br>Xác suất cần tìm (ít nhất 1 lần) là phần bù: \( 1 - (5/6)^4 \). Chọn A.</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Cho hai biến cố độc lập \( A \) và \( B \). Biết \( P(A) = 1/4, P(A \cup B) = 1/2 \). Tính \( P(B) \).</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập phân số tối giản (VD: 1/2)..." data-hash="z8SM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Do hai biến cố độc lập nên \( P(AB) = P(A) \cdot P(B) = \frac{1}{4}P(B) \).<br>Thay vào công thức \( P(A \cup B) = P(A) + P(B) - P(AB) \):<br>\( \frac{1}{2} = \frac{1}{4} + P(B) - \frac{1}{4}P(B) \Rightarrow \frac{1}{4} = \frac{3}{4}P(B) \Rightarrow P(B) = \frac{1}{3} \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Có 2 hộp: hộp I đựng 4 gói quà màu đỏ và 6 gói quà màu xanh, hộp II đựng 2 gói quà màu đỏ và 8 gói quà màu xanh. Gieo một con xúc xắc, nếu được mặt 6 chấm thì lấy một gói quà từ hộp I, nếu mặt khác thì lấy một gói quà từ hộp II. Tính xác suất để lấy được gói quà màu đỏ.</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập phân số (VD: 1/2)..." data-hash="==AMz8yN"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Xác suất chọn hộp I (mặt 6 chấm) là \( 1/6 \). Xác suất chọn hộp II là \( 5/6 \).<br>Xác suất được gói đỏ = Xác suất (Hộp I và Đỏ) + Xác suất (Hộp II và Đỏ)<br>\( P = (\frac{1}{6} \times \frac{4}{10}) + (\frac{5}{6} \times \frac{2}{10}) = \frac{4}{60} + \frac{10}{60} = \frac{14}{60} = \frac{7}{30} \).</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trên kệ sách có 8 sách Toán và 6 sách Văn. Lấy lần lượt 3 cuốn sách mà không để lại trên kệ. Có bao nhiêu cách để chọn được ít nhất hai cuốn sách Toán? (Tính số kết quả thuận lợi).</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập số nguyên..." data-hash="0IyM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>"Ít nhất 2 sách Toán" gồm 2 trường hợp xung khắc: (2 Toán, 1 Văn) hoặc (3 Toán).<br>Số cách = \( C^2_8 \times C^1_6 + C^3_8 = 28 \times 6 + 56 = 168 + 56 = 224 \) cách.</div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Cho tập hợp \( E = \{1; 2; 3; 4; 5; 6; 7\} \). Viết ngẫu nhiên lên bảng hai số tự nhiên, mỗi số gồm 3 chữ số đôi một khác nhau thuộc tập \( E \). Tính xác suất để trong hai số đó có đúng một số có mặt chữ số 5.</div>
+            <div class="sub-question"><input type="text" class="short-answer-input" placeholder="Nhập phân số (VD: 1/2)..." data-hash="==wN4QzLwQjM"></div>
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra lời giải toàn câu</button>
+            <div class="explanation"><span class="step-title">Giải chi tiết:</span><br>Tổng số các số tự nhiên có 3 chữ số khác nhau từ E là \( A^3_7 = 210 \) số.<br>Số không chứa số 5 (tạo từ 6 chữ số còn lại) là \( A^3_6 = 120 \) số.<br>Số có chứa chữ số 5 là: \( 210 - 120 = 90 \) số.<br>Chọn 2 số từ 210 số. Gọi A là biến cố "Hai số đều chứa số 5" \(\Rightarrow P(A) = \frac{C^2_{90}}{C^2_{210}}\).<br>B là biến cố "Hai số đều không chứa số 5" \(\Rightarrow P(B) = \frac{C^2_{120}}{C^2_{210}}\).<br>Xác suất có đúng 1 số chứa chữ số 5: \( 1 - P(A) - P(B) \)<br>\( = 1 - \frac{4005}{21945} - \frac{7140}{21945} = \frac{10800}{21945} = \frac{240}{487} \).</div>
+        </div>
+
+    </div>
+
+    <button class="submit-btn" onclick="tinhDiem()">NỘP BÀI XEM ĐIỂM VÀ LỜI GIẢI</button>
+</div>
+
+<script>
+// Hàm giải mã đáp án an toàn chống lỗi crash
+function decodeAns(str) {
+    try {
+        return atob(str.split('').reverse().join(''));
+    } catch (e) {
+        console.error("Mã bảo vệ bị lỗi, bỏ qua câu này.");
+        return "";
+    }
+}
+
+// Hàm hiển thị/ẩn lời giải cho toàn câu hỏi
+function kiemTraCauHoi(btn) {
+    let card = btn.closest('.question-card');
+    let explanation = card.querySelector('.explanation');
+    
+    if (explanation) {
+        if (explanation.style.display === 'none' || explanation.style.display === '') {
+            explanation.style.display = 'block';
+            btn.innerText = 'Ẩn lời giải toàn câu';
+            btn.style.background = '#6c757d'; 
+        } else {
+            explanation.style.display = 'none';
+            btn.innerText = 'Kiểm tra lời giải toàn câu';
+            btn.style.background = '#17a2b8'; 
+        }
+    }
+}
+
+// Khi tải xong trang: Chỉ cấp mã đề, tắt đồng hồ và không đảo đề
+window.onload = function() {
+    setTimeout(() => {
+        const cds = ['101', '102', '103', '104', '105', '106'];
+        document.getElementById('ma-de-id').innerText = cds[Math.floor(Math.random() * cds.length)];
+        if (window.MathJax) { MathJax.typesetPromise(); }
+    }, 150);
+};
+
+// Hàm chấm điểm, nộp điểm ngầm lên Sheets và Hiện lời giải
+function tinhDiem() {
+    let hoTen = document.getElementById("ho-ten").value.trim();
+    let lop = document.getElementById("lop").value.trim();
+    
+    if (hoTen === "" || lop === "") {
+        alert("Vui lòng nhập đầy đủ Họ và tên và Lớp trước khi nộp bài!");
+        return;
+    }
+
+    try {
+        let dung = 0;
+        let questions = document.querySelectorAll('input[type="text"].short-answer-input');
+        let totalQs = questions.length;
+
+        // Chấm tất cả các câu trả lời ngắn
+        questions.forEach(input => {
+            let hash = input.getAttribute('data-hash');
+            if (hash) {
+                let ans = decodeAns(hash);
+                let userAns = input.value.trim().replace(',', '.').toUpperCase(); 
+                let trueAns = ans.replace(',', '.').toUpperCase();
+                if (userAns !== "" && userAns === trueAns) { dung++; }
+            }
+        });
+
+        // Tính điểm tự động trên thang điểm 10
+        let diem = (dung / totalQs) * 10;
+
+        let thiSinhInfo = `Thí sinh: ${hoTen} - Lớp: ${lop}\n---------------------------------------\n`;
+        let msg = `KẾT QUẢ BÀI LÀM:\n\n${thiSinhInfo}`;
+        msg += `Bạn đã trả lời đúng ${dung} / ${totalQs} ý.\n\n`;
+        msg += `=> TỔNG ĐIỂM CỦA BẠN LÀ: ${diem.toFixed(2)} / 10.00\n\n`;
+        
+        // Ẩn nút nộp để chống spam
+        document.querySelector('.submit-btn').style.display = 'none';
+
+        // Code gửi dữ liệu ngầm lên Google Sheet
+        let maDe = document.getElementById('ma-de-id').innerText;
+        let urlWebAPP = "https://script.google.com/macros/s/AKfycbzr0AZasU8vebFHokf14niSXgC940oSVZsiajo6i3wjx1Rkxt5H7eJmXWaUxB29SPEL/exec";          
+        let linkGuiDiem = `${urlWebAPP}?hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(lop)}&maDe=${maDe}&diem=${diem.toFixed(2)}`;
+        
+        let sendData = new Image();
+        sendData.src = linkGuiDiem;
+        
+        setTimeout(() => {
+            alert(msg);
+            // Hiện tất cả lời giải và chuyển tất cả nút thành "Ẩn lời giải"
+            document.querySelectorAll('.explanation').forEach(el => {
+                el.style.display = 'block';
+            });
+            document.querySelectorAll('.check-btn').forEach(btn => {
+                btn.innerText = 'Ẩn lời giải toàn câu';
+                btn.style.background = '#6c757d';
+            });
+        }, 1000);
+        
+    } catch (err) {
+        alert("Lỗi hệ thống: " + err.message);
+    }
+}
+</script>
+</body>
+</html>
