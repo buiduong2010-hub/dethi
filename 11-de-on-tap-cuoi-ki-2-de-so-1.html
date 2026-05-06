@@ -640,22 +640,33 @@ function tinhDiem(isAutoSubmit = false) {
         document.querySelectorAll('.option-item').forEach(label => label.classList.add('disabled-option'));
         document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => input.disabled = true);
 
+        // ================= ĐOẠN CODE GỬI ĐIỂM MỚI =================
         let maDe = document.getElementById('ma-de-id').innerText;
+        
+        // Link Google Apps Script (Anh hãy chắc chắn không có dấu cách nào lọt vào giữa chuỗi này)
         let urlWebAPP = "https://script.google.com/macros/s/AKfycbzr0AZasU8vebFHokf14niSXgC940oSVZsiajo6i3wjx1Rkxt5H7eJmXWaUxB29SPEL/exec"; 
-        let linkGuiDiem = `${urlWebAPP}?tenDe=Kiem_Tra_Toan_11_Co_Ban&hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${maDe}&diem=${diem.toFixed(2)}`;
         
-        let sendData = new Image();
-        sendData.src = linkGuiDiem;
+        // Đã xóa tham số tenDe= để cấu trúc link giống hệt bản cũ của anh
+        let linkGuiDiem = `${urlWebAPP}?hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${encodeURIComponent(maDe)}&diem=${diem.toFixed(2)}`;
         
+        // Dùng phương thức fetch thay cho Image() để đảm bảo request luôn được gửi đi
+        fetch(linkGuiDiem, { mode: 'no-cors' })
+            .then(() => console.log("Gửi điểm thành công"))
+            .catch(err => console.error("Lỗi gửi điểm: ", err));
+        
+        // Tăng thời gian chờ lên 1.5 giây (1500ms) để dữ liệu chắc chắn đã bay về Sheet trước khi hiện Alert chặn màn hình
         setTimeout(() => {
             alert(msg);
             document.querySelectorAll('.explanation').forEach(el => {
                 el.style.display = 'block';
             });
-        }, 1000);
+        }, 1500);
+        // ==========================================================
             
     } catch (err) {
         alert("Lỗi hệ thống: " + err.message);
+    }
+}
     }
 }
 </script>
