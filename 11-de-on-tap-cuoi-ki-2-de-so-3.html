@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ĐỀ ÔN TẬP CHUYÊN ĐỀ SỐ 2 - THPT TRẦN PHÚ</title>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .quiz-container { width: 100%; max-width: 850px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; border-top: 8px solid #1a73e8; }
+        .exam-code { position: absolute; top: 20px; right: 20px; border: 2px solid #333; padding: 5px 15px; font-weight: bold; background: #fff; }
+        .header-box { text-align: center; margin-bottom: 30px; border-bottom: 2px dashed #ddd; padding-bottom: 25px; }
+        .student-info { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
+        .info-input { padding: 10px 15px; border: 2px solid #ccc; border-radius: 8px; font-size: 1.05rem; width: 220px; outline: none; transition: 0.3s border-color; font-family: inherit; }
+        .info-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }
+        .part-title { background: #1a73e8; color: white; padding: 12px; border-radius: 8px; margin: 35px 0 20px 0; font-weight: bold; text-transform: uppercase; }
+        .storage { counter-reset: cauNum; min-height: 100px; }
+        .question-card { background: #fff; padding: 22px; border: 1px solid #eee; border-radius: 12px; margin-bottom: 25px; display: block; }
+        .q-text { font-weight: bold; font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; line-height: 1.6; }
+        .q-text::before { counter-increment: cauNum; content: "Câu " counter(cauNum) ": "; color: #1a73e8; }
+        mjx-container { display: inline-block !important; white-space: nowrap !important; vertical-align: middle; }
+        .options-list { counter-reset: optNum; list-style: none; padding: 0; }
+        .option-item { display: flex; align-items: center; padding: 10px; border: 1px solid #e8e8e8; border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.3s; }
+        .option-item:hover { background: #f0f7ff; border-color: #1a73e8; }
+        .label-badge::before { counter-increment: optNum; content: counter(optNum, upper-alpha) "."; }
+        .label-badge { font-weight: bold; min-width: 30px; height: 30px; background: #f0f0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; }
+        .tf-table { width: 100%; border-collapse: collapse; }
+        .statement { padding: 10px 0; width: 65%; font-size: 1rem; color: #34495e; font-weight: normal; }
+        .choice-group { display: flex; gap: 15px; justify-content: flex-end; }
+        .short-answer-input { width: 100%; max-width: 250px; padding: 12px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 1.1rem; margin-top: 10px; outline: none; transition: 0.3s border-color; font-weight: bold; color: #1a73e8; }
+        .short-answer-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }
+        .submit-btn { width: 100%; padding: 20px; background: #28a745; color: white; border: none; border-radius: 12px; font-size: 1.3rem; font-weight: bold; cursor: pointer; margin-top: 40px; transition: 0.3s; }
+        .submit-btn:hover { background: #218838; }
+        .explanation { margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid #ff9800; border-radius: 8px; display: none; font-size: 1.05rem; color: #333; line-height: 1.7; box-shadow: inset 0 0 10px rgba(0,0,0,0.03); }
+        .step-title { color: #d84315; font-weight: bold; text-transform: uppercase; }
+        .formula-box { background: #fff3e0; padding: 5px 10px; border-radius: 5px; display: inline-block; font-weight: bold; color: #e65100; margin: 5px 0; border: 1px dashed #ffb74d;}
+        
+        /* Cảnh báo và đếm ngược */
+        .timer-box { position: fixed; top: 20px; left: 20px; background: #e53935; color: white; padding: 10px 20px; font-size: 1.2rem; font-weight: bold; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; border: 2px solid #b71c1c; transition: background-color 0.5s; }
+
+        /* Highlight */
+        .correct-highlight { background-color: #d4edda !important; border: 2px solid #28a745 !important; color: #155724 !important; font-weight: bold; border-radius: 8px; }
+        .tf-table label.correct-highlight { padding: 4px 10px; border-radius: 6px; }
+        .correct-input { background-color: #d4edda !important; border: 2px solid #28a745 !important; color: #155724 !important; }
+        .wrong-highlight { background-color: #f8d7da !important; border: 2px solid #dc3545 !important; color: #721c24 !important; font-weight: bold; border-radius: 8px; }
+        .tf-table label.wrong-highlight { padding: 4px 10px; border-radius: 6px; }
+        .wrong-input { background-color: #f8d7da !important; border: 2px solid #dc3545 !important; color: #721c24 !important; }
+        
+        input:disabled { cursor: not-allowed; opacity: 0.8; }
+        .option-item.disabled-option { pointer-events: none; }
+    </style>
+</head>
+<body>
+
+<div id="countdown-timer" class="timer-box">⏳ 90:00</div>
+
+<div class="quiz-container">
+    <div class="exam-code">Mã đề: <span id="ma-de-id">ĐỀ SỐ 2</span></div>
+    
+    <div class="header-box">
+        <h1 style="margin:10px 0; color:#1a73e8; font-size: 1.7rem;">ĐỀ ÔN TẬP 3<br>11 CƠ BẢN</h1>
+        <p>Môn thi: <b>TOÁN 12</b> - Cấu trúc đề 2025</p>
+        <p><i>Thời gian làm bài: 90 phút (Không kể thời gian phát đề)</i></p>
+        
+        <div class="student-info">
+            <input type="text" id="ho-ten" class="info-input" placeholder="Nhập Họ và tên...">
+            <input type="text" id="so-bao-danh" class="info-input" placeholder="Nhập Số báo danh...">
+        </div>
+    </div>
+
+    <!-- PHẦN I -->
+    <div class="part-title">PHẦN I. Câu trắc nghiệm nhiều phương án lựa chọn (12 câu)</div>
+    <div id="part1-storage" class="storage">
+
+        <div class="question-card">
+            <div class="q-text">Một vật di chuyển theo phương trình \( S(t) = -3t^3 + 9t^2 + 5t - 2 \) (s tính bằng m, t tính bằng s). Gia tốc tức thời của vật tại thời điểm \( t = 2s \) là bao nhiêu?</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q1" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( -18 \, \text{m/s}^2 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \( 18 \, \text{m/s}^2 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \( -36 \, \text{m/s}^2 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \( 36 \, \text{m/s}^2 \).</label>
+            </div>
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                <b>Bước 1:</b> Phương trình vận tốc là đạo hàm cấp 1 của quãng đường: <br>
+                \( v(t) = S'(t) = -9t^2 + 18t + 5 \).<br>
+                <b>Bước 2:</b> Gia tốc là đạo hàm cấp 2 của quãng đường (tức là đạo hàm của vận tốc):<br>
+                \( a(t) = v''(t) = -18t + 18 \).<br>
+                <b>Bước 3:</b> Thay thời điểm \( t=2 \) vào phương trình gia tốc:<br>
+                \( a(2) = -18(2) + 18 = -36 + 18 = -18 \).
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Tính đạo hàm cấp hai \( y'' \) của hàm số \( y = x^4 - 3x^3 + 5x \).</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( y'' = 12x^2 - 18 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( y'' = 4x^3 - 9x^2 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q2" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( y'' = 12x^2 - 18x \).</label>
+                <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( y'' = 12x^2 - 9x \).</label>
+            </div>
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                <b>Bước 1:</b> Tính đạo hàm cấp 1:<br>
+                \( y' = 4x^3 - 9x^2 + 5 \).<br>
+                <b>Bước 2:</b> Tính đạo hàm cấp 2 (đạo hàm tiếp của \( y' \)):<br>
+                \( y'' = 4 \times 3x^2 - 9 \times 2x = 12x^2 - 18x \).
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Một khối lăng trụ tứ giác đều có cạnh đáy bằng \( 3a \) và chiều cao bằng \( 2a \). Thể tích của khối lăng trụ đó là</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q3" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( 18a^3 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \( 6a^3 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \( 9a^3 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \( 12a^3 \).</label>
+            </div>
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Lăng trụ tứ giác đều có đáy là hình vuông.<br>
+                Diện tích đáy: \( S = (3a)^2 = 9a^2 \).<br>
+                Thể tích khối lăng trụ: \( V = S \times h = 9a^2 \times 2a = 18a^3 \).
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Tập xác định của hàm số \( y = \log_5(x - 6) \) là khoảng nào dưới đây?</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \( [6; +\infty) \).</label>
+                <label class="option-item"><input type="radio" name="p1_q4" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( (6; +\infty) \).</label>
+                <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \( (-\infty; 6) \).</label>
+                <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \( \mathbb{R} \).</label>
+            </div>
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Biểu thức bên trong Logarit bắt buộc phải lớn hơn 0.<br>
+                Ta có: \( x - 6 > 0 \Leftrightarrow x > 6 \).<br>
+                Vậy tập xác định là khoảng \( (6; +\infty) \).
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Hai học sinh A và B cùng tham gia một kỳ thi một cách độc lập. Xác suất để học sinh A và học sinh B đạt điểm giỏi lần lượt là 0,85 và 0,6. Xác suất để cả hai học sinh cùng đạt điểm giỏi là:</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; 0,45.</label>
+                <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; 0,15.</label>
+                <label class="option-item"><input type="radio" name="p1_q5" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; 0,51.</label>
+                <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; 0,85.</label>
+            </div>
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Hai người thi <b>độc lập</b> với nhau. Theo quy tắc nhân xác suất, xác suất để <b>cả hai</b> cùng đạt điểm giỏi bằng tích các xác suất thành phần.<br>
+                \( P = 0,85 \times 0,6 = 0,51 \).
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Cho hình hộp chữ nhật \( ABCD.A'B'C'D' \) có \( AB=4 \), \( AD=6 \), \( AA'=9 \). Khoảng cách giữa đường thẳng \( BB' \) và mặt phẳng \( (ADD'A') \) bằng bao nhiêu?</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; 9.</label>
+                <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; 6.</label>
+                <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; 10.</label>
+                <label class="option-item"><input type="radio" name="p1_q6" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; 4.</label>
+            </div>
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Đường thẳng \( BB' \) hoàn toàn song song với mặt phẳng đối diện \( (ADD'A') \).<br>
+                Do đó, khoảng cách từ đường thẳng \( BB' \) tới mặt phẳng này chính bằng độ dài đoạn vuông góc nối từ \( B \) tới mặt phẳng đó, tức là cạnh \( BA \) (hay \( AB \)).<br>
+                Vậy khoảng cách bằng \( AB = 4 \).
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Cho hình chóp \( S.ABCD \) có đáy \( ABCD \) là hình thoi tâm \( O \) và đường cao \( SO \perp (ABCD) \). Mặt phẳng nào sau đây vuông góc với đường thẳng \( AC \)?</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q7" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( (SBD) \).</label>
+                <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \( (SAB) \).</label>
+                <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \( (SCD) \).</label>
+                <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \( (SBC) \).</label>
+            </div>
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Đáy \( ABCD \) là hình thoi nên hai đường chéo vuông góc: \( AC \perp BD \).<br>
+                Đường cao \( SO \) vuông góc với đáy nên \( AC \perp SO \).<br>
+                Đường thẳng \( AC \) vuông góc với hai đường thẳng cắt nhau \( BD \) và \( SO \) cùng nằm trong mặt phẳng \( (SBD) \).<br>
+                Suy ra \( AC \perp (SBD) \).
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Chọn ngẫu nhiên một nhân viên trong công ty. Xét biến cố \( M \): "Nhân viên biết tiếng Anh" và \( N \): "Nhân viên biết tiếng Nhật". Biến cố \( M \cup N \) là:</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; Nhân viên biết tiếng Anh và tiếng Nhật.</label>
+                <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; Nhân viên chỉ biết tiếng Anh.</label>
+                <label class="option-item"><input type="radio" name="p1_q8" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; Nhân viên biết tiếng Anh hoặc biết tiếng Nhật.</label>
+                <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; Nhân viên không biết ngoại ngữ nào.</label>
+            </div>
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Phép hợp (kí hiệu chữ U ngửa lên) mang ý nghĩa là lấy phần tử thuộc tập này <b>HOẶC</b> thuộc tập kia (Bao gồm cả việc biết cả hai).<br>
+                Vậy \( M \cup N \) đọc là: Nhân viên biết tiếng Anh <b>hoặc</b> biết tiếng Nhật.
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Tiếp tuyến của đồ thị hàm số \( y = \frac{3x-2}{x+2} \) tại điểm giao với trục tung có hệ số góc bằng bao nhiêu?</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; 4.</label>
+                <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; -2.</label>
+                <label class="option-item"><input type="radio" name="p1_q9" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; 2.</label>
+                <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; 8.</label>
+            </div>
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                <b>Bước 1:</b> Giao điểm với trục tung nghĩa là hoành độ \( x_0 = 0 \).<br>
+                <b>Bước 2:</b> Tính đạo hàm \( y' \) bằng quy tắc tính chéo: \( \frac{ad-bc}{(cx+d)^2} \).<br>
+                \( y' = \frac{3 \times 2 - (-2) \times 1}{(x+2)^2} = \frac{6+2}{(x+2)^2} = \frac{8}{(x+2)^2} \).<br>
+                <b>Bước 3:</b> Hệ số góc của tiếp tuyến chính là giá trị đạo hàm tại điểm đó.<br>
+                Thay \( x = 0 \) vào ta được: \( k = y'(0) = \frac{8}{(0+2)^2} = \frac{8}{4} = 2 \).
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Cho \( A \) và \( B \) là hai biến cố xung khắc. Biết \( P(A) = 0,25 \) và \( P(B) = 0,45 \). Xác suất của biến cố \( A \cup B \) là:</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; 0,1125.</label>
+                <label class="option-item"><input type="radio" name="p1_q10" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; 0,7.</label>
+                <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; 0,2.</label>
+                <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; 1.</label>
+            </div>
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                "Xung khắc" nghĩa là hai biến cố không bao giờ cùng xảy ra một lúc (phần giao bằng 0).<br>
+                Khi đó xác suất của biến cố hợp bằng tổng xác suất của chúng:<br>
+                <span class="formula-box">\( P(A \cup B) = P(A) + P(B) \)</span><br>
+                Thay số: \( 0,25 + 0,45 = 0,70 \).
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Tìm đạo hàm \( y' \) của hàm số \( y = 4\cos 2x - 5\sin 3x \).</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q11" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( -8\sin 2x - 15\cos 3x \).</label>
+                <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; \( 8\sin 2x - 15\cos 3x \).</label>
+                <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; \( -4\sin 2x + 5\cos 3x \).</label>
+                <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; \( -8\sin 2x + 15\cos 3x \).</label>
+            </div>
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Sử dụng công thức đạo hàm hàm hợp:<br>
+                \( (\cos u)' = -u' \cdot \sin u \)<br>
+                \( (\sin u)' = u' \cdot \cos u \)<br>
+                Áp dụng: <br>
+                \( y' = 4 \times (2x)' \times (-\sin 2x) - 5 \times (3x)' \times (\cos 3x) \)<br>
+                \( y' = 4 \times (-2 \sin 2x) - 5 \times 3 \cos 3x = -8\sin 2x - 15\cos 3x \).
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Tập nghiệm của phương trình \( 5^{2x-3} = 125 \) có phần tử là:</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \( x=2 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q12" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( x=3 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \( x=4 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \( x=5 \).</label>
+            </div>
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Đưa về cùng cơ số 5. Ta biết \( 125 = 5^3 \).<br>
+                Nên phương trình trở thành: \( 5^{2x-3} = 5^3 \).<br>
+                Cho hai số mũ bằng nhau: \( 2x - 3 = 3 \Rightarrow 2x = 6 \Rightarrow x = 3 \).
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PHẦN II -->
+    <div class="part-title">PHẦN II. Câu trắc nghiệm Đúng - Sai (2 câu)</div>
+    <div id="part2-storage" class="storage">
+
+        <div class="question-card">
+            <div class="q-text">Câu 1. Cho hình chóp \( S.MNP \) có đáy \( MNP \) là tam giác vuông tại \( P \), cạnh bên \( SM \) vuông góc với mặt phẳng đáy \( (MNP) \).</div>
+            <table class="tf-table">
+                <tr><td class="statement">a) Hai đường thẳng \( SM \) và \( NP \) chéo nhau và không vuông góc.</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_a"> Đ</label> <label><input type="radio" name="p2_q1_a" data-hash="==QZ1JHd"> S</label></div></td></tr>
+                <tr><td class="statement">b) Đường thẳng \( NP \) vuông góc với mặt phẳng \( (SMP) \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_b" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q1_b"> S</label></div></td></tr>
+                <tr><td class="statement">c) Mặt phẳng \( (SNP) \) vuông góc với mặt phẳng \( (SMP) \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_c" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q1_c"> S</label></div></td></tr>
+                <tr><td class="statement">d) Hình chiếu vuông góc của điểm \( S \) lên mặt phẳng \( (MNP) \) là điểm \( P \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_d"> Đ</label> <label><input type="radio" name="p2_q1_d" data-hash="==QZ1JHd"> S</label></div></td></tr>
+            </table>
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
+                - <b>a) Sai.</b> Đường cao \( SM \perp (MNP) \) nên nó vuông với mọi đường ở đáy, tức là \( SM \perp NP \). Mặc dù chéo nhau nhưng chúng vẫn vuông góc.<br>
+                - <b>b) Đúng.</b> Đáy vuông tại P nên \( NP \perp MP \). Lại có \( NP \perp SM \) (chứng minh trên). Đường NP vuông góc với cả 2 đường cắt nhau là MP và SM, vậy \( NP \perp (SMP) \).<br>
+                - <b>c) Đúng.</b> Vì mặt phẳng \( (SNP) \) chứa đường thẳng \( NP \) mà \( NP \perp (SMP) \) nên hai mặt phẳng này vuông góc với nhau.<br>
+                - <b>d) Sai.</b> Do \( SM \perp (MNP) \), hình chiếu vuông góc của S rọi thẳng xuống sàn nhà phải là điểm M, không phải điểm P.
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Câu 2. Hai cầu thủ bóng rổ X và Y thực hiện ném phạt một cách độc lập. Xác suất ném trúng rổ của X là 0,85 và của Y là 0,8. Xét tính đúng sai của các mệnh đề sau:</div>
+            <table class="tf-table">
+                <tr><td class="statement">a) Xác suất để cả hai cầu thủ đều ném trượt là 0,03.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_a" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_a"> S</label></div></td></tr>
+                <tr><td class="statement">b) Xác suất để có đúng một cầu thủ ném trúng là 0,31.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_b"> Đ</label> <label><input type="radio" name="p2_q2_b" data-hash="==QZ1JHd"> S</label></div></td></tr>
+                <tr><td class="statement">c) Xác suất để ít nhất một cầu thủ ném trúng là 0,97.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_c" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_c"> S</label></div></td></tr>
+                <tr><td class="statement">d) Biến cố "X ném trúng" và "Y ném trúng" là hai biến cố xung khắc.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_d"> Đ</label> <label><input type="radio" name="p2_q2_d" data-hash="==QZ1JHd"> S</label></div></td></tr>
+            </table>
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
+                Xác suất X trúng = 0,85 \(\Rightarrow\) Xác suất X trượt = 0,15.<br>
+                Xác suất Y trúng = 0,8 \(\Rightarrow\) Xác suất Y trượt = 0,2.<br>
+                - <b>a) Đúng.</b> Cả hai cùng ném trượt = (X trượt) nhân (Y trượt) = \( 0,15 \times 0,2 = 0,03 \).<br>
+                - <b>b) Sai.</b> Có đúng 1 người ném trúng sẽ gồm 2 trường hợp: (X trúng, Y trượt) HOẶC (X trượt, Y trúng). Tính toán: \( (0,85 \times 0,2) + (0,15 \times 0,8) = 0,17 + 0,12 = 0,29 \). Không phải 0,31.<br>
+                - <b>c) Đúng.</b> Xác suất có ít nhất một người trúng = 1 - Xác suất cả hai cùng trượt = \( 1 - 0,03 = 0,97 \).<br>
+                - <b>d) Sai.</b> Đề đã cho rõ X và Y thực hiện "độc lập". Xung khắc nghĩa là người này ném trúng thì người kia bắt buộc phải trượt (không thể cùng trúng), điều này không đúng với thực tế bài toán.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PHẦN III -->
+    <div class="part-title">PHẦN III. Câu trắc nghiệm trả lời ngắn (4 câu)</div>
+    <div id="part3-storage" class="storage">
+        
+        <div class="question-card">
+            <div class="q-text">Câu 1. Tìm số lượng nghiệm nguyên của bất phương trình \( \log_{0,2}(x-2) \ge \log_{0,2}5 \).</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==QN">
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
+                <b>Bước 1: Điều kiện:</b> Biểu thức trong logarit phải lớn hơn 0: \( x - 2 > 0 \Rightarrow x > 2 \).<br>
+                <b>Bước 2: Giải:</b><br>
+                Vì cơ số \( 0,2 < 1 \) nên khi bỏ logarit ta phải <b>đổi chiều</b> bất phương trình:<br>
+                \( x - 2 \le 5 \Rightarrow x \le 7 \).<br>
+                <b>Bước 3:</b> Kết hợp điều kiện ta có: \( 2 < x \le 7 \).<br>
+                Các số nguyên thỏa mãn là: 3, 4, 5, 6, 7. Có tổng cộng <b>5</b> nghiệm nguyên.
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Câu 2. Một câu lạc bộ có 7 thành viên nam và 5 thành viên nữ. Cần chọn ngẫu nhiên 2 người để làm nhiệm vụ trực nhật. Tính xác suất để 2 người được chọn cùng giới tính? (Làm tròn kết quả đến 2 chữ số thập phân, ví dụ 0.12).</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==wN04CM">
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
+                <b>Bước 1: Không gian mẫu.</b> Tổng cộng có 12 người, chọn bừa 2 người: \( \Omega = C_{12}^2 = 66 \) cách.<br>
+                <b>Bước 2: Biến cố thuận lợi.</b> "Cùng giới tính" nghĩa là bốc trúng (2 nam) HOẶC (2 nữ).<br>
+                Số cách = \( C_7^2 + C_5^2 = 21 + 10 = 31 \) cách.<br>
+                <b>Bước 3: Xác suất.</b> \( P = \frac{31}{66} \approx 0,4696... \).<br>
+                Làm tròn 2 chữ số thập phân ta được đáp án là <b>0.47</b>.
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Câu 3. Quãng đường di chuyển của một hạt nảy mầm trong dung dịch được đo bằng phương trình \( S(t) = -0,2t^2 + 2,4t + 5 \) (đơn vị: mm), với t là thời gian tính bằng giờ. Tốc độ thay đổi quãng đường tức thời tại thời điểm \( t = 4 \) giờ bằng bao nhiêu?</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="44CM">
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
+                Tốc độ thay đổi tức thời chính là đạo hàm của hàm số tại thời điểm đó.<br>
+                <b>Bước 1:</b> Tính đạo hàm: \( S'(t) = -0,4t + 2,4 \).<br>
+                <b>Bước 2:</b> Thay \( t=4 \) vào đạo hàm:<br>
+                \( S'(4) = -0,4(4) + 2,4 = -1,6 + 2,4 = 0,8 \).<br>
+                Đáp số là <b>0.8</b>.
+            </div>
+        </div>
+        
+        <div class="question-card">
+            <div class="q-text">Câu 4. Cho khối chóp \( S.ABC \) có cạnh bên \( SA \) vuông góc với mặt phẳng đáy \( (ABC) \). Đáy \( ABC \) là tam giác vuông tại \( A \) với độ dài \( AB=3 \) và \( AC=4 \). Biết chiều cao \( SA=5 \). Tính thể tích \( V \) của khối chóp \( S.ABC \).</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="=ATM">
+            <div class="explanation">
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
+                <b>Bước 1:</b> Tính diện tích đáy. Đáy là tam giác vuông tại A, nên diện tích là một nửa tích hai cạnh góc vuông:<br>
+                \( S_{\text{đáy}} = \frac{1}{2} \times AB \times AC = \frac{1}{2} \times 3 \times 4 = 6 \).<br>
+                <b>Bước 2:</b> Thể tích khối chóp tính bằng công thức: \( V = \frac{1}{3} \times S_{\text{đáy}} \times \text{cao} \).<br>
+                \( V = \frac{1}{3} \times 6 \times 5 = 10 \).<br>
+                Đáp án là <b>10</b>.
+            </div>
+        </div>
+
+    </div>
+
+    <button class="submit-btn" onclick="tinhDiem()">NỘP BÀI XEM ĐIỂM VÀ LỜI GIẢI</button>
+</div>
+
+<script>
+// Hàm giải mã đáp án an toàn chống gian lận
+function decodeAns(str) {
+    try {         
+        return atob(str.split('').reverse().join(''));     
+    } catch (e) {         
+        console.error("Mã bảo vệ bị lỗi, bỏ qua câu này.");         
+        return "";     
+    } 
+}
+
+// Hàm xử lý xáo trộn an toàn
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+let timeRemaining = 90 * 60; // 90 phút = 5400 giây
+let timerInterval;
+
+// ---- TÍNH NĂNG CHỐNG GIAN LẬN (CHỐNG THOÁT MÀN HÌNH/CHUYỂN TAB) ----
+let viPham = 0; // Biến đếm số lần vi phạm
+const maxViPham = 3; 
+
+document.addEventListener("visibilitychange", function() {
+    let btnNopBai = document.querySelector('.submit-btn');
+    let daNopBai = btnNopBai && btnNopBai.style.display === 'none';
+
+    if (document.hidden && !daNopBai) {
+        viPham++; 
+    } 
+    else if (!document.hidden && !daNopBai) {
+        if (viPham < maxViPham) {
+            alert(`⚠️ CẢNH BÁO GIAN LẬN (${viPham}/${maxViPham}):\nHệ thống phát hiện bạn vừa thoát khỏi màn hình làm bài hoặc chuyển sang thẻ khác!\nNếu vi phạm đủ ${maxViPham} lần, bài thi sẽ bị tự động thu ngay lập tức.`);
+        } else if (viPham === maxViPham) {
+            alert(`🚨 ĐÌNH CHỈ THI:\nBạn đã vi phạm quy chế (thoát màn hình quá ${maxViPham} lần).\nHệ thống tiến hành tự động thu bài!`);
+            tinhDiem(true); 
+        }
+    }
+});
+
+function startTimer() {
+    let timerDisplay = document.getElementById("countdown-timer");
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+        let minutes = Math.floor(timeRemaining / 60);
+        let seconds = timeRemaining % 60;
+        
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        timerDisplay.innerText = `⏳ ${minutes}:${seconds}`;
+
+        if (timeRemaining <= 300) {
+            timerDisplay.style.backgroundColor = "#ff9800";
+            timerDisplay.style.borderColor = "#e65100";
+        }
+
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            timerDisplay.innerText = "Hết giờ!";
+            alert("Đã hết 90 phút làm bài! Hệ thống sẽ tự động thu bài.");
+            tinhDiem(true);
+        }
+    }, 1000);
+}
+
+// BẮT SỰ KIỆN DOMContentLoaded ĐỂ CHẮC CHẮN ĐẢO CÂU NGAY LẬP TỨC
+document.addEventListener("DOMContentLoaded", function() {
+    startTimer();
+    
+    ['part1-storage', 'part2-storage', 'part3-storage'].forEach(id => {
+        const container = document.getElementById(id);
+        if(container) {
+            const cards = Array.from(container.children);
+            shuffleArray(cards);
+            cards.forEach(card => container.appendChild(card));
+        }
+    });
+
+    document.querySelectorAll('.options-list').forEach(list => {
+        const opts = Array.from(list.children);
+        shuffleArray(opts);
+        opts.forEach(opt => list.appendChild(opt));
+    });
+});
+
+function tinhDiem(isAutoSubmit = false) {
+    let hoTen = document.getElementById("ho-ten").value.trim();
+    let sbd = document.getElementById("so-bao-danh").value.trim();
+    
+    if (!isAutoSubmit && (hoTen === "" || sbd === "")) {
+        alert("Vui lòng nhập đầy đủ Họ và tên và Số báo danh trước khi nộp bài!");
+        return;
+    }
+
+    if (isAutoSubmit && hoTen === "") hoTen = "Không ghi tên (Nộp tự động)";
+    if (isAutoSubmit && sbd === "") sbd = "Không ghi SBD (Nộp tự động)";
+
+    if (typeof timerInterval !== "undefined") {
+        clearInterval(timerInterval);
+    }
+
+    try {
+        let diem = 0;
+        let dungP1 = 0, dungP3 = 0;
+
+        // Chấm Phần 1 (12 câu * 0.25đ = 3đ)
+        document.querySelectorAll('#part1-storage input[type="radio"]:checked').forEach(c => {
+            let hash = c.getAttribute('data-hash');
+            if (hash && decodeAns(hash) === "true") { diem += 0.25; dungP1++; }
+        });
+
+        // Chấm Phần 2 (2 câu * 1đ = 2đ)
+        let p2Cards = document.querySelectorAll('#part2-storage .question-card');
+        p2Cards.forEach(card => {
+            let dungTrongCau = 0;
+            card.querySelectorAll('input[type="radio"]:checked').forEach(c => {
+                let hash = c.getAttribute('data-hash');
+                if (hash && decodeAns(hash) === "true") { dungTrongCau++; }
+            });
+            if (dungTrongCau === 1) diem += 0.1;
+            else if (dungTrongCau === 2) diem += 0.25;
+            else if (dungTrongCau === 3) diem += 0.5;
+            else if (dungTrongCau === 4) diem += 1.0;
+            card.setAttribute('data-correct-count', dungTrongCau);
+        });
+
+        // Chấm Phần 3 (4 câu * 0.5đ = 2đ) -> Tổng điểm sẽ là 7/10
+        document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => {
+            let hash = input.getAttribute('data-hash');
+            if (hash) {
+                let trueAns = decodeAns(hash);
+                let userAns = input.value.trim().replace(',', '.');
+                let cleanTrueAns = trueAns.replace(',', '.');
+                if (userAns !== "" && userAns === cleanTrueAns) { diem += 0.5; dungP3++; }
+            }
+        });
+
+        let thiSinhInfo = `Thí sinh: ${hoTen} - SBD: ${sbd}\n---------------------------------------\n`;
+        let msg = `KẾT QUẢ BÀI LÀM:\n\n${thiSinhInfo}`;
+        msg += `- Phần I: Trả lời đúng ${dungP1}/12 câu.\n`;
+        msg += `- Phần II:\n`;
+        p2Cards.forEach((card, index) => {
+            msg += `   + Câu ${index + 1} đúng ${card.getAttribute('data-correct-count')}/4 ý.\n`;
+        });
+        msg += `- Phần III: Trả lời đúng ${dungP3}/4 câu.\n\n`;
+        msg += `=> TỔNG ĐIỂM CỦA BẠN LÀ: ${diem.toFixed(2)} / 7.00\n(Thang điểm 7 do đề kiểm tra ngắn)\n\nBạn có thể đóng hộp thoại này để XEM LỜI GIẢI CHI TIẾT bên dưới các câu hỏi!`;
+
+        document.querySelector('.submit-btn').style.display = 'none';
+        
+        // Tô màu đúng/sai Phần 1 & 2
+        document.querySelectorAll('input[type="radio"]:checked').forEach(c => {
+            let parentLabel = c.closest('.option-item') || c.closest('label');
+            let hash = c.getAttribute('data-hash');
+            if (!hash || decodeAns(hash) !== "true") {
+                if (parentLabel) parentLabel.classList.add('wrong-highlight');
+            }
+        });
+
+        document.querySelectorAll('input[type="radio"]').forEach(c => {
+            let hash = c.getAttribute('data-hash');
+            if (hash && decodeAns(hash) === "true") {
+                let parentLabel = c.closest('.option-item') || c.closest('label');
+                if (parentLabel) parentLabel.classList.add('correct-highlight');
+            }
+        });
+
+        // Tô màu đúng/sai Phần 3
+        document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => {
+            let hash = input.getAttribute('data-hash');
+            if (hash) {
+                let trueAns = decodeAns(hash);
+                let userAns = input.value.trim().replace(',', '.');
+                let cleanTrueAns = trueAns.replace(',', '.');
+
+                if (userAns === "") {
+                    input.value = "Chưa làm ❌ (ĐA: " + trueAns + ")"; 
+                    input.classList.add('wrong-input');
+                } else if (userAns !== cleanTrueAns) {
+                    input.value = userAns + " ❌ (ĐA: " + trueAns + ")"; 
+                    input.classList.add('wrong-input');
+                } else {
+                    input.value = userAns + " ✔️"; 
+                    input.classList.add('correct-input');
+                }
+            }
+        });
+
+        // Khóa tính năng chọn và nhập đáp án
+        document.querySelectorAll('input[type="radio"]').forEach(radio => radio.disabled = true);
+        document.querySelectorAll('.option-item').forEach(label => label.classList.add('disabled-option'));
+        document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => input.disabled = true);
+
+        // Gửi điểm ngầm về Google Sheets (Anh có thể đổi đường link Webhook)
+        let maDe = document.getElementById('ma-de-id').innerText;
+        let urlWebAPP = "https://script.google.com/macros/s/AKfycbzr0AZasU8vebFHokf14niSXgC940oSVZsiajo6i3wjx1Rkxt5H7eJmXWaUxB29SPEL/exec"; 
+        let linkGuiDiem = `${urlWebAPP}?tenDe=De_So_2_Tran_Phu&hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${maDe}&diem=${diem.toFixed(2)}`;
+        
+        let sendData = new Image();
+        sendData.src = linkGuiDiem;
+        
+        setTimeout(() => {
+            alert(msg);
+            document.querySelectorAll('.explanation').forEach(el => {
+                el.style.display = 'block';
+            });
+        }, 1000);
+            
+    } catch (err) {
+        alert("Lỗi hệ thống: " + err.message);
+    }
+}
+</script>
+</body>
+</html>
