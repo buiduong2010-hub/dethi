@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ĐỀ KIỂM TRA TOÁN 11 - HỆ CƠ BẢN</title>
+    <title>ĐỀ ÔN TẬP CHUYÊN ĐỀ - THPT TRẦN PHÚ</title>
     <script>
         window.MathJax = {
             tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }
@@ -40,14 +40,17 @@
         .step-title { color: #d84315; font-weight: bold; text-transform: uppercase; }
         .formula-box { background: #fff3e0; padding: 5px 10px; border-radius: 5px; display: inline-block; font-weight: bold; color: #e65100; margin: 5px 0; border: 1px dashed #ffb74d;}
         
+        /* Cảnh báo và đếm ngược */
         .timer-box { position: fixed; top: 20px; left: 20px; background: #e53935; color: white; padding: 10px 20px; font-size: 1.2rem; font-weight: bold; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; border: 2px solid #b71c1c; transition: background-color 0.5s; }
-        
+
+        /* Highlight */
         .correct-highlight { background-color: #d4edda !important; border: 2px solid #28a745 !important; color: #155724 !important; font-weight: bold; border-radius: 8px; }
         .tf-table label.correct-highlight { padding: 4px 10px; border-radius: 6px; }
         .correct-input { background-color: #d4edda !important; border: 2px solid #28a745 !important; color: #155724 !important; }
         .wrong-highlight { background-color: #f8d7da !important; border: 2px solid #dc3545 !important; color: #721c24 !important; font-weight: bold; border-radius: 8px; }
         .tf-table label.wrong-highlight { padding: 4px 10px; border-radius: 6px; }
         .wrong-input { background-color: #f8d7da !important; border: 2px solid #dc3545 !important; color: #721c24 !important; }
+        
         input:disabled { cursor: not-allowed; opacity: 0.8; }
         .option-item.disabled-option { pointer-events: none; }
     </style>
@@ -57,11 +60,11 @@
 <div id="countdown-timer" class="timer-box">⏳ 90:00</div>
 
 <div class="quiz-container">
-    <div class="exam-code">Mã đề: <span id="ma-de-id">Cơ Bản 11</span></div>
+    <div class="exam-code">Mã đề: <span id="ma-de-id">O.T.T.P</span></div>
     
     <div class="header-box">
-        <h1 style="margin:10px 0; color:#1a73e8; font-size: 1.7rem;">ĐỀ ÔN TẬP KIỂM TRA CUỐI KỲ II - HỆ CƠ BẢN<br>MÔN: TOÁN 11</h1>
-        <p><i>CẤU TRÚC BỘ NĂM 2025</i></p>
+        <h1 style="margin:10px 0; color:#1a73e8; font-size: 1.7rem;">ĐỀ ÔN TẬP CHUYÊN ĐỀ LẦN 3<br>TRƯỜNG THPT TRẦN PHÚ</h1>
+        <p>Môn thi: <b>TOÁN 12</b> - Cấu trúc đề 2025</p>
         <p><i>Thời gian làm bài: 90 phút (Không kể thời gian phát đề)</i></p>
         
         <div class="student-info">
@@ -75,368 +78,305 @@
     <div id="part1-storage" class="storage">
 
         <div class="question-card">
-            <div class="q-text">Với \( a \) là số thực dương tùy ý, biểu thức \( a^{\frac{1}{3}} \cdot a^{\frac{1}{2}} \) bằng</div>
+            <div class="q-text">Một chất điểm chuyển động theo phương trình \( S(t) = -2t^3 + 6t^2 + 3t + 1 \) (s tính bằng m, t tính bằng s). Gia tốc tức thời của chất điểm tại thời điểm \( t = 3s \) là bao nhiêu?</div>
             <div class="options-list">
-                <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \( a^{\frac{1}{6}} \).</label>
-                <label class="option-item"><input type="radio" name="p1_q1" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( a^{\frac{5}{6}} \).</label>
-                <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \( a^{\frac{2}{5}} \).</label>
-                <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \( a^{\frac{1}{5}} \).</label>
+                <label class="option-item"><input type="radio" name="p1_q1" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( -24 \, \text{m/s}^2 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \( 24 \, \text{m/s}^2 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \( -12 \, \text{m/s}^2 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \( 12 \, \text{m/s}^2 \).</label>
             </div>
             <div class="explanation">
-                <span class="step-title">Lời giải tham khảo:</span><br>
-                Áp dụng tính chất của lũy thừa cùng cơ số: nhân hai lũy thừa cùng cơ số thì ta cộng số mũ lại với nhau.<br>
-                \( a^{\frac{1}{3}} \cdot a^{\frac{1}{2}} = a^{\frac{1}{3} + \frac{1}{2}} = a^{\frac{2}{6} + \frac{3}{6}} = a^{\frac{5}{6}} \).
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                <b>Bước 1:</b> Phương trình vận tốc là đạo hàm cấp 1 của quãng đường: <br>
+                \( v(t) = S'(t) = -6t^2 + 12t + 3 \).<br>
+                <b>Bước 2:</b> Gia tốc là đạo hàm cấp 2 của quãng đường (tức là đạo hàm của vận tốc):<br>
+                \( a(t) = v'(t) = -12t + 12 \).<br>
+                <b>Bước 3:</b> Thay thời điểm \( t=3 \) vào phương trình gia tốc:<br>
+                \( a(3) = -12(3) + 12 = -36 + 12 = -24 \).
             </div>
         </div>
 
         <div class="question-card">
-            <div class="q-text">Với \( a \) là số thực dương tùy ý, \( \log_2(8a) \) bằng</div>
+            <div class="q-text">Tính đạo hàm cấp hai \( y'' \) của hàm số \( y = x^5 + 2x^2 - 3 \).</div>
             <div class="options-list">
-                <label class="option-item"><input type="radio" name="p1_q2" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( 3 + \log_2 a \).</label>
-                <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( 4 \log_2 a \).</label>
-                <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( 3 \log_2 a \).</label>
-                <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( 8 + \log_2 a \).</label>
+                <label class="option-item"><input type="radio" name="p1_q2" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( y'' = 20x^3 + 4 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( y'' = 5x^4 + 4x \).</label>
+                <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( y'' = 20x^3 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \( y'' = 20x^3 + 4x \).</label>
             </div>
             <div class="explanation">
-                <span class="step-title">Lời giải tham khảo:</span><br>
-                Áp dụng tính chất logarit của một tích: \( \log_c(ab) = \log_c a + \log_c b \).<br>
-                \( \log_2(8a) = \log_2 8 + \log_2 a \).<br>
-                Mà \( 8 = 2^3 \Rightarrow \log_2 8 = 3 \).<br>
-                Vậy biểu thức bằng \( 3 + \log_2 a \).
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                <b>Bước 1:</b> Tính đạo hàm cấp 1:<br>
+                \( y' = 5x^4 + 4x \).<br>
+                <b>Bước 2:</b> Tính đạo hàm cấp 2 (đạo hàm tiếp của \( y' \)):<br>
+                \( y'' = 5 \times 4x^3 + 4 \times 1 = 20x^3 + 4 \).
             </div>
         </div>
 
         <div class="question-card">
-            <div class="q-text">Tập xác định của hàm số \( y = \log_3(x-2) \) là</div>
+            <div class="q-text">Một khối lăng trụ tứ giác đều có cạnh đáy bằng \( 2a \) và chiều cao bằng \( 3a \) sẽ có thể tích là</div>
             <div class="options-list">
-                <label class="option-item"><input type="radio" name="p1_q3" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( (2;+\infty) \).</label>
-                <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \( [2;+\infty) \).</label>
-                <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \( (-\infty;2) \).</label>
-                <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \( \mathbb{R} \setminus \{2\} \).</label>
+                <label class="option-item"><input type="radio" name="p1_q3" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( 12a^3 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \( 4a^3 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \( 6a^3 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \( 24a^3 \).</label>
             </div>
             <div class="explanation">
-                <span class="step-title">Lời giải tham khảo:</span><br>
-                Hàm số logarit \( \log_a(u) \) xác định khi biểu thức bên trong lớn hơn 0.<br>
-                Ta có: \( x - 2 > 0 \Leftrightarrow x > 2 \).<br>
-                Vậy tập xác định là \( D = (2; +\infty) \).
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Lăng trụ tứ giác đều có đáy là hình vuông.<br>
+                Diện tích đáy: \( S = (2a)^2 = 4a^2 \).<br>
+                Thể tích khối lăng trụ: \( V = S \times h = 4a^2 \times 3a = 12a^3 \).
             </div>
         </div>
 
         <div class="question-card">
-            <div class="q-text">Nghiệm của phương trình \( 3^{2x-1} = 27 \) là</div>
+            <div class="q-text">Tập xác định của hàm số \( y = \log_3(x - 4) \) là khoảng nào dưới đây?</div>
             <div class="options-list">
-                <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \( x = 1 \).</label>
-                <label class="option-item"><input type="radio" name="p1_q4" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( x = 2 \).</label>
-                <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \( x = 3 \).</label>
-                <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \( x = 4 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q4" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( (4; +\infty) \).</label>
+                <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \( [4; +\infty) \).</label>
+                <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \( (-\infty; 4) \).</label>
+                <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \( \mathbb{R} \).</label>
             </div>
             <div class="explanation">
-                <span class="step-title">Lời giải tham khảo:</span><br>
-                Đưa cả hai vế về cùng cơ số 3, ta có: \( 27 = 3^3 \).<br>
-                Phương trình trở thành: \( 3^{2x-1} = 3^3 \).<br>
-                Từ đó suy ra số mũ bằng nhau: \( 2x - 1 = 3 \Leftrightarrow 2x = 4 \Leftrightarrow x = 2 \).
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Biểu thức bên trong Logarit bắt buộc phải lớn hơn 0.<br>
+                Ta có: \( x - 4 > 0 \Leftrightarrow x > 4 \).<br>
+                Vậy tập xác định là khoảng \( (4; +\infty) \).
             </div>
         </div>
 
         <div class="question-card">
-            <div class="q-text">Cho hình lập phương \( ABCD.A'B'C'D' \). Góc giữa hai đường thẳng \( AB \) và \( A'D' \) bằng</div>
+            <div class="q-text">Một nhà máy có hai hệ thống cảnh báo hoạt động hoàn toàn độc lập. Xác suất để hệ thống 1 và hệ thống 2 phát tín hiệu tốt lần lượt là 0,9 và 0,6. Xác suất để cả hai hệ thống cùng phát tín hiệu tốt là:</div>
             <div class="options-list">
-                <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; \( 30^\circ \).</label>
-                <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; \( 45^\circ \).</label>
-                <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; \( 60^\circ \).</label>
-                <label class="option-item"><input type="radio" name="p1_q5" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( 90^\circ \).</label>
+                <label class="option-item"><input type="radio" name="p1_q5" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; 0,54.</label>
+                <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; 0,36.</label>
+                <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; 0,96.</label>
+                <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; 1,5.</label>
             </div>
             <div class="explanation">
-                <span class="step-title">Lời giải tham khảo:</span><br>
-                Trong hình lập phương, ta có đường thẳng \( A'D' \) song song với đường thẳng \( AD \) (nằm ở mặt đáy).<br>
-                Do đó, góc giữa \( AB \) và \( A'D' \) chính là góc giữa \( AB \) và \( AD \).<br>
-                Vì đáy \( ABCD \) là hình vuông nên góc giữa \( AB \) và \( AD \) bằng \( 90^\circ \).
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Hai hệ thống hoạt động <b>độc lập</b> với nhau. Theo quy tắc nhân xác suất, xác suất để <b>cả hai</b> cùng phát tín hiệu tốt bằng tích các xác suất thành phần.<br>
+                \( P = 0,9 \times 0,6 = 0,54 \).
             </div>
         </div>
 
         <div class="question-card">
-            <div class="q-text">Cho hình chóp \( S.ABCD \) có đáy \( ABCD \) là hình chữ nhật, cạnh bên \( SA \) vuông góc với mặt phẳng đáy \( (ABCD) \). Khẳng định nào sau đây là đúng?</div>
+            <div class="q-text">Cho hình hộp chữ nhật \( ABCD.A'B'C'D' \) có kích thước \( AB=5 \), \( AD=7 \), \( AA'=8 \). Khoảng cách giữa đường thẳng \( AA' \) và mặt phẳng \( (CDD'C') \) bằng bao nhiêu?</div>
             <div class="options-list">
-                <label class="option-item"><input type="radio" name="p1_q6" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( BC \perp (SAB) \).</label>
-                <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; \( BD \perp (SAC) \).</label>
-                <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; \( AC \perp (SBD) \).</label>
-                <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; \( CD \perp (SBC) \).</label>
+                <label class="option-item"><input type="radio" name="p1_q6" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; 7.</label>
+                <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; 5.</label>
+                <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; 8.</label>
+                <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; 12.</label>
             </div>
             <div class="explanation">
-                <span class="step-title">Lời giải tham khảo:</span><br>
-                Vì đáy \( ABCD \) là hình chữ nhật nên ta có \( BC \perp AB \).<br>
-                Vì \( SA \perp (ABCD) \) nên \( SA \) vuông góc với mọi đường thẳng nằm trong mặt phẳng đáy, tức là \( BC \perp SA \).<br>
-                Vì \( BC \) vuông góc với hai đường thẳng cắt nhau \( AB \) và \( SA \) nằm trong mặt phẳng \( (SAB) \), suy ra \( BC \perp (SAB) \).
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Đường thẳng \( AA' \) hoàn toàn song song với mặt phẳng đối diện \( (CDD'C') \).<br>
+                Do đó, khoảng cách từ đường thẳng \( AA' \) tới mặt phẳng này chính bằng độ dài đoạn vuông góc nối từ \( A \) tới mặt phẳng đó, tức là cạnh \( AD \).<br>
+                Vậy khoảng cách bằng \( AD = 7 \).
             </div>
         </div>
 
         <div class="question-card">
-            <div class="q-text">Mệnh đề nào sau đây đúng?</div>
+            <div class="q-text">Xét hình chóp \( S.ABCD \) có đáy \( ABCD \) là hình thoi tâm \( O \) và đường cao là \( SO \) vuông góc với đáy. Trong các mặt phẳng sau, mặt phẳng nào vuông góc với đường thẳng \( BD \)?</div>
             <div class="options-list">
-                <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; Hai mặt phẳng phân biệt cùng vuông góc với một mặt phẳng thì song song với nhau.</label>
-                <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; Hai đường thẳng phân biệt cùng vuông góc với một đường thẳng thì song song với nhau.</label>
-                <label class="option-item"><input type="radio" name="p1_q7" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; Một đường thẳng vuông góc với một trong hai đường thẳng song song thì vuông góc với đường thẳng kia.</label>
-                <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; Một đường thẳng vuông góc với một trong hai mặt phẳng song song thì nằm trong mặt phẳng kia.</label>
+                <label class="option-item"><input type="radio" name="p1_q7" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( (SAC) \).</label>
+                <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \( (SAB) \).</label>
+                <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \( (SCD) \).</label>
+                <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \( (SBC) \).</label>
             </div>
             <div class="explanation">
-                <span class="step-title">Lời giải tham khảo:</span><br>
-                Trong không gian, tính chất cơ bản của quan hệ vuông góc là: Nếu một đường thẳng vuông góc với một trong hai đường thẳng song song thì nó cũng sẽ vuông góc với đường thẳng còn lại. (Các câu khác đều sai vì trong không gian có thêm trạng thái "chéo nhau" hoặc có thể cắt nhau).
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Đáy \( ABCD \) là hình thoi nên hai đường chéo vuông góc: \( BD \perp AC \).<br>
+                Đường cao \( SO \) vuông góc với đáy nên \( SO \perp BD \).<br>
+                Đường thẳng \( BD \) vuông góc với hai đường thẳng cắt nhau \( AC \) và \( SO \) cùng nằm trong mặt phẳng \( (SAC) \).<br>
+                Suy ra \( BD \perp (SAC) \).
             </div>
         </div>
 
         <div class="question-card">
-            <div class="q-text">Cho hình chóp \( S.ABC \) có cạnh bên \( SA \) vuông góc với mặt phẳng đáy \( (ABC) \). Khoảng cách từ đỉnh \( S \) đến mặt phẳng \( (ABC) \) bằng độ dài đoạn thẳng nào dưới đây?</div>
+            <div class="q-text">Khảo sát học sinh trong trường, gọi biến cố \( M \): "Học sinh giỏi Toán", biến cố \( V \): "Học sinh giỏi Văn". Mệnh đề diễn tả biến cố \( M \cup V \) là:</div>
             <div class="options-list">
-                <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; \( SB \).</label>
-                <label class="option-item"><input type="radio" name="p1_q8" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( SA \).</label>
-                <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; \( SC \).</label>
-                <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; \( AB \).</label>
+                <label class="option-item"><input type="radio" name="p1_q8" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; Học sinh giỏi Toán hoặc giỏi Văn.</label>
+                <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; Học sinh giỏi Toán và Văn.</label>
+                <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; Học sinh chỉ giỏi Toán.</label>
+                <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; Học sinh không giỏi môn nào.</label>
             </div>
             <div class="explanation">
-                <span class="step-title">Lời giải tham khảo:</span><br>
-                Khoảng cách từ đỉnh \( S \) xuống mặt phẳng đáy chính là đoạn thẳng kẻ từ \( S \) vuông góc xuống đáy. Vì giả thiết đã cho sẵn \( SA \perp (ABC) \) nên độ dài đoạn thẳng \( SA \) chính là khoảng cách cần tìm.
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Phép hợp (kí hiệu chữ U ngửa lên) mang ý nghĩa là lấy phần tử thuộc tập này <b>HOẶC</b> thuộc tập kia (Bao gồm cả việc giỏi cả hai).<br>
+                Vậy \( M \cup V \) đọc là: Học sinh giỏi Toán <b>hoặc</b> giỏi Văn.
             </div>
         </div>
 
         <div class="question-card">
-            <div class="q-text">Cho \( A \) và \( B \) là hai biến cố độc lập với nhau. Mệnh đề nào sau đây là đúng?</div>
+            <div class="q-text">Tiếp tuyến của đồ thị hàm số \( y = \frac{2x-1}{x+1} \) tại giao điểm với trục tung có hệ số góc bằng bao nhiêu?</div>
             <div class="options-list">
-                <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; \( P(A \cup B) = P(A) + P(B) \).</label>
-                <label class="option-item"><input type="radio" name="p1_q9" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( P(A \cap B) = P(A) \cdot P(B) \).</label>
-                <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; \( A \cap B = \emptyset \).</label>
-                <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; \( P(A \cup B) = P(A) \cdot P(B) \).</label>
+                <label class="option-item"><input type="radio" name="p1_q9" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; 3.</label>
+                <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; -3.</label>
+                <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; 1.</label>
+                <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; 2.</label>
             </div>
             <div class="explanation">
-                <span class="step-title">Lời giải tham khảo:</span><br>
-                Theo định nghĩa xác suất: Khi hai biến cố A và B độc lập (việc xảy ra A không ảnh hưởng tới việc xảy ra B), thì xác suất để cả hai biến cố cùng xảy ra (biến cố giao) bằng tích các xác suất của chúng. Tức là: \( P(A \cap B) = P(A) \cdot P(B) \).
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                <b>Bước 1:</b> Giao điểm với trục tung nghĩa là hoành độ \( x_0 = 0 \).<br>
+                <b>Bước 2:</b> Tính đạo hàm \( y' \) bằng quy tắc tính chéo: \( \frac{ad-bc}{(cx+d)^2} \).<br>
+                \( y' = \frac{2 \times 1 - (-1) \times 1}{(x+1)^2} = \frac{3}{(x+1)^2} \).<br>
+                <b>Bước 3:</b> Hệ số góc của tiếp tuyến chính là giá trị đạo hàm tại điểm đó.<br>
+                Thay \( x = 0 \) vào ta được: \( k = y'(0) = \frac{3}{(0+1)^2} = 3 \).
             </div>
         </div>
 
         <div class="question-card">
-            <div class="q-text">Đạo hàm của hàm số \( y = x^3 - 3x^2 + 2x \) là</div>
+            <div class="q-text">Cho \( X \) và \( Y \) là hai biến cố xung khắc. Biết \( P(X) = 0,2 \) và \( P(Y) = 0,5 \). Xác suất của biến cố \( X \cup Y \) là:</div>
             <div class="options-list">
-                <label class="option-item"><input type="radio" name="p1_q10" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( y' = 3x^2 - 6x + 2 \).</label>
-                <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; \( y' = x^2 - 6x + 2 \).</label>
-                <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; \( y' = 3x^2 - 3x + 2 \).</label>
-                <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; \( y' = 3x^2 - 6x \).</label>
+                <label class="option-item"><input type="radio" name="p1_q10" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; 0,7.</label>
+                <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; 0,1.</label>
+                <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; 0,3.</label>
+                <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; 0,6.</label>
             </div>
             <div class="explanation">
-                <span class="step-title">Lời giải tham khảo:</span><br>
-                Sử dụng công thức đạo hàm cơ bản \( (x^n)' = n \cdot x^{n-1} \):<br>
-                \( (x^3)' = 3x^2 \).<br>
-                \( (-3x^2)' = -3 \cdot 2x = -6x \).<br>
-                \( (2x)' = 2 \).<br>
-                Vậy \( y' = 3x^2 - 6x + 2 \).
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                "Xung khắc" nghĩa là hai biến cố không bao giờ cùng xảy ra một lúc (phần giao bằng 0).<br>
+                Khi đó xác suất của biến cố hợp bằng tổng xác suất của chúng:<br>
+                <span class="formula-box">\( P(X \cup Y) = P(X) + P(Y) \)</span><br>
+                Thay số: \( 0,2 + 0,5 = 0,7 \).
             </div>
         </div>
 
         <div class="question-card">
-            <div class="q-text">Đạo hàm của hàm số \( y = \frac{2x+1}{x-1} \) là</div>
+            <div class="q-text">Tìm đạo hàm \( y' \) của hàm số \( y = 3\sin 2x + 2\cos 3x \).</div>
             <div class="options-list">
-                <label class="option-item"><input type="radio" name="p1_q11" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( y' = \frac{-3}{(x-1)^2} \).</label>
-                <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; \( y' = \frac{3}{(x-1)^2} \).</label>
-                <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; \( y' = \frac{-1}{(x-1)^2} \).</label>
-                <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; \( y' = \frac{1}{(x-1)^2} \).</label>
+                <label class="option-item"><input type="radio" name="p1_q11" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( 6\cos 2x - 6\sin 3x \).</label>
+                <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; \( 3\cos 2x - 2\sin 3x \).</label>
+                <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; \( -6\cos 2x + 6\sin 3x \).</label>
+                <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; \( 6\cos 2x + 6\sin 3x \).</label>
             </div>
             <div class="explanation">
-                <span class="step-title">Lời giải tham khảo:</span><br>
-                Dùng công thức đạo hàm nhanh của hàm phân thức bậc nhất chia bậc nhất: \( y = \frac{ax+b}{cx+d} \Rightarrow y' = \frac{ad-bc}{(cx+d)^2} \).<br>
-                Với \( a=2, b=1, c=1, d=-1 \), ta có: \( y' = \frac{2 \cdot (-1) - 1 \cdot 1}{(x-1)^2} = \frac{-2 - 1}{(x-1)^2} = \frac{-3}{(x-1)^2} \).
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Sử dụng công thức đạo hàm hàm hợp:<br>
+                \( (\sin u)' = u' \cdot \cos u \)<br>
+                \( (\cos u)' = -u' \cdot \sin u \)<br>
+                Áp dụng: <br>
+                \( y' = 3 \times (2x)' \times \cos 2x + 2 \times (3x)' \times (-\sin 3x) \)<br>
+                \( y' = 3 \times 2 \cos 2x - 2 \times 3 \sin 3x = 6\cos 2x - 6\sin 3x \).
             </div>
         </div>
 
         <div class="question-card">
-            <div class="q-text">Đạo hàm cấp hai của hàm số \( y = \sin 2x \) là</div>
+            <div class="q-text">Tập nghiệm của phương trình \( 2^{x-2} = 16 \) có phần tử là:</div>
             <div class="options-list">
-                <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \( y'' = 2\cos 2x \).</label>
-                <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \( y'' = -2\cos 2x \).</label>
-                <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \( y'' = 4\sin 2x \).</label>
-                <label class="option-item"><input type="radio" name="p1_q12" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( y'' = -4\sin 2x \).</label>
+                <label class="option-item"><input type="radio" name="p1_q12" data-hash="==QZ1JHd"> <span class="label-badge"></span> &nbsp; \( x=6 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \( x=4 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \( x=8 \).</label>
+                <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \( x=2 \).</label>
             </div>
             <div class="explanation">
-                <span class="step-title">Lời giải tham khảo:</span><br>
-                - Đạo hàm cấp 1: \( y' = (\sin 2x)' = 2\cos 2x \).<br>
-                - Đạo hàm cấp 2 là đạo hàm của đạo hàm cấp 1: \( y'' = (2\cos 2x)' = 2 \cdot (-2\sin 2x) = -4\sin 2x \).
+                <span class="step-title">Gợi ý cách làm:</span><br>
+                Đưa về cùng cơ số 2. Ta biết \( 16 = 2^4 \).<br>
+                Nên phương trình trở thành: \( 2^{x-2} = 2^4 \).<br>
+                Cho hai số mũ bằng nhau: \( x - 2 = 4 \Rightarrow x = 6 \).
             </div>
         </div>
 
     </div>
 
     <!-- PHẦN II -->
-    <div class="part-title">PHẦN II. Câu trắc nghiệm Đúng - Sai (4 câu)</div>
+    <div class="part-title">PHẦN II. Câu trắc nghiệm Đúng - Sai (2 câu)</div>
     <div id="part2-storage" class="storage">
 
         <div class="question-card">
-            <div class="q-text">Câu 1. Hai xạ thủ A và B cùng bắn vào một tấm bia một cách độc lập với nhau. Xác suất để xạ thủ A bắn trúng bia là 0,7 và xác suất để xạ thủ B bắn trúng bia là 0,6. Xét tính đúng sai của các mệnh đề sau:</div>
+            <div class="q-text">Câu 1. Cho hình chóp \( S.MNP \) có đáy \( MNP \) là tam giác vuông tại \( N \), cạnh bên \( SM \) vuông góc với mặt phẳng đáy \( (MNP) \).</div>
             <table class="tf-table">
-                <tr><td class="statement">a) Xác suất để cả hai xạ thủ cùng bắn trúng bia là 0,42.</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_a" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q1_a"> S</label></div></td></tr>
-                <tr><td class="statement">b) Xác suất để xạ thủ A bắn trúng bia và xạ thủ B bắn trượt bia là 0,28.</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_b" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q1_b"> S</label></div></td></tr>
-                <tr><td class="statement">c) Xác suất để có đúng một xạ thủ bắn trúng bia là 0,46.</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_c" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q1_c"> S</label></div></td></tr>
-                <tr><td class="statement">d) Xác suất để có ít nhất một xạ thủ bắn trúng bia là 0,88.</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_d" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q1_d"> S</label></div></td></tr>
+                <tr><td class="statement">a) Mặt phẳng \( (SNP) \) vuông góc với mặt phẳng \( (MNP) \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_a"> Đ</label> <label><input type="radio" name="p2_q1_a" data-hash="==QZ1JHd"> S</label></div></td></tr>
+                <tr><td class="statement">b) Hình chiếu vuông góc của tam giác \( SNP \) lên mặt phẳng đáy \( (MNP) \) chính là tam giác \( MNP \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_b" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q1_b"> S</label></div></td></tr>
+                <tr><td class="statement">c) Đường thẳng \( NP \) vuông góc với mặt phẳng \( (SMN) \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_c" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q1_c"> S</label></div></td></tr>
+                <tr><td class="statement">d) Hai đường thẳng \( SM \) và \( NP \) vuông góc với nhau.</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_d" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q1_d"> S</label></div></td></tr>
             </table>
             <div class="explanation">
                 <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
-                Gọi \( A \) là biến cố xạ thủ A bắn trúng, \( B \) là biến cố xạ thủ B bắn trúng. \( P(A) = 0,7; P(B) = 0,6 \). Hai biến cố độc lập.<br>
-                - <b>a) Đúng.</b> Xác suất cả hai cùng bắn trúng: \( 0,7 \times 0,6 = 0,42 \).<br>
-                - <b>b) Đúng.</b> Xác suất xạ thủ A trúng và B trượt: \( P(A) \times (1 - P(B)) = 0,7 \times (1 - 0,6) = 0,7 \times 0,4 = 0,28 \).<br>
-                - <b>c) Đúng.</b> Xác suất có đúng một người bắn trúng: (A trúng B trượt) + (A trượt B trúng) = \( 0,28 + 0,3 \times 0,6 = 0,28 + 0,18 = 0,46 \).<br>
-                - <b>d) Đúng.</b> Xác suất có ít nhất một người bắn trúng = 1 - Xác suất cả hai bắn trượt = \( 1 - (1 - 0,7) \times (1 - 0,6) = 1 - 0,3 \times 0,4 = 1 - 0,12 = 0,88 \).
+                - <b>a) Sai.</b> Mặt phẳng \( (MNP) \) vuông góc với \( (SMN) \) và \( (SMP) \) do chứa đường cao \( SM \). Tuy nhiên \( (SNP) \) thì xiên góc với đáy, không có cạnh nào thẳng đứng đâm vào đáy nên không thể vuông góc với đáy \( (MNP) \).<br>
+                - <b>b) Đúng.</b> Rọi đèn thẳng từ trên xuống mặt đáy, điểm S sẽ rơi trúng điểm M. Điểm N và P nằm sẵn trên sàn nên vẫn là N và P. Vậy cái bóng của tam giác SNP chính là tam giác MNP.<br>
+                - <b>c) Đúng.</b> Đáy vuông tại N nên \( NP \perp MN \). Đường cao \( SM \perp (MNP) \) nên nó vuông với mọi đường ở đáy, tức là \( SM \perp NP \). Đường NP vuông góc với cả 2 đường cắt nhau trong vách tường là MN và SM, vậy \( NP \perp (SMN) \).<br>
+                - <b>d) Đúng.</b> Như đã chứng minh ở câu C, do \( SM \) là trụ cột vuông góc thẳng xuống đất nên nó vuông góc với mọi đường kẻ dưới đất, bao gồm cả đường \( NP \).
             </div>
         </div>
 
         <div class="question-card">
-            <div class="q-text">Câu 2. Cho hàm số \( y = x^3 - 3x + 2 \) có đồ thị là \( (C) \). Xét tính đúng sai của các mệnh đề sau:</div>
+            <div class="q-text">Câu 2. Hai nhân viên kiểm tra chất lượng sản phẩm A và B làm việc độc lập. Xác suất để nhân viên A và nhân viên B hoàn thành tốt nhiệm vụ trong ngày lần lượt là 0,9 và 0,8. Gọi biến cố A: "Nhân viên A làm việc tốt" và biến cố B: "Nhân viên B làm việc tốt". Khi đó:</div>
             <table class="tf-table">
-                <tr><td class="statement">a) Đạo hàm cấp một của hàm số là \( y' = 3x^2 - 3 \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_a" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_a"> S</label></div></td></tr>
-                <tr><td class="statement">b) Đạo hàm cấp hai của hàm số tại điểm \( x = -1 \) có giá trị bằng 6.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_b"> Đ</label> <label><input type="radio" name="p2_q2_b" data-hash="==QZ1JHd"> S</label></div></td></tr>
-                <tr><td class="statement">c) Hệ số góc của tiếp tuyến của đồ thị \( (C) \) tại điểm có hoành độ \( x = 2 \) là \( k = 9 \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_c" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_c"> S</label></div></td></tr>
-                <tr><td class="statement">d) Đồ thị \( (C) \) có đúng hai tiếp tuyến song song với trục hoành.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_d" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_d"> S</label></div></td></tr>
+                <tr><td class="statement">a) Xác suất để cả hai nhân viên đều không hoàn thành nhiệm vụ trong ngày là 0,02.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_a" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_a"> S</label></div></td></tr>
+                <tr><td class="statement">b) Xác suất để cả hai cùng hoàn thành tốt nhiệm vụ trong ngày là 0,72.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_b" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_b"> S</label></div></td></tr>
+                <tr><td class="statement">c) A và B là hai biến cố xung khắc.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_c"> Đ</label> <label><input type="radio" name="p2_q2_c" data-hash="==QZ1JHd"> S</label></div></td></tr>
+                <tr><td class="statement">d) Xác suất để có đúng một người hoàn thành tốt nhiệm vụ là 0,26.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_d" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_d"> S</label></div></td></tr>
             </table>
             <div class="explanation">
                 <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
-                - <b>a) Đúng.</b> Đạo hàm cơ bản \( y' = 3x^2 - 3 \).<br>
-                - <b>b) Sai.</b> Đạo hàm cấp hai \( y'' = 6x \). Tại \( x = -1 \), giá trị là \( y''(-1) = 6(-1) = -6 \), không phải 6.<br>
-                - <b>c) Đúng.</b> Hệ số góc của tiếp tuyến tại \( x=2 \) chính là giá trị đạo hàm tại đó: \( k = y'(2) = 3(2)^2 - 3 = 12 - 3 = 9 \).<br>
-                - <b>d) Đúng.</b> Tiếp tuyến song song với trục hoành có hệ số góc \( k = 0 \Leftrightarrow y' = 0 \Leftrightarrow 3x^2 - 3 = 0 \Leftrightarrow x = \pm 1 \). Ứng với hai giá trị \( x \), ta tìm được hai điểm tiếp xúc khác nhau tạo thành 2 tiếp tuyến nằm ngang (tiếp tuyến tại các điểm cực trị).
-            </div>
-        </div>
-
-        <div class="question-card">
-            <div class="q-text">Câu 3. Cho hình chóp \( S.ABCD \) có đáy \( ABCD \) là hình vuông cạnh \( a \), cạnh bên \( SA \) vuông góc với mặt phẳng đáy \( (ABCD) \) và \( SA = a\sqrt{2} \). Gọi \( O \) là tâm của hình vuông đáy. Xét tính đúng sai của các mệnh đề sau:</div>
-            <table class="tf-table">
-                <tr><td class="statement">a) Mặt phẳng \( (SBC) \) vuông góc với mặt phẳng \( (SAB) \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_a" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q3_a"> S</label></div></td></tr>
-                <tr><td class="statement">b) Góc giữa đường thẳng \( SC \) và mặt phẳng đáy \( (ABCD) \) bằng \( 45^\circ \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_b" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q3_b"> S</label></div></td></tr>
-                <tr><td class="statement">c) Góc phẳng nhị diện \( [S,BD,A] \) là góc \( \widehat{SDA} \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_c"> Đ</label> <label><input type="radio" name="p2_q3_c" data-hash="==QZ1JHd"> S</label></div></td></tr>
-                <tr><td class="statement">d) Khoảng cách từ điểm \( A \) đến mặt phẳng \( (SCD) \) bằng \( \frac{a\sqrt{6}}{3} \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_d" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q3_d"> S</label></div></td></tr>
-            </table>
-            <div class="explanation">
-                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
-                - <b>a) Đúng.</b> Do \( BC \perp AB \) và \( BC \perp SA \), ta có \( BC \perp (SAB) \). Mà \( BC \subset (SBC) \) nên \( (SBC) \perp (SAB) \).<br>
-                - <b>b) Đúng.</b> Hình chiếu của \( SC \) lên mặt đáy là \( AC \). Vậy góc cần tìm là \( \widehat{SCA} \). Có \( AC = a\sqrt{2} \), tam giác \( SAC \) vuông tại A có \( SA = AC = a\sqrt{2} \) nên là tam giác vuông cân. Góc \( \widehat{SCA} = 45^\circ \).<br>
-                - <b>c) Sai.</b> Giao tuyến của mặt phẳng \( (SBD) \) và \( (ABCD) \) là \( BD \). Ta có \( AO \perp BD \) và \( SO \perp BD \), nên góc phẳng nhị diện phải là góc \( \widehat{SOA} \), chứ không phải \( \widehat{SDA} \).<br>
-                - <b>d) Đúng.</b> Kẻ \( AH \perp SD \). Dễ dàng chứng minh \( AH \perp (SCD) \). Khoảng cách chính là \( AH \). Áp dụng hệ thức lượng trong tam giác vuông \( SAD \): \( AH = \frac{SA \cdot AD}{\sqrt{SA^2+AD^2}} = \frac{a\sqrt{2} \cdot a}{\sqrt{2a^2+a^2}} = \frac{a\sqrt{2}}{\sqrt{3}} = \frac{a\sqrt{6}}{3} \).
-            </div>
-        </div>
-
-        <div class="question-card">
-            <div class="q-text">Câu 4. Cho hàm số \( f(x) = \log_2(x^2 - 2x + m) \) với \( m \) là tham số thực. Xét tính đúng sai của các mệnh đề sau:</div>
-            <table class="tf-table">
-                <tr><td class="statement">a) Khi \( m = 3 \), tập xác định của hàm số là \( D = \mathbb{R} \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_a" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q4_a"> S</label></div></td></tr>
-                <tr><td class="statement">b) Khi \( m = 3 \), đạo hàm của hàm số là \( f'(x) = \frac{2x-2}{(x^2-2x+3)\ln 2} \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_b" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q4_b"> S</label></div></td></tr>
-                <tr><td class="statement">c) Để tập xác định của hàm số là \( \mathbb{R} \) thì \( m > 1 \).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_c" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q4_c"> S</label></div></td></tr>
-                <tr><td class="statement">d) Khi \( m = 0 \), phương trình \( f(x) = 2 \) có nghiệm là một số nguyên.</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_d"> Đ</label> <label><input type="radio" name="p2_q4_d" data-hash="==QZ1JHd"> S</label></div></td></tr>
-            </table>
-            <div class="explanation">
-                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
-                - <b>a) Đúng.</b> Thay \( m = 3 \), điều kiện để Logarit xác định là \( x^2 - 2x + 3 > 0 \Leftrightarrow (x-1)^2 + 2 > 0 \). Biểu thức này luôn đúng với mọi \( x \in \mathbb{R} \). Tập xác định là \( \mathbb{R} \).<br>
-                - <b>b) Đúng.</b> Đạo hàm hàm Logarit: \( (\log_a u)' = \frac{u'}{u \cdot \ln a} \). Áp dụng vào: \( f'(x) = \frac{(x^2 - 2x + 3)'}{(x^2 - 2x + 3) \cdot \ln 2} = \frac{2x - 2}{(x^2 - 2x + 3) \ln 2} \).<br>
-                - <b>c) Đúng.</b> Tập xác định là \( \mathbb{R} \) khi và chỉ khi phương trình \( x^2 - 2x + m > 0, \forall x \). Tức là \( \Delta' < 0 \Leftrightarrow (-1)^2 - m < 0 \Leftrightarrow 1 - m < 0 \Leftrightarrow m > 1 \).<br>
-                - <b>d) Sai.</b> Thay \( m = 0 \), ta có phương trình: \( \log_2(x^2 - 2x) = 2 \Leftrightarrow x^2 - 2x = 2^2 \Leftrightarrow x^2 - 2x - 4 = 0 \). Phương trình này có 2 nghiệm là \( 1 \pm \sqrt{5} \), đây là các số vô tỉ chứ không phải số nguyên.
+                Xác suất A tốt = 0,9 \(\Rightarrow\) Xác suất A trượt = 0,1.<br>
+                Xác suất B tốt = 0,8 \(\Rightarrow\) Xác suất B trượt = 0,2.<br>
+                - <b>a) Đúng.</b> Cả hai cùng làm việc không tốt = (A trượt) nhân (B trượt) = \( 0,1 \times 0,2 = 0,02 \).<br>
+                - <b>b) Đúng.</b> Cả hai cùng làm tốt = (A tốt) nhân (B tốt) = \( 0,9 \times 0,8 = 0,72 \).<br>
+                - <b>c) Sai.</b> Đề đã cho rõ A và B làm việc "độc lập". Xung khắc nghĩa là đứa này làm tốt thì đứa kia bắt buộc phải làm dở, điều này không đúng với thực tế bài toán.<br>
+                - <b>d) Đúng.</b> Có đúng 1 người làm tốt sẽ gồm 2 trường hợp: (A tốt, B trượt) HOẶC (A trượt, B tốt).<br>
+                Tính toán: \( (0,9 \times 0,2) + (0,1 \times 0,8) = 0,18 + 0,08 = 0,26 \).
             </div>
         </div>
 
     </div>
 
     <!-- PHẦN III -->
-    <div class="part-title">PHẦN III. Câu trắc nghiệm trả lời ngắn (6 câu)</div>
+    <div class="part-title">PHẦN III. Câu trắc nghiệm trả lời ngắn (4 câu)</div>
     <div id="part3-storage" class="storage">
         
         <div class="question-card">
-            <div class="q-text">Câu 1. Bác Tâm gửi tiết kiệm 100 triệu đồng vào ngân hàng theo thể thức lãi kép với lãi suất 6%/năm. Biết rằng lãi suất không thay đổi trong suốt quá trình gửi. Hỏi sau đúng 3 năm, bác Tâm thu được tổng số tiền cả gốc và lãi là bao nhiêu triệu đồng? (Làm tròn kết quả đến hàng phần mười).</div>
-            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="=EjLj5ETM">
+            <div class="q-text">Câu 1. Tìm số nghiệm nguyên của bất phương trình \( \log_2(x-3) \le 2 \).</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==AN">
             <div class="explanation">
                 <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
-                Áp dụng công thức tính lãi kép: <span class="formula-box">\( T = A(1+r)^n \)</span><br>
-                Trong đó: <br>
-                \( A \) là số tiền gửi ban đầu: 100 triệu.<br>
-                \( r \) là lãi suất mỗi năm: 6% hay 0,06.<br>
-                \( n \) là số kỳ hạn (năm): 3 năm.<br>
-                Lắp số vào: \( T = 100 \times (1 + 0,06)^3 = 100 \times (1,06)^3 = 119,1016 \).<br>
-                Làm tròn kết quả đến hàng phần mười, ta có 119,1 triệu đồng.
+                <b>Bước 1: Điều kiện:</b> Biểu thức trong logarit phải lớn hơn 0: \( x - 3 > 0 \Rightarrow x > 3 \).<br>
+                <b>Bước 2: Giải:</b><br>
+                \( \log_2(x-3) \le 2 \Rightarrow x - 3 \le 2^2 \)<br>
+                \( x - 3 \le 4 \Rightarrow x \le 7 \).<br>
+                <b>Bước 3:</b> Kết hợp điều kiện ta có: \( 3 < x \le 7 \).<br>
+                Các số nguyên thỏa mãn là: 4, 5, 6, 7. Có tổng cộng <b>4</b> số nguyên.
             </div>
         </div>
 
         <div class="question-card">
-            <div class="q-text">Câu 2. Một vật chuyển động thẳng có phương trình \( s(t) = -t^3 + 6t^2 + 5t \), trong đó thời gian \( t \) tính bằng giây và quãng đường \( s \) tính bằng mét. Tính vận tốc lớn nhất của vật trong quá trình chuyển động (kết quả tính bằng m/s).</div>
-            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="=cTM">
+            <div class="q-text">Câu 2. Một đội tình nguyện có 5 học sinh lớp 11 và 7 học sinh lớp 12. Cần chọn ngẫu nhiên 2 học sinh đi trực ban. Xác suất để 2 học sinh được chọn học cùng một khối lớp là bao nhiêu? (Làm tròn kết quả đến 2 chữ số thập phân, ví dụ 0.12).</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==wN0CM">
             <div class="explanation">
                 <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
-                <b>Bước 1:</b> Viết phương trình vận tốc \( v(t) \). Vận tốc chính là đạo hàm của quãng đường theo thời gian.<br>
-                \( v(t) = s'(t) = -3t^2 + 12t + 5 \).<br>
-                <b>Bước 2:</b> Tìm giá trị lớn nhất của hàm số bậc hai này. Đây là một parabol có bề lõm hướng xuống, sẽ đạt đỉnh cao nhất tại \( t = \frac{-b}{2a} \).<br>
-                \( t = \frac{-12}{2(-3)} = \frac{-12}{-6} = 2 \) giây.<br>
-                <b>Bước 3:</b> Thay \( t = 2 \) vào lại phương trình vận tốc để lấy kết quả:<br>
-                \( v(2) = -3(2)^2 + 12(2) + 5 = -12 + 24 + 5 = 17 \).<br>
-                Vậy vận tốc lớn nhất là 17 m/s.
+                <b>Bước 1: Không gian mẫu.</b> Tổng cộng có 12 học sinh, bốc bừa 2 em: \( \Omega = C_{12}^2 = 66 \) cách.<br>
+                <b>Bước 2: Biến cố thuận lợi.</b> "Học cùng một khối" nghĩa là bốc trúng (2 em lớp 11) HOẶC (2 em lớp 12).<br>
+                Số cách = \( C_5^2 + C_7^2 = 10 + 21 = 31 \) cách.<br>
+                <b>Bước 3: Xác suất.</b> \( P = \frac{31}{66} \approx 0,4696... \).<br>
+                Làm tròn 2 chữ số thập phân ta được đáp án là <b>0.47</b>.
             </div>
         </div>
 
         <div class="question-card">
-            <div class="q-text">Câu 3. Cho lăng trụ đứng \( ABC.A'B'C' \) có đáy \( ABC \) là tam giác vuông tại \( B \) với \( AB = 3, BC = 4 \). Biết góc giữa đường thẳng \( A'C \) và mặt phẳng đáy \( (ABC) \) bằng \( 45^\circ \). Tính thể tích của khối lăng trụ \( ABC.A'B'C' \).</div>
-            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="=AzM">
+            <div class="q-text">Câu 3. Tốc độ thay đổi nhiệt độ của một dung dịch hóa học tại thời điểm \( t \) (phút) được cho bởi phương trình \( T(t) = -0,2t^2 + 1,5t + 37 \) (đơn vị độ C). Tính tốc độ thay đổi nhiệt độ tức thời tại thời điểm \( t=3 \) phút.</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="z4CM">
             <div class="explanation">
                 <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
-                <b>Bước 1: Phân tích góc:</b> Lăng trụ đứng nên \( A'A \perp (ABC) \). Hình chiếu của \( A'C \) lên đáy \( (ABC) \) chính là cạnh \( AC \). Vậy góc giữa \( A'C \) và mặt đáy là góc \( \widehat{A'CA} = 45^\circ \).<br>
-                Do đó tam giác \( A'AC \) vuông cân tại \( A \), dẫn đến Chiều cao \( A'A \) bằng với đường chéo đáy \( AC \).<br>
-                <b>Bước 2: Tính toán:</b><br>
-                - Diện tích đáy \( \Delta ABC \) vuông tại B: \( S_{ABC} = \frac{1}{2} \times AB \times BC = \frac{1}{2} \times 3 \times 4 = 6 \).<br>
-                - Dùng Pytago cho đáy vuông: \( AC = \sqrt{AB^2 + BC^2} = \sqrt{3^2 + 4^2} = \sqrt{25} = 5 \).<br>
-                - Chiều cao lăng trụ \( A'A = AC = 5 \).<br>
-                - Thể tích Lăng trụ \( V = \text{S_{đáy}} \times \text{Chiều cao} = 6 \times 5 = 30 \).
+                Tốc độ thay đổi tức thời chính là đạo hàm của hàm số tại thời điểm đó.<br>
+                <b>Bước 1:</b> Tính đạo hàm: \( T'(t) = -0,4t + 1,5 \).<br>
+                <b>Bước 2:</b> Thay \( t=3 \) vào đạo hàm:<br>
+                \( T'(3) = -0,4(3) + 1,5 = -1,2 + 1,5 = 0,3 \).<br>
+                Đáp số là <b>0.3</b>.
             </div>
         </div>
         
         <div class="question-card">
-            <div class="q-text">Câu 4. Tìm số lượng các nghiệm nguyên của bất phương trình \( \log_2(x^2 - 2x + 1) \le 2 \).</div>
-            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==AN">
+            <div class="q-text">Câu 4. Cho hình chóp \( S.ABC \) có cạnh bên \( SA \) vuông góc với mặt phẳng đáy \( (ABC) \), và đáy \( ABC \) là tam giác vuông cân tại \( B \) với độ dài \( BA=BC=2 \). Biết chiều cao \( SA=3 \). Tính thể tích \( V \) của khối chóp \( S.ABC \).</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==gM">
             <div class="explanation">
                 <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
-                <b>Bước 1: Đặt điều kiện trong logarit:</b><br>
-                \( x^2 - 2x + 1 > 0 \Leftrightarrow (x-1)^2 > 0 \Leftrightarrow x \neq 1 \).<br>
-                <b>Bước 2: Giải bất phương trình:</b><br>
-                Đội cơ số 2 lên: \( x^2 - 2x + 1 \le 2^2 \)<br>
-                \( \Leftrightarrow (x-1)^2 \le 4 \)<br>
-                Lấy căn 2 vế ta được: \( -2 \le x - 1 \le 2 \)<br>
-                Cộng thêm 1 vào cả ba vế: \( -1 \le x \le 3 \).<br>
-                <b>Bước 3: Đếm số lượng nghiệm nguyên:</b><br>
-                Các số nguyên nằm trong đoạn \([-1; 3]\) là: \( -1, 0, 1, 2, 3 \).<br>
-                Nhưng đối chiếu với điều kiện loại đi số \( 1 \), ta chỉ còn các số: \( -1, 0, 2, 3 \).<br>
-                Đếm được tổng cộng có đúng 4 số.
-            </div>
-        </div>
-
-        <div class="question-card">
-            <div class="q-text">Câu 5. Trong một chiếc hộp kín có 5 viên bi màu xanh và 4 viên bi màu đỏ (các viên bi chỉ khác nhau về màu sắc). Lấy ngẫu nhiên đồng thời 2 viên bi từ hộp. Xác suất để lấy được 2 viên bi cùng màu là phân số tối giản \( \frac{a}{b} \). Tính giá trị của biểu thức \( T = a + b \).</div>
-            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="=MTM">
-            <div class="explanation">
-                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
-                <b>Bước 1: Tính Không gian mẫu (Tổng số cách bốc bừa 2 viên):</b><br>
-                Trong hộp có tổng cộng 5 + 4 = 9 viên. Lấy ra 2 viên, số cách bốc là: \( C_{9}^2 = 36 \).<br>
-                <b>Bước 2: Tính số kết quả có lợi (Bốc được 2 viên CÙNG MÀU):</b><br>
-                - Trường hợp 1: Bốc được 2 viên xanh. Số cách là \( C_5^2 = 10 \).<br>
-                - Trường hợp 2: Bốc được 2 viên đỏ. Số cách là \( C_4^2 = 6 \).<br>
-                Tổng số cách thỏa mãn là \( 10 + 6 = 16 \).<br>
-                <b>Bước 3: Lập tỉ số Xác suất:</b><br>
-                Xác suất \( P = \frac{16}{36} \). Rút gọn chia cho 4 ta được \( \frac{4}{9} \). Đây đã là phân số tối giản.<br>
-                Suy ra \( a = 4, b = 9 \). Đề hỏi tính \( T = a + b = 4 + 9 = 13 \).
-            </div>
-        </div>
-
-        <div class="question-card">
-            <div class="q-text">Câu 6. Cho hình chóp \( S.ABC \) có cạnh bên \( SA \) vuông góc với mặt phẳng đáy \( (ABC) \) và tam giác \( ABC \) vuông tại \( B \). Biết \( SA = 4, AB = 3 \) và \( BC = 4 \). Tính khoảng cách từ điểm \( A \) đến mặt phẳng \( (SBC) \) (kết quả viết dưới dạng số thập phân).</div>
-            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="04iM">
-            <div class="explanation">
-                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
-                Đây là bài toán dựng khoảng cách kinh điển: "Từ chân đường cao A, kẻ đường vuông góc lên cạnh đối diện dưới đáy".<br>
-                <b>Bước 1: Dựng hình chiếu:</b><br>
-                Kẻ \( AH \) vuông góc với \( SB \) tại \( H \).<br>
-                Ta có \( BC \perp AB \) (do tam giác vuông tại B) và \( BC \perp SA \) (do \( SA \perp \) đáy). Từ đó \( BC \perp (SAB) \), suy ra \( BC \perp AH \).<br>
-                Vì \( AH \) vuông góc với cả \( SB \) và \( BC \), nên \( AH \perp (SBC) \). Độ dài \( AH \) chính là khoảng cách từ A đến mặt phẳng (SBC).<br>
-                <b>Bước 2: Tính độ dài AH:</b><br>
-                Xét tam giác \( SAB \) vuông tại A, đường cao \( AH \), áp dụng hệ thức lượng:<br>
-                \( AH = \frac{SA \times AB}{\sqrt{SA^2 + AB^2}} \)<br>
-                Thay số vào: \( AH = \frac{4 \times 3}{\sqrt{4^2 + 3^2}} = \frac{12}{\sqrt{16+9}} = \frac{12}{5} \).<br>
-                Đổi \( \frac{12}{5} \) ra số thập phân ta được 2.4.
+                <b>Bước 1:</b> Tính diện tích đáy. Đáy là tam giác vuông tại B, nên diện tích là một nửa tích hai cạnh góc vuông:<br>
+                \( S_{\text{đáy}} = \frac{1}{2} \times BA \times BC = \frac{1}{2} \times 2 \times 2 = 2 \).<br>
+                <b>Bước 2:</b> Thể tích khối chóp tính bằng công thức: \( V = \frac{1}{3} \times S_{\text{đáy}} \times \text{cao} \).<br>
+                \( V = \frac{1}{3} \times 2 \times 3 = 2 \).<br>
+                Đáp án là <b>2</b>.
             </div>
         </div>
 
@@ -469,21 +409,21 @@ let timerInterval;
 
 // ---- TÍNH NĂNG CHỐNG GIAN LẬN (CHỐNG THOÁT MÀN HÌNH/CHUYỂN TAB) ----
 let viPham = 0; // Biến đếm số lần vi phạm
-const maxViPham = 3; // Giới hạn số lần cho phép vi phạm
+const maxViPham = 3; 
 
 document.addEventListener("visibilitychange", function() {
     let btnNopBai = document.querySelector('.submit-btn');
     let daNopBai = btnNopBai && btnNopBai.style.display === 'none';
 
     if (document.hidden && !daNopBai) {
-        viPham++;
+        viPham++; 
     } 
     else if (!document.hidden && !daNopBai) {
         if (viPham < maxViPham) {
             alert(`⚠️ CẢNH BÁO GIAN LẬN (${viPham}/${maxViPham}):\nHệ thống phát hiện bạn vừa thoát khỏi màn hình làm bài hoặc chuyển sang thẻ khác!\nNếu vi phạm đủ ${maxViPham} lần, bài thi sẽ bị tự động thu ngay lập tức.`);
         } else if (viPham === maxViPham) {
             alert(`🚨 ĐÌNH CHỈ THI:\nBạn đã vi phạm quy chế (thoát màn hình quá ${maxViPham} lần).\nHệ thống tiến hành tự động thu bài!`);
-            tinhDiem(true);
+            tinhDiem(true); 
         }
     }
 });
@@ -553,13 +493,13 @@ function tinhDiem(isAutoSubmit = false) {
         let diem = 0;
         let dungP1 = 0, dungP3 = 0;
 
-        // Chấm Phần 1
+        // Chấm Phần 1 (12 câu * 0.25đ = 3đ)
         document.querySelectorAll('#part1-storage input[type="radio"]:checked').forEach(c => {
             let hash = c.getAttribute('data-hash');
             if (hash && decodeAns(hash) === "true") { diem += 0.25; dungP1++; }
         });
 
-        // Chấm Phần 2
+        // Chấm Phần 2 (2 câu * 1đ = 2đ)
         let p2Cards = document.querySelectorAll('#part2-storage .question-card');
         p2Cards.forEach(card => {
             let dungTrongCau = 0;
@@ -574,7 +514,8 @@ function tinhDiem(isAutoSubmit = false) {
             card.setAttribute('data-correct-count', dungTrongCau);
         });
 
-        // Chấm Phần 3
+        // Chấm Phần 3 (4 câu * 0.5đ = 2đ) -> Tổng điểm sẽ là 7/10 nếu theo cấu trúc này (Do đề gốc chỉ có 2 câu P2 và 4 câu P3)
+        // Hệ thống sẽ tính và in ra số điểm cụ thể.
         document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => {
             let hash = input.getAttribute('data-hash');
             if (hash) {
@@ -592,8 +533,8 @@ function tinhDiem(isAutoSubmit = false) {
         p2Cards.forEach((card, index) => {
             msg += `   + Câu ${index + 1} đúng ${card.getAttribute('data-correct-count')}/4 ý.\n`;
         });
-        msg += `- Phần III: Trả lời đúng ${dungP3}/6 câu.\n\n`;
-        msg += `=> TỔNG ĐIỂM CỦA BẠN LÀ: ${diem.toFixed(2)} / 10.00\n\nBạn có thể đóng hộp thoại này để XEM LỜI GIẢI CHI TIẾT bên dưới các câu hỏi!`;
+        msg += `- Phần III: Trả lời đúng ${dungP3}/4 câu.\n\n`;
+        msg += `=> TỔNG ĐIỂM CỦA BẠN LÀ: ${diem.toFixed(2)} / 7.00\n(Thang điểm 7 do đề kiểm tra ngắn)\n\nBạn có thể đóng hộp thoại này để XEM LỜI GIẢI CHI TIẾT bên dưới các câu hỏi!`;
 
         document.querySelector('.submit-btn').style.display = 'none';
         
@@ -640,33 +581,23 @@ function tinhDiem(isAutoSubmit = false) {
         document.querySelectorAll('.option-item').forEach(label => label.classList.add('disabled-option'));
         document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => input.disabled = true);
 
-        // ================= ĐOẠN CODE GỬI ĐIỂM MỚI =================
+        // Gửi điểm ngầm nếu anh có link Google Sheets (có thể thay đổi URL bên dưới)
         let maDe = document.getElementById('ma-de-id').innerText;
-        
-        // Link Google Apps Script (Anh hãy chắc chắn không có dấu cách nào lọt vào giữa chuỗi này)
         let urlWebAPP = "https://script.google.com/macros/s/AKfycbzr0AZasU8vebFHokf14niSXgC940oSVZsiajo6i3wjx1Rkxt5H7eJmXWaUxB29SPEL/exec"; 
+        let linkGuiDiem = `${urlWebAPP}?tenDe=TranPhu_OnTapChuyenDe&hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${maDe}&diem=${diem.toFixed(2)}`;
         
-        // Đã xóa tham số tenDe= để cấu trúc link giống hệt bản cũ của anh
-        let linkGuiDiem = `${urlWebAPP}?hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${encodeURIComponent(maDe)}&diem=${diem.toFixed(2)}`;
+        let sendData = new Image();
+        sendData.src = linkGuiDiem;
         
-        // Dùng phương thức fetch thay cho Image() để đảm bảo request luôn được gửi đi
-        fetch(linkGuiDiem, { mode: 'no-cors' })
-            .then(() => console.log("Gửi điểm thành công"))
-            .catch(err => console.error("Lỗi gửi điểm: ", err));
-        
-        // Tăng thời gian chờ lên 1.5 giây (1500ms) để dữ liệu chắc chắn đã bay về Sheet trước khi hiện Alert chặn màn hình
         setTimeout(() => {
             alert(msg);
             document.querySelectorAll('.explanation').forEach(el => {
                 el.style.display = 'block';
             });
-        }, 1500);
-        // ==========================================================
+        }, 1000);
             
     } catch (err) {
         alert("Lỗi hệ thống: " + err.message);
-    }
-}
     }
 }
 </script>
