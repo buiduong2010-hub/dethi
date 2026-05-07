@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ĐỀ ÔN TẬP CHUYÊN ĐỀ - THPT TRẦN PHÚ</title>
+    <title>ĐỀ ÔN TẬP CHUYÊN ĐỀ SỐ 1 - 11 CƠ BẢN</title>
     <script>
         window.MathJax = {
             tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }
@@ -343,7 +343,7 @@
 
         <div class="question-card">
             <div class="q-text">Câu 2. Một đội tình nguyện có 5 học sinh lớp 11 và 7 học sinh lớp 12. Cần chọn ngẫu nhiên 2 học sinh đi trực ban. Xác suất để 2 học sinh được chọn học cùng một khối lớp là bao nhiêu? (Làm tròn kết quả đến 2 chữ số thập phân, ví dụ 0.12).</div>
-            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==wN0CM">
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==wN04CM">
             <div class="explanation">
                 <span class="step-title">Gợi ý cách giải chi tiết:</span><br>
                 <b>Bước 1: Không gian mẫu.</b> Tổng cộng có 12 học sinh, bốc bừa 2 em: \( \Omega = C_{12}^2 = 66 \) cách.<br>
@@ -581,20 +581,28 @@ function tinhDiem(isAutoSubmit = false) {
         document.querySelectorAll('.option-item').forEach(label => label.classList.add('disabled-option'));
         document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => input.disabled = true);
 
-        // Gửi điểm ngầm nếu anh có link Google Sheets (có thể thay đổi URL bên dưới)
+        // ================= ĐOẠN CODE GỬI ĐIỂM CHUẨN =================
         let maDe = document.getElementById('ma-de-id').innerText;
+        
+        // Link Google Apps Script (Đã xóa khoảng trắng bị lỗi)
         let urlWebAPP = "https://script.google.com/macros/s/AKfycbzr0AZasU8vebFHokf14niSXgC940oSVZsiajo6i3wjx1Rkxt5H7eJmXWaUxB29SPEL/exec"; 
-        let linkGuiDiem = `${urlWebAPP}?tenDe=TranPhu_OnTapChuyenDe&hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${maDe}&diem=${diem.toFixed(2)}`;
         
-        let sendData = new Image();
-        sendData.src = linkGuiDiem;
+        // Cấu trúc link gửi điểm (Đã xóa khoảng trắng và tham số tenDe= để tránh xung đột hệ thống của anh)
+        let linkGuiDiem = `${urlWebAPP}?hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${encodeURIComponent(maDe)}&diem=${diem.toFixed(2)}`;
         
+        // Dùng phương thức fetch thay cho Image() để đảm bảo request luôn được gửi đi
+        fetch(linkGuiDiem, { mode: 'no-cors' })
+            .then(() => console.log("Gửi điểm thành công"))
+            .catch(err => console.error("Lỗi gửi điểm: ", err));
+        
+        // Tăng thời gian chờ lên 1.5 giây (1500ms) để dữ liệu chắc chắn đã bay về Sheet trước khi hiện Alert chặn màn hình
         setTimeout(() => {
             alert(msg);
             document.querySelectorAll('.explanation').forEach(el => {
                 el.style.display = 'block';
             });
-        }, 1000);
+        }, 1500);
+        // ==========================================================
             
     } catch (err) {
         alert("Lỗi hệ thống: " + err.message);
