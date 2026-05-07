@@ -838,16 +838,21 @@ function tinhDiem() {
 
         alert(msg);
 // Thay cái link dưới đây bằng link của anh (đuôi VQXe/exec)
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxKLmZC3AI2ieMOfG8DAYi8Vyq2dJ4FATkrJVZxIDaJcgi41ok4UHWv6fWubRFtVQXe/exec'; 
+       // --- ĐOẠN MÃ GỬI ĐIỂM ĐÃ TỐI ƯU ---
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxKLmZC3AI2ieMOfG8DAyi8Vyq2dJ4FATkrJVZxlDaJcgi41ok4UHWv6fWubRFtVQXe/exec'; 
         
         fetch(scriptURL + "?hoTen=" + encodeURIComponent(hoTen) 
                        + "&sbd=" + encodeURIComponent(sbd) 
-                       + "&maDe=" + document.getElementById("ma-de-id").innerText 
+                       + "&maDe=" + encodeURIComponent(document.getElementById("ma-de-id").innerText) 
                        + "&diem=" + diem.toFixed(2), 
-        { method: 'GET' });
-        document.querySelectorAll('.explanation').forEach(el => {
-            el.style.display = 'block';
-        });
+        { 
+            method: 'GET',
+            mode: 'no-cors', // Dòng này cực kỳ quan trọng để vượt qua chặn bảo mật trình duyệt
+            cache: 'no-cache'
+        })
+        .then(() => console.log("Đã gửi điểm thành công!"))
+        .catch(e => console.error("Lỗi kết nối:", e));
+        // ---------------------------------
         
     } catch (err) {
         alert("Lỗi hệ thống: " + err.message);
