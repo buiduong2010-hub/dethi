@@ -837,7 +837,14 @@ function tinhDiem() {
         msg += `=> TỔNG ĐIỂM CỦA EM LÀ: ${diem.toFixed(2)} / 10.00\n\nCác em đóng thông báo này lại để xem Lời giải chi tiết bên dưới mỗi câu nhé!`;
 
         alert(msg);
-
+// Thay cái link dưới đây bằng link của anh (đuôi VQXe/exec)
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxKLmZC3AI2ieMOfG8DAYi8Vyq2dJ4FATkrJVZxIDaJcgi41ok4UHWv6fWubRFtVQXe/exec'; 
+        
+        fetch(scriptURL + "?hoTen=" + encodeURIComponent(hoTen) 
+                       + "&sbd=" + encodeURIComponent(sbd) 
+                       + "&maDe=" + document.getElementById("ma-de-id").innerText 
+                       + "&diem=" + diem.toFixed(2), 
+        { method: 'GET' });
         document.querySelectorAll('.explanation').forEach(el => {
             el.style.display = 'block';
         });
