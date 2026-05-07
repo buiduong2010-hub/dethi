@@ -835,24 +835,26 @@ function tinhDiem() {
         });
         msg += `- Phần III: Em điền đúng ${dungP3}/6 câu.\n\n`;
         msg += `=> TỔNG ĐIỂM CỦA EM LÀ: ${diem.toFixed(2)} / 10.00\n\nCác em đóng thông báo này lại để xem Lời giải chi tiết bên dưới mỗi câu nhé!`;
+alert(msg);
 
-        alert(msg);
-// Thay cái link dưới đây bằng link của anh (đuôi VQXe/exec)
-       // --- ĐOẠN MÃ GỬI ĐIỂM ĐÃ TỐI ƯU ---
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxKLmZC3AI2ieMOfG8DAyi8Vyq2dJ4FATkrJVZxlDaJcgi41ok4UHWv6fWubRFtVQXe/exec'; 
+        // --- ĐOẠN MÃ GỬI ĐIỂM CHẮC CHẮN CHẠY ---
+        var scriptURL = 'https://script.google.com/macros/s/AKfycbxKLmZC3AI2ieMOfG8DAyi8Vyq2dJ4FATkrJVZxlDaJcgi41ok4UHWv6fWubRFtVQXe/exec';
         
-        fetch(scriptURL + "?hoTen=" + encodeURIComponent(hoTen) 
-                       + "&sbd=" + encodeURIComponent(sbd) 
-                       + "&maDe=" + encodeURIComponent(document.getElementById("ma-de-id").innerText) 
-                       + "&diem=" + diem.toFixed(2), 
-        { 
-            method: 'GET',
-            mode: 'no-cors', // Dòng này cực kỳ quan trọng để vượt qua chặn bảo mật trình duyệt
-            cache: 'no-cache'
-        })
-        .then(() => console.log("Đã gửi điểm thành công!"))
-        .catch(e => console.error("Lỗi kết nối:", e));
-        // ---------------------------------
+        var params = "?hoTen=" + encodeURIComponent(hoTen) 
+                   + "&sbd=" + encodeURIComponent(sbd) 
+                   + "&maDe=" + encodeURIComponent(maDe) 
+                   + "&diem=" + encodeURIComponent(tongDiem);
+
+        // Dùng cơ chế gửi ảnh để ép trình duyệt đẩy dữ liệu đi mà không bị chặn
+        var sender = new Image();
+        sender.src = scriptURL + params;
+        
+        console.log("Dữ liệu đã đẩy đi: " + scriptURL + params);
+        // --------------------------------------
+
+        document.querySelectorAll('.explanation').forEach(el => {
+            el.style.display = 'block';
+        });
         
     } catch (err) {
         alert("Lỗi hệ thống: " + err.message);
