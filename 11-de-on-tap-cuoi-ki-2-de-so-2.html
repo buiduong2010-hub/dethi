@@ -385,6 +385,7 @@ tinhDiem(true);
 }
 }, 1000);
 }
+
 // Hàm xử lý khi ấn nút "Kiểm tra câu này"
 function checkSingleQuestion(btn) {
 let card = btn.closest('.question-card');
@@ -464,10 +465,12 @@ clearInterval(timerInterval);
 try {
 let diem = 0;
 let dungP1 = 0, dungP3 = 0;
+// Chấm Phần 1
 document.querySelectorAll('#part1-storage input[type="radio"]:checked').forEach(c => {
 let hash = c.getAttribute('data-hash');
 if (hash && decodeAns(hash) === "true") { diem += 0.25; dungP1++; }
 });
+// Chấm Phần 2
 let p2Cards = document.querySelectorAll('#part2-storage .question-card');
 p2Cards.forEach(card => {
 let dungTrongCau = 0;
@@ -481,6 +484,7 @@ else if (dungTrongCau === 3) diem += 0.5;
 else if (dungTrongCau === 4) diem += 1.0;
 card.setAttribute('data-correct-count', dungTrongCau);
 });
+// Chấm Phần 3
 document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => {
 let hash = input.getAttribute('data-hash');
 if (hash) {
@@ -491,6 +495,7 @@ let cleanTrueAns = trueAns.replace(',', '.');
 if (userAns !== "" && userAns === cleanTrueAns) { diem += 0.5; dungP3++; }
 }
 });
+
 let thiSinhInfo = `Thí sinh: ${hoTen} - SBD: ${sbd}\n---------------------------------------\n`;
 let msg = `KẾT QUẢ BÀI LÀM:\n\n${thiSinhInfo}`;
 msg += `- Phần I: Trả lời đúng ${dungP1}/12 câu.\n`;
@@ -503,6 +508,7 @@ msg += `=> TỔNG ĐIỂM CỦA BẠN LÀ: ${diem.toFixed(2)} / 7.00\n(Thang đi
 
 document.querySelector('.submit-btn').style.display = 'none';
 document.querySelectorAll('.check-btn').forEach(btn => btn.style.display = 'none');
+
 document.querySelectorAll('input[type="radio"]:checked').forEach(c => {
 let card = c.closest('.question-card');
 if (card && card.getAttribute('data-checked') === 'true') return;
@@ -512,6 +518,7 @@ if (!hash || decodeAns(hash) !== "true") {
 if (parentLabel) parentLabel.classList.add('wrong-highlight');
 }
 });
+
 document.querySelectorAll('input[type="radio"]').forEach(c => {
 let card = c.closest('.question-card');
 if (card && card.getAttribute('data-checked') === 'true') return;
@@ -521,9 +528,10 @@ let parentLabel = c.closest('.option-item') || c.closest('label');
 if (parentLabel) parentLabel.classList.add('correct-highlight');
 }
 });
+
 document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => {
 let card = input.closest('.question-card');
-if (card && card.getAttribute('data-checked') === 'true') return;
+if (card && card.getAttribute('data-checked') === 'true') return; 
 let hash = input.getAttribute('data-hash');
 if (hash) {
 let trueAns = decodeAns(hash);
@@ -541,20 +549,21 @@ input.classList.add('correct-input');
 }
 }
 });
+
 document.querySelectorAll('input[type="radio"]').forEach(radio => radio.disabled = true);
 document.querySelectorAll('.option-item').forEach(label => label.classList.add('disabled-option'));
 document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => input.disabled = true);
 
-// ====== ĐOẠN MÃ THÊM VÀO ĐỂ GỬI DỮ LIỆU ĐI ======
+// =========================================================================
+// ====== ĐÂY LÀ ĐOẠN MÃ GỬI ĐIỂM EM ĐÃ THÊM VÀO GIÚP ANH ======
 let maDe = document.getElementById("ma-de-id").innerText;
-// Link mới nhất của bạn đã được gắn vào đây:
 let scriptURL = "https://script.google.com/macros/s/AKfycbys6Sa4iPbuiwr5cZ-rsvaKEmBYLyyQ6rZrHL3Ly9s710_DLHAzfP7KqlTnUeOVFd44/exec";
 let requestUrl = `${scriptURL}?hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${encodeURIComponent(maDe)}&diem=${diem.toFixed(2)}`;
 
 fetch(requestUrl, { mode: 'no-cors' })
-  .then(() => console.log("Đã gửi điểm thành công!"))
-  .catch(error => console.error("Lỗi:", error));
-// ================================================
+  .then(() => console.log("Đã gửi điểm thành công về Google Sheets!"))
+  .catch(error => console.error("Lỗi khi gửi dữ liệu:", error));
+// =========================================================================
 
 // Hiển thị ngay kết quả và lời giải không cần chờ đợi Web App phản hồi
 alert(msg);
