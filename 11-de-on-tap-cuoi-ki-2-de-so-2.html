@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ĐỀ ÔN TẬP</title>
+<title>ĐỀ ÔN TẬP CHUYÊN ĐỀ - THPT TRẦN PHÚ</title>
 <script>
 window.MathJax = {
 tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }
@@ -547,8 +547,8 @@ document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => 
 
 // ====== ĐOẠN MÃ THÊM VÀO ĐỂ GỬI DỮ LIỆU ĐI ======
 let maDe = document.getElementById("ma-de-id").innerText;
-// Lưu ý: Nếu bạn tạo link web app mới, hãy đổi link bên dưới thành link /exec mới của bạn
-let scriptURL = "https://script.google.com/macros/s/AKfycbxKLmZC3AI2ieMOfG8DAyi8Vyq2dJ4FATkrJVZxlDaJcgi41ok4UHWv6fWubRFtVQXe/exec";
+// Link mới nhất của bạn đã được gắn vào đây:
+let scriptURL = "https://script.google.com/macros/s/AKfycbys6Sa4iPbuiwr5cZ-rsvaKEmBYLyyQ6rZrHL3Ly9s710_DLHAzfP7KqlTnUeOVFd44/exec";
 let requestUrl = `${scriptURL}?hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${encodeURIComponent(maDe)}&diem=${diem.toFixed(2)}`;
 
 fetch(requestUrl, { mode: 'no-cors' })
