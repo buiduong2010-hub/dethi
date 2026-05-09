@@ -386,7 +386,6 @@ tinhDiem(true);
 }, 1000);
 }
 
-// Hàm xử lý khi ấn nút "Kiểm tra câu này"
 function checkSingleQuestion(btn) {
 let card = btn.closest('.question-card');
 card.setAttribute('data-checked', 'true');
@@ -465,12 +464,12 @@ clearInterval(timerInterval);
 try {
 let diem = 0;
 let dungP1 = 0, dungP3 = 0;
-// Chấm Phần 1
+
 document.querySelectorAll('#part1-storage input[type="radio"]:checked').forEach(c => {
 let hash = c.getAttribute('data-hash');
 if (hash && decodeAns(hash) === "true") { diem += 0.25; dungP1++; }
 });
-// Chấm Phần 2
+
 let p2Cards = document.querySelectorAll('#part2-storage .question-card');
 p2Cards.forEach(card => {
 let dungTrongCau = 0;
@@ -484,7 +483,7 @@ else if (dungTrongCau === 3) diem += 0.5;
 else if (dungTrongCau === 4) diem += 1.0;
 card.setAttribute('data-correct-count', dungTrongCau);
 });
-// Chấm Phần 3
+
 document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => {
 let hash = input.getAttribute('data-hash');
 if (hash) {
@@ -555,7 +554,7 @@ document.querySelectorAll('.option-item').forEach(label => label.classList.add('
 document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => input.disabled = true);
 
 // =========================================================================
-// ====== ĐÂY LÀ ĐOẠN MÃ GỬI ĐIỂM EM ĐÃ THÊM VÀO GIÚP ANH ======
+// MÃ GỬI ĐIỂM (ĐÃ CHÈN SẴN LINK MỚI NHẤT)
 let maDe = document.getElementById("ma-de-id").innerText;
 let scriptURL = "https://script.google.com/macros/s/AKfycbys6Sa4iPbuiwr5cZ-rsvaKEmBYLyyQ6rZrHL3Ly9s710_DLHAzfP7KqlTnUeOVFd44/exec";
 let requestUrl = `${scriptURL}?hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${encodeURIComponent(maDe)}&diem=${diem.toFixed(2)}`;
@@ -565,7 +564,6 @@ fetch(requestUrl, { mode: 'no-cors' })
   .catch(error => console.error("Lỗi khi gửi dữ liệu:", error));
 // =========================================================================
 
-// Hiển thị ngay kết quả và lời giải không cần chờ đợi Web App phản hồi
 alert(msg);
 document.querySelectorAll('.explanation').forEach(el => {
 el.style.display = 'block';
