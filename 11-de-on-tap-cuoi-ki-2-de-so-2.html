@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ĐỀ ÔN TẬP CHUYÊN ĐỀ - THPT TRẦN PHÚ</title>
+<title>ĐỀ ÔN TẬP </title>
 <script>
 window.MathJax = {
 tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }
@@ -34,7 +34,6 @@ mjx-container { display: inline-block !important; white-space: nowrap !important
 .choice-group { display: flex; gap: 15px; justify-content: flex-end; }
 .short-answer-input { width: 100%; max-width: 250px; padding: 12px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 1.1rem; margin-top: 10px; outline: none; transition: 0.3s border-color; font-weight: bold; color: #1a73e8; }
 .short-answer-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }
-/* CSS cho Nút kiểm tra từng câu */
 .check-btn { background-color: #ff9800; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 1rem; cursor: pointer; margin-top: 15px; margin-bottom: 15px; font-weight: bold; transition: 0.3s; display: inline-block; }
 .check-btn:hover { background-color: #e65100; }
 .submit-btn { width: 100%; padding: 20px; background: #28a745; color: white; border: none; border-radius: 12px; font-size: 1.3rem; font-weight: bold; cursor: pointer; margin-top: 40px; transition: 0.3s; }
@@ -42,9 +41,7 @@ mjx-container { display: inline-block !important; white-space: nowrap !important
 .explanation { margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid #ff9800; border-radius: 8px; display: none; font-size: 1.05rem; color: #333; line-height: 1.7; box-shadow: inset 0 0 10px rgba(0,0,0,0.03); }
 .step-title { color: #d84315; font-weight: bold; text-transform: uppercase; }
 .formula-box { background: #fff3e0; padding: 5px 10px; border-radius: 5px; display: inline-block; font-weight: bold; color: #e65100; margin: 5px 0; border: 1px dashed #ffb74d;}
-/* Cảnh báo và đếm ngược */
 .timer-box { position: fixed; top: 20px; left: 20px; background: #e53935; color: white; padding: 10px 20px; font-size: 1.2rem; font-weight: bold; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; border: 2px solid #b71c1c; transition: background-color 0.5s; }
-/* Highlight */
 .correct-highlight { background-color: #d4edda !important; border: 2px solid #28a745 !important; color: #155724 !important; font-weight: bold; border-radius: 8px; }
 .tf-table label.correct-highlight { padding: 4px 10px; border-radius: 6px; }
 .correct-input { background-color: #d4edda !important; border: 2px solid #28a745 !important; color: #155724 !important; }
@@ -60,7 +57,7 @@ input:disabled { cursor: not-allowed; opacity: 0.8; }
 <div class="quiz-container">
 <div class="exam-code">Mã đề: <span id="ma-de-id">O.T.T.P</span></div>
 <div class="header-box">
-<h1 style="margin:10px 0; color:#1a73e8; font-size: 1.7rem;">ĐỀ ÔN TẬP <br>11 CƠ BẢN</h1>
+<h1 style="margin:10px 0; color:#1a73e8; font-size: 1.7rem;">ĐỀ ÔN TẬP <br>11 SỬ</h1>
 <p>Môn thi: <b>TOÁN 11</b> - Cấu trúc đề 2025</p>
 <p><i>Thời gian làm bài: 90 phút (Không kể thời gian phát đề)</i></p>
 <div class="student-info">
@@ -356,7 +353,6 @@ Tốc độ thay đổi tức thời chính là đạo hàm của hàm số tạ
 <button class="submit-btn" onclick="tinhDiem()">NỘP BÀI XEM ĐIỂM VÀ LỜI GIẢI</button>
 </div>
 <script>
-// Hàm giải mã đáp án an toàn chống gian lận
 function decodeAns(str) {
 try {
 return atob(str.split('').reverse().join(''));
@@ -365,7 +361,7 @@ console.error("Mã bảo vệ bị lỗi, bỏ qua câu này.");
 return "";
 }
 }
-let timeRemaining = 90 * 60; // 90 phút = 5400 giây
+let timeRemaining = 90 * 60; 
 let timerInterval;
 function startTimer() {
 let timerDisplay = document.getElementById("countdown-timer");
@@ -388,8 +384,6 @@ tinhDiem(true);
 }
 }, 1000);
 }
-
-// Hàm xử lý khi ấn nút "Kiểm tra câu này"
 function checkSingleQuestion(btn) {
 let card = btn.closest('.question-card');
 card.setAttribute('data-checked', 'true');
@@ -468,12 +462,10 @@ clearInterval(timerInterval);
 try {
 let diem = 0;
 let dungP1 = 0, dungP3 = 0;
-
 document.querySelectorAll('#part1-storage input[type="radio"]:checked').forEach(c => {
 let hash = c.getAttribute('data-hash');
 if (hash && decodeAns(hash) === "true") { diem += 0.25; dungP1++; }
 });
-
 let p2Cards = document.querySelectorAll('#part2-storage .question-card');
 p2Cards.forEach(card => {
 let dungTrongCau = 0;
@@ -487,7 +479,6 @@ else if (dungTrongCau === 3) diem += 0.5;
 else if (dungTrongCau === 4) diem += 1.0;
 card.setAttribute('data-correct-count', dungTrongCau);
 });
-
 document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => {
 let hash = input.getAttribute('data-hash');
 if (hash) {
@@ -511,7 +502,6 @@ msg += `=> TỔNG ĐIỂM CỦA BẠN LÀ: ${diem.toFixed(2)} / 7.00\n(Thang đi
 
 document.querySelector('.submit-btn').style.display = 'none';
 document.querySelectorAll('.check-btn').forEach(btn => btn.style.display = 'none');
-
 document.querySelectorAll('input[type="radio"]:checked').forEach(c => {
 let card = c.closest('.question-card');
 if (card && card.getAttribute('data-checked') === 'true') return;
@@ -521,7 +511,6 @@ if (!hash || decodeAns(hash) !== "true") {
 if (parentLabel) parentLabel.classList.add('wrong-highlight');
 }
 });
-
 document.querySelectorAll('input[type="radio"]').forEach(c => {
 let card = c.closest('.question-card');
 if (card && card.getAttribute('data-checked') === 'true') return;
@@ -531,10 +520,9 @@ let parentLabel = c.closest('.option-item') || c.closest('label');
 if (parentLabel) parentLabel.classList.add('correct-highlight');
 }
 });
-
 document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => {
 let card = input.closest('.question-card');
-if (card && card.getAttribute('data-checked') === 'true') return; 
+if (card && card.getAttribute('data-checked') === 'true') return;
 let hash = input.getAttribute('data-hash');
 if (hash) {
 let trueAns = decodeAns(hash);
@@ -552,15 +540,14 @@ input.classList.add('correct-input');
 }
 }
 });
-
 document.querySelectorAll('input[type="radio"]').forEach(radio => radio.disabled = true);
 document.querySelectorAll('.option-item').forEach(label => label.classList.add('disabled-option'));
 document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => input.disabled = true);
 
 // =========================================================================
-// MÃ GỬI ĐIỂM (ĐÃ CHÈN SẴN LINK MỚI NHẤT)
+// MÃ GỬI ĐIỂM VỚI LINK MỚI NHẤT
 let maDe = document.getElementById("ma-de-id").innerText;
-let scriptURL = "https://script.google.com/macros/s/AKfycbzzrF74X_ipdoIWa_1FDn4cuKwWUY6a5mdt2Xqb8nnTnmgeCbaeIzr-amr-WJbtB4O1/exec";
+let scriptURL = "https://script.google.com/macros/s/AKfycbyY9cHLohVai4qDdrBLXwmMQ6OnobQ_c6spuWNIfWB6bvyrKfJYJ56MjqOHmGhW7rQN/exec";
 let requestUrl = `${scriptURL}?hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${encodeURIComponent(maDe)}&diem=${diem.toFixed(2)}`;
 
 fetch(requestUrl, { mode: 'no-cors' })
