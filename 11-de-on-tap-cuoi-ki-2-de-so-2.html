@@ -69,7 +69,6 @@
         </div>     
     </div>      
 
-    <!-- PHẦN I -->     
     <div class="part-title">PHẦN I. Câu trắc nghiệm nhiều phương án lựa chọn (12 câu)</div>     
     <div id="part1-storage" class="storage">          
 
@@ -267,7 +266,6 @@
         </div>      
     </div>      
 
-    <!-- PHẦN II -->     
     <div class="part-title">PHẦN II. Câu trắc nghiệm Đúng - Sai (2 câu)</div>     
     <div id="part2-storage" class="storage">          
 
@@ -310,7 +308,6 @@
         </div>      
     </div>      
 
-    <!-- PHẦN III -->     
     <div class="part-title">PHẦN III. Câu trắc nghiệm trả lời ngắn (4 câu)</div>     
     <div id="part3-storage" class="storage">                  
 
@@ -529,7 +526,7 @@ function tinhDiem(isAutoSubmit = false) {
             if (hash) {                 
                 let trueAns = decodeAns(hash);                 
                 
-                // ĐÃ SỬA LỖI Ở ĐÂY: Lấy giá trị chuỗi hợp lệ trước khi so sánh
+                // Lấy giá trị chuỗi thô hợp lệ trước khi so sánh
                 let userAnsRaw = input.value.trim().split(" ")[0]; 
                 let userAns = userAnsRaw ? userAnsRaw.replace(',', '.') : "";               
                 let cleanTrueAns = trueAns.replace(',', '.');                 
@@ -593,12 +590,19 @@ function tinhDiem(isAutoSubmit = false) {
         document.querySelectorAll('.option-item').forEach(label => label.classList.add('disabled-option'));         
         document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => input.disabled = true);          
 
+        // -------------------------------------------------------------
+        // TÍCH HỢP GỬI ĐIỂM NGẦM VỀ GOOGLE SHEETS
+        // -------------------------------------------------------------
         let maDe = document.getElementById('ma-de-id').innerText;         
         let urlWebAPP = "https://script.google.com/macros/s/AKfycbxkACo6fRAOFbyC8Gj2ar9j8TLrrCqWnlrANAmciOwHemwBE27ogDTGSTj2swKr9Vc/exec";          
+
         let linkGuiDiem = `${urlWebAPP}?tenDe=DeOnTap_So2_Toan11&hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${maDe}&diem=${diem.toFixed(2)}`;                  
         
-        let sendData = new Image();         
-        sendData.src = linkGuiDiem;
+        // Dùng fetch với mode no-cors để đảm bảo dữ liệu được gửi đi chắc chắn nhất
+        fetch(linkGuiDiem, { mode: 'no-cors' })
+            .then(() => console.log("Gửi điểm thành công"))
+            .catch(err => console.log("Lỗi gửi điểm:", err));
+        // -------------------------------------------------------------
 
         setTimeout(() => {             
             alert(msg);             
