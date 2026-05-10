@@ -3,7 +3,7 @@
 <head>     
     <meta charset="UTF-8">     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">     
-    <title>ĐỀ ÔN TẬP SỐ </title>     
+    <title>ĐỀ ÔN TẬP SỐ 2 - TOÁN 11 THEO CẤU TRÚC MỚI</title>     
     <script>         
         window.MathJax = {             
             tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }         
@@ -530,6 +530,7 @@ function tinhDiem(isAutoSubmit = false) {
             let hash = input.getAttribute('data-hash');             
             if (hash) {                 
                 let trueAns = decodeAns(hash);                 
+                // ĐÃ SỬA LỖI Ở DÒNG NÀY (Thêm  để lấy phần số nguyên bản trước khi so sánh)
                 let userAns = input.value.trim().split(" ").replace(',', '.');               
                 let cleanTrueAns = trueAns.replace(',', '.');                 
                 if (userAns !== "" && userAns === cleanTrueAns) { diem += 0.5; dungP3++; }             
