@@ -1,0 +1,485 @@
+<!DOCTYPE html> 
+<html lang="vi"> 
+<head>     
+    <meta charset="UTF-8">     
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">     
+    <title>CHUYÊN ĐỀ TỐI ƯU HÓA DOANH THU VÀ LỢI NHUẬN</title>     
+    <script>         
+        window.MathJax = {             
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }         
+        };     
+    </script>     
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>     
+    <style>         
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; padding: 20px; display: flex; flex-direction: column; align-items: center; }         
+        .quiz-container { width: 100%; max-width: 850px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; border-top: 8px solid #1a73e8; }         
+        .exam-code { position: absolute; top: 20px; right: 20px; border: 2px solid #333; padding: 5px 15px; font-weight: bold; background: #fff; }         
+        .header-box { text-align: center; margin-bottom: 30px; border-bottom: 2px dashed #ddd; padding-bottom: 25px; }         
+        .student-info { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }         
+        .info-input { padding: 10px 15px; border: 2px solid #ccc; border-radius: 8px; font-size: 1.05rem; width: 220px; outline: none; transition: 0.3s border-color; font-family: inherit; }         
+        .info-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }         
+        .part-title { background: #1a73e8; color: white; padding: 12px; border-radius: 8px; margin: 35px 0 20px 0; font-weight: bold; text-transform: uppercase; }         
+        .storage { counter-reset: cauNum; min-height: 100px; }         
+        .question-card { background: #fff; padding: 22px; border: 1px solid #eee; border-radius: 12px; margin-bottom: 25px; display: block; }         
+        .q-text { font-weight: bold; font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; line-height: 1.6; }         
+        .q-text::before { counter-increment: cauNum; content: "Câu " counter(cauNum) ": "; color: #1a73e8; }         
+        mjx-container { display: inline-block !important; white-space: nowrap !important; vertical-align: middle; }         
+        .short-answer-input { width: 100%; max-width: 250px; padding: 12px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 1.1rem; margin-top: 10px; outline: none; transition: 0.3s border-color; font-weight: bold; color: #1a73e8; }         
+        .short-answer-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }         
+        
+        /* Nút kiểm tra từng câu */
+        .check-btn { background-color: #ff9800; color: white; border: none; padding: 10px 18px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s; display: inline-block; }
+        .check-btn:hover { background-color: #e65100; }
+
+        .submit-btn { width: 100%; padding: 20px; background: #28a745; color: white; border: none; border-radius: 12px; font-size: 1.3rem; font-weight: bold; cursor: pointer; margin-top: 40px; transition: 0.3s; }         
+        .submit-btn:hover { background: #218838; }         
+        .explanation { margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid #ff9800; border-radius: 8px; display: none; font-size: 1.05rem; color: #333; line-height: 1.7; box-shadow: inset 0 0 10px rgba(0,0,0,0.03); }         
+        .step-title { color: #d84315; font-weight: bold; text-transform: uppercase; }         
+        .formula-box { background: #fff3e0; padding: 5px 10px; border-radius: 5px; display: inline-block; font-weight: bold; color: #e65100; margin: 5px 0; border: 1px dashed #ffb74d;}                  
+        .timer-box { position: fixed; top: 20px; left: 20px; background: #e53935; color: white; padding: 10px 20px; font-size: 1.2rem; font-weight: bold; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; border: 2px solid #b71c1c; transition: background-color 0.5s; }          
+        .correct-input { background-color: #d4edda !important; border: 2px solid #28a745 !important; color: #155724 !important; }         
+        .wrong-input { background-color: #f8d7da !important; border: 2px solid #dc3545 !important; color: #721c24 !important; }                  
+        input:disabled { cursor: not-allowed; opacity: 0.8; }         
+    </style> 
+</head> 
+<body>
+
+<div id="countdown-timer" class="timer-box">90:00</div>  
+<div class="quiz-container">     
+    <div class="exam-code">Mã đề: <span id="ma-de-id">O.T.DTLN.TLN</span></div>          
+    <div class="header-box">         
+        <h1 style="margin:10px 0; color:#1a73e8; font-size: 1.7rem;">CHUYÊN ĐỀ LỚP 12 <br>TỐI ƯU HÓA DOANH THU VÀ LỢI NHUẬN</h1>         
+        <p>Luyện tập 100% Cấu trúc Trắc nghiệm Trả lời ngắn</p>         
+        <p><i>Thời gian làm bài: 90 phút (Không kể thời gian phát đề)</i></p>                  
+        <div class="student-info">             
+            <input type="text" id="ho-ten" class="info-input" placeholder="Nhập Họ và tên...">             
+            <input type="text" id="so-bao-danh" class="info-input" placeholder="Lớp">         
+        </div>     
+    </div>      
+
+    <div class="part-title">CÂU TRẮC NGHIỆM TRẢ LỜI NGẮN (20 CÂU)</div>     
+    <div id="part1-storage" class="storage">          
+
+        <!-- Cấp độ 1 -->
+        <div class="question-card">             
+            <div class="q-text">Một cửa hàng buôn giày nhập một đôi với giá là 40 đôla. Cửa hàng ước tính rằng nếu đôi giày được bán với giá \( x \) đôla thì mỗi tháng khách hàng sẽ mua \( 120 - x \) đôi. Hỏi cửa hàng bán một đôi giày giá bao nhiêu đôla thì thu được nhiều lãi nhất?</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="MDg=">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Lợi nhuận khi bán được một đôi giày là \( x - 40 \) (đôla).<br>                 
+                <b>Bước 2:</b> Tổng lợi nhuận thu được mỗi tháng là: \( P(x) = (x - 40)(120 - x) = -x^2 + 160x - 4800 \).<br>                 
+                <b>Bước 3:</b> Hàm số \( P(x) \) là một parabol bề lõm hướng xuống, đạt giá trị lớn nhất tại đỉnh \( x = \frac{-b}{2a} = \frac{-160}{-2} = 80 \). Vậy cần bán giá <b>80</b> đôla.             
+            </div>         
+        </div>          
+
+        <div class="question-card">             
+            <div class="q-text">Giả sử lợi nhuận (tính bằng nghìn đồng) của một quán cà phê nhỏ trong ngày thứ \( t \) của một tháng được cho bởi công thức \( P(t) = -t^2 + 20t + 100 \) (với tháng có 30 ngày). Hỏi trong bao nhiêu ngày của tháng, lợi nhuận của quán cà phê tăng so với ngày liền trước?</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="OQ==">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Lợi nhuận tăng khi tốc độ thay đổi mang dấu dương, tức là \( P'(t) > 0 \).<br>                 
+                <b>Bước 2:</b> Ta có \( P'(t) = -2t + 20 \). Giải bất phương trình: \( -2t + 20 > 0 \Leftrightarrow t < 10 \).<br>                 
+                <b>Bước 3:</b> Do \( t \) là số nguyên dương tính từ ngày đầu tháng nên \( t \in \{1, 2, ..., 9\} \). Có tổng cộng <b>9</b> ngày.             
+            </div>         
+        </div>          
+
+        <div class="question-card">             
+            <div class="q-text">Một công ty tiến hành khai thác 15 giếng dầu, trung bình mỗi giếng dầu chiết xuất được 231 thùng dầu mỗi ngày. Cứ khai thác thêm một giếng thì lượng dầu mỗi giếng chiết xuất được hằng ngày sẽ giảm 7 thùng. Hỏi công ty cần khai thác thêm bao nhiêu giếng để sản lượng dầu chiết xuất lớn nhất?</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="OQ==">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Gọi \( x \) là số giếng khai thác thêm. Tổng số giếng là \( 15 + x \). Lượng dầu mỗi giếng là \( 231 - 7x \).<br>                 
+                <b>Bước 2:</b> Tổng sản lượng: \( Q(x) = (15 + x)(231 - 7x) = -7x^2 + 126x + 3465 \).<br>                 
+                <b>Bước 3:</b> Đạo hàm \( Q'(x) = -14x + 126 = 0 \Leftrightarrow x = 9 \). Đáp án là <b>9</b> giếng.             
+            </div>         
+        </div>
+
+        <div class="question-card">             
+            <div class="q-text">Một cửa hàng bán tạp chí với giá 20 nghìn đồng/cuốn. Chi phí xuất bản \( x \) cuốn tạp chí là \( C(x) = 0,0001x^2 - 0,2x + 10000 \) (vạn đồng). Phí phát hành cho mỗi cuốn là 4 nghìn đồng. Nhận được 5 triệu đồng tiền trợ cấp báo chí. Hãy tính số cuốn tạp chí cần in để thu được lãi nhiều nhất.</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="MDAwOQ==">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Đổi đơn vị về vạn đồng. Giá bán 2 vạn, phí phát hành 0,4 vạn, trợ cấp 500 vạn.<br>                 
+                <b>Bước 2:</b> Doanh thu \( R(x) = 2x + 500 \). Tổng chi phí \( T(x) = C(x) + 0,4x = 0,0001x^2 + 0,2x + 10000 \).<br>                 
+                <b>Bước 3:</b> Lợi nhuận \( P(x) = R(x) - T(x) = -0,0001x^2 + 1,8x - 9500 \).<br>                 
+                <b>Bước 4:</b> Đạo hàm \( P'(x) = -0,0002x + 1,8 = 0 \Leftrightarrow x = 9000 \). Đáp án là <b>9000</b>.             
+            </div>         
+        </div>          
+
+        <!-- Cấp độ 2 -->
+        <div class="question-card">             
+            <div class="q-text">Để gây quỹ, câu lạc bộ bán thực đơn 1 (30 nghìn đồng, 2 cốc chanh và 1 túi khoai), thực đơn 2 (50 nghìn đồng, 3 cốc chanh và 2 túi khoai). Chỉ có tối đa 165 cốc chanh và 100 túi khoai. Doanh thu lớn nhất có thể là bao nhiêu nghìn đồng?</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="MDU2Mg==">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Đặt \( x, y \) là số suất TĐ1 và TĐ2. Hệ điều kiện: \( 2x + 3y \le 165 \) và \( x + 2y \le 100 \).<br>                 
+                <b>Bước 2:</b> Mục tiêu cần lớn nhất: \( F(x,y) = 30x + 50y \).<br>                 
+                <b>Bước 3:</b> Giao điểm của hai đường thẳng biên là \( x = 30, y = 35 \). Thay vào F ta được \( 30(30) + 50(35) = 2650 \). Đáp án là <b>2650</b>.             
+            </div>         
+        </div>          
+
+        <div class="question-card">             
+            <div class="q-text">Cơ sở sản xuất loại I (cần 1 tấn nguyên liệu A, 0,5 tấn B, lãi 6 triệu) và loại II (cần 0,5 tấn A, 0,75 tấn B, lãi 7 triệu). Hiện có 40 tấn A và 30 tấn B. Số tiền lãi lớn nhất cơ sở thu về là bao nhiêu triệu đồng?</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="MDIz">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Hệ bất phương trình ràng buộc: \( x + 0,5y \le 40 \) và \( 0,5x + 0,75y \le 30 \).<br>                 
+                <b>Bước 2:</b> Hàm mục tiêu \( F = 6x + 7y \).<br>                 
+                <b>Bước 3:</b> Giải hệ tìm giao điểm miền nghiệm được \( x = 30, y = 20 \). Tiền lãi cực đại = \( 6(30) + 7(20) = 320 \). Đáp án là <b>320</b>.             
+            </div>         
+        </div>          
+
+        <div class="question-card">             
+            <div class="q-text">Một học sinh làm Gấu bông len (6 giờ, lãi 180 nghìn) và Túi len (4 giờ, lãi 140 nghìn). Tối đa 36 giờ/tuần. Số lượng Túi len không hơn Gấu bông quá 1 cái, tổng sản phẩm tối đa 7 cái. Số tiền lãi lớn nhất có thể thu được trong một tuần là bao nhiêu nghìn đồng?</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="MDQxMQ==">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Điều kiện: \( 6x + 4y \le 36 \); \( y - x \le 1 \); \( x + y \le 7 \). Hàm lợi nhuận \( L = 180x + 140y \).<br>                 
+                <b>Bước 2:</b> Xét các đỉnh của đa giác miền nghiệm, tọa độ \( (x=4, y=3) \) thỏa mãn tất cả điều kiện.<br>                 
+                <b>Bước 3:</b> Lợi nhuận cực đại = \( 180(4) + 140(3) = 1140 \). Đáp án là <b>1140</b>.             
+            </div>         
+        </div>
+
+        <div class="question-card">             
+            <div class="q-text">Lợi nhuận thu được \( P \) (nghìn USD) khi dùng số tiền \( x \) (nghìn USD) chi cho quảng cáo là \( P(x) = -0,1x^3 + 0,6x^2 + 10x - 3 \) với \( x \ge 0 \). Tính lợi nhuận tối đa xấp xỉ đạt được (làm tròn đến số nguyên, đơn vị nghìn USD).</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="NzU=">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Tính đạo hàm \( P'(x) = -0,3x^2 + 1,2x + 10 \).<br>                 
+                <b>Bước 2:</b> Cho \( P'(x) = 0 \Leftrightarrow x \approx 7,12 \).<br>                 
+                <b>Bước 3:</b> Thay giá trị \( x \approx 7,12 \) vào phương trình \( P(x) \) để tìm đỉnh lợi nhuận sẽ thu được xấp xỉ 57 nghìn USD. Đáp án là <b>57</b>.             
+            </div>         
+        </div>          
+
+        <div class="question-card">             
+            <div class="q-text">Nếu chi số tiền \( x \) nghìn USD cho việc quảng cáo thì doanh thu là \( R(x) = -2x^3 + 90x^2 - 1200x + 8000 \) nghìn USD. Hỏi công ty đạt doanh thu tối đa là bao nhiêu nghìn USD?</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="MDAwNA==">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Tính đạo hàm \( R'(x) = -6x^2 + 180x - 1200 \).<br>                 
+                <b>Bước 2:</b> Giải \( R'(x) = 0 \Leftrightarrow x = 10 \) hoặc \( x = 20 \). Cực đại xảy ra tại \( x = 20 \).<br>                 
+                <b>Bước 3:</b> Tính giá trị tại \( x = 20 \): \( R(20) = -16000 + 36000 - 24000 + 8000 = 4000 \). Đáp án là <b>4000</b>.             
+            </div>         
+        </div>
+
+        <div class="question-card">             
+            <div class="q-text">Doanh thu nhận được khi bán \( x \) sản phẩm là \( F(x) = 2000x - x^2 \) (nghìn đồng). Chi phí sản xuất bình quân cho một sản phẩm là \( G(x) = x + 1440 + \frac{50}{x} \) (nghìn đồng). Lợi nhuận thu được lớn nhất bằng bao nhiêu nghìn đồng?</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="MDUxOTM=">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Tổng chi phí sản xuất: \( C(x) = x \cdot G(x) = x^2 + 1440x + 50 \).<br>                 
+                <b>Bước 2:</b> Lợi nhuận \( P(x) = F(x) - C(x) = -2x^2 + 560x - 50 \).<br>                 
+                <b>Bước 3:</b> Đạt giá trị cực đại tại đỉnh parabol: \( x = \frac{-560}{-4} = 140 \). Thay \( x=140 \) vào, \( P(140) = 39150 \). Đáp án là <b>39150</b>.             
+            </div>         
+        </div>          
+
+        <!-- Cấp độ 3 -->
+        <div class="question-card">             
+            <div class="q-text">Cửa hàng bán thịt gà mua vào 120 nghìn/kg, đang bán 150 nghìn/kg và bán được 1000 kg/tháng. Nếu giảm giá 1 nghìn/kg thì lượng bán tăng thêm 50 kg. Phải định giá bán mới là bao nhiêu nghìn đồng/kg để lợi nhuận cao nhất?</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="NTQx">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Gọi \( x \) là mức giảm giá (nghìn đồng). Lợi nhuận 1kg lúc này là \( 30 - x \). Sản lượng bán là \( 1000 + 50x \).<br>                 
+                <b>Bước 2:</b> Tổng lợi nhuận \( L(x) = (30 - x)(1000 + 50x) = -50x^2 + 500x + 30000 \).<br>                 
+                <b>Bước 3:</b> Đạt giá trị cao nhất tại đỉnh \( x = 5 \). Giá bán mới tối ưu là \( 150 - 5 = 145 \) (nghìn đồng/kg). Đáp án là <b>145</b>.             
+            </div>         
+        </div>
+
+        <div class="question-card">             
+            <div class="q-text">Trang trại mỗi ngày thu 1 tấn (1000 kg) rau. Bán giá 30.000 đồng/kg thì hết. Nếu giá tăng 1.000 đồng/kg thì rau thừa 20 kg (rau thừa bán làm thức ăn giá 2.000 đồng/kg). Nên bán rau với giá bao nhiêu nghìn đồng/kg để thu được nhiều tiền nhất?</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="MTQ=">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Gọi số tiền tăng giá là \( x \) (nghìn). Giá bán mới là \( 30 + x \). Lượng rau bán được là \( 1000 - 20x \), dư \( 20x \) kg.<br>                 
+                <b>Bước 2:</b> Doanh thu \( D(x) = (30 + x)(1000 - 20x) + 2(20x) = -20x^2 + 440x + 30000 \).<br>                 
+                <b>Bước 3:</b> Đạt giá trị lớn nhất tại đỉnh parabol \( x = \frac{-440}{-40} = 11 \). Vậy cần bán với giá \( 30 + 11 = 41 \) nghìn đồng. Đáp án là <b>41</b>.             
+            </div>         
+        </div>
+
+        <div class="question-card">             
+            <div class="q-text">Cơ sở sản xuất luôn bán hết sản phẩm. Giá bán trung bình của một sản phẩm là \( p = 120 - x \) (nghìn đồng). Chi phí sản xuất \( x \) sản phẩm là \( C(x) = x^2 + 30x + 200 \) (nghìn đồng). Cần sản xuất bao nhiêu sản phẩm để lợi nhuận lớn nhất? (Nếu có nhiều giá trị, chọn số lượng nhỏ nhất).</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="MjI=">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Doanh thu là \( R(x) = x(120 - x) \). Lợi nhuận \( P(x) = x(120 - x) - (x^2 + 30x + 200) = -2x^2 + 90x - 200 \).<br>                 
+                <b>Bước 2:</b> Đạo hàm \( P'(x) = -4x + 90 = 0 \Leftrightarrow x = 22,5 \).<br>                 
+                <b>Bước 3:</b> Do \( x \) phải là số nguyên, ta xét \( x = 22 \) và \( x = 23 \). Cả hai đều cho ra lợi nhuận cực đại \( P = 812 \). Chọn giá trị nhỏ hơn là <b>22</b>.             
+            </div>         
+        </div>      
+
+        <div class="question-card">             
+            <div class="q-text">Cơ sở sản xuất nước 20 lít có chi phí cố định 10 triệu/ngày; vỏ bình 15 nghìn; điện nước bảo dưỡng 15 nghìn. Công suất tối đa 1000 bình/ngày. Giá bán 50 nghìn/bình. Sản xuất bao nhiêu bình một ngày để lợi nhuận lớn nhất?</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="MDAwMQ==">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Chi phí biến đổi (biến phí) cho mỗi bình nước là \( 15 + 15 = 30 \) nghìn.<br>                 
+                <b>Bước 2:</b> Lợi nhuận thu được trên mỗi bình nước là \( 50 - 30 = 20 \) nghìn.<br>                 
+                <b>Bước 3:</b> Hàm lợi nhuận tổng \( L(x) = 20x - 10000 \). Do hàm luôn đồng biến nên lợi nhuận cực đại khi sản xuất tối đa công suất, tức là \( x = 1000 \) bình. Đáp án là <b>1000</b>.             
+            </div>         
+        </div>
+
+        <div class="question-card">             
+            <div class="q-text">Cửa hàng bán máy lọc nước có hàm cầu biểu thị là bậc nhất. Giá 5 triệu/chiếc bán được 100 chiếc, giá 4,5 triệu/chiếc bán được 120 chiếc. Chi phí trung bình cho một chiếc khi bán \( x \) chiếc là \( 3 + \frac{50}{x} \) (triệu đồng). Giá bán tối ưu là bao nhiêu triệu đồng? (Dùng dấu chấm cho phần thập phân).</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="NTIuNQ==">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Gọi hàm cầu \( p(x) = ax + b \). Ta giải hệ \( 100a + b = 5 \) và \( 120a + b = 4,5 \). Suy ra \( p(x) = -0,025x + 7,5 \).<br>                 
+                <b>Bước 2:</b> Lợi nhuận \( L(x) = x \cdot p(x) - x(3 + \frac{50}{x}) = -0,025x^2 + 4,5x - 50 \).<br>                 
+                <b>Bước 3:</b> Đạt cực đại tại \( x = \frac{-4,5}{2 \times (-0,025)} = 90 \) chiếc. Thay vào hàm cầu: \( p(90) = -0,025(90) + 7,5 = 5,25 \). Đáp án là <b>5.25</b>.             
+            </div>         
+        </div>
+
+        <!-- Cấp độ 4 -->
+        <div class="question-card">             
+            <div class="q-text">Doanh nghiệp sản xuất có chi phí cố định 200 triệu/tháng, biến phí 1 triệu/SP. Giá bán 3 triệu/SP. Thuế bán dưới 100 SP là 10%; từ 100 đến dưới 300 SP là 8%. Gọi \( x \) là số sản phẩm bán ra, tìm số sản phẩm \( x \) tối thiểu để doanh nghiệp bắt đầu có lãi.</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="NDEx">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Nếu bán dưới 100 SP, thuế 10%. Lợi nhuận \( L = 3x - 10\%(3x) - (x + 200) = 1,7x - 200 > 0 \Rightarrow x > 117,6 \) (Loại vì đang xét \( x < 100 \)).<br>                 
+                <b>Bước 2:</b> Nếu từ 100 đến dưới 300 SP, thuế 8%. Lợi nhuận \( L = 3x - 8\%(3x) - (x + 200) = 1,76x - 200 > 0 \Rightarrow x > 113,6 \).<br>                 
+                <b>Bước 3:</b> Do \( x \) nguyên nên sản lượng bán ra tối thiểu là <b>114</b> sản phẩm.             
+            </div>         
+        </div>
+
+        <div class="question-card">             
+            <div class="q-text">Tại một nhà máy phân bón, lợi nhuận cận biên được ước lượng bởi \( P'(x) = 300 - 3x^2 \) (triệu đồng/tấn). Biết nhà máy lỗ 100 triệu nếu không bán được. Lợi nhuận thu được khi bán 10 tấn sản phẩm là bao nhiêu triệu đồng?</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="MDA5MQ==">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Hàm lợi nhuận là nguyên hàm của lợi nhuận cận biên: \( P(x) = \int (300 - 3x^2)dx = 300x - x^3 + C \).<br>                 
+                <b>Bước 2:</b> Khi không bán được sản phẩm (\( x = 0 \)), \( P(0) = -100 \Rightarrow C = -100 \). Ta có phương trình: \( P(x) = -x^3 + 300x - 100 \).<br>                 
+                <b>Bước 3:</b> Tại \( x = 10 \), \( P(10) = -(10)^3 + 300(10) - 100 = 1900 \). Đáp án là <b>1900</b>.             
+            </div>         
+        </div>
+
+        <div class="question-card">             
+            <div class="q-text">Sản xuất sản phẩm T, với chi phí \( x \) thì làm được \( x^2 + 20x \) SP và tiêu thụ trong nước \( 100 - x \) SP. Phần dư xuất khẩu với giá 40. Lợi nhuận xuất khẩu tỷ lệ với Thuế nộp nhà nước là 4:1. Tính lợi nhuận xuất khẩu thu được khi \( x = 10 \).</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="MDQwNQ==">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Lượng sản phẩm dư xuất khẩu = \( (x^2 + 20x) - (100 - x) = x^2 + 21x - 100 \).<br>                 
+                <b>Bước 2:</b> Vì Lợi nhuận / Thuế = 4 nên Thuế = 1/4 Lợi nhuận. Doanh thu gộp một sản phẩm xuất khẩu mang về là \( 40 - x \).<br>
+                Tổng Lợi nhuận + Thuế = Doanh thu xuất khẩu \(\Rightarrow \frac{5}{4}\) Lợi nhuận = \( (40 - x)(x^2 + 21x - 100) \).<br>                 
+                <b>Bước 3:</b> Khi \( x = 10 \), Doanh thu xuất khẩu = \( (40 - 10)(10^2 + 210 - 100) = 30 \times 210 = 6300 \). <br>
+                Lợi nhuận = \( 6300 \times \frac{4}{5} = 5040 \). Đáp án là <b>5040</b>.             
+            </div>         
+        </div>
+
+        <div class="question-card">             
+            <div class="q-text">Hàm chi phí nguyên vật liệu là \( H(x) = x^2 + 50000x \), được giảm 1% cho 200 sản phẩm đầu và giảm 2% cho lượng vượt mốc. Khi \( x > 200 \), hàm chi phí thực tế có dạng \( H_{true}(x) = ax^2 + bx + c \). Tính giá trị của \( a \). (Dùng dấu chấm cho phần thập phân).</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="ODkuMA==">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Với sản lượng \( x > 200 \), hàm chi phí thực tế tính gộp là: \( H_{true}(x) = 0,99 \times H(200) + 0,98 \times (H(x) - H(200)) \).<br>                 
+                <b>Bước 2:</b> Rút gọn phương trình: \( H_{true}(x) = 0,98 \times H(x) + 0,01 \times H(200) \).<br>                 
+                <b>Bước 3:</b> Thay \( H(x) = x^2 + 50000x \), ta có \( H_{true}(x) = 0,98(x^2 + 50000x) + \text{hằng số} \). Từ đó, hệ số \( a = 0,98 \). Đáp án là <b>0.98</b>.             
+            </div>         
+        </div>
+
+        <div class="question-card">             
+            <div class="q-text">Nhà máy A cung cấp tối đa 200 tấn sản phẩm. Giá bán \( x \) tấn là \( 250 - 0,0002x \) (triệu đồng). Chi phí cố định 150 triệu, biến phí 35 triệu/tấn. Đóng thuế 5% trên doanh thu. Tính lợi nhuận sau thuế lớn nhất thu được trong 1 tháng (đơn vị tỉ đồng, làm tròn 4 chữ số thập phân).</div>             
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="NDI0My4wNA==">             
+            <button class="check-btn" onclick="kiemTraCauHoi(this)">Kiểm tra đáp án</button>
+            <div class="explanation">                 
+                <span class="step-title">Gợi ý cách giải chi tiết:</span><br>                 
+                <b>Bước 1:</b> Doanh thu \( D(x) = 250x - 0,0002x^2 \). Lợi nhuận sau thuế = \( 0,95D(x) - \text{Chi phí} \).<br>                 
+                <b>Bước 2:</b> Ta có \( P(x) = 0,95(250x - 0,0002x^2) - (150 + 35x) = -0,00019x^2 + 202,5x - 150 \).<br>                 
+                <b>Bước 3:</b> Parabol này có đỉnh rất xa, nên trong miền ràng buộc \( x \le 200 \), hàm luôn đồng biến. Lợi nhuận cực đại tại \( x = 200 \).<br>
+                \( P(200) = 40342,4 \) (triệu đồng). Đổi ra tỉ đồng là <b>40.3424</b>.             
+            </div>         
+        </div>
+
+    </div>
+
+    <button class="submit-btn" onclick="tinhDiem()">NỘP BÀI XEM ĐIỂM VÀ LỜI GIẢI</button> 
+</div>  
+
+<script> 
+function decodeAns(str) {     
+    try {                  
+        return atob(str.split('').reverse().join(''));          
+    } catch (e) {                  
+        console.error("Mã bảo vệ bị lỗi, bỏ qua câu này.");                  
+        return "";          
+    }  
+}  
+
+let timeRemaining = 90 * 60; // 90 phút
+let timerInterval;  
+
+function startTimer() {     
+    let timerDisplay = document.getElementById("countdown-timer");     
+    timerInterval = setInterval(() => {         
+        timeRemaining--;         
+        let minutes = Math.floor(timeRemaining / 60);         
+        let seconds = timeRemaining % 60;                  
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;         
+        seconds = seconds < 10 ? "0" + seconds : seconds;         
+        timerDisplay.innerText = `${minutes}:${seconds}`;          
+
+        if (timeRemaining <= 300) {             
+            timerDisplay.style.backgroundColor = "#ff9800";             
+            timerDisplay.style.borderColor = "#e65100";         
+        }          
+
+        if (timeRemaining <= 0) {             
+            clearInterval(timerInterval);             
+            timerDisplay.innerText = "Hết giờ!";             
+            alert("Đã hết thời gian làm bài! Hệ thống sẽ tự động thu bài.");             
+            tinhDiem(true);         
+        }     
+    }, 1000); 
+}  
+
+document.addEventListener("DOMContentLoaded", function() {     
+    startTimer();          
+});  
+
+function kiemTraCauHoi(btn) {
+    let card = btn.closest('.question-card');
+    let duocKiemTra = false;
+
+    let textInput = card.querySelector('input[type="text"].short-answer-input');
+    if (textInput) {
+        let hash = textInput.getAttribute('data-hash');
+        if (hash) {
+            let trueAns = decodeAns(hash);
+            let userAnsRaw = textInput.value.trim().split(" ");
+            let userAns = userAnsRaw ? userAnsRaw.replace(',', '.') : "";
+            let cleanTrueAns = trueAns.replace(',', '.');
+
+            if (userAns === "") {
+                alert("Vui lòng nhập đáp án trước khi kiểm tra!");
+                return;
+            }
+
+            if (userAns !== cleanTrueAns) {
+                textInput.value = userAns + " ❌ (ĐA: " + trueAns + ")";
+                textInput.classList.add('wrong-input');
+            } else {
+                textInput.value = userAns + " ✔️";
+                textInput.classList.add('correct-input');
+            }
+            textInput.disabled = true;
+            duocKiemTra = true;
+        }
+    }
+
+    if (duocKiemTra) {
+        let explanation = card.querySelector('.explanation');
+        if (explanation) explanation.style.display = 'block';
+        btn.style.display = 'none';
+    }
+}
+
+function tinhDiem(isAutoSubmit = false) {     
+    let hoTen = document.getElementById("ho-ten").value.trim();     
+    let sbd = document.getElementById("so-bao-danh").value.trim();          
+
+    if (!isAutoSubmit && (hoTen === "" || sbd === "")) {         
+        alert("Vui lòng nhập đầy đủ Họ và tên và Lớp trước khi nộp bài!");         
+        return;     
+    }      
+
+    if (isAutoSubmit && hoTen === "") hoTen = "Không ghi tên (Nộp tự động)";     
+    if (isAutoSubmit && sbd === "") sbd = "Không ghi Lớp (Nộp tự động)";      
+
+    if (typeof timerInterval !== "undefined") {         
+        clearInterval(timerInterval);     
+    }      
+
+    try {         
+        let diem = 0;         
+        let dung = 0;          
+
+        // Chấm Trả lời ngắn (20 câu * 0.5đ = 10 điểm)
+        document.querySelectorAll('.question-card input[type="text"].short-answer-input').forEach(input => {             
+            let hash = input.getAttribute('data-hash');             
+            if (hash) {                 
+                let trueAns = decodeAns(hash);                 
+                let userAnsRaw = input.value.trim().split(" "); 
+                let userAns = userAnsRaw ? userAnsRaw.replace(',', '.') : "";               
+                let cleanTrueAns = trueAns.replace(',', '.');                 
+                
+                if (userAns !== "" && userAns === cleanTrueAns) { 
+                    diem += 0.5; 
+                    dung++; 
+                }             
+            }         
+        });          
+
+        let thiSinhInfo = `Thí sinh: ${hoTen} - Lớp: ${sbd}\n---------------------------------------\n`;         
+        let msg = `KẾT QUẢ BÀI LÀM:\n\n${thiSinhInfo}`;         
+        msg += `- Bạn đã trả lời đúng ${dung}/20 câu.\n\n`;         
+        msg += `=> TỔNG ĐIỂM CỦA BẠN LÀ: ${diem.toFixed(2)} / 10.00\n\nBạn có thể đóng hộp thoại này để XEM LỜI GIẢI CHI TIẾT bên dưới các câu hỏi!`;          
+
+        document.querySelector('.submit-btn').style.display = 'none';
+        document.querySelectorAll('.check-btn').forEach(btn => btn.style.display = 'none');               
+
+        // Tô màu đúng/sai cho các ô chưa ấn kiểm tra lẻ         
+        document.querySelectorAll('.question-card input[type="text"].short-answer-input').forEach(input => {             
+            let hash = input.getAttribute('data-hash');             
+            if (hash && !input.disabled) { 
+                let trueAns = decodeAns(hash);                 
+                let userAnsRaw = input.value.trim().split(" "); 
+                let userAns = userAnsRaw ? userAnsRaw.replace(',', '.') : "";                 
+                let cleanTrueAns = trueAns.replace(',', '.');                  
+                
+                if (userAns === "") {                     
+                    input.value = "Chưa làm ❌ (ĐA: " + trueAns + ")";                      
+                    input.classList.add('wrong-input');                 
+                } else if (userAns !== cleanTrueAns) {                     
+                    input.value = userAns + " ❌ (ĐA: " + trueAns + ")";                      
+                    input.classList.add('wrong-input');                 
+                } else {                     
+                    input.value = userAns + " ✔️";                      
+                    input.classList.add('correct-input');                 
+                }             
+            }         
+        });          
+
+        // Khóa toàn bộ  
+        document.querySelectorAll('.question-card input[type="text"].short-answer-input').forEach(input => input.disabled = true);          
+
+        // Gửi điểm ngầm 
+        let maDe = document.getElementById('ma-de-id').innerText;         
+        let urlWebAPP = "https://script.google.com/macros/s/AKfycbxkACo6fRAOFbyC8Gj2ar9j8TLrrCqWnlrANAmciOwHemwBE27ogDTGSTj2swKr9Vc/exec";          
+        let linkGuiDiem = `${urlWebAPP}?tenDe=ChuyenDe_ToiUuTLN&hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${maDe}&diem=${diem.toFixed(2)}`;                  
+        
+        let sendData = new Image();         
+        sendData.src = linkGuiDiem;
+
+        setTimeout(() => {             
+            alert(msg);             
+            document.querySelectorAll('.explanation').forEach(el => {                 
+                el.style.display = 'block';             
+            });         
+        }, 500);                  
+
+    } catch (err) {         
+        alert("Lỗi hệ thống: " + err.message);     
+    }
+} 
+</script> 
+</body> 
+</html>
