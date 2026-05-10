@@ -71,7 +71,6 @@
 
     <div class="part-title">PHẦN I. Câu trắc nghiệm nhiều phương án lựa chọn (12 câu)</div>     
     <div id="part1-storage" class="storage">          
-
         <div class="question-card">             
             <div class="q-text">Phương trình chuyển động của một chất điểm là \( S(t) = t^3 - 3t^2 + 5t \) (s tính bằng m, t tính bằng s). Gia tốc tức thời của chất điểm tại thời điểm \( t = 2s \) bằng bao nhiêu?</div>             
             <div class="options-list">                 
@@ -268,7 +267,6 @@
 
     <div class="part-title">PHẦN II. Câu trắc nghiệm Đúng - Sai (2 câu)</div>     
     <div id="part2-storage" class="storage">          
-
         <div class="question-card">             
             <div class="q-text">Câu 1. Cho hình chóp \( S.ABCD \) có đáy \( ABCD \) là hình vuông tâm \( O \), cạnh bên \( SA \) vuông góc với mặt phẳng đáy \( (ABCD) \).</div>             
             <table class="tf-table">                 
@@ -291,7 +289,7 @@
             <div class="q-text">Câu 2. Hai xạ thủ A và B bắn mục tiêu một cách độc lập. Xác suất bắn trúng mục tiêu của xạ thủ A là 0,6 và của xạ thủ B là 0,7. Gọi A: "Xạ thủ A bắn trúng" và B: "Xạ thủ B bắn trúng".</div>             
             <table class="tf-table">                 
                 <tr><td class="statement">a) Xác suất để cả hai xạ thủ cùng bắn trượt mục tiêu là 0,12.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_a" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_a"> S</label></div></td></tr>                 
-                <tr><td class="statement">b) Xác suất để cả hai xạ thủ cùng bắn trúng mục tiêu là 0,42.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_b" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_b"> S</label></div></td></tr>                 
+                <tr><td class="statement">b) Xác suất để cả hai xạ thủ cùng bắn trúng mục tiêu là 0,42.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_b" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_b" data-hash="==QZ1JHd"> S</label></div></td></tr>                 
                 <tr><td class="statement">c) Xác suất để có ít nhất một xạ thủ bắn trúng mục tiêu là 0,88.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_c" data-hash="==QZ1JHd"> Đ</label> <label><input type="radio" name="p2_q2_c"> S</label></div></td></tr>                 
                 <tr><td class="statement">d) Biến cố A và B là hai biến cố xung khắc.</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_d"> Đ</label> <label><input type="radio" name="p2_q2_d" data-hash="==QZ1JHd"> S</label></div></td></tr>             
             </table>             
@@ -310,7 +308,6 @@
 
     <div class="part-title">PHẦN III. Câu trắc nghiệm trả lời ngắn (4 câu)</div>     
     <div id="part3-storage" class="storage">                  
-
         <div class="question-card">             
             <div class="q-text">Câu 1. Tìm số lượng nghiệm nguyên của bất phương trình \( \log_3(x-2) \le 2 \).</div>             
             <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-hash="==QO">             
@@ -370,7 +367,6 @@
 </div>  
 
 <script> 
-// Hàm giải mã đáp án an toàn 
 function decodeAns(str) {     
     try {                  
         return atob(str.split('').reverse().join(''));          
@@ -380,7 +376,7 @@ function decodeAns(str) {
     }  
 }  
 
-let timeRemaining = 90 * 60; // 90 phút = 5400 giây 
+let timeRemaining = 90 * 60; 
 let timerInterval;  
 
 function startTimer() {     
@@ -412,41 +408,27 @@ document.addEventListener("DOMContentLoaded", function() {
     startTimer();          
 });  
 
-// HÀM KIỂM TRA ĐÁP ÁN TỪNG CÂU
 function kiemTraCauHoi(btn) {
     let card = btn.closest('.question-card');
     let duocKiemTra = false;
 
-    // Chấm Phần 1 & Phần 2 (Radio box)
     let radios = card.querySelectorAll('input[type="radio"]');
     if (radios.length > 0) {
         let hasChecked = false;
         radios.forEach(r => { if (r.checked) hasChecked = true; });
-        
-        if (!hasChecked) {
-            alert("Vui lòng chọn ít nhất 1 đáp án trước khi kiểm tra!");
-            return;
-        }
+        if (!hasChecked) { alert("Vui lòng chọn ít nhất 1 đáp án trước khi kiểm tra!"); return; }
 
         radios.forEach(c => {
             let parentLabel = c.closest('.option-item') || c.closest('label');
             let hash = c.getAttribute('data-hash');
-            
-            if (c.checked) {
-                if (!hash || decodeAns(hash) !== "true") {
-                    if (parentLabel) parentLabel.classList.add('wrong-highlight');
-                }
-            }
-            if (hash && decodeAns(hash) === "true") {
-                if (parentLabel) parentLabel.classList.add('correct-highlight');
-            }
-            c.disabled = true; // Khóa sau khi đã check
+            if (c.checked) { if (!hash || decodeAns(hash) !== "true") { if (parentLabel) parentLabel.classList.add('wrong-highlight'); } }
+            if (hash && decodeAns(hash) === "true") { if (parentLabel) parentLabel.classList.add('correct-highlight'); }
+            c.disabled = true; 
             if (c.closest('.option-item')) c.closest('.option-item').classList.add('disabled-option');
         });
         duocKiemTra = true;
     }
 
-    // Chấm Phần 3 (Text Input)
     let textInput = card.querySelector('input[type="text"].short-answer-input');
     if (textInput) {
         let hash = textInput.getAttribute('data-hash');
@@ -454,12 +436,7 @@ function kiemTraCauHoi(btn) {
             let trueAns = decodeAns(hash);
             let userAns = textInput.value.trim().replace(',', '.');
             let cleanTrueAns = trueAns.replace(',', '.');
-
-            if (userAns === "") {
-                alert("Vui lòng nhập đáp án trước khi kiểm tra!");
-                return;
-            }
-
+            if (userAns === "") { alert("Vui lòng nhập đáp án trước khi kiểm tra!"); return; }
             if (userAns !== cleanTrueAns) {
                 textInput.value = userAns + " ❌ (ĐA: " + trueAns + ")";
                 textInput.classList.add('wrong-input');
@@ -475,7 +452,7 @@ function kiemTraCauHoi(btn) {
     if (duocKiemTra) {
         let explanation = card.querySelector('.explanation');
         if (explanation) explanation.style.display = 'block';
-        btn.style.display = 'none'; // Ẩn nút kiểm tra đi
+        btn.style.display = 'none'; 
     }
 }
 
@@ -483,29 +460,20 @@ function tinhDiem(isAutoSubmit = false) {
     let hoTen = document.getElementById("ho-ten").value.trim();     
     let sbd = document.getElementById("so-bao-danh").value.trim();          
 
-    if (!isAutoSubmit && (hoTen === "" || sbd === "")) {         
-        alert("Vui lòng nhập đầy đủ Họ và tên và Lớp trước khi nộp bài!");         
-        return;     
-    }      
-
+    if (!isAutoSubmit && (hoTen === "" || sbd === "")) { alert("Vui lòng nhập đầy đủ Họ và tên và Lớp trước khi nộp bài!"); return; }      
     if (isAutoSubmit && hoTen === "") hoTen = "Không ghi tên (Nộp tự động)";     
     if (isAutoSubmit && sbd === "") sbd = "Không ghi Lớp (Nộp tự động)";      
-
-    if (typeof timerInterval !== "undefined") {         
-        clearInterval(timerInterval);     
-    }      
+    if (typeof timerInterval !== "undefined") { clearInterval(timerInterval); }      
 
     try {         
         let diem = 0;         
         let dungP1 = 0, dungP3 = 0;          
 
-        // Chấm Phần 1 (12 câu * 0.25đ = 3đ)         
         document.querySelectorAll('#part1-storage input[type="radio"]:checked').forEach(c => {             
             let hash = c.getAttribute('data-hash');             
             if (hash && decodeAns(hash) === "true") { diem += 0.25; dungP1++; }         
         });          
 
-        // Chấm Phần 2 (2 câu * 1đ = 2đ)         
         let p2Cards = document.querySelectorAll('#part2-storage .question-card');         
         p2Cards.forEach(card => {             
             let dungTrongCau = 0;             
@@ -520,17 +488,13 @@ function tinhDiem(isAutoSubmit = false) {
             card.setAttribute('data-correct-count', dungTrongCau);         
         });          
 
-        // Chấm Phần 3 (4 câu * 0.5đ = 2đ) -> Tổng điểm tối đa 7 điểm.
         document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => {             
             let hash = input.getAttribute('data-hash');             
             if (hash) {                 
                 let trueAns = decodeAns(hash);                 
-                
-                // Lấy giá trị chuỗi thô hợp lệ trước khi so sánh
                 let userAnsRaw = input.value.trim().split(" ")[0]; 
                 let userAns = userAnsRaw ? userAnsRaw.replace(',', '.') : "";               
                 let cleanTrueAns = trueAns.replace(',', '.');                 
-                
                 if (userAns !== "" && userAns === cleanTrueAns) { diem += 0.5; dungP3++; }             
             }         
         });          
@@ -539,22 +503,17 @@ function tinhDiem(isAutoSubmit = false) {
         let msg = `KẾT QUẢ BÀI LÀM:\n\n${thiSinhInfo}`;         
         msg += `- Phần I: Trả lời đúng ${dungP1}/12 câu.\n`;         
         msg += `- Phần II:\n`;         
-        p2Cards.forEach((card, index) => {             
-            msg += `   + Câu ${index + 1} đúng ${card.getAttribute('data-correct-count')}/4 ý.\n`;         
-        });         
+        p2Cards.forEach((card, index) => { msg += `   + Câu ${index + 1} đúng ${card.getAttribute('data-correct-count')}/4 ý.\n`; });         
         msg += `- Phần III: Trả lời đúng ${dungP3}/4 câu.\n\n`;         
         msg += `=> TỔNG ĐIỂM CỦA BẠN LÀ: ${diem.toFixed(2)} / 7.00\n(Thang điểm 7 do cấu trúc rút gọn)\n\nBạn có thể đóng hộp thoại này để XEM LỜI GIẢI CHI TIẾT bên dưới các câu hỏi!`;          
 
         document.querySelector('.submit-btn').style.display = 'none';
         document.querySelectorAll('.check-btn').forEach(btn => btn.style.display = 'none');               
 
-        // Tô màu đúng/sai Phần 1 & 2         
         document.querySelectorAll('input[type="radio"]:checked').forEach(c => {             
             let parentLabel = c.closest('.option-item') || c.closest('label');             
             let hash = c.getAttribute('data-hash');             
-            if (!hash || decodeAns(hash) !== "true") {                 
-                if (parentLabel) parentLabel.classList.add('wrong-highlight');             
-            }         
+            if (!hash || decodeAns(hash) !== "true") { if (parentLabel) parentLabel.classList.add('wrong-highlight'); }         
         });          
 
         document.querySelectorAll('input[type="radio"]').forEach(c => {             
@@ -565,14 +524,12 @@ function tinhDiem(isAutoSubmit = false) {
             }         
         });          
 
-        // Tô màu đúng/sai Phần 3         
         document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => {             
             let hash = input.getAttribute('data-hash');             
             if (hash && !input.disabled) {
                 let trueAns = decodeAns(hash);                 
                 let userAns = input.value.trim().replace(',', '.');                 
                 let cleanTrueAns = trueAns.replace(',', '.');                  
-                
                 if (userAns === "") {                     
                     input.value = "Chưa làm ❌ (ĐA: " + trueAns + ")";                      
                     input.classList.add('wrong-input');                 
@@ -590,30 +547,24 @@ function tinhDiem(isAutoSubmit = false) {
         document.querySelectorAll('.option-item').forEach(label => label.classList.add('disabled-option'));         
         document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => input.disabled = true);          
 
-        // -------------------------------------------------------------
-        // TÍCH HỢP GỬI ĐIỂM NGẦM VỀ GOOGLE SHEETS
-        // -------------------------------------------------------------
+        // --- GỬI ĐIỂM NGẦM BẰNG IFRAME ẨN (BỀN BỈ NHẤT) ---
         let maDe = document.getElementById('ma-de-id').innerText;         
         let urlWebAPP = "https://script.google.com/macros/s/AKfycbxkACo6fRAOFbyC8Gj2ar9j8TLrrCqWnlrANAmciOwHemwBE27ogDTGSTj2swKr9Vc/exec";          
-
         let linkGuiDiem = `${urlWebAPP}?tenDe=DeOnTap_So2_Toan11&hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${maDe}&diem=${diem.toFixed(2)}`;                  
         
-        // Dùng fetch với mode no-cors để đảm bảo dữ liệu được gửi đi chắc chắn nhất
-        fetch(linkGuiDiem, { mode: 'no-cors' })
-            .then(() => console.log("Gửi điểm thành công"))
-            .catch(err => console.log("Lỗi gửi điểm:", err));
-        // -------------------------------------------------------------
+        let ifr = document.createElement('iframe');
+        ifr.style.display = 'none';
+        ifr.src = linkGuiDiem;
+        document.body.appendChild(ifr);
+        setTimeout(() => { document.body.removeChild(ifr); }, 3000);
+        // -----------------------------------------------
 
         setTimeout(() => {             
             alert(msg);             
-            document.querySelectorAll('.explanation').forEach(el => {                 
-                el.style.display = 'block';             
-            });         
+            document.querySelectorAll('.explanation').forEach(el => { el.style.display = 'block'; });         
         }, 500);                  
 
-    } catch (err) {         
-        alert("Lỗi hệ thống: " + err.message);     
-    }
+    } catch (err) { alert("Lỗi hệ thống: " + err.message); }
 } 
 </script> 
 </body> 
