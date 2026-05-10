@@ -35,7 +35,6 @@
         .short-answer-input { width: 100%; max-width: 250px; padding: 12px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 1.1rem; margin-top: 10px; outline: none; transition: 0.3s border-color; font-weight: bold; color: #1a73e8; }         
         .short-answer-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }         
         
-        /* Nút kiểm tra từng câu */
         .check-btn { background-color: #ff9800; color: white; border: none; padding: 10px 18px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s; display: inline-block; }
         .check-btn:hover { background-color: #e65100; }
 
@@ -451,13 +450,12 @@ function kiemTraCauHoi(btn) {
     }
 
     // Chấm Phần 3 (Text Input)
-    let textInputs = card.querySelectorAll('input[type="text"].short-answer-input');
-    if (textInputs.length > 0) {
-        let input = textInputs;
-        let hash = input.getAttribute('data-hash');
+    let textInput = card.querySelector('input[type="text"].short-answer-input');
+    if (textInput) {
+        let hash = textInput.getAttribute('data-hash');
         if (hash) {
             let trueAns = decodeAns(hash);
-            let userAns = input.value.trim().replace(',', '.');
+            let userAns = textInput.value.trim().replace(',', '.');
             let cleanTrueAns = trueAns.replace(',', '.');
 
             if (userAns === "") {
@@ -466,13 +464,13 @@ function kiemTraCauHoi(btn) {
             }
 
             if (userAns !== cleanTrueAns) {
-                input.value = userAns + " ❌ (ĐA: " + trueAns + ")";
-                input.classList.add('wrong-input');
+                textInput.value = userAns + " ❌ (ĐA: " + trueAns + ")";
+                textInput.classList.add('wrong-input');
             } else {
-                input.value = userAns + " ✔️";
-                input.classList.add('correct-input');
+                textInput.value = userAns + " ✔️";
+                textInput.classList.add('correct-input');
             }
-            input.disabled = true;
+            textInput.disabled = true;
             duocKiemTra = true;
         }
     }
@@ -531,8 +529,8 @@ function tinhDiem(isAutoSubmit = false) {
             if (hash) {                 
                 let trueAns = decodeAns(hash);                 
                 
-                // ĐÃ SỬA LỖI Ở DÒNG NÀY (Thêm  để lấy phần số nguyên bản trước khi so sánh)
-                let userAnsRaw = input.value.trim().split(" "); 
+                // ĐÃ SỬA LỖI Ở ĐÂY: Lấy giá trị chuỗi hợp lệ trước khi so sánh
+                let userAnsRaw = input.value.trim().split(" ")[0]; 
                 let userAns = userAnsRaw ? userAnsRaw.replace(',', '.') : "";               
                 let cleanTrueAns = trueAns.replace(',', '.');                 
                 
@@ -551,8 +549,6 @@ function tinhDiem(isAutoSubmit = false) {
         msg += `=> TỔNG ĐIỂM CỦA BẠN LÀ: ${diem.toFixed(2)} / 7.00\n(Thang điểm 7 do cấu trúc rút gọn)\n\nBạn có thể đóng hộp thoại này để XEM LỜI GIẢI CHI TIẾT bên dưới các câu hỏi!`;          
 
         document.querySelector('.submit-btn').style.display = 'none';
-        
-        // Ẩn tất cả nút kiểm tra từng câu đi
         document.querySelectorAll('.check-btn').forEach(btn => btn.style.display = 'none');               
 
         // Tô màu đúng/sai Phần 1 & 2         
@@ -575,7 +571,7 @@ function tinhDiem(isAutoSubmit = false) {
         // Tô màu đúng/sai Phần 3         
         document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => {             
             let hash = input.getAttribute('data-hash');             
-            if (hash && !input.disabled) { // Nếu đã kiểm tra bằng nút lẻ rồi thì không thao tác lại
+            if (hash && !input.disabled) {
                 let trueAns = decodeAns(hash);                 
                 let userAns = input.value.trim().replace(',', '.');                 
                 let cleanTrueAns = trueAns.replace(',', '.');                  
@@ -593,22 +589,16 @@ function tinhDiem(isAutoSubmit = false) {
             }         
         });          
 
-        // Khóa toàn bộ tính năng         
         document.querySelectorAll('input[type="radio"]').forEach(radio => radio.disabled = true);         
         document.querySelectorAll('.option-item').forEach(label => label.classList.add('disabled-option'));         
         document.querySelectorAll('#part3-storage input[type="text"]').forEach(input => input.disabled = true);          
 
-        // -------------------------------------------------------------
-        // TÍCH HỢP GỬI ĐIỂM NGẦM VỀ GOOGLE SHEETS BẰNG LINK MỚI
-        // -------------------------------------------------------------
         let maDe = document.getElementById('ma-de-id').innerText;         
         let urlWebAPP = "https://script.google.com/macros/s/AKfycbxkACo6fRAOFbyC8Gj2ar9j8TLrrCqWnlrANAmciOwHemwBE27ogDTGSTj2swKr9Vc/exec";          
-
         let linkGuiDiem = `${urlWebAPP}?tenDe=DeOnTap_So2_Toan11&hoTen=${encodeURIComponent(hoTen)}&sbd=${encodeURIComponent(sbd)}&maDe=${maDe}&diem=${diem.toFixed(2)}`;                  
         
         let sendData = new Image();         
         sendData.src = linkGuiDiem;
-        // -------------------------------------------------------------
 
         setTimeout(() => {             
             alert(msg);             
