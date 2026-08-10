@@ -3,497 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ Thống Ôn Tập Toán THPT</title>
-    <!-- Nhúng Font Awesome 6 để lấy icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>Thư Viện Toán - Thầy Dương Math</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+        :root { --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; --zalo: #0068ff; --text: #34495e; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding: 0; color: var(--text); }
+        
+        header { background: white; padding: 30px 10px; text-align: center; box-shadow: 0 2px 15px rgba(0,0,0,0.05); }
+        h1 { color: var(--primary); font-size: 28px; margin: 0; letter-spacing: 1px; font-weight: 800; }
+        h1 span { color: var(--accent); }
+        
+        nav { background: var(--primary); display: flex; justify-content: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .nav-container { display: flex; list-style: none; margin: 0; padding: 0; width: 100%; max-width: 1200px; }
+        .nav-item { position: relative; flex: 1; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
+        .nav-item:last-child { border-right: none; }
+        .nav-link { display: block; padding: 18px 5px; color: white; text-decoration: none; font-weight: 600; font-size: 13px; transition: 0.3s; cursor: pointer; }
+        .nav-link:hover { background: var(--accent); }
 
-        body {
-            background-color: #f4f6f9;
-            color: #333;
-        }
+        .dropdown { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: white; width: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); display: none; text-align: left; border-radius: 0 0 12px 12px; padding: 10px 0; max-height: 80vh; overflow-y: auto; }
+        .nav-item:hover .dropdown, .nav-item.active .dropdown { display: block; }
+        .sub-header { background: #fdf2e9; font-size: 11px; font-weight: bold; padding: 10px 15px; color: #e67e22; text-transform: uppercase; margin-top: 5px; }
+        .menu-link { display: block; padding: 12px 20px; color: var(--primary); text-decoration: none; border-bottom: 1px solid #f8f9fa; font-size: 14px; transition: 0.2s; }
+        .menu-link:hover { background: #ebf5ff; color: var(--accent); padding-left: 25px; }
 
-        /* 1. THANH MENU CHÍNH */
-        .navbar {
-            background-color: #2b2b2b;
-            display: flex;
-            align-items: center;
-            height: 48px;
-            padding: 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+        .welcome-card { background: white; padding: 50px 30px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); text-align: center; margin-bottom: 40px; border: 1px solid rgba(0,0,0,0.02); }
+        .welcome-card h2 { color: var(--primary); font-size: 32px; margin-bottom: 15px; }
+        .welcome-card p { color: #7f8c8d; line-height: 1.8; font-size: 17px; max-width: 700px; margin: 0 auto 30px auto; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .feature-item { background: white; padding: 40px 30px; border-radius: 20px; text-align: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 8px 20px rgba(0,0,0,0.03); border: 1px solid #f0f0f0; }
+        .feature-item:hover { transform: translateY(-12px); box-shadow: 0 15px 40px rgba(0,0,0,0.08); border-color: var(--accent); }
+        .feature-icon { font-size: 45px; margin-bottom: 20px; display: inline-block; }
+        .feature-item h3 { margin: 10px 0; color: var(--primary); font-size: 20px; font-weight: 700; }
+        .feature-item p { color: #95a5a6; font-size: 15px; line-height: 1.5; }
 
-        .nav-list {
-            display: flex;
-            list-style: none;
-            height: 100%;
-        }
+        .zalo-btn { display: inline-flex; align-items: center; background: var(--zalo); color: white; padding: 14px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 6px 20px rgba(0, 104, 255, 0.3); transition: 0.3s; }
+        .zalo-btn:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(0, 104, 255, 0.4); }
 
-        .nav-item {
-            position: relative;
-            height: 100%;
-            border-right: 1px solid #3a3a3a;
-        }
+        .zalo-chat-fixed { position: fixed; bottom: 30px; right: 30px; z-index: 2000; display: flex; align-items: center; background: var(--zalo); color: white; padding: 14px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 10px 30px rgba(0, 104, 255, 0.4); transition: 0.4s; }
+        .zalo-chat-fixed:hover { transform: translateY(-5px) scale(1.05); }
+        .zalo-chat-fixed img { width: 26px; height: 26px; margin-right: 12px; filter: brightness(0) invert(1); }
+        
+        footer { text-align: center; padding: 50px 20px; font-size: 14px; color: #95a5a6; background: white; margin-top: 60px; border-top: 1px solid #eee; }
 
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0 18px;
-            height: 100%;
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            transition: background-color 0.2s ease;
-            cursor: pointer;
-        }
-
-        .nav-item:hover > .nav-link {
-            background-color: #3d3d3d;
-        }
-
-        .home-icon {
-            font-size: 18px;
-        }
-
-        /* Dropdown Submenu */
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #2b2b2b;
-            min-width: 260px;
-            list-style: none;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-        }
-
-        .dropdown-menu li {
-            border-bottom: 1px solid #3a3a3a;
-        }
-
-        .dropdown-menu a {
-            display: block;
-            padding: 10px 16px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: normal;
-            transition: background-color 0.2s, color 0.2s;
-            cursor: pointer;
-        }
-
-        .dropdown-menu a:hover {
-            background-color: #3d3d3d;
-            color: #4da6ff;
-        }
-
-        .nav-item.dropdown:hover .dropdown-menu {
-            display: block;
-        }
-
-        /* 2. KHU VỰC NỘI DUNG */
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .page-card {
-            background: #ffffff;
-            border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            display: none; /* Mặc định ẩn tất cả các trang nội dung */
-        }
-
-        .page-card.active {
-            display: block; /* Chỉ hiện trang được kích hoạt */
-        }
-
-        /* Đường dẫn Breadcrumb */
-        .breadcrumb {
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .breadcrumb a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-
-        .page-title {
-            color: #1a1a1a;
-            font-size: 20px;
-            border-bottom: 2px solid #0066cc;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* 3. DANH SÁCH ĐỀ THI */
-        .exam-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .exam-item {
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-
-        .exam-item:hover {
-            border-color: #0066cc;
-            background-color: #f8fafc;
-            transform: translateX(4px);
-        }
-
-        .exam-link {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 18px;
-            color: #2c3e50;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .exam-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .badge {
-            background-color: #eef2ff;
-            color: #4f46e5;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: normal;
-        }
-
-        .btn-view {
-            color: #0066cc;
-            font-size: 13px;
+        @media (max-width: 800px) {
+            .nav-container { flex-wrap: wrap; }
+            .nav-item { flex: none; width: 33.33%; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .nav-link { font-size: 11px; padding: 12px 2px; }
+            .dropdown { width: 100vw; position: fixed; left: 0; transform: none; top: auto; border-radius: 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- THANH MENU CHÍNH -->
-    <nav class="navbar">
-        <ul class="nav-list">
-            <!-- Trang chủ -->
-            <li class="nav-item">
-                <a class="nav-link" onclick="showPage('home')">
-                    <i class="fa-solid fa-house home-icon"></i>
-                </a>
-            </li>
+<header>
+    <h1>📚 THƯ VIỆN TOÁN <span></h1>
+</header>
 
-            <!-- TOÁN 10 -->
-            <li class="nav-item dropdown">
-                <a class="nav-link">
-                    <i class="fa-regular fa-newspaper"></i>
-                    TOÁN 10
-                    <i class="fa-solid fa-chevron-down" style="font-size: 11px;"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a onclick="showPage('t10-c1')">Chương 1: MỆNH ĐỀ & TẬP HỢP</a></li>
-                    <li><a onclick="showPage('t10-c2')">Chương 2: BẤT PHƯƠNG TRÌNH</a></li>
-                    <li><a onclick="showPage('t10-c3')">Chương 3: HÀM SỐ & ĐỒ THỊ</a></li>
-                </ul>
-            </li>
-
-            <!-- TOÁN 11 -->
-            <li class="nav-item dropdown">
-                <a class="nav-link">
-                    <i class="fa-regular fa-newspaper"></i>
-                    TOÁN 11
-                    <i class="fa-solid fa-chevron-down" style="font-size: 11px;"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a onclick="showPage('t11-c1')">Chương 1: HÀM SỐ MŨ & LOGARITHM</a></li>
-                    <li><a onclick="showPage('t11-c2')">Chương 2: HÌNH HỌC KHÔNG GIAN</a></li>
-                    <li><a onclick="showPage('t11-c3')">Chương 3: ĐẠO HÀM</a></li>
-                </ul>
-            </li>
-
-            <!-- TOÁN 12 -->
-            <li class="nav-item dropdown">
-                <a class="nav-link">
-                    <i class="fa-regular fa-newspaper"></i>
-                    TOÁN 12
-                    <i class="fa-solid fa-chevron-down" style="font-size: 11px;"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a onclick="showPage('t12-c1')">Chương 1: HÀM SỐ</a></li>
-                    <li><a onclick="showPage('t12-c2')">Chương 2: PHƯƠNG PHÁP TỌA ĐỘ</a></li>
-                    <li><a onclick="showPage('t12-c3')">Chương 3: THỐNG KÊ</a></li>
-                </ul>
-            </li>
-
-            <!-- ĐỀ THI THPT -->
-            <li class="nav-item dropdown">
-                <a class="nav-link">
-                    <i class="fa-solid fa-paper-plane"></i>
-                    ĐỀ THI THPT
-                    <i class="fa-solid fa-chevron-down" style="font-size: 11px;"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Đề thi tham khảo BGD</a></li>
-                    <li><a href="#">Đề thi thử các Trường Chuyên</a></li>
-                    <li><a href="#">Bộ đề ôn thi Tốt nghiệp</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-
-    <div class="container">
-        
-        <!-- TRANG CHỦ -->
-        <div id="home" class="page-card active">
-            <h1 class="page-title"><i class="fa-solid fa-graduation-cap" style="color: #0066cc;"></i> Chào mừng đến với Hệ thống Học & Ôn thi Toán</h1>
-            <p>Vui lòng chọn khối lớp (Toán 10, Toán 11, Toán 12) và chương tương ứng trên thanh menu để chọn đề thi.</p>
+<nav>
+    <div class="nav-container">
+        <div class="nav-item">
+            <a class="nav-link" onclick="toggleDropdown(this)">📝 TOÁN 9</a>
+            <div class="dropdown">
+                <div class="sub-header">📍 Tuyển sinh lớp 10</div>
+                <a href="#" class="menu-link">📄 Tài liệu ôn thi vào 10</a>
+            </div>
         </div>
 
-        <!-- ==================== KHỐI TOÁN 10 ==================== -->
-        <!-- Toán 10 - Chương 1 -->
-        <div id="t10-c1" class="page-card">
-            <div class="breadcrumb"><a onclick="showPage('home')">Trang chủ</a> / <span>Toán 10</span> / <strong>Chương 1</strong></div>
-            <h2 class="page-title"><i class="fa-solid fa-file-pen" style="color: #0066cc;"></i> ĐỀ THI: CHƯƠNG 1 - MỆNH ĐỀ & TẬP HỢP (TOÁN 10)</h2>
-            <ul class="exam-list">
-                <li class="exam-item">
-                    <a href="#" class="exam-link">
-                        <div class="exam-info">
-                            <i class="fa-regular fa-file-pdf" style="color: #d9534f; font-size: 20px;"></i>
-                            <span>Đề số 1: Mệnh đề, mệnh đề kéo theo và mệnh đề đảo</span>
-                            <span class="badge">Trắc nghiệm 30 câu</span>
-                        </div>
-                        <span class="btn-view">Vào thi / Tải đề <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                </li>
-                <li class="exam-item">
-                    <a href="#" class="exam-link">
-                        <div class="exam-info">
-                            <i class="fa-regular fa-file-pdf" style="color: #d9534f; font-size: 20px;"></i>
-                            <span>Đề số 2: Các phép toán trên tập hợp (Giao, Hợp, Hiệu)</span>
-                            <span class="badge">Đề kiểm tra 45 phút</span>
-                        </div>
-                        <span class="btn-view">Vào thi / Tải đề <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                </li>
-            </ul>
+        <div class="nav-item">
+            <a class="nav-link" onclick="toggleDropdown(this)">🎓 TOÁN 10</a>
+            <div class="dropdown">
+                <div class="sub-header">📍 Các chương (KNTT)</div>
+                <a href="#" class="menu-link">Chương 1: Mệnh đề và tập hợp</a>
+                <a href="#" class="menu-link">Chương 2: BPT bậc nhất hai ẩn</a>
+                <a href="#" class="menu-link">Chương 3: Hệ thức lượng trong tam giác</a>
+                <a href="#" class="menu-link">Chương 4: Vectơ</a>
+                <a href="#" class="menu-link">Chương 5: Các số đặc trưng mẫu số liệu</a>
+                <a href="#" class="menu-link">Chương 6: Hàm số, đồ thị và vận dụng</a>
+                <a href="#" class="menu-link">Chương 7: Phương trình đường thẳng</a>
+                <a href="#" class="menu-link">Chương 8: Đại số tổ hợp</a>
+                <a href="#" class="menu-link">Chương 9: Tính xác suất cổ điển</a>
+            </div>
         </div>
 
-        <!-- Toán 10 - Chương 2 -->
-        <div id="t10-c2" class="page-card">
-            <div class="breadcrumb"><a onclick="showPage('home')">Trang chủ</a> / <span>Toán 10</span> / <strong>Chương 2</strong></div>
-            <h2 class="page-title"><i class="fa-solid fa-file-pen" style="color: #0066cc;"></i> ĐỀ THI: CHƯƠNG 2 - BẤT PHƯƠNG TRÌNH (TOÁN 10)</h2>
-            <ul class="exam-list">
-                <li class="exam-item">
-                    <a href="#" class="exam-link">
-                        <div class="exam-info">
-                            <i class="fa-regular fa-file-pdf" style="color: #d9534f; font-size: 20px;"></i>
-                            <span>Đề số 1: Bất phương trình bậc nhất hai ẩn & Hệ BPT</span>
-                            <span class="badge">40 câu trắc nghiệm</span>
-                        </div>
-                        <span class="btn-view">Vào thi / Tải đề <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                </li>
-            </ul>
+        <div class="nav-item">
+            <a class="nav-link" onclick="toggleDropdown(this)">🎓 TOÁN 11</a>
+            <div class="dropdown">
+                <div class="sub-header">📍 Các chương (KNTT)</div>
+                <a href="#" class="menu-link">Chương I: Hàm số lượng giác & PT lượng giác</a>
+                <a href="#" class="menu-link">Chương II: Dãy số. Cấp số cộng và nhân</a>
+                <a href="#" class="menu-link">Chương III: Số đặc trưng mẫu số liệu ghép nhóm</a>
+                <a href="#" class="menu-link">Chương IV: Quan hệ song song</a>
+                <a href="#" class="menu-link">Chương V: Giới hạn. Hàm số liên tục</a>
+                <a href="#" class="menu-link">Chương VI: Hàm số mũ và lôgarit</a>
+                <a href="#" class="menu-link">Chương VII: Quan hệ vuông góc</a>
+                <a href="#" class="menu-link">Chương VIII: Quy tắc tính xác suất</a>
+                <a href="#" class="menu-link">Chương IX: Đạo hàm</a>
+            </div>
         </div>
 
-        <!-- Toán 10 - Chương 3 -->
-        <div id="t10-c3" class="page-card">
-            <div class="breadcrumb"><a onclick="showPage('home')">Trang chủ</a> / <span>Toán 10</span> / <strong>Chương 3</strong></div>
-            <h2 class="page-title"><i class="fa-solid fa-file-pen" style="color: #0066cc;"></i> ĐỀ THI: CHƯƠNG 3 - HÀM SỐ & ĐỒ THỊ (TOÁN 10)</h2>
-            <ul class="exam-list">
-                <li class="exam-item">
-                    <a href="#" class="exam-link">
-                        <div class="exam-info">
-                            <i class="fa-regular fa-file-pdf" style="color: #d9534f; font-size: 20px;"></i>
-                            <span>Đề số 1: Hàm số bậc hai và đồ thị Parabol</span>
-                            <span class="badge">Ôn tập tổng hợp</span>
-                        </div>
-                        <span class="btn-view">Vào thi / Tải đề <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                </li>
-            </ul>
+        <div class="nav-item">
+            <a class="nav-link" onclick="toggleDropdown(this)">🎓 TOÁN 12</a>
+            <div class="dropdown">
+                <div class="sub-header">📍 Các chương (KNTT)</div>
+                <a href="#" class="menu-link">Chương I: Ứng dụng đạo hàm khảo sát hàm số</a>
+                <a href="#" class="menu-link">Chương II: Vector và tọa độ trong không gian</a>
+                <a href="#" class="menu-link">Chương III: Đặc trưng đo mức độ phân tán số liệu</a>
+                <a href="#" class="menu-link">Chương IV: Nguyên hàm và Tích phân</a>
+                <a href="#" class="menu-link">Chương V: PT mặt phẳng, đường thẳng, mặt cầu</a>
+                <a href="#" class="menu-link">Chương VI: Xác suất có điều kiện</a>
+            </div>
         </div>
 
-        <!-- ==================== KHỐI TOÁN 11 ==================== -->
-        <!-- Toán 11 - Chương 1 -->
-        <div id="t11-c1" class="page-card">
-            <div class="breadcrumb"><a onclick="showPage('home')">Trang chủ</a> / <span>Toán 11</span> / <strong>Chương 1</strong></div>
-            <h2 class="page-title"><i class="fa-solid fa-file-pen" style="color: #0066cc;"></i> ĐỀ THI: CHƯƠNG 1 - HÀM SỐ MŨ & LOGARITHM (TOÁN 11)</h2>
-            <ul class="exam-list">
-                <li class="exam-item">
-                    <a href="#" class="exam-link">
-                        <div class="exam-info">
-                            <i class="fa-regular fa-file-pdf" style="color: #d9534f; font-size: 20px;"></i>
-                            <span>Đề số 1: Biến đổi biểu thức Lũy thừa & Logarithm</span>
-                            <span class="badge">40 câu trắc nghiệm</span>
-                        </div>
-                        <span class="btn-view">Vào thi / Tải đề <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                </li>
-                <li class="exam-item">
-                    <a href="#" class="exam-link">
-                        <div class="exam-info">
-                            <i class="fa-regular fa-file-pdf" style="color: #d9534f; font-size: 20px;"></i>
-                            <span>Đề số 2: Phương trình & Bất phương trình Mũ - Logarithm</span>
-                            <span class="badge">Vận dụng cao</span>
-                        </div>
-                        <span class="btn-view">Vào thi / Tải đề <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                </li>
-            </ul>
+        <div class="nav-item">
+            <a class="nav-link" onclick="toggleDropdown(this)">📜 TN-THPT</a>
+            <div class="dropdown">
+                <div class="sub-header">📍 Tuyển tập đề thi thử</div>
+                <a href="1-chuyen-lao-cai.html" class="menu-link">📝 Đề thi Chuyên Lào Cai</a>
+                <a href="2-le-thanh-tong.html" class="menu-link">📝 Đề thi Lê Thánh Tông</a>
+                <a href="3-so-nghe-an.html" class="menu-link">📝 Đề thi Sở Nghệ An</a>
+                <a href="4-tran-phu-phu-tho.html" class="menu-link">📝 Đề thi Trần Phú - Phú Thọ</a>
+                <a href="5-so-hung-yen.html" class="menu-link">📝 Đề thi Sở Hưng Yên</a>
+                <a href="6-cum-hai-phong.html" class="menu-link">📝 Đề thi Cụm Hải Phòng</a>
+            </div>
         </div>
 
-        <!-- Toán 11 - Chương 2 -->
-        <div id="t11-c2" class="page-card">
-            <div class="breadcrumb"><a onclick="showPage('home')">Trang chủ</a> / <span>Toán 11</span> / <strong>Chương 2</strong></div>
-            <h2 class="page-title"><i class="fa-solid fa-file-pen" style="color: #0066cc;"></i> ĐỀ THI: CHƯƠNG 2 - HÌNH HỌC KHÔNG GIAN (TOÁN 11)</h2>
-            <ul class="exam-list">
-                <li class="exam-item">
-                    <a href="#" class="exam-link">
-                        <div class="exam-info">
-                            <i class="fa-regular fa-file-pdf" style="color: #d9534f; font-size: 20px;"></i>
-                            <span>Đề số 1: Quan hệ song song & Quan hệ vuông góc</span>
-                            <span class="badge">Đề kiểm tra 1 tiết</span>
-                        </div>
-                        <span class="btn-view">Vào thi / Tải đề <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                </li>
-            </ul>
+        <div class="nav-item">
+            <a class="nav-link" onclick="toggleDropdown(this)">🚀 ĐGNL</a>
+            <div class="dropdown">
+                <div class="sub-header">📍 Ôn thi ĐGNL</div>
+                <a href="#" class="menu-link">📑 Đề mẫu ĐHQG Hà Nội</a>
+                <a href="#" class="menu-link">📑 Đề mẫu ĐHQG TP.HCM</a>
+            </div>
         </div>
+    </div>
+</nav>
 
-        <!-- Toán 11 - Chương 3 -->
-        <div id="t11-c3" class="page-card">
-            <div class="breadcrumb"><a onclick="showPage('home')">Trang chủ</a> / <span>Toán 11</span> / <strong>Chương 3</strong></div>
-            <h2 class="page-title"><i class="fa-solid fa-file-pen" style="color: #0066cc;"></i> ĐỀ THI: CHƯƠNG 3 - ĐẠO HÀM (TOÁN 11)</h2>
-            <ul class="exam-list">
-                <li class="exam-item">
-                    <a href="#" class="exam-link">
-                        <div class="exam-info">
-                            <i class="fa-regular fa-file-pdf" style="color: #d9534f; font-size: 20px;"></i>
-                            <span>Đề số 1: Quy tắc tính đạo hàm & Phương trình tiếp tuyến</span>
-                            <span class="badge">Ôn tập giữa kỳ 2</span>
-                        </div>
-                        <span class="btn-view">Vào thi / Tải đề <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                </li>
-            </ul>
+<div class="container">
+    <div class="welcome-section">
+        <div class="welcome-card">
+            <h2>Chào mừng các em học sinh! 🎓</h2>
+            <p>Hệ thống cung cấp kho tài liệu, chuyên đề và đề thi thử trắc nghiệm Toán bám sát chương trình mới, giúp các em tự tin chinh phục kỳ thi tốt nghiệp THPT và ĐGNL.</p>
+            <div class="zalo-share">
+                <a href="#" id="shareZalo" class="zalo-btn">🚀 Chia sẻ cho bạn bè qua Zalo</a>
+            </div>
         </div>
-
-        <!-- ==================== KHỐI TOÁN 12 ==================== -->
-        <!-- Toán 12 - Chương 1 -->
-        <div id="t12-c1" class="page-card">
-            <div class="breadcrumb"><a onclick="showPage('home')">Trang chủ</a> / <span>Toán 12</span> / <strong>Chương 1</strong></div>
-            <h2 class="page-title"><i class="fa-solid fa-file-pen" style="color: #0066cc;"></i> ĐỀ THI: CHƯƠNG 1 - HÀM SỐ (TOÁN 12)</h2>
-            <ul class="exam-list">
-                <li class="exam-item">
-                    <a href="#" class="exam-link">
-                        <div class="exam-info">
-                            <i class="fa-regular fa-file-pdf" style="color: #d9534f; font-size: 20px;"></i>
-                            <span>Đề số 1: Tính đơn điệu và Cực trị của Hàm số</span>
-                            <span class="badge">40 câu trắc nghiệm</span>
-                        </div>
-                        <span class="btn-view">Vào thi / Tải đề <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                </li>
-                <li class="exam-item">
-                    <a href="#" class="exam-link">
-                        <div class="exam-info">
-                            <i class="fa-regular fa-file-pdf" style="color: #d9534f; font-size: 20px;"></i>
-                            <span>Đề số 2: Giá trị lớn nhất, nhỏ nhất & Đường tiệm cận</span>
-                            <span class="badge">Đề ôn tập giữa kỳ</span>
-                        </div>
-                        <span class="btn-view">Vào thi / Tải đề <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Toán 12 - Chương 2 -->
-        <div id="t12-c2" class="page-card">
-            <div class="breadcrumb"><a onclick="showPage('home')">Trang chủ</a> / <span>Toán 12</span> / <strong>Chương 2</strong></div>
-            <h2 class="page-title"><i class="fa-solid fa-file-pen" style="color: #0066cc;"></i> ĐỀ THI: CHƯƠNG 2 - PHƯƠNG PHÁP TỌA ĐỘ (TOÁN 12)</h2>
-            <ul class="exam-list">
-                <li class="exam-item">
-                    <a href="#" class="exam-link">
-                        <div class="exam-info">
-                            <i class="fa-regular fa-file-pdf" style="color: #d9534f; font-size: 20px;"></i>
-                            <span>Đề số 1: Tọa độ Vectơ và phương trình Mặt phẳng trong không gian</span>
-                            <span class="badge">40 câu trắc nghiệm</span>
-                        </div>
-                        <span class="btn-view">Vào thi / Tải đề <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Toán 12 - Chương 3 -->
-        <div id="t12-c3" class="page-card">
-            <div class="breadcrumb"><a onclick="showPage('home')">Trang chủ</a> / <span>Toán 12</span> / <strong>Chương 3</strong></div>
-            <h2 class="page-title"><i class="fa-solid fa-file-pen" style="color: #0066cc;"></i> ĐỀ THI: CHƯƠNG 3 - THỐNG KÊ (TOÁN 12)</h2>
-            <ul class="exam-list">
-                <li class="exam-item">
-                    <a href="#" class="exam-link">
-                        <div class="exam-info">
-                            <i class="fa-regular fa-file-pdf" style="color: #d9534f; font-size: 20px;"></i>
-                            <span>Đề số 1: Các đặc trưng đo thế hiện của mẫu số liệu ghép nhóm</span>
-                            <span class="badge">Chương trình mới</span>
-                        </div>
-                        <span class="btn-view">Vào thi / Tải đề <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
     </div>
 
-    <!-- JAVASCRIPT ĐIỀU HƯỚNG BẤM LÀ CHUYỂN TRANG -->
-    <script>
-        function showPage(pageId) {
-            // Lấy tất cả các card trang
-            const pages = document.querySelectorAll('.page-card');
-            
-            // Ẩn tất cả các trang
-            pages.forEach(page => {
-                page.classList.remove('active');
-            });
+    <div class="features-grid">
+        <div class="feature-item">
+            <span class="feature-icon">📂</span>
+            <h3>Tài liệu miễn phí</h3>
+            <p>Hơn 1000+ đề thi và chuyên đề bám sát chương trình mới nhất của Bộ GD&ĐT.</p>
+        </div>
+        <div class="feature-item">
+            <span class="feature-icon">⚡</span>
+            <h3>Ôn thi cấp tốc</h3>
+            <p>Tổng hợp các phương pháp giải nhanh, mẹo bấm máy tính Casio tối ưu thời gian.</p>
+        </div>
+        <div class="feature-item">
+            <span class="feature-icon">🎯</span>
+            <h3>Luyện đề ĐGNL</h3>
+            <p>Cập nhật liên tục cấu trúc đề thi Đánh giá năng lực của các đại học lớn.</p>
+        </div>
+    </div>
+</div>
 
-            // Hiển thị trang được bấm chọn
-            const targetPage = document.getElementById(pageId);
-            if(targetPage) {
-                targetPage.classList.add('active');
-            } else {
-                // Nếu không tìm thấy trang thì quay về trang chủ
-                document.getElementById('home').classList.add('active');
-            }
+<a href="https://zalo.me/0989532111" target="_blank" class="zalo-chat-fixed">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
+    <span>Chat với Thầy Dương</span>
+</a>
 
-            // Tự động cuộn lên đầu trang mượt mà
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+<footer>&copy; 2026 - Thầy Dương Math - Hệ thống học liệu Toán học trực tuyến</footer>
+
+<script>
+    function toggleDropdown(element) {
+        if (window.innerWidth <= 800) {
+            const parent = element.parentElement;
+            const isActive = parent.classList.contains('active');
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if (!isActive) parent.classList.add('active');
         }
-    </script>
+    }
+    document.getElementById('shareZalo').onclick = function(e) {
+        e.preventDefault();
+        const shareUrl = `https://sp.zalo.me/share/base?url=${encodeURIComponent(window.location.href)}`;
+        window.open(shareUrl, '_blank', 'width=600,height=500');
+    };
+    window.onclick = function(event) {
+        if (!event.target.matches('.nav-link')) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        }
+    }
+</script>
 
 </body>
 </html>
