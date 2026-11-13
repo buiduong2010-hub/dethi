@@ -48,6 +48,19 @@
             .nav-link { font-size: 11px; padding: 12px 2px; }
             .dropdown { width: 100vw; position: fixed; left: 0; transform: none; top: auto; border-radius: 0; }
         }
+
+        /* ===== ADMIN (adm_) ===== */
+        #adminPanel { display:none; max-width:760px; margin:20px auto; background:white; border:2px solid var(--accent); border-radius:16px; padding:22px; box-shadow:0 10px 30px rgba(0,0,0,.08); }
+        #adminPanel h3 { margin:0 0 14px; color:var(--primary); }
+        #adminPanel label { display:block; font-weight:600; margin:12px 0 4px; font-size:14px; }
+        #adminPanel input[type=text], #adminPanel input[type=password], #adminPanel select, #adminPanel input[type=file] { width:100%; box-sizing:border-box; padding:10px; border:1px solid #ccd; border-radius:8px; font-size:15px; font-family:inherit; }
+        .adm_btn { margin-top:16px; padding:12px 24px; background:#27ae60; color:white; border:none; border-radius:8px; font-size:16px; font-weight:bold; cursor:pointer; }
+        .adm_btn:disabled { background:#aaa; cursor:wait; }
+        .adm_btn2 { padding:6px 12px; background:#ecf0f1; border:1px solid #ccd; border-radius:6px; cursor:pointer; font-size:13px; }
+        #adm_msg { margin-top:14px; padding:10px; border-radius:8px; background:#f4f7f6; font-size:14px; white-space:pre-wrap; display:none; }
+        #adm_list .adm_row { display:flex; align-items:center; gap:8px; padding:6px 0; border-bottom:1px solid #eee; font-size:14px; }
+        #adm_list .adm_row span { flex:1; }
+        #adm_list .adm_x { background:#e74c3c; color:white; border:none; border-radius:6px; cursor:pointer; padding:4px 10px; }
     </style>
 </head>
 <body>
@@ -62,7 +75,9 @@
             <a class="nav-link" onclick="toggleDropdown(this)">📝 TOÁN 9</a>
             <div class="dropdown">
                 <div class="sub-header">📍 Tuyển sinh lớp 10</div>
+                <!-- toan9:START -->
                 <a href="#" class="menu-link">📄 Tài liệu ôn thi vào 10</a>
+                <!-- toan9:END -->
             </div>
         </div>
 
@@ -70,6 +85,7 @@
             <a class="nav-link" onclick="toggleDropdown(this)">🎓 TOÁN 10</a>
             <div class="dropdown">
                 <div class="sub-header">📍 Các chương (KNTT)</div>
+                <!-- toan10:START -->
                 <a href="#" class="menu-link">Chương 1: Mệnh đề và tập hợp</a>
                 <a href="#" class="menu-link">Chương 2: BPT bậc nhất hai ẩn</a>
                 <a href="#" class="menu-link">Chương 3: Hệ thức lượng trong tam giác</a>
@@ -79,6 +95,7 @@
                 <a href="#" class="menu-link">Chương 7: Phương trình đường thẳng</a>
                 <a href="#" class="menu-link">Chương 8: Đại số tổ hợp</a>
                 <a href="#" class="menu-link">Chương 9: Tính xác suất cổ điển</a>
+                <!-- toan10:END -->
             </div>
         </div>
 
@@ -86,6 +103,7 @@
             <a class="nav-link" onclick="toggleDropdown(this)">🎓 TOÁN 11</a>
             <div class="dropdown">
                 <div class="sub-header">📍 Các chương (KNTT)</div>
+                <!-- toan11:START -->
                 <a href="#" class="menu-link">Chương I: Hàm số lượng giác & PT lượng giác</a>
                 <a href="#" class="menu-link">Chương II: Dãy số. Cấp số cộng và nhân</a>
                 <a href="#" class="menu-link">Chương III: Số đặc trưng mẫu số liệu ghép nhóm</a>
@@ -95,6 +113,7 @@
                 <a href="#" class="menu-link">Chương VII: Quan hệ vuông góc</a>
                 <a href="#" class="menu-link">Chương VIII: Quy tắc tính xác suất</a>
                 <a href="#" class="menu-link">Chương IX: Đạo hàm</a>
+                <!-- toan11:END -->
             </div>
         </div>
 
@@ -102,12 +121,14 @@
             <a class="nav-link" onclick="toggleDropdown(this)">🎓 TOÁN 12</a>
             <div class="dropdown">
                 <div class="sub-header">📍 Các chương (KNTT)</div>
+                <!-- toan12:START -->
                 <a href="#" class="menu-link">Chương I: Ứng dụng đạo hàm khảo sát hàm số</a>
                 <a href="#" class="menu-link">Chương II: Vector và tọa độ trong không gian</a>
                 <a href="#" class="menu-link">Chương III: Đặc trưng đo mức độ phân tán số liệu</a>
                 <a href="#" class="menu-link">Chương IV: Nguyên hàm và Tích phân</a>
                 <a href="#" class="menu-link">Chương V: PT mặt phẳng, đường thẳng, mặt cầu</a>
                 <a href="#" class="menu-link">Chương VI: Xác suất có điều kiện</a>
+                <!-- toan12:END -->
             </div>
         </div>
 
@@ -115,6 +136,7 @@
             <a class="nav-link" onclick="toggleDropdown(this)">📜 TN-THPT</a>
             <div class="dropdown">
                 <div class="sub-header">📍 Tuyển tập đề thi thử (mới nhất ở trên)</div>
+                <!-- tnthpt:START -->
                 <a href="de-khao-sat-toan-12-phu-tho-ma-0101.html" class="menu-link">📝 Đề thi cụm Phú Thọ</a>
                 <a href="6-cum-hai-phong.html" class="menu-link">📝 Đề thi Cụm Hải Phòng</a>
                 <a href="5-so-hung-yen.html" class="menu-link">📝 Đề thi Sở Hưng Yên</a>
@@ -122,6 +144,7 @@
                 <a href="3-so-nghe-an.html" class="menu-link">📝 Đề thi Sở Nghệ An</a>
                 <a href="2-le-thanh-tong.html" class="menu-link">📝 Đề thi Lê Thánh Tông</a>
                 <a href="1-chuyen-lao-cai.html" class="menu-link">📝 Đề thi Chuyên Lào Cai</a>
+                <!-- tnthpt:END -->
             </div>
         </div>
 
@@ -129,12 +152,44 @@
             <a class="nav-link" onclick="toggleDropdown(this)">🚀 ĐGNL</a>
             <div class="dropdown">
                 <div class="sub-header">📍 Ôn thi ĐGNL</div>
+                <!-- dgnl:START -->
                 <a href="#" class="menu-link">📑 Đề mẫu ĐHQG Hà Nội</a>
                 <a href="#" class="menu-link">📑 Đề mẫu ĐHQG TP.HCM</a>
+                <!-- dgnl:END -->
             </div>
         </div>
     </div>
 </nav>
+
+
+<div id="adminPanel">
+    <h3>🔧 Trang đăng bài (chỉ thầy Dương dùng)</h3>
+    <label>Token GitHub <span style="font-weight:normal;color:#888">(lưu trong trình duyệt này, không ai khác thấy)</span></label>
+    <input type="password" id="adm_token" placeholder="github_pat_...">
+    <label>Mục</label>
+    <select id="adm_sec">
+        <option value="tnthpt">📜 TN-THPT</option>
+        <option value="dgnl">🚀 ĐGNL</option>
+        <option value="toan9">📝 Toán 9</option>
+        <option value="toan10">🎓 Toán 10 (theo chương)</option>
+        <option value="toan11">🎓 Toán 11 (theo chương)</option>
+        <option value="toan12">🎓 Toán 12 (theo chương)</option>
+    </select>
+    <div id="adm_chapWrap" style="display:none">
+        <label>Gắn vào chương</label>
+        <select id="adm_chap"></select>
+    </div>
+    <label>File HTML</label>
+    <input type="file" id="adm_file" accept=".html,.htm">
+    <div id="adm_nameWrap">
+        <label>Tên hiển thị</label>
+        <input type="text" id="adm_name" placeholder="VD: Đề thi Sở Hà Nội">
+    </div>
+    <button class="adm_btn" id="adm_go">⬆️ Đăng lên</button>
+    <div id="adm_msg"></div>
+    <h4 style="margin:22px 0 6px">Đang có trong mục này <span style="font-weight:normal;color:#888;font-size:13px">(✕ chỉ gỡ khỏi menu, không xóa file)</span></h4>
+    <div id="adm_list"></div>
+</div>
 
 <div class="container">
     <div class="welcome-section">
@@ -187,6 +242,161 @@
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
         }
     }
+
+    /* ===== MENU TỪ de.json ===== */
+    const KEYS = ['toan9','toan10','toan11','toan12','tnthpt','dgnl'];
+    const CHAPTER = { toan10:1, toan11:1, toan12:1 };
+    const dropdowns = () => document.querySelectorAll('nav .nav-item .dropdown');
+    let staticData = {};
+    let currentData = {};
+
+    function captureStatic() {
+        dropdowns().forEach((dd, i) => {
+            staticData[KEYS[i]] = Array.from(dd.querySelectorAll('a.menu-link')).map(a => {
+                const h = a.getAttribute('href');
+                return [h === '#' ? null : h, a.textContent.trim()];
+            });
+        });
+    }
+    function renderMenu(data) {
+        currentData = data;
+        dropdowns().forEach((dd, i) => {
+            const items = data[KEYS[i]];
+            if (!items) return;
+            dd.querySelectorAll('a.menu-link').forEach(a => a.remove());
+            items.forEach(it => {
+                const a = document.createElement('a');
+                a.className = 'menu-link';
+                a.href = it[0] || '#';
+                a.textContent = it[1];
+                dd.appendChild(a);
+            });
+        });
+        if (typeof admRenderList === 'function') admRenderList();
+    }
+    captureStatic();
+    currentData = JSON.parse(JSON.stringify(staticData));
+    fetch('de.json?t=' + Date.now()).then(r => r.ok ? r.json() : null).then(d => { if (d) renderMenu(d); }).catch(() => {});
+
+    /* ===== ADMIN (adm_) ===== */
+    const OWNER = 'buiduong2010-hub', REPO = 'dethi', BRANCH = 'main';
+    const $ = id => document.getElementById(id);
+    const clone = o => JSON.parse(JSON.stringify(o));
+
+    function admToggle() { $('adminPanel').style.display = (location.hash === '#admin') ? 'block' : 'none'; }
+    window.addEventListener('hashchange', admToggle); admToggle();
+    $('adm_token').value = localStorage.getItem('adm_token') || '';
+    $('adm_token').onchange = () => localStorage.setItem('adm_token', $('adm_token').value.trim());
+
+    function msg(t, ok) { const m = $('adm_msg'); m.style.display = 'block'; m.style.background = ok === false ? '#fdecea' : ok ? '#e8f8ef' : '#f4f7f6'; m.textContent = t; }
+    function b64FromText(s) { const b = new TextEncoder().encode(s); let r = ''; b.forEach(c => r += String.fromCharCode(c)); return btoa(r); }
+    function textFromB64(b) { const bin = atob(b.replace(/\n/g, '')); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return new TextDecoder().decode(u); }
+    function fileToB64(f) { return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(String(r.result).split(',')[1]); r.onerror = rej; r.readAsDataURL(f); }); }
+    function cleanName(n) {
+        let s = n.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D');
+        s = s.replace(/[^A-Za-z0-9._-]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+        return s || ('de-' + Date.now() + '.html');
+    }
+    async function gh(method, path, body) {
+        const token = $('adm_token').value.trim();
+        const r = await fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/' + path, {
+            method,
+            headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+            body: body ? JSON.stringify(body) : undefined
+        });
+        let j = null; try { j = await r.json(); } catch (e) {}
+        return { status: r.status, ok: r.ok, json: j };
+    }
+    async function getDe() {
+        const r = await gh('GET', 'contents/de.json?ref=' + BRANCH);
+        let data, sha = null;
+        if (r.status === 404) data = clone(staticData);
+        else if (r.ok) { data = JSON.parse(textFromB64(r.json.content)); sha = r.json.sha; }
+        else throw new Error('Không đọc được de.json (mã ' + r.status + '): ' + ((r.json && r.json.message) || ''));
+        KEYS.forEach(k => { if (!data[k]) data[k] = clone(staticData[k] || []); });
+        return { data, sha };
+    }
+    async function putDe(data, sha, message) {
+        const body = { message, content: b64FromText(JSON.stringify(data, null, 1)), branch: BRANCH };
+        if (sha) body.sha = sha;
+        const r = await gh('PUT', 'contents/de.json', body);
+        if (!r.ok) throw new Error('Không ghi được de.json (mã ' + r.status + '): ' + ((r.json && r.json.message) || ''));
+    }
+    function needToken() { if (!$('adm_token').value.trim()) { msg('Chưa dán token GitHub.', false); return true; } localStorage.setItem('adm_token', $('adm_token').value.trim()); return false; }
+
+    function admRenderList() {
+        const sec = $('adm_sec').value, items = currentData[sec] || [];
+        const isCh = !!CHAPTER[sec];
+        $('adm_chapWrap').style.display = isCh ? 'block' : 'none';
+        $('adm_nameWrap').style.display = isCh ? 'none' : 'block';
+        const ch = $('adm_chap'), old = ch.value; ch.innerHTML = '';
+        if (isCh) items.forEach((it, i) => { const o = document.createElement('option'); o.value = i; o.textContent = it[1] + (it[0] ? '  ✔' : ''); ch.appendChild(o); });
+        if (old) ch.value = old;
+        const box = $('adm_list'); box.innerHTML = '';
+        items.forEach(it => {
+            const row = document.createElement('div'); row.className = 'adm_row';
+            const sp = document.createElement('span'); sp.textContent = it[1] + (it[0] ? '' : '  (chưa có file)'); row.appendChild(sp);
+            if (it[0]) {
+                const x = document.createElement('button'); x.className = 'adm_x'; x.textContent = '✕'; x.title = 'Gỡ khỏi menu';
+                x.onclick = () => admRemove(sec, it[0], it[1]); row.appendChild(x);
+            }
+            box.appendChild(row);
+        });
+    }
+    $('adm_sec').onchange = admRenderList;
+    admRenderList();
+
+    async function admRemove(sec, path, name) {
+        if (needToken()) return;
+        if (!confirm('Gỡ "' + name + '" khỏi menu? (file vẫn còn trong repo)')) return;
+        try {
+            msg('Đang gỡ...');
+            const { data, sha } = await getDe();
+            if (CHAPTER[sec]) data[sec].forEach(it => { if (it[0] === path) it[0] = null; });
+            else data[sec] = data[sec].filter(it => it[0] !== path);
+            await putDe(data, sha, 'Gỡ khỏi menu: ' + name);
+            renderMenu(data); msg('Đã gỡ khỏi menu.', true);
+        } catch (e) { msg('Lỗi: ' + e.message, false); }
+    }
+
+    $('adm_go').onclick = async function () {
+        if (needToken()) return;
+        const sec = $('adm_sec').value, f = $('adm_file').files[0], isCh = !!CHAPTER[sec];
+        if (!f) { msg('Chưa chọn file.', false); return; }
+        let name = $('adm_name').value.trim();
+        if (!isCh && !name) { msg('Chưa nhập tên hiển thị.', false); return; }
+        if (isCh && !$('adm_chap').value) { msg('Chưa chọn chương.', false); return; }
+        const btn = this; btn.disabled = true;
+        try {
+            msg('Đang đọc file...');
+            const content = await fileToB64(f);
+            const path = sec + '/' + cleanName(f.name);
+            msg('Đang tải file lên GitHub...');
+            const ex = await gh('GET', 'contents/' + path + '?ref=' + BRANCH);
+            const body = { message: 'Đăng: ' + path, content, branch: BRANCH };
+            if (ex.ok && ex.json && ex.json.sha) body.sha = ex.json.sha;
+            const up = await gh('PUT', 'contents/' + path, body);
+            if (!up.ok) {
+                if (up.status === 401) throw new Error('Token sai hoặc hết hạn (401).');
+                if (up.status === 403 || up.status === 404) throw new Error('Token không đủ quyền hoặc sai repo (' + up.status + '). Cần quyền Contents: Read and write cho repo dethi.');
+                throw new Error('Mã ' + up.status + ': ' + ((up.json && up.json.message) || ''));
+            }
+            msg('Đang cập nhật menu...');
+            const { data, sha } = await getDe();
+            if (isCh) {
+                data[sec][parseInt($('adm_chap').value, 10)][0] = path;
+            } else {
+                if (!/^\p{Extended_Pictographic}/u.test(name)) name = (sec === 'dgnl' ? '📑 ' : '📝 ') + name;
+                data[sec] = data[sec].filter(it => it[0] !== path);
+                data[sec].unshift([path, name]);
+            }
+            await putDe(data, sha, 'Cập nhật menu: ' + sec);
+            renderMenu(data);
+            $('adm_file').value = ''; $('adm_name').value = '';
+            msg('✅ Đã đăng xong!\nFile: ' + path + '\nGitHub Pages cần 1–2 phút để cập nhật; sau đó bấm Ctrl+F5 để thấy menu mới.', true);
+        } catch (e) { msg('❌ Lỗi: ' + e.message, false); }
+        btn.disabled = false;
+    };
 </script>
 
 </body>
