@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+        <html lang="vi">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CHỦ ĐỀ 09. TÍCH PHÂN CƠ BẢN - TOÁN 12</title>
+        <script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};</script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+        <style>
+        body{font-family:system-ui,Arial,sans-serif;background:#f4f6fb;margin:0;padding:16px;color:#222;line-height:1.6}
+        .wrap{max-width:860px;margin:auto}
+        h1{font-size:22px;text-align:center;margin:8px 0}.info{text-align:center;color:#555}
+        h2{font-size:18px;color:#3949ab;margin-top:28px}
+        .question-card{background:#fff;padding:20px;border:1px solid #e3e3e3;border-radius:12px;margin-bottom:20px;counter-increment:cau}
+        .question-card::before{content:"Câu " counter(cau) ". ";font-weight:700;color:#3949ab}
+        .part{counter-reset:cau}
+        .q-text{display:inline}
+        .img-container{text-align:center;margin:12px 0}.img-container img{max-width:100%}
+        .options-list{display:grid;gap:8px;margin-top:12px}
+        .option-item{display:block;border:1px solid #ddd;border-radius:8px;padding:8px 12px;cursor:pointer}
+        .tf-table{width:100%;border-collapse:collapse;margin-top:12px}.tf-table td{border:1px solid #ddd;padding:8px}
+        .short-answer-input{margin-top:12px;padding:8px;font-size:16px;border:1px solid #bbb;border-radius:8px;width:180px}
+        .data-table{border-collapse:collapse;margin:10px auto}.data-table td,.data-table th{border:1px solid #888;padding:4px 10px;text-align:center}
+        .explanation{display:none;margin-top:14px;padding:14px;background:#fff8e1;border-left:4px solid #ffb300;border-radius:6px}
+        .step-title{font-weight:700;color:#e65100}
+        .check-btn{margin-top:12px;padding:8px 16px;border:0;border-radius:8px;background:#3949ab;color:#fff;cursor:pointer}
+        .verdict{margin-left:10px;font-weight:700}
+        .question-card.is-ok{border:2px solid #34a853}.question-card.is-bad{border:2px solid #e53935}
+        .ok{background:#e8f5e9!important;border-color:#34a853!important}.bad{background:#ffebee!important;border-color:#e53935!important}
+        </style>
+        </head>
+        <body><div class="wrap">
+        <h1>CHỦ ĐỀ 09. TÍCH PHÂN CƠ BẢN - TOÁN 12</h1>
+        <p class="info">Thời gian làm bài: 90 phút</p>
+        
+        <h2>DẠNG 1. Trắc nghiệm nhiều phương án lựa chọn</h2>
+        <div class="part">
+          <div class="question-card">
+    <div class="q-text">Nếu \( \int_1^4f(x)dx=4 \) và \( \int_1^4g(x)dx=-3 \) thì \( \int_1^4[f(x)-g(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q1"> A. \( 1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q1"> B. \( -7 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q1"> C. \( -1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q1" data-answer="true"> D. \( 7 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_1^4[f-g]dx=\int_1^4f\,dx-\int_1^4g\,dx=4-(-3)=7 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_0^3f(x)dx=3 \) thì \( \int_0^34f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q2"> A. \( 3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q2" data-answer="true"> B. \( 12 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q2"> C. \( 36 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q2"> D. \( 4 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> Hằng số nhân đưa ra ngoài: \( 4\cdot3=12 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_1^4f(x)dx=5 \) và \( \int_1^4g(x)dx=-4 \) thì \( \int_1^4[f(x)-g(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q3"> A. \( -1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q3"> B. \( -9 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q3"> C. \( 1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q3" data-answer="true"> D. \( 9 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 5-(-4)=9 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_0^3f(x)dx=2 \) thì \( \int_0^33f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q4" data-answer="true"> A. \( 6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q4"> B. \( 1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q4"> C. \( -1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q4"> D. \( 0 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 3\cdot2=6 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_1^4f(x)dx=6 \) và \( \int_1^4g(x)dx=-5 \) thì \( \int_1^4[f(x)-g(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q5"> A. \( -1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q5"> B. \( -11 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q5"> C. \( 1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q5" data-answer="true"> D. \( 11 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 6-(-5)=11 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_1^4f(x)dx=3 \) và \( \int_1^4g(x)dx=-2 \) thì \( \int_1^4[f(x)-g(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q6"> A. \( -1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q6"> B. \( -5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q6" data-answer="true"> C. \( 5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q6"> D. \( 1 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 3-(-2)=5 \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_1^2f(x)dx=5 \) và \( \int_2^3f(x)dx=-2 \) thì \( \int_1^3f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q7" data-answer="true"> A. \( 3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q7"> B. \( 7 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q7"> C. \( -10 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q7"> D. \( -7 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> Cộng hai đoạn liền nhau: \( \int_1^3=\int_1^2+\int_2^3=5+(-2)=3 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( \int_1^2f(x)dx=3 \) và \( \int_1^2g(x)dx=2 \). Khi đó \( \int_1^2[f(x)+g(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q8"> A. \( 1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q8" data-answer="true"> B. \( 5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q8"> C. \( -1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q8"> D. \( 6 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 3+2=5 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( \int_1^2f(x)dx=3 \) và \( \int_1^2g(x)dx=2 \). Khi đó \( \int_1^2[f(x)-g(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q9"> A. \( 6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q9" data-answer="true"> B. \( 1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q9"> C. \( 5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q9"> D. \( -1 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 3-2=1 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( \int_0^1[f(x)+2x]dx=4 \). Khi đó \( \int_0^1f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q10" data-answer="true"> A. \( 3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q10"> B. \( 2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q10"> C. \( 6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q10"> D. \( 4 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^12x\,dx=\left.x^2\right|_0^1=1 \).<br>
+✍️ <b>Bước 2:</b> \( \int_0^1f\,dx=4-1=3 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( \int_2^3f(x)dx=3 \) và \( \int_2^3g(x)dx=1 \). Khi đó \( \int_2^3[f(x)+g(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q11" data-answer="true"> A. \( 4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q11"> B. \( 2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q11"> C. \( -2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q11"> D. \( 3 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 3+1=4 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( \int_2^3f(x)dx=4 \) và \( \int_2^3g(x)dx=1 \). Khi đó \( \int_2^3[f(x)-g(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q12"> A. \( -3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q12" data-answer="true"> B. \( 3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q12"> C. \( 4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q12"> D. \( 5 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 4-1=3 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_1^2f(x)dx=-2 \) và \( \int_2^3f(x)dx=1 \) thì \( \int_1^3f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q13"> A. \( -3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q13" data-answer="true"> B. \( -1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q13"> C. \( 1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q13"> D. \( 3 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_1^3=-2+1=-1 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( \int_0^1f(x)dx=2 \) và \( \int_0^1g(x)dx=-4 \). Khi đó \( \int_0^1[f(x)+g(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q14"> A. \( 6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q14"> B. \( -6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q14" data-answer="true"> C. \( -2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q14"> D. \( 2 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 2+(-4)=-2 \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( \int_1^2f(x)dx=2 \) và \( \int_1^2g(x)dx=6 \), khi đó \( \int_1^2[f(x)-g(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q15"> A. \( 4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q15"> B. \( -8 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q15"> C. \( 8 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q15" data-answer="true"> D. \( -4 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 2-6=-4 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( \int_0^1f(x)dx=3 \) và \( \int_0^1g(x)dx=4 \), khi đó \( \int_0^1[f(x)+g(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q16"> A. \( -7 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q16" data-answer="true"> B. \( 7 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q16"> C. \( -1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q16"> D. \( 1 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 3+4=7 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.<br>
+⚠️ <b>Lưu ý:</b> ⚠️ Đề trong sách bị thiếu dữ kiện (chỉ in “và s,”). Tôi bổ sung \( \int_0^1g(x)dx=4 \), khi đó đáp án là B. Nếu đề gốc là \( -4 \) thì đáp án sẽ là C (−1); thầy/cô đối chiếu đề gốc giúp.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( \int_0^1f(x)dx=-2 \) và \( \int_0^1g(x)dx=3 \), khi đó \( \int_0^1[f(x)-g(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q17" data-answer="true"> A. \( -5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q17"> B. \( 5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q17"> C. \( -1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q17"> D. \( 1 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( -2-3=-5 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho \( \int_0^1f(x)dx=2 \) và \( \int_0^1g(x)dx=5 \), khi đó \( \int_0^1[f(x)-2g(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q18"> A. \( -3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q18"> B. \( 12 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q18" data-answer="true"> C. \( -8 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q18"> D. \( 1 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 2-2\cdot5=-8 \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( f(x) \) có đạo hàm trên đoạn \( [1;2] \), \( f(1)=1 \) và \( f(2)=2 \). Tính \( I=\int_1^2f'(x)dx \).</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q19" data-answer="true"> A. \( I=1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q19"> B. \( I=-1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q19"> C. \( I=3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q19"> D. \( I=\frac72 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( f \) là một nguyên hàm của \( f' \), nên \( I=f(2)-f(1)=2-1=1 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_0^2f(x)dx=4 \) thì \( \int_0^2[2f(x)-1]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q20"> A. \( 8 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q20"> B. \( 10 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q20"> C. \( 7 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q20" data-answer="true"> D. \( 6 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^22f\,dx=8 \); \( \int_0^21\,dx=2 \).<br>
+✍️ <b>Bước 2:</b> \( 8-2=6 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_0^2f(x)dx=6 \) thì \( \int_0^2[2f(x)-1]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q21"> A. \( 12 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q21" data-answer="true"> B. \( 10 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q21"> C. \( 11 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q21"> D. \( 14 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 2\cdot6-2=10 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_0^2f(x)dx=3 \) thì \( \int_0^2[2f(x)-1]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q22"> A. \( 6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q22" data-answer="true"> B. \( 4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q22"> C. \( 8 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q22"> D. \( 5 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 2\cdot3-\int_0^21\,dx=6-2=4 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_0^2f(x)dx=5 \) thì \( \int_0^2[2f(x)-1]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q23" data-answer="true"> A. \( 8 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q23"> B. \( 9 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q23"> C. \( 10 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q23"> D. \( 12 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 2\cdot5-\int_0^21\,dx=10-2=8 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_1^3[2f(x)+1]dx=5 \) thì \( \int_1^3f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q24"> A. \( 3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q24"> B. \( 2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q24"> C. \( \frac34 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q24" data-answer="true"> D. \( \frac32 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_1^31\,dx=2 \), nên \( 2\int_1^3f\,dx+2=5 \).<br>
+✍️ <b>Bước 2:</b> \( \int_1^3f\,dx=\frac32 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( \int_0^1[f(x)+2x]dx=5 \). Khi đó \( \int_0^1f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q25"> A. \( 7 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q25"> B. \( 3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q25"> C. \( 5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q25" data-answer="true"> D. \( 4 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^12x\,dx=1 \), nên \( \int_0^1f\,dx=5-1=4 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( \int_0^1[f(x)+2x]dx=3 \). Khi đó \( \int_0^1f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q26"> A. \( 1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q26"> B. \( 5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q26"> C. \( 3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q26" data-answer="true"> D. \( 2 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^12x\,dx=1 \), nên \( \int_0^1f\,dx=3-1=2 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( \int_0^1[f(x)+2x]dx=2 \). Khi đó \( \int_0^1f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q27" data-answer="true"> A. \( 1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q27"> B. \( 4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q27"> C. \( 2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q27"> D. \( 0 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^1f\,dx=2-1=1 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( F(x)=x^2 \) là một nguyên hàm của hàm số \( f(x) \) trên \( \mathbb{R} \). Giá trị của \( \int_1^2[2+f(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q28" data-answer="true"> A. \( 5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q28"> B. \( 3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q28"> C. \( \frac{13}{3} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q28"> D. \( \frac73 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( \int_1^22\,dx=2 \); \( \int_1^2f\,dx=F(2)-F(1)=4-1=3 \).<br>
+✍️ <b>Bước 2:</b> Tổng \( =2+3=5 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Tính \( \int_1^2\frac{dx}{3x-2} \).</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q29"> A. \( 2\ln2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q29"> B. \( \frac13\ln2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q29" data-answer="true"> C. \( \frac23\ln2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q29"> D. \( \ln2 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> \( \int\frac{dx}{ax+b}=\frac1a\ln|ax+b| \).<br>
+✍️ <b>Bước 1:</b> \( \int_1^2\frac{dx}{3x-2}=\left.\frac13\ln|3x-2|\right|_1^2=\frac13(\ln4-\ln1) \).<br>
+✍️ <b>Bước 2:</b> \( =\frac13\cdot2\ln2=\frac23\ln2 \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Tính \( \int_0^1e^{3x+1}dx \).</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q30" data-answer="true"> A. \( \frac13(e^4-e) \).</label>
+      <label class="option-item"><input type="radio" name="p1_q30"> B. \( e^4-e \).</label>
+      <label class="option-item"><input type="radio" name="p1_q30"> C. \( \frac13(e^4+e) \).</label>
+      <label class="option-item"><input type="radio" name="p1_q30"> D. \( e^3-e \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> \( \int e^{ax+b}dx=\frac1ae^{ax+b} \).<br>
+✍️ <b>Bước 1:</b> \( \left.\frac13e^{3x+1}\right|_0^1=\frac13(e^4-e) \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( F(x)=x^2 \) là một nguyên hàm của hàm số \( f(x) \) trên \( \mathbb{R} \). Giá trị của \( \int_1^3[1+f(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q31" data-answer="true"> A. \( 10 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q31"> B. \( 8 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q31"> C. \( \frac{26}{3} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q31"> D. \( \frac{32}{3} \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( \int_1^31\,dx=2 \); \( \int_1^3f\,dx=F(3)-F(1)=9-1=8 \).<br>
+✍️ <b>Bước 2:</b> Tổng \( =10 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( F(x)=x^3 \) là một nguyên hàm của hàm số \( f(x) \) trên \( \mathbb{R} \). Giá trị của \( \int_1^3[1+f(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q32"> A. \( 20 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q32"> B. \( 22 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q32"> C. \( 26 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q32" data-answer="true"> D. \( 28 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( \int_1^31\,dx=2 \); \( \int_1^3f\,dx=F(3)-F(1)=27-1=26 \).<br>
+✍️ <b>Bước 2:</b> Tổng \( =28 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( F(x)=x^3 \) là một nguyên hàm của hàm số \( f(x) \) trên \( \mathbb{R} \). Giá trị của \( \int_1^2[2+f(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q33"> A. \( \frac{23}{4} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q33"> B. \( 7 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q33" data-answer="true"> C. \( 9 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q33"> D. \( \frac{15}{4} \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( \int_1^22\,dx=2 \); \( \int_1^2f\,dx=F(2)-F(1)=8-1=7 \).<br>
+✍️ <b>Bước 2:</b> Tổng \( =9 \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( f(x) \). Biết \( f(0)=4 \) và \( f'(x)=2\sin^2x+3,\forall x\in\mathbb{R} \), khi đó \( \int_0^{\frac\pi4}f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q34"> A. \( \frac{\pi^2-2}{8} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q34"> B. \( \frac{\pi^2+8\pi-8}{8} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q34" data-answer="true"> C. \( \frac{\pi^2+8\pi-2}{8} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q34"> D. \( \frac{3\pi^2+2\pi-3}{8} \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Hạ bậc \( 2\sin^2x=1-\cos2x \). Tìm \( f \) từ \( f' \), dùng \( f(0) \) tìm hằng số, rồi tích phân.<br>
+✍️ <b>Bước 1:</b> \( f'(x)=1-\cos2x+3=4-\cos2x \), nên \( f(x)=4x-\frac12\sin2x+C \).<br>
+✍️ <b>Bước 2:</b> \( f(0)=C=4 \), vậy \( f(x)=4x-\frac12\sin2x+4 \).<br>
+✍️ <b>Bước 3:</b> \( \int_0^{\pi/4}f\,dx=\left.2x^2+\frac14\cos2x+4x\right|_0^{\pi/4}=\frac{\pi^2}{8}+0+\pi-\frac14=\frac{\pi^2+8\pi-2}{8} \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( f(x) \). Biết \( f(0)=4 \) và \( f'(x)=2\sin^2x+1,\forall x\in\mathbb{R} \), khi đó \( \int_0^{\frac\pi4}f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q35"> A. \( \frac{\pi^2+15\pi}{16} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q35"> B. \( \frac{\pi^2+16\pi-16}{16} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q35" data-answer="true"> C. \( \frac{\pi^2+16\pi-4}{16} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q35"> D. \( \frac{\pi^2-4}{16} \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Hạ bậc \( 2\sin^2x=1-\cos2x \).<br>
+✍️ <b>Bước 1:</b> \( f'(x)=2-\cos2x \), nên \( f(x)=2x-\frac12\sin2x+C \), \( f(0)=4\Rightarrow C=4 \).<br>
+✍️ <b>Bước 2:</b> \( \int_0^{\pi/4}f\,dx=\left.x^2+\frac14\cos2x+4x\right|_0^{\pi/4}=\frac{\pi^2}{16}-\frac14+\pi=\frac{\pi^2+16\pi-4}{16} \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( f(x) \). Biết \( f(0)=4 \) và \( f'(x)=2\cos^2x+3,\forall x\in\mathbb{R} \), khi đó \( \int_0^{\frac\pi4}f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q36"> A. \( \frac{\pi^2+2}{8} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q36"> B. \( \frac{\pi^2+8\pi+8}{8} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q36" data-answer="true"> C. \( \frac{\pi^2+8\pi+2}{8} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q36"> D. \( \frac{\pi^2+6\pi+8}{8} \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Hạ bậc \( 2\cos^2x=1+\cos2x \).<br>
+✍️ <b>Bước 1:</b> \( f'(x)=1+\cos2x+3=4+\cos2x \), nên \( f(x)=4x+\frac12\sin2x+C \), \( f(0)=4\Rightarrow C=4 \).<br>
+✍️ <b>Bước 2:</b> \( \int_0^{\pi/4}f\,dx=\left.2x^2-\frac14\cos2x+4x\right|_0^{\pi/4}=\frac{\pi^2}{8}-0+\pi-\left(-\frac14\right)=\frac{\pi^2+8\pi+2}{8} \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Tính \( \int_1^2\frac{dx}{2x+3} \).</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q37"> A. \( 2\ln\frac75 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q37"> B. \( \frac12\ln35 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q37"> C. \( \ln\frac75 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q37" data-answer="true"> D. \( \frac12\ln\frac75 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> \( \int\frac{dx}{ax+b}=\frac1a\ln|ax+b| \).<br>
+✍️ <b>Bước 1:</b> \( \left.\frac12\ln|2x+3|\right|_1^2=\frac12(\ln7-\ln5)=\frac12\ln\frac75 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Tính \( \int_1^2e^{3x-1}dx \).</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q38" data-answer="true"> A. \( \frac13(e^5-e^2) \).</label>
+      <label class="option-item"><input type="radio" name="p1_q38"> B. \( \frac13e^5-e^2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q38"> C. \( e^5-e^2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q38"> D. \( \frac13(e^5+e^2) \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> \( \int e^{ax+b}dx=\frac1ae^{ax+b} \).<br>
+✍️ <b>Bước 1:</b> \( \left.\frac13e^{3x-1}\right|_1^2=\frac13(e^5-e^2) \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Tích phân \( \int_0^2\frac{dx}{x+3} \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q39"> A. \( \frac{16}{225} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q39"> B. \( \log\frac53 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q39" data-answer="true"> C. \( \ln\frac53 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q39"> D. \( \frac{2}{15} \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> \( \int\frac{dx}{x+b}=\ln|x+b| \).<br>
+✍️ <b>Bước 1:</b> \( \left.\ln|x+3|\right|_0^2=\ln5-\ln3=\ln\frac53 \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho \( F(x) \) là một nguyên hàm của hàm số \( f(x)=\frac{\ln x}{x} \). Tính \( I=F(e)-F(1) \).</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q40"> A. \( I=e \).</label>
+      <label class="option-item"><input type="radio" name="p1_q40"> B. \( I=\frac1e \).</label>
+      <label class="option-item"><input type="radio" name="p1_q40" data-answer="true"> C. \( I=\frac12 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q40"> D. \( I=1 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( I=F(e)-F(1)=\int_1^e\frac{\ln x}{x}dx \). Đặt \( t=\ln x \), \( dt=\frac{dx}{x} \); \( x:1\to e \) thì \( t:0\to1 \).<br>
+✍️ <b>Bước 2:</b> \( I=\int_0^1t\,dt=\frac12 \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho \( \int_{-1}^2f(x)dx=2 \) và \( \int_{-1}^2g(x)dx=-1 \). Tính \( I=\int_{-1}^2[x+2f(x)-3g(x)]dx \).</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q41"> A. \( I=\frac52 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q41"> B. \( I=\frac72 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q41" data-answer="true"> C. \( I=\frac{17}{2} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q41"> D. \( I=\frac{11}{2} \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_{-1}^2x\,dx=\left.\frac{x^2}{2}\right|_{-1}^2=2-\frac12=\frac32 \).<br>
+✍️ <b>Bước 2:</b> \( I=\frac32+2\cdot2-3\cdot(-1)=\frac32+4+3=\frac{17}{2} \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( f(x) \) thỏa mãn \( f'(x)=3-5\sin x \) và \( f(0)=10 \). Mệnh đề nào dưới đây đúng?</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q42" data-answer="true"> A. \( f(x)=3x+5\cos x+5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q42"> B. \( f(x)=3x+5\cos x+2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q42"> C. \( f(x)=3x-5\cos x+2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q42"> D. \( f(x)=3x-5\cos x+15 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> \( f \) là nguyên hàm của \( f' \); dùng \( f(0) \) tìm hằng số.<br>
+✍️ <b>Bước 1:</b> \( f(x)=\int(3-5\sin x)dx=3x+5\cos x+C \).<br>
+✍️ <b>Bước 2:</b> \( f(0)=5+C=10\Rightarrow C=5 \). Vậy \( f(x)=3x+5\cos x+5 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( f(x) \). Biết \( f(0)=4 \) và \( f'(x)=2\cos^2x+1,\forall x\in\mathbb{R} \), khi đó \( \int_0^{\frac\pi4}f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q43"> A. \( \frac{\pi^2+4}{16} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q43"> B. \( \frac{\pi^2+14\pi}{16} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q43" data-answer="true"> C. \( \frac{\pi^2+16\pi+4}{16} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q43"> D. \( \frac{\pi^2+16\pi+16}{16} \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Hạ bậc \( 2\cos^2x=1+\cos2x \).<br>
+✍️ <b>Bước 1:</b> \( f'(x)=2+\cos2x \), nên \( f(x)=2x+\frac12\sin2x+C \), \( f(0)=4\Rightarrow C=4 \).<br>
+✍️ <b>Bước 2:</b> \( \int_0^{\pi/4}f\,dx=\left.x^2-\frac14\cos2x+4x\right|_0^{\pi/4}=\frac{\pi^2}{16}+\frac14+\pi=\frac{\pi^2+16\pi+4}{16} \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho \( \int_0^1\frac{x\,dx}{(x+2)^2}=a+b\ln2+c\ln3 \) với \( a,b,c \) là các số hữu tỷ. Giá trị của \( 3a+b+c \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q44"> A. \( -2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q44" data-answer="true"> B. \( -1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q44"> C. \( 2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q44"> D. \( 1 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tách \( \frac{x}{(x+2)^2}=\frac{(x+2)-2}{(x+2)^2}=\frac{1}{x+2}-\frac{2}{(x+2)^2} \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^1\frac{dx}{x+2}=\ln3-\ln2 \).<br>
+✍️ <b>Bước 2:</b> \( \int_0^1\frac{2\,dx}{(x+2)^2}=\left.-\frac{2}{x+2}\right|_0^1=-\frac23+1=\frac13 \).<br>
+✍️ <b>Bước 3:</b> Vậy tích phân \( =\ln3-\ln2-\frac13 \), tức \( a=-\frac13,\ b=-1,\ c=1 \).<br>
+✍️ <b>Bước 4:</b> \( 3a+b+c=-1-1+1=-1 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( f(x) \) là hàm số liên tục trên \( \mathbb{R} \), \( a \) là số thực thỏa mãn \( 0\lt a\lt\pi \) và \( \int_0^af(x)dx=\int_a^\pi f(x)dx=1 \). Tính \( \int_0^\pi f(x)dx \).</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q45"> A. \( 0 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q45" data-answer="true"> B. \( 2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q45"> C. \( \frac12 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q45"> D. \( 1 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> Cộng hai đoạn liền nhau: \( \int_0^\pi=\int_0^a+\int_a^\pi=1+1=2 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho \( \int_0^1f(x)dx=1 \) và \( \int_0^2f(x)dx=-4 \). Tích phân \( \int_1^2f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q46"> A. \( 5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q46"> B. \( -3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q46" data-answer="true"> C. \( -5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q46"> D. \( 3 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^2=\int_0^1+\int_1^2 \Rightarrow \int_1^2=-4-1=-5 \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho \( I=\int_0^2f(x)dx=3 \). Khi đó \( J=\int_0^2[4f(x)-3]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q47"> A. \( 8 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q47" data-answer="true"> B. \( 6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q47"> C. \( 2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q47"> D. \( 4 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^24f\,dx=12 \); \( \int_0^23\,dx=6 \).<br>
+✍️ <b>Bước 2:</b> \( J=12-6=6 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( f(x) \) liên tục trên \( [a;c] \) và \( b \) là số thực tùy ý thuộc đoạn \( [a;c] \). Nếu biết \( \int_a^bf(x)dx=-5 \) và \( \int_b^cf(x)dx=10 \), thì giá trị của \( \int_a^cf(x)dx \) là bao nhiêu?</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q48" data-answer="true"> A. \( 5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q48"> B. \( -5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q48"> C. \( 15 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q48"> D. \( -15 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_a^c=\int_a^b+\int_b^c=-5+10=5 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Một vật chuyển động với vận tốc \( v(t)=4t+8\ (\text{m/s}) \), với thời gian \( t \) tính bằng giây. Tính quãng đường vật đi được trong khoảng thời gian từ \( t=8 \) đến \( t=10 \).</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q49"> A. \( 89\ (\text{m}) \).</label>
+      <label class="option-item"><input type="radio" name="p1_q49"> B. \( 87\ (\text{m}) \).</label>
+      <label class="option-item"><input type="radio" name="p1_q49"> C. \( 86\ (\text{m}) \).</label>
+      <label class="option-item"><input type="radio" name="p1_q49" data-answer="true"> D. \( 88\ (\text{m}) \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Quãng đường \( s=\int_{t_1}^{t_2}v(t)dt \) (vận tốc không đổi dấu).<br>
+✍️ <b>Bước 1:</b> \( s=\int_8^{10}(4t+8)dt=\left.(2t^2+8t)\right|_8^{10} \).<br>
+✍️ <b>Bước 2:</b> \( =(200+80)-(128+64)=280-192=88 \) (m).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( y=f(x) \) có đạo hàm liên tục trên đoạn \( [a;b] \) và \( f(3)=-1;\ f(b)=3 \). Khi đó \( \int_a^bf'(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q50"> A. \( -3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q50" data-answer="true"> B. \( 4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q50"> C. \( -4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q50"> D. \( 2 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( \int_a^bf'(x)dx=f(b)-f(a) \).<br>
+✍️ <b>Bước 2:</b> Đề cho \( f(3)=-1 \) (sách ghi \( f(3) \) thay vì \( f(a) \)); hiểu \( f(a)=-1 \) thì kết quả \( =3-(-1)=4 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.<br>
+⚠️ <b>Lưu ý:</b> ⚠️ Đề sách ghi \( f(3)=-1 \) trong khi cận dưới là \( a \); đúng ra phải là \( f(a)=-1 \) (mới tính được). Tôi hiểu theo \( f(a)=-1 \).
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( \int_0^9f(x)dx=37 \) và \( \int_0^9[3f(x)-2g(x)]dx=61 \). Tính \( \int_0^9g(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q51"> A. \( -25 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q51" data-answer="true"> B. \( 25 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q51"> C. \( -86 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q51"> D. \( 86 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 3\int f\,dx-2\int g\,dx=61 \Rightarrow 3\cdot37-2G=61 \).<br>
+✍️ <b>Bước 2:</b> \( 111-2G=61\Rightarrow G=25 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( y=f(x) \) liên tục trên đoạn \( [a;b] \) và \( c \) là số thực tùy ý thuộc đoạn \( [a;b] \). Nếu \( \int_a^bf(x)dx=3 \) và \( \int_a^cf(x)dx=8 \) thì tích phân \( \int_c^bf(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q52"> A. \( 11 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q52" data-answer="true"> B. \( -5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q52"> C. \( 5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q52"> D. \( -11 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_a^b=\int_a^c+\int_c^b\Rightarrow\int_c^b=3-8=-5 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.<br>
+⚠️ <b>Lưu ý:</b> ⚠️ Đáp án đúng là \( -5 \) (phương án B); chú ý không nhầm thành \( 5 \).
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết rằng \( F(x) \) là một nguyên hàm của hàm số \( f(x) \) trên đoạn \( [1;4] \) và \( F(4)=9,\ F(1)=3 \). Giá trị của \( \int_1^4[f(x)+2]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q53"> A. \( 0 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q53"> B. \( 8 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q53"> C. \( -4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q53" data-answer="true"> D. \( 12 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( \int_1^4f\,dx=F(4)-F(1)=9-3=6 \); \( \int_1^42\,dx=6 \).<br>
+✍️ <b>Bước 2:</b> Tổng \( =12 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_{-3}^1f(x)dx=-2 \) thì \( \int_{-3}^1[2-5f(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q54" data-answer="true"> A. \( 18 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q54"> B. \( 6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q54"> C. \( 12 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q54"> D. \( -4 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_{-3}^12\,dx=2\cdot4=8 \); \( -5\int f\,dx=-5\cdot(-2)=10 \).<br>
+✍️ <b>Bước 2:</b> Tổng \( =18 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho \( \int_0^2[f(x)-3x^2]dx=4 \). Tích phân \( \int_0^2f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q55"> A. \( 8 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q55"> B. \( -4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q55" data-answer="true"> C. \( 12 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q55"> D. \( 4 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^23x^2dx=\left.x^3\right|_0^2=8 \).<br>
+✍️ <b>Bước 2:</b> \( \int_0^2f\,dx=4+8=12 \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( y=f(x) \) liên tục trên \( \mathbb{R} \). Biết \( \int_5^9f(x)dx=25 \) thì \( \int_9^5f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q56"> A. \( 9 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q56"> B. \( 25 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q56" data-answer="true"> C. \( -25 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q56"> D. \( 5 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> Đổi cận thì đổi dấu: \( \int_9^5=-\int_5^9=-25 \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_0^4f(x)dx=6 \) và \( \int_1^4f(x)dx=-5 \) thì \( \int_1^0f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q57"> A. \( 11 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q57" data-answer="true"> B. \( -11 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q57"> C. \( -1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q57"> D. \( 1 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^4=\int_0^1+\int_1^4\Rightarrow\int_0^1=6-(-5)=11 \).<br>
+✍️ <b>Bước 2:</b> \( \int_1^0=-\int_0^1=-11 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_0^2f(x)dx=3 \) thì \( \int_0^2[f(x)+2]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q58"> A. \( 5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q58"> B. \( 6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q58" data-answer="true"> C. \( 7 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q58"> D. \( 10 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^22\,dx=4 \), nên \( 3+4=7 \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( y=f(x) \) liên tục trên \( \mathbb{R} \). Biết hàm số \( F(x) \) là một nguyên hàm của \( f(x) \) trên \( \mathbb{R} \) thoả \( F(5)=2+F(1) \). Giá trị của \( \int_1^5f(x)dx \)</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q59"> A. \( 8 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q59" data-answer="true"> B. \( 2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q59"> C. \( -2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q59"> D. \( -8 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( \int_1^5f\,dx=F(5)-F(1)=2 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho \( \int_1^2f(x)dx=-3 \) và \( \int_1^2g(x)dx=4 \). Giá trị tích phân \( \int_1^2(g(x)+2f(x))dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q60" data-answer="true"> A. \( -2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q60"> B. \( 2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q60"> C. \( 1 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q60"> D. \( 5 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 4+2\cdot(-3)=-2 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_0^3f(x)dx=6 \) thì \( \int_0^3\left[\frac13f(x)+2\right]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q61" data-answer="true"> A. \( 8 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q61"> B. \( 6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q61"> C. \( 5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q61"> D. \( 9 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \frac13\cdot6=2 \); \( \int_0^32\,dx=6 \).<br>
+✍️ <b>Bước 2:</b> Tổng \( =8 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( f(x) \) liên tục trên \( \mathbb{R} \) thỏa mãn \( \int_0^1f(x)dx=2 \) và \( \int_0^3f(x)dx=7 \). Khi đó \( \int_1^3f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q62"> A. \( -9 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q62"> B. \( 9 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q62"> C. \( -5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q62" data-answer="true"> D. \( 5 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_1^3=\int_0^3-\int_0^1=7-2=5 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_0^{\frac\pi2}f(x)dx=-5 \) thì \( \int_0^{\frac\pi2}[f(x)+\sin x]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q63" data-answer="true"> A. \( -4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q63"> B. \( -7 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q63"> C. \( -6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q63"> D. \( -3 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^{\pi/2}\sin x\,dx=\left.-\cos x\right|_0^{\pi/2}=0+1=1 \).<br>
+✍️ <b>Bước 2:</b> Tổng \( =-5+1=-4 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( f(x) \) liên tục trên \( \mathbb{R} \) và có \( \int_0^4f(x)dx=9;\ \int_2^4f(x)dx=4 \). Tích phân \( \int_0^2f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q64"> A. \( 13 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q64" data-answer="true"> B. \( 5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q64"> C. \( \frac94 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q64"> D. \( 36 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^2=\int_0^4-\int_2^4=9-4=5 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_0^2f(x)dx=4 \) thì \( \int_0^2\left[\frac12f(x)-2\right]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q65"> A. \( 4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q65"> B. \( 6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q65"> C. \( 0 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q65" data-answer="true"> D. \( -2 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \frac12\cdot4=2 \); \( \int_0^22\,dx=4 \).<br>
+✍️ <b>Bước 2:</b> \( 2-4=-2 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( F(x)=x^3 \) là một nguyên hàm của hàm số \( f(x) \) trên \( \mathbb{R} \). Giá trị của \( \int_1^2[2+f(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q66" data-answer="true"> A. \( 9 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q66"> B. \( \frac{15}{4} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q66"> C. \( 7 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q66"> D. \( \frac{23}{4} \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( \int_1^22\,dx=2 \); \( \int_1^2f\,dx=F(2)-F(1)=8-1=7 \).<br>
+✍️ <b>Bước 2:</b> Tổng \( =9 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Nếu \( \int_a^bf(x)dx=2025 \) thì \( \int_a^b2f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q67"> A. \( 2025^2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q67"> B. \( \frac{2025}{2} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q67"> C. \( 2023 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q67" data-answer="true"> D. \( 4050 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 2\cdot2025=4050 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho \( \int_0^1f(x)dx=7 \). Giá trị của \( \int_0^13f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q68" data-answer="true"> A. \( 21 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q68"> B. \( \frac37 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q68"> C. \( 7 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q68"> D. \( \frac73 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 3\cdot7=21 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( F(x) \) là nguyên hàm của \( f(x) \). Biết \( F(1)=-3,\ F(-2)=12 \). Tính \( I=\int_{-2}^1f(x)dx \).</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q69"> A. \( I=9 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q69"> B. \( I=15 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q69"> C. \( I=-36 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q69" data-answer="true"> D. \( I=-15 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( I=F(1)-F(-2)=-3-12=-15 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( f(x) \) liên tục trên \( [a;b] \) và có một nguyên hàm trên \( [a;b] \) là hàm số \( F(x) \). Tìm mệnh đề đúng trong các mệnh đề sau</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q70"> A. \( \int_a^bf(x)dx=f(b)-f(a) \).</label>
+      <label class="option-item"><input type="radio" name="p1_q70"> B. \( \int_a^bf(x)dx=F(a)-F(b) \).</label>
+      <label class="option-item"><input type="radio" name="p1_q70" data-answer="true"> C. \( \int_a^bf(x)dx=F(b)-F(a) \).</label>
+      <label class="option-item"><input type="radio" name="p1_q70"> D. \( \int_a^bf(x)dx=f(a)-f(b) \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> Theo định nghĩa (Newton–Leibniz): \( \int_a^bf(x)dx=F(b)-F(a) \) — lấy nguyên hàm tại cận trên trừ nguyên hàm tại cận dưới.<br>
+✍️ <b>Bước 2:</b> A, D dùng \( f \) thay vì \( F \); B bị đảo thứ tự cận.<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( f(x) \) có đạo hàm \( f'(x) \) liên tục trên \( \mathbb{R} \), \( f(1)=1 \) và \( \int_1^4f'(x)dx=15 \) khi đó giá trị \( f(4) \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q71" data-answer="true"> A. \( 16 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q71"> B. \( 15 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q71"> C. \( 14 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q71"> D. \( 17 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( \int_1^4f'\,dx=f(4)-f(1)=15 \Rightarrow f(4)=15+1=16 \).<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho \( \int_1^5f(x)dx=3;\ \int_1^2f(x)dx=-2 \). Tính \( I=3\int_2^5f(x)dx \).</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q72"> A. \( 3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q72"> B. \( -15 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q72" data-answer="true"> C. \( 15 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q72"> D. \( -3 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( \int_2^5=\int_1^5-\int_1^2=3-(-2)=5 \).<br>
+✍️ <b>Bước 2:</b> \( I=3\cdot5=15 \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( y=f(x) \) liên tục trên \( \mathbb{R} \) và \( F(x) \) là một nguyên hàm của \( f(x) \), biết \( \int_0^9f(x)dx=9 \) và \( F(0)=3 \). Tính \( F(9) \).</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q73"> A. \( F(9)=-12 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q73"> B. \( F(9)=6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q73" data-answer="true"> C. \( F(9)=12 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q73"> D. \( F(9)=-6 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^9f\,dx=F(9)-F(0)=9\Rightarrow F(9)=9+3=12 \).<br>
+🎯 <b>Kết luận:</b> Chọn C.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( f(x) \) có đạo hàm liên tục trên đoạn \( [a;b] \) và \( f(a)=-2,\ f(b)=-4 \). Giá trị của \( \int_a^bf'(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q74"> A. \( 2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q74" data-answer="true"> B. \( -2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q74"> C. \( -6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q74"> D. \( 6 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( f(b)-f(a)=-4-(-2)=-2 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Biết \( \int_2^48f(x)dx=3,\ \int_2^34f(y)dy=7 \). Tính \( \int_3^4f(z)dz \).</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q75"> A. \( -\frac74 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q75" data-answer="true"> B. \( -\frac{11}{8} \).</label>
+      <label class="option-item"><input type="radio" name="p1_q75"> C. \( -\frac32 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q75"> D. \( -\frac98 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tích phân không phụ thuộc tên biến: \( \int f(x)dx=\int f(y)dy=\int f(z)dz \). Dùng \( \int_2^4=\int_2^3+\int_3^4 \).<br>
+✍️ <b>Bước 1:</b> \( \int_2^4f\,dx=\frac38 \) và \( \int_2^3f\,dy=\frac74 \).<br>
+✍️ <b>Bước 2:</b> \( \int_3^4f\,dz=\frac38-\frac74=\frac{3-14}{8}=-\frac{11}{8} \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho \( f(x) \) là hàm số liên tục trên đoạn \( [a;b] \) và \( F(x) \) là một nguyên hàm của hàm số \( f(x) \) trên đoạn \( [a;b] \). Khẳng định nào dưới đây đúng?</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q76" data-answer="true"> A. \( \int_a^bf(x)dx=\left.F(x)\right|_a^b=F(b)-F(a) \).</label>
+      <label class="option-item"><input type="radio" name="p1_q76"> B. \( \int_a^bF(x)dx=\left.f(x)\right|_a^b=f(b)-f(a) \).</label>
+      <label class="option-item"><input type="radio" name="p1_q76"> C. \( \int_a^bf(x)dx=\left.F(x)\right|_a^b=F(a)-F(b) \).</label>
+      <label class="option-item"><input type="radio" name="p1_q76"> D. \( \int_a^bF(x)dx=\left.f(x)\right|_a^b=f(a)-f(b) \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> Newton–Leibniz: \( \int_a^bf\,dx=F(b)-F(a) \). B, D sai vì lấy tích phân của \( F \) mà lại dùng \( f \); C đảo thứ tự.<br>
+🎯 <b>Kết luận:</b> Chọn A.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Giá trị của tích phân \( \int_{-2}^2|x^2-1|dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q77"> A. \( \frac83 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q77" data-answer="true"> B. \( 4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q77"> C. \( 0 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q77"> D. \( \frac43 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tách dấu giá trị tuyệt đối: \( |x^2-1|=1-x^2 \) khi \( |x|\le1 \), \( =x^2-1 \) khi \( |x|\ge1 \). Hàm chẵn nên \( \int_{-2}^2=2\int_0^2 \).<br>
+✍️ <b>Bước 1:</b> \( \int_{-2}^2|x^2-1|dx=2\int_0^2|x^2-1|dx=2\left[\int_0^1(1-x^2)dx+\int_1^2(x^2-1)dx\right] \).<br>
+✍️ <b>Bước 2:</b> \( \int_0^1(1-x^2)dx=1-\frac13=\frac23 \); \( \int_1^2(x^2-1)dx=\frac{8-1}{3}-1=\frac43 \).<br>
+✍️ <b>Bước 3:</b> Tổng \( =2\left(\frac23+\frac43\right)=4 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.<br>
+⚠️ <b>Lưu ý:</b> Bẫy: nếu bỏ dấu giá trị tuyệt đối và tính \( \int_{-2}^2(x^2-1)dx \) sẽ được \( \frac43 \) (phương án D) là sai; luôn xét dấu trước khi tích phân.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( f(x) \) liên tục trên \( \mathbb{R} \). Biết hàm số \( F(x) \) là một nguyên hàm của \( f(x) \) trên \( \mathbb{R} \) và \( F(3)=5,\ F(1)=1 \). Tích phân \( \int_1^3f(x)dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q78"> A. \( -4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q78"> B. \( 5 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q78"> C. \( 6 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q78" data-answer="true"> D. \( 4 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( F(3)-F(1)=5-1=4 \).<br>
+🎯 <b>Kết luận:</b> Chọn D.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho \( \int_0^1f(x)dx=2 \) và \( \int_0^1g(x)dx=5 \), khi đó \( \int_0^1[f(x)-2g(x)]dx \) bằng</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q79"> A. \( -3 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q79" data-answer="true"> B. \( -8 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q79"> C. \( 12 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q79"> D. \( 1 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Tính chất: \( \int_a^b[f\pm g]dx=\int_a^bf\,dx\pm\int_a^bg\,dx \); \( \int_a^bkf\,dx=k\int_a^bf\,dx \); \( \int_a^bf\,dx=\int_a^cf\,dx+\int_c^bf\,dx \); \( \int_b^af\,dx=-\int_a^bf\,dx \).<br>
+✍️ <b>Bước 1:</b> \( 2-2\cdot5=-8 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="q-text">Cho hàm số \( y=f(x) \) có đạo hàm liên tục trên \( [0;2] \), \( f(0)=1 \) và \( \int_0^2f'(x)dx=-3 \). Tính \( f(2) \).</div>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="p1_q80"> A. \( f(2)=-4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q80" data-answer="true"> B. \( f(2)=-2 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q80"> C. \( f(2)=4 \).</label>
+      <label class="option-item"><input type="radio" name="p1_q80"> D. \( f(2)=-3 \).</label>
+    </div>
+    <div class="explanation">
+<span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+📚 <b>Lý thuyết:</b> Công thức Newton–Leibniz: \( \int_a^bf(x)dx=F(b)-F(a) \) với \( F \) là một nguyên hàm của \( f \).<br>
+✍️ <b>Bước 1:</b> \( \int_0^2f'\,dx=f(2)-f(0)=-3\Rightarrow f(2)=-3+1=-2 \).<br>
+🎯 <b>Kết luận:</b> Chọn B.
+    </div>
+  </div>
+
+</div>
+        
+        <script>
+        // Nút "Kiểm tra đáp án" cho từng câu: sai thì mở hướng dẫn giải
+        const norm = s => String(s).trim().replace(/\s+/g, '').replace(',', '.').toLowerCase();
+        document.querySelectorAll('.question-card').forEach(card => {
+          const btn = document.createElement('button'); btn.className = 'check-btn'; btn.textContent = 'Kiểm tra đáp án';
+          const out = document.createElement('span'); out.className = 'verdict';
+          const ex = card.querySelector('.explanation'); card.insertBefore(btn, ex); card.insertBefore(out, ex);
+          btn.onclick = () => {
+            let ok = true, done = true;
+            const opts = card.querySelector('.options-list'), tf = card.querySelector('.tf-table'), sa = card.querySelector('.short-answer-input');
+            if (opts) {
+              const picked = opts.querySelector('input:checked'); if (!picked) done = false;
+              opts.querySelectorAll('.option-item').forEach(l => { const i = l.querySelector('input'); l.classList.remove('ok', 'bad');
+                if (i.dataset.answer === 'true') l.classList.add('ok'); else if (i.checked) { l.classList.add('bad'); ok = false; } });
+            } else if (tf) {
+              tf.querySelectorAll('tr').forEach(r => { const p = r.querySelector('input:checked'); if (!p) done = false;
+                r.classList.remove('ok', 'bad'); r.classList.add(p && p.dataset.answer === 'true' ? 'ok' : 'bad'); if (!p || p.dataset.answer !== 'true') ok = false; });
+            } else if (sa) {
+              if (!sa.value.trim()) done = false;
+              const num = t => { t = norm(t); const f = /^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/.exec(t); return f ? f[1] / f[2] : (/^-?\d*\.?\d+$/.test(t) ? +t : NaN); };
+              ok = sa.dataset.answer.split('|').some(a => norm(a) === norm(sa.value) || Math.abs(num(a) - num(sa.value)) < 1e-9);
+              sa.classList.toggle('ok', ok); sa.classList.toggle('bad', !ok);
+            }
+            if (!done) { out.textContent = 'Em chưa làm xong câu này.'; out.style.color = '#e65100'; return; }
+            card.classList.toggle('is-ok', ok); card.classList.toggle('is-bad', !ok);
+            out.textContent = ok ? 'Chính xác!' : 'Chưa đúng, xem hướng dẫn giải bên dưới.'; out.style.color = ok ? '#2e7d32' : '#c62828';
+            if (ex) ex.style.display = ok ? 'none' : 'block';
+            if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([card]);
+          };
+        });
+        </script>
+        </body>
+        </html>
+        
