@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 18: Xác suất có điều kiện - Đề số 2</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], processEscapes: true },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+:root{
+  --bg:#f4f6fb; --card:#fff; --ink:#1d2433; --muted:#5b6478; --line:#dfe4ef;
+  --pri:#2457d6; --pri-soft:#e8efff; --ok:#1a8f4a; --ok-soft:#e6f6ec; --bad:#c62f3d; --bad-soft:#fdebed;
+  --warn:#9a6700; --warn-soft:#fff6dd;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 14px 90px}
+header.top{padding:22px 0 6px}
+header.top h1{margin:0 0 4px;font-size:1.45rem;line-height:1.3}
+header.top .sub{color:var(--muted);font-size:.95rem}
+.guide{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:14px 0;font-size:.93rem;color:#33405a}
+.guide b{color:var(--ink)}
+.guide ul{margin:6px 0 0 18px;padding:0}
+#bar{position:sticky;top:0;z-index:20;background:rgba(244,246,251,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -14px;padding:8px 14px}
+#bar .row{display:flex;justify-content:space-between;gap:10px;font-size:.88rem;color:var(--muted);flex-wrap:wrap}
+#bar .row b{color:var(--ink)}
+.track{height:8px;background:#dde3f1;border-radius:99px;overflow:hidden;margin-top:6px}
+.fill{height:100%;width:0;background:var(--pri);transition:width .25s}
+h2.part{font-size:1.1rem;margin:28px 0 10px;padding:8px 12px;background:var(--pri-soft);border-left:4px solid var(--pri);border-radius:6px;line-height:1.4}
+h2.part small{display:block;font-weight:400;color:var(--muted);font-size:.85rem;margin-top:2px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0;box-shadow:0 1px 2px rgba(20,30,60,.04)}
+.q.ok{border-color:var(--ok);background:linear-gradient(0deg,#fff,#fff) padding-box}
+.q.bad{border-color:var(--bad)}
+.qhead{font-weight:700;color:var(--pri);margin-bottom:4px}
+.stem{margin-bottom:10px;overflow-x:auto;overflow-y:hidden}
+.hint,.mistake{overflow-x:auto}
+.stem p,.sol p,.sub p{margin:.35em 0}
+.stem img,.sol img{max-width:100%;height:auto}
+.stem img.fig,.sol img.fig{display:block;margin:8px auto}
+img.eqimg{vertical-align:middle;max-width:none}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fbfcff;color:inherit;font:inherit;cursor:pointer;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--pri);background:var(--pri-soft)}
+.opt .lab{font-weight:700;min-width:1.4em;color:var(--pri)}
+.opt .txt{flex:1;min-width:0;overflow-x:auto}
+.opt .txt p{margin:0}
+.opt.sel{border-color:var(--pri);background:var(--pri-soft);box-shadow:0 0 0 2px rgba(36,87,214,.15)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt:disabled{cursor:default}
+.subs{display:flex;flex-direction:column;gap:10px}
+.subrow{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fbfcff}
+.subrow .sl{font-weight:700;color:var(--pri);min-width:1.4em}
+.subrow .sb{flex:1;min-width:0;overflow-x:auto}
+.subrow .tf{display:flex;gap:6px;flex-shrink:0}
+.tfb{width:42px;height:38px;border:1.5px solid var(--line);border-radius:8px;background:#fff;font:inherit;font-weight:700;cursor:pointer}
+.tfb:hover:not(:disabled){border-color:var(--pri)}
+.tfb.sel{background:var(--pri);color:#fff;border-color:var(--pri)}
+.tfb:disabled{cursor:default}
+.subrow.right{border-color:var(--ok);background:var(--ok-soft)}
+.subrow.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.subrow .ans{display:block;font-size:.85rem;color:var(--bad);margin-top:3px;font-weight:600}
+.sa{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sa label{font-weight:600}
+.sa input{flex:1;min-width:150px;max-width:260px;padding:9px 12px;font:inherit;border:1.5px solid var(--line);border-radius:10px}
+.sa input:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px rgba(36,87,214,.15)}
+.sa input.right{border-color:var(--ok);background:var(--ok-soft)}
+.sa input.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.sa .corr{width:100%;font-size:.92rem;color:var(--bad);font-weight:600}
+.acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.btn{padding:9px 16px;border-radius:10px;border:0;background:var(--pri);color:#fff;font:inherit;font-weight:600;cursor:pointer}
+.btn:disabled{background:#b9c3dc;cursor:not-allowed}
+.btn.ghost{background:#fff;color:var(--pri);border:1.5px solid var(--pri)}
+.btn.big{padding:12px 26px;font-size:1.05rem}
+.fb{font-weight:600}
+.fb.ok{color:var(--ok)} .fb.bad{color:var(--bad)} .fb.info{color:var(--warn)}
+.hint{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--warn-soft);border:1px solid #f0dca0;color:#5c4400}
+.mistake{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--bad-soft);border:1px solid #f1c3c8;color:#6b1b24}
+.sol{margin-top:10px;padding:10px 14px;border-radius:10px;background:#f6f8ff;border:1px solid var(--line);overflow-x:auto}
+.sol h4,.mistake b.t,.hint b.t{margin:0 0 4px;font-size:.95rem}
+.sol h4{color:var(--pri)}
+.sol table{border-collapse:collapse;margin:8px 0}
+.sol td,.sol th{border:1px solid var(--line);padding:4px 8px}
+.tree-box{margin:6px 0 12px;padding:10px 10px 8px;border:1px solid #cfd9f3;border-radius:10px;background:#fff;overflow-x:auto}
+.tree-box .tt{font-weight:700;color:var(--pri);margin-bottom:6px;font-size:.95rem}
+.sol table.tree{border-collapse:separate;border-spacing:0;width:100%;margin:0;font-size:.88rem;line-height:1.35}
+.sol table.tree th{background:var(--pri-soft);color:var(--pri);font-size:.8rem;padding:5px 6px;border:1px solid var(--line);text-align:center;font-weight:700}
+.sol table.tree td{border:1px solid var(--line);padding:5px 6px;vertical-align:middle;text-align:center;background:#fff}
+.sol table.tree td.n1{background:#f1f5ff;border-left:4px solid var(--pri)}
+.sol table.tree td.n2{border-left:3px solid #9db4ee}
+.sol table.tree .sy{font-weight:700;font-size:1rem}
+.sol table.tree .ds{font-size:.78rem;color:var(--muted);line-height:1.25}
+.sol table.tree .pb{font-size:.82rem;color:#243b7a;margin-top:2px}
+.sol table.tree .ev{font-weight:700}
+.sol table.tree .calc{font-size:.85rem}
+.sol table.tree tr.hit td.n2,.sol table.tree tr.hit td.pth{background:#fff3c4}
+.sol table.tree tr.hit td.pth{border-left:3px solid #e0a800}
+.sol table.tree tr.num td.pth{outline:2.5px solid var(--ok);outline-offset:-3px;background:#e3f6ea}
+.sol table.tree tr.num td.n2{background:#e3f6ea}
+.tree-box .tsum{margin-top:7px;padding:6px 9px;border-radius:8px;background:#f6f8ff;border:1px solid var(--line);font-size:.92rem;overflow-x:auto}
+.tree-box .tsum mjx-container[display="true"]{margin:.45em 0 .2em !important}
+.tree-box .tleg{margin-top:6px;font-size:.78rem;color:var(--muted)}
+mjx-container{max-width:100%}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden}
+.submitbox{margin:28px 0;text-align:center}
+#result{display:none;background:var(--card);border:2px solid var(--pri);border-radius:14px;padding:18px;margin:20px 0;text-align:center}
+#result .big{font-size:1.6rem;font-weight:800;color:var(--pri)}
+#result table{margin:12px auto 0;border-collapse:collapse;font-size:.95rem}
+#result td,#result th{border:1px solid var(--line);padding:5px 14px}
+@media (max-width:520px){
+  body{font-size:15.5px}
+  .tree-box{padding:8px 6px 6px}
+  .sol table.tree{font-size:.76rem}
+  .sol table.tree th{font-size:.7rem;padding:4px 3px}
+  .sol table.tree td{padding:4px 3px}
+  .sol table.tree .ds{font-size:.68rem}
+  .sol table.tree .pb,.sol table.tree .calc{font-size:.72rem}
+  .sol table.tree td.n1{border-left-width:3px}
+  .q{padding:12px}
+  .subrow{flex-wrap:wrap}
+  .subrow .sb{flex:1 1 calc(100% - 2.6em)}
+  .subrow .tf{margin-left:auto}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Bài 18: Xác suất có điều kiện - Đề số 2</h1>
+    <div class="sub">Đề số 2 · 22 câu: 12 trắc nghiệm, 4 đúng/sai, 6 trả lời ngắn</div>
+  </header>
+  <div class="guide">
+    <b>Cách làm bài:</b> chọn đáp án rồi bấm <b>Kiểm tra đáp án</b>.
+    <ul>
+      <li>Sai lần 1: chỉ hiện gợi ý, bạn được làm lại. Sai lần 2: hiện đáp án đúng và lời giải chi tiết.</li>
+      <li>Câu đúng sẽ được khoá; bấm <b>Xem lời giải</b> nếu muốn đối chiếu cách làm.</li>
+      <li>Câu trả lời ngắn: nhập số, có thể dùng dấu phẩy hoặc dấu chấm (ví dụ <b>-4</b>, <b>2,25</b>, <b>2.25</b>) hoặc phân số <b>a/b</b>. Khi đề yêu cầu làm tròn, hãy nhập đúng số đã làm tròn.</li>
+      <li>Bấm <b>Nộp bài</b> ở cuối trang để xem tổng số câu đúng và số câu sai.</li>
+    </ul>
+  </div>
+  <div id="bar">
+    <div class="row"><span>Đã kiểm tra <b id="pChecked">0</b>/<b id="pTotal">0</b> câu</span><span>Đúng: <b id="pOk" style="color:var(--ok)">0</b> · Sai: <b id="pBad" style="color:var(--bad)">0</b></span></div>
+    <div class="track"><div class="fill" id="pFill"></div></div>
+  </div>
+  <main id="quiz"></main>
+  <div class="submitbox"><button class="btn big" id="submitBtn">Nộp bài</button></div>
+  <div id="result"></div>
+</div>
+<script>
+const DATA = {"sections": [{"kind": "mcq", "title": "Phần I. Trắc nghiệm nhiều phương án lựa chọn (Câu 1–12)", "note": "Mỗi câu chỉ chọn một phương án", "questions": [{"n": 1, "stem": "<p>Cho <span class=\"math inline\">\\(A,B\\)<\/span> là hai biến cố độc lập. Khẳng định nào sau đây <strong>sai<\/strong>?<\/p>", "hint": "Hai biến cố <span class=\"math inline\">\\(A,B\\)<\/span> độc lập khi <span class=\"math inline\">\\(P(AB)=P(A)\\,P(B)\\)<\/span>; khi đó <span class=\"math inline\">\\(P(A|B)=P(A)\\)<\/span> và <span class=\"math inline\">\\(P(B|A)=P(B)\\)<\/span>.", "mistake": "Nhầm hai biến cố độc lập với hai biến cố xung khắc (xung khắc thì <span class=\"math inline\">\\(P(AB)=0\\)<\/span>).", "sol": "<p>Nếu <span class=\"math inline\">\\(A,B\\)<\/span> độc lập thì <span class=\"math inline\">\\(A\\)<\/span> và <span class=\"math inline\">\\(B\\)<\/span>, <span class=\"math inline\">\\(A\\)<\/span> và <span class=\"math inline\">\\(\\overline{B}\\)<\/span>, <span class=\"math inline\">\\(\\overline{A}\\)<\/span> và <span class=\"math inline\">\\(B\\)<\/span> cũng độc lập, nên: <span class=\"math inline\">\\(P(A|B)=P(A)\\)<\/span>, <span class=\"math inline\">\\(P(B|A)=P(B)\\)<\/span>, <span class=\"math inline\">\\(P(A|\\overline{B})=P(A)\\)<\/span> và <span class=\"math inline\">\\(P(\\overline{A}|B)=P(\\overline{A})\\)<\/span>.<\/p>\n<p>Phương án D viết <span class=\"math inline\">\\(P(\\overline{A}|B)=P(B)\\)<\/span> là sai (vế phải phải là <span class=\"math inline\">\\(P(\\overline{A})\\)<\/span>).<\/p>", "options": ["<span class=\"math inline\">\\(P\\left(\\left.A\\right|B\\right)=P\\left(A\\right)\\)<\/span>.", "<span class=\"math inline\">\\(P\\left(\\left.B\\right|A\\right)=P\\left(B\\right)\\)<\/span>.", "<span class=\"math inline\">\\(P\\left(\\left.A\\right|\\overline{B}\\right)=P\\left(A\\right)\\)<\/span>.", "<span class=\"math inline\">\\(P\\left(\\left.\\overline{A}\\right|B\\right)=P\\left(B\\right)\\)<\/span>."], "answer": "D"}, {"n": 2, "stem": "<p>Cho hai biến cố <span class=\"math inline\">\\(A,B\\)<\/span>. Biết <span class=\"math inline\">\\(P\\left(A\\right)=0{,}4\\)<\/span>, <span class=\"math inline\">\\(P\\left(B\\right)=0{,}6\\)<\/span>, <span class=\"math inline\">\\(P\\left(AB\\right)=0{,}2\\)<\/span>. Khi đó <span class=\"math inline\">\\(P\\left(\\left.A\\right|B\\right)\\)<\/span> bằng<\/p>", "hint": "Dùng <span class=\"math inline\">\\(P(A|B)=\\dfrac{P(AB)}{P(B)}\\)<\/span> (<span class=\"math inline\">\\(P(B)&gt;0\\)<\/span>) và <span class=\"math inline\">\\(P(AB)=P(B)\\,P(A|B)\\)<\/span>; <span class=\"math inline\">\\(P(\\overline{A}|B)=1-P(A|B)\\)<\/span>.", "mistake": "Nhầm <span class=\"math inline\">\\(P(A|B)\\)<\/span> với <span class=\"math inline\">\\(P(B|A)\\)<\/span> hoặc với <span class=\"math inline\">\\(P(AB)\\)<\/span>; chia cho <span class=\"math inline\">\\(P(A)\\)<\/span> thay vì <span class=\"math inline\">\\(P(B)\\)<\/span>.", "sol": "<p><span class=\"math inline\">\\(P\\left(\\left.A\\right|B\\right)=\\frac{P\\left(AB\\right)}{P\\left(B\\right)}=\\frac{0{,}2}{0{,}6}=\\frac{1}{3}\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(\\frac{2}{3}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{1}{3}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{1}{2}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{3}{4}\\)<\/span>."], "answer": "B"}, {"n": 3, "stem": "<p>Cho hai biến cố <span class=\"math inline\">\\(A,B\\)<\/span>. Biết <span class=\"math inline\">\\(P\\left(A\\right)=0{,}4\\)<\/span>, <span class=\"math inline\">\\(P\\left(B\\right)=0{,}6\\)<\/span>, <span class=\"math inline\">\\(P\\left(\\left.A\\right|B\\right)=0{,}3\\)<\/span>. Khi đó <span class=\"math inline\">\\(P\\left(AB\\right)\\)<\/span> bằng<\/p>", "hint": "Dùng <span class=\"math inline\">\\(P(A|B)=\\dfrac{P(AB)}{P(B)}\\)<\/span> (<span class=\"math inline\">\\(P(B)&gt;0\\)<\/span>) và <span class=\"math inline\">\\(P(AB)=P(B)\\,P(A|B)\\)<\/span>; <span class=\"math inline\">\\(P(\\overline{A}|B)=1-P(A|B)\\)<\/span>.", "mistake": "Nhầm <span class=\"math inline\">\\(P(A|B)\\)<\/span> với <span class=\"math inline\">\\(P(B|A)\\)<\/span> hoặc với <span class=\"math inline\">\\(P(AB)\\)<\/span>; chia cho <span class=\"math inline\">\\(P(A)\\)<\/span> thay vì <span class=\"math inline\">\\(P(B)\\)<\/span>.", "sol": "<p>Từ <span class=\"math inline\">\\(P(A|B)=\\dfrac{P(AB)}{P(B)}\\)<\/span> suy ra <span class=\"math inline\">\\(P(AB)=P(B)\\cdot P(A|B)=0{,}6\\cdot 0{,}3=0{,}18\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(0{,}12\\)<\/span>.", "<span class=\"math inline\">\\(0{,}24\\)<\/span>.", "<span class=\"math inline\">\\(0{,}18\\)<\/span>.", "<span class=\"math inline\">\\(0{,}5\\)<\/span>."], "answer": "C"}, {"n": 4, "stem": "<p>Cho hai biến cố <span class=\"math inline\">\\(A,B\\)<\/span>. Biết <span class=\"math inline\">\\(P\\left(A\\right)=0{,}4\\)<\/span>, <span class=\"math inline\">\\(P\\left(B\\right)=0{,}6\\)<\/span>, <span class=\"math inline\">\\(P\\left(AB\\right)=0{,}2\\)<\/span>. Khi đó <span class=\"math inline\">\\(P\\left(\\left.B\\right|A\\right)\\)<\/span> bằng<\/p>", "hint": "Dùng <span class=\"math inline\">\\(P(A|B)=\\dfrac{P(AB)}{P(B)}\\)<\/span> (<span class=\"math inline\">\\(P(B)&gt;0\\)<\/span>) và <span class=\"math inline\">\\(P(AB)=P(B)\\,P(A|B)\\)<\/span>; <span class=\"math inline\">\\(P(\\overline{A}|B)=1-P(A|B)\\)<\/span>.", "mistake": "Nhầm <span class=\"math inline\">\\(P(A|B)\\)<\/span> với <span class=\"math inline\">\\(P(B|A)\\)<\/span> hoặc với <span class=\"math inline\">\\(P(AB)\\)<\/span>; chia cho <span class=\"math inline\">\\(P(A)\\)<\/span> thay vì <span class=\"math inline\">\\(P(B)\\)<\/span>.", "sol": "<p><span class=\"math inline\">\\(P\\left(\\left.B\\right|A\\right)=\\frac{P\\left(AB\\right)}{P\\left(A\\right)}=\\frac{0{,}2}{0{,}4}=0{,}5\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(\\frac{2}{3}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{1}{3}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{1}{2}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{3}{4}\\)<\/span>."], "answer": "C"}, {"n": 5, "stem": "<p>Gieo con xúc xắc một lần. Gọi <span class=\"math inline\">\\(A\\)<\/span> là biến cố xuất hiện mặt 2 chấm, <span class=\"math inline\">\\(B\\)<\/span> là biến cố xuất hiện mặt chẵn. Khi đó <span class=\"math inline\">\\(P\\left(\\left.A\\right|B\\right)\\)<\/span> bằng<\/p>", "hint": "Liệt kê không gian mẫu rồi xác định <span class=\"math inline\">\\(n(B)\\)<\/span> và <span class=\"math inline\">\\(n(AB)\\)<\/span>; <span class=\"math inline\">\\(P(A|B)=\\dfrac{n(AB)}{n(B)}\\)<\/span> (hoặc thu hẹp không gian mẫu về các kết quả của <span class=\"math inline\">\\(B\\)<\/span>).", "mistake": "Chia cho <span class=\"math inline\">\\(n(\\Omega)\\)<\/span> thay vì chia cho <span class=\"math inline\">\\(n(B)\\)<\/span>, hoặc đếm thiếu kết quả của <span class=\"math inline\">\\(AB\\)<\/span>.", "sol": "<p><span class=\"math inline\">\\(P\\left(\\left.A\\right|B\\right)=\\frac{P\\left(AB\\right)}{P\\left(B\\right)}=\\frac{1}{3}\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(\\frac{2}{3}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{1}{3}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{1}{2}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{3}{4}\\)<\/span>."], "answer": "B"}, {"n": 6, "stem": "<p>Gieo con xúc xắc một lần. Gọi <span class=\"math inline\">\\(A\\)<\/span> là biến cố xuất hiện số nguyên tố, <span class=\"math inline\">\\(B\\)<\/span> là biến cố xuất hiện mặt lẻ. Khi đó <span class=\"math inline\">\\(P\\left(\\left.A\\right|B\\right)\\)<\/span> bằng<\/p>", "hint": "Liệt kê không gian mẫu rồi xác định <span class=\"math inline\">\\(n(B)\\)<\/span> và <span class=\"math inline\">\\(n(AB)\\)<\/span>; <span class=\"math inline\">\\(P(A|B)=\\dfrac{n(AB)}{n(B)}\\)<\/span> (hoặc thu hẹp không gian mẫu về các kết quả của <span class=\"math inline\">\\(B\\)<\/span>).", "mistake": "Chia cho <span class=\"math inline\">\\(n(\\Omega)\\)<\/span> thay vì chia cho <span class=\"math inline\">\\(n(B)\\)<\/span>, hoặc đếm thiếu kết quả của <span class=\"math inline\">\\(AB\\)<\/span>.", "sol": "<p><span class=\"math inline\">\\(A=\\left\\{2;3;5\\right\\}\\)<\/span>, <span class=\"math inline\">\\(B=\\left\\{1;3;5\\right\\}\\)<\/span>, <span class=\"math inline\">\\(A\\cap B=\\left\\{3;5\\right\\}\\)<\/span><\/p>\n<p><span class=\"math inline\">\\(P\\left(\\left.A\\right|B\\right)=\\frac{P\\left(AB\\right)}{P\\left(B\\right)}=\\frac{2}{3}\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(\\frac{2}{3}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{1}{3}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{1}{2}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{3}{4}\\)<\/span>."], "answer": "A"}, {"n": 7, "stem": "<p>Một phụ nữ sinh hai người con. Xác suất cả hai là con trai biết rằng có ít nhất một đứa con trai là<\/p>", "hint": "Liệt kê không gian mẫu rồi xác định <span class=\"math inline\">\\(n(B)\\)<\/span> và <span class=\"math inline\">\\(n(AB)\\)<\/span>; <span class=\"math inline\">\\(P(A|B)=\\dfrac{n(AB)}{n(B)}\\)<\/span> (hoặc thu hẹp không gian mẫu về các kết quả của <span class=\"math inline\">\\(B\\)<\/span>).", "mistake": "Chia cho <span class=\"math inline\">\\(n(\\Omega)\\)<\/span> thay vì chia cho <span class=\"math inline\">\\(n(B)\\)<\/span>, hoặc đếm thiếu kết quả của <span class=\"math inline\">\\(AB\\)<\/span>.", "sol": "<p><span class=\"math inline\">\\(\\Omega =\\left\\{TT,TG,GT,GG\\right\\}\\Rightarrow n\\left(\\Omega \\right)=4\\)<\/span><\/p>\n<p>Gọi <span class=\"math inline\">\\(A\\)<\/span> là biến cố “ cả hai là con trai”<\/p>\n<p><span class=\"math inline\">\\(B\\)<\/span> là biến cố “ít nhất một đứa con trai”<\/p>\n<p>Số trường hợp để <span class=\"math inline\">\\(B\\)<\/span> xảy ra là <span class=\"math inline\">\\(n\\left(B\\right)=3\\)<\/span><\/p>\n<p>Số trường hợp để <span class=\"math inline\">\\(AB\\)<\/span> xảy ra là <span class=\"math inline\">\\(1\\)<\/span><\/p>\n<p><span class=\"math inline\">\\(P\\left(\\left.A\\right|B\\right)=\\frac{P\\left(AB\\right)}{P\\left(B\\right)}=\\frac{1}{3}\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(\\frac{2}{3}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{1}{3}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{1}{2}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{3}{4}\\)<\/span>."], "answer": "B"}, {"n": 8, "stem": "<p>Một rổ đựng 10 quả táo và 8 quả cam. Bạn An lấy ngẫu nhiên một quả (không hoàn lại), sau đó bạn Uyên lấy ngẫu nhiên một quả. Xác suất bạn Uyên lấy được một quả cam, biết rằng bạn An lấy được một quả táo là (chính xác đến hàng phần trăm)<\/p>", "hint": "Khi lấy không hoàn lại, sau lần thứ nhất số phần tử còn lại giảm 1 nên <span class=\"math inline\">\\(P(B|A)\\)<\/span> tính trên số phần tử còn lại; <span class=\"math inline\">\\(P(AB)=P(A)\\,P(B|A)\\)<\/span>. Nếu cần <span class=\"math inline\">\\(P(B)\\)<\/span>, phân hai trường hợp theo kết quả lần thứ nhất rồi dùng công thức xác suất toàn phần.", "mistake": "Giữ nguyên tổng số phần tử (quên rằng sau lần đầu đã lấy đi một phần tử) hoặc nhầm <span class=\"math inline\">\\(P(B|A)\\)<\/span> với <span class=\"math inline\">\\(P(AB)\\)<\/span>.", "sol": "<p>Gọi <span class=\"math inline\">\\(A\\)<\/span> là biến cố “bạn Uyên lấy được một quả cam”<\/p>\n<p><span class=\"math inline\">\\(B\\)<\/span> là biến cố “bạn An lấy được một quả táo”<\/p>\n<p><span class=\"math inline\">\\(P\\left(\\left.A\\right|B\\right)=\\frac{8}{17}\\approx 0{,}47.\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(0{,}56\\)<\/span>.", "<span class=\"math inline\">\\(0{,}59\\)<\/span>.", "<span class=\"math inline\">\\(0{,}44\\)<\/span>.", "<span class=\"math inline\">\\(0{,}47\\)<\/span>."], "answer": "D"}, {"n": 9, "stem": "<p>Một công ty đấu thầu 2 dự án độc lập. Khả năng thắng thầu dự án 1, dự án 2 lần lượt là <span class=\"math inline\">\\(0{,}4\\)<\/span> và <span class=\"math inline\">\\(0{,}7\\)<\/span>. Biết công ty thắng thầu dự án 1, tìm xác suất công ty thắng thầu dự án 2.<\/p>", "hint": "Hai biến cố <span class=\"math inline\">\\(A,B\\)<\/span> độc lập khi <span class=\"math inline\">\\(P(AB)=P(A)\\,P(B)\\)<\/span>; khi đó <span class=\"math inline\">\\(P(A|B)=P(A)\\)<\/span> và <span class=\"math inline\">\\(P(B|A)=P(B)\\)<\/span>.", "mistake": "Nhầm hai biến cố độc lập với hai biến cố xung khắc (xung khắc thì <span class=\"math inline\">\\(P(AB)=0\\)<\/span>).", "sol": "<p>Gọi <span class=\"math inline\">\\(A\\)<\/span> là biến cố “công ty thắng thầu dự án 1”<\/p>\n<p><span class=\"math inline\">\\(B\\)<\/span> là biến cố “công ty thắng thầu dự án 2”<\/p>\n<p><span class=\"math inline\">\\(\\left(\\left.B\\right|A\\right)\\)<\/span> “công ty thắng thầu dự án 2 biết công ty thắng thầu dự án 1”<\/p>\n<p><span class=\"math inline\">\\(P\\left(\\left.B\\right|A\\right)=\\frac{P\\left(AB\\right)}{P\\left(A\\right)}=P\\left(B\\right)=0{,}7\\)<\/span> (do hai biến cố độc lập)<\/p>", "options": ["<span class=\"math inline\">\\(0{,}6\\)<\/span>.", "<span class=\"math inline\">\\(0{,}5\\)<\/span>.", "<span class=\"math inline\">\\(0{,}4\\)<\/span>.", "<span class=\"math inline\">\\(0{,}7\\)<\/span>."], "answer": "D"}, {"n": 10, "stem": "<p>Một công ty đấu thầu 2 dự án. Khả năng thắng thầu dự án 1, dự án 2 lần lượt là <span class=\"math inline\">\\(0{,}4\\)<\/span> và <span class=\"math inline\">\\(0{,}7\\)<\/span>.<\/p>\n<p>Khả năng thắng thầu cả 2 dự án là <span class=\"math inline\">\\(0{,}3\\)<\/span>. Biết công ty thắng thầu dự án 1, tìm xác suất công ty thắng thầu dự án 2.<\/p>", "hint": "Dùng <span class=\"math inline\">\\(P(A|B)=\\dfrac{P(AB)}{P(B)}\\)<\/span> (<span class=\"math inline\">\\(P(B)&gt;0\\)<\/span>) và <span class=\"math inline\">\\(P(AB)=P(B)\\,P(A|B)\\)<\/span>; <span class=\"math inline\">\\(P(\\overline{A}|B)=1-P(A|B)\\)<\/span>.", "mistake": "Nhầm <span class=\"math inline\">\\(P(A|B)\\)<\/span> với <span class=\"math inline\">\\(P(B|A)\\)<\/span> hoặc với <span class=\"math inline\">\\(P(AB)\\)<\/span>; chia cho <span class=\"math inline\">\\(P(A)\\)<\/span> thay vì <span class=\"math inline\">\\(P(B)\\)<\/span>.", "sol": "<p>Gọi <span class=\"math inline\">\\(A\\)<\/span> là biến cố “công ty thắng thầu dự án 1”<\/p>\n<p><span class=\"math inline\">\\(B\\)<\/span> là biến cố “công ty thắng thầu dự án 2”<\/p>\n<p><span class=\"math inline\">\\(\\left(\\left.B\\right|A\\right)\\)<\/span> “công ty thắng thầu dự án 2 biết công ty thắng thầu dự án 1”<\/p>\n<p><span class=\"math inline\">\\(P\\left(\\left.B\\right|A\\right)=\\frac{P\\left(AB\\right)}{P\\left(A\\right)}=\\frac{0{,}3}{0{,}4}=0{,}75\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(0{,}75\\)<\/span>.", "<span class=\"math inline\">\\(0{,}5\\)<\/span>.", "<span class=\"math inline\">\\(0{,}6\\)<\/span>.", "<span class=\"math inline\">\\(0{,}3\\)<\/span>."], "answer": "A"}, {"n": 11, "stem": "<p>Một gia đình có 2 đứa trẻ. Biết rằng có ít nhất 1 đứa trẻ là con gái. Hỏi xác suất 2 đứa trẻ đều là con gái là bao nhiêu? Cho biết xác suất để một đứa trẻ là trai hoặc gái là bằng nhau.<\/p>", "hint": "Liệt kê không gian mẫu rồi xác định <span class=\"math inline\">\\(n(B)\\)<\/span> và <span class=\"math inline\">\\(n(AB)\\)<\/span>; <span class=\"math inline\">\\(P(A|B)=\\dfrac{n(AB)}{n(B)}\\)<\/span> (hoặc thu hẹp không gian mẫu về các kết quả của <span class=\"math inline\">\\(B\\)<\/span>).", "mistake": "Chia cho <span class=\"math inline\">\\(n(\\Omega)\\)<\/span> thay vì chia cho <span class=\"math inline\">\\(n(B)\\)<\/span>, hoặc đếm thiếu kết quả của <span class=\"math inline\">\\(AB\\)<\/span>.", "sol": "<p>Giới tính cả 2 đứa trẻ là ngẫu nhiên và không liên quan đến nhau.<\/p>\n<p>Do gia đình có 2 đứa trẻ nên sẽ có thể xảy ra 4 khả năng:<\/p>\n<p>(trai, trai), (gái, gái), (gái, trai), (trai, gái).<\/p>\n<p>Gọi A là biến cố “Cả hai đứa trẻ đều là con gái”<\/p>\n<p>Gọi B là biến cố “Có ít nhất một đứa trẻ là con gái”<\/p>\n<p>Ta có <span class=\"math inline\">\\(P\\left(A\\right)=\\frac{1}{4};P\\left(B\\right)=\\frac{3}{4}\\)<\/span><\/p>\n<p>Do nếu xảy ra A thì đương nhiên sẽ xảy ra B nên ta có:<\/p>\n<p><span class=\"math inline\">\\(P\\left(A\\cap B\\right)=P\\left(A\\right)=\\frac{1}{4}\\)<\/span><\/p>\n<p>Suy ra, xác suất để cả hai đứa trẻ đều là con gái khi biết ít nhất có một đứa trẻ là gái là<\/p>\n<p><span class=\"math inline\">\\(P\\left(A|B\\right)=\\frac{P\\left(A\\cap B\\right)}{P\\left(B\\right)}=\\frac{\\frac{1}{4}}{\\frac{3}{4}}=\\frac{1}{3}\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(\\frac{3}{5}\\)<\/span>", "<span class=\"math inline\">\\(\\frac{9}{16}\\)<\/span>", "<span class=\"math inline\">\\(\\frac{9}{17}\\)<\/span>", "<span class=\"math inline\">\\(\\frac{1}{3}\\)<\/span>"], "answer": "D"}, {"n": 12, "stem": "<p>Từ một hộp chứa 3 quả cầu đỏ và 7 quả cầu xanh, ông An lấy ngẫu nhiên 2 quả cầu thì thấy có quả cầu đỏ. Xác suất ông An lấy được quả cầu xanh bằng<\/p>", "hint": "Dùng <span class=\"math inline\">\\(P(A|B)=\\dfrac{P(AB)}{P(B)}\\)<\/span> (<span class=\"math inline\">\\(P(B)&gt;0\\)<\/span>) và <span class=\"math inline\">\\(P(AB)=P(B)\\,P(A|B)\\)<\/span>; <span class=\"math inline\">\\(P(\\overline{A}|B)=1-P(A|B)\\)<\/span>.", "mistake": "Nhầm <span class=\"math inline\">\\(P(A|B)\\)<\/span> với <span class=\"math inline\">\\(P(B|A)\\)<\/span> hoặc với <span class=\"math inline\">\\(P(AB)\\)<\/span>; chia cho <span class=\"math inline\">\\(P(A)\\)<\/span> thay vì <span class=\"math inline\">\\(P(B)\\)<\/span>.", "sol": "<p>Gọi <span class=\"math inline\">\\(A\\)<\/span> là biến cố “ông An lấy được quả cầu xanh”<\/p>\n<p><span class=\"math inline\">\\(B\\)<\/span> là biến cố “ông An lấy được quả cầu đỏ”<\/p>\n<p>Số trường hợp để <span class=\"math inline\">\\(B\\)<\/span> xảy ra là <span class=\"math inline\">\\(C_{3}^{1}.C_{7}^{1}+C_{3}^{2}=24\\)<\/span><\/p>\n<p>Số trường hợp để <span class=\"math inline\">\\(AB\\)<\/span> xảy ra là <span class=\"math inline\">\\(C_{3}^{1}.C_{7}^{1}=21\\)<\/span><\/p>\n<p><span class=\"math inline\">\\(P\\left(\\left.A\\right|B\\right)=\\frac{P\\left(AB\\right)}{P\\left(B\\right)}=\\frac{21}{24}=0{,}875\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(0{,}875\\)<\/span>.", "<span class=\"math inline\">\\(0{,}4\\)<\/span>.", "<span class=\"math inline\">\\(0{,}5\\)<\/span>.", "<span class=\"math inline\">\\(0{,}75\\)<\/span>."], "answer": "A"}]}, {"kind": "tf", "title": "Phần II. Trắc nghiệm đúng sai (Câu 1–4)", "note": "Trong mỗi câu, chọn Đúng (Đ) hoặc Sai (S) cho từng ý a), b), c), d); câu chỉ đúng khi cả bốn ý đúng", "questions": [{"n": 1, "stem": "<p>Gieo một xúc xắc cân đối và đồng chất 1 lần. Xét các biến cố:<\/p>\n<p><span class=\"math inline\">\\(A\\)<\/span> : “Mặt xuất hiện của xúc xắc ghi số <span class=\"math inline\">\\(5\\)<\/span>”;<\/p>\n<p><span class=\"math inline\">\\(B\\)<\/span> : “Mặt xuất hiện của xúc xắc ghi số lẻ”.<\/p>", "hint": "Xét riêng từng ý. Liệt kê không gian mẫu rồi xác định <span class=\"math inline\">\\(n(B)\\)<\/span> và <span class=\"math inline\">\\(n(AB)\\)<\/span>; <span class=\"math inline\">\\(P(A|B)=\\dfrac{n(AB)}{n(B)}\\)<\/span> (hoặc thu hẹp không gian mẫu về các kết quả của <span class=\"math inline\">\\(B\\)<\/span>).", "mistake": "Chia cho <span class=\"math inline\">\\(n(\\Omega)\\)<\/span> thay vì chia cho <span class=\"math inline\">\\(n(B)\\)<\/span>, hoặc đếm thiếu kết quả của <span class=\"math inline\">\\(AB\\)<\/span>.", "sol": "<p><strong>a)<\/strong> Ta có: <span class=\"math inline\">\\(\\text{P}(A)=\\frac{1}{6};\\)<\/span> Suy ra sai<\/p>\n<p><strong>b)<\/strong> <span class=\"math inline\">\\(\\text{P}(A\\cap B)=\\frac{1}{6};\\)<\/span> Suy ra đúng<\/p>\n<p><strong>c)<\/strong> <span class=\"math inline\">\\(\\text{P}(B\\mid A)=1;\\text{P}(B)=\\frac{1}{2}\\)<\/span> Suy ra đúng<\/p>\n<p><strong>d)<\/strong> Khi đó, <span class=\"math inline\">\\(\\text{P}(A\\mid B)=\\frac{\\frac{1}{6}}{\\frac{1}{2}}=\\frac{1}{3}\\)<\/span>. Suy ra sai<\/p>", "subs": ["<span class=\"math inline\">\\(\\text{P}(A)=\\frac{5}{6}\\)<\/span>.", "<span class=\"math inline\">\\(\\text{P}(A\\cap B)=\\frac{1}{6}\\)<\/span>.", "<span class=\"math inline\">\\(\\text{P}(B\\mid A)=1\\)<\/span>", "<span class=\"math inline\">\\(\\text{P}(A\\mid B)=\\frac{1}{2}\\)<\/span>."], "answers": [false, true, true, false]}, {"n": 2, "stem": "<p>Một công ty xây dựng đấu thầu 2 dự án độc lập. Khả năng thắng thầu của dự án 1 là <span class=\"math inline\">\\(0{,}6\\)<\/span> và dự án 2 là <span class=\"math inline\">\\(0{,}7\\)<\/span>.<\/p>", "hint": "Xét riêng từng ý. Hai biến cố <span class=\"math inline\">\\(A,B\\)<\/span> độc lập khi <span class=\"math inline\">\\(P(AB)=P(A)\\,P(B)\\)<\/span>; khi đó <span class=\"math inline\">\\(P(A|B)=P(A)\\)<\/span> và <span class=\"math inline\">\\(P(B|A)=P(B)\\)<\/span>. Dùng <span class=\"math inline\">\\(P(A|B)=\\dfrac{P(AB)}{P(B)}\\)<\/span> (<span class=\"math inline\">\\(P(B)&gt;0\\)<\/span>) và <span class=\"math inline\">\\(P(AB)=P(B)\\,P(A|B)\\)<\/span>; <span class=\"math inline\">\\(P(\\overline{A}|B)=1-P(A|B)\\)<\/span>.", "mistake": "Nhầm hai biến cố độc lập với hai biến cố xung khắc (xung khắc thì <span class=\"math inline\">\\(P(AB)=0\\)<\/span>). Nhầm <span class=\"math inline\">\\(P(A|B)\\)<\/span> với <span class=\"math inline\">\\(P(B|A)\\)<\/span> hoặc với <span class=\"math inline\">\\(P(AB)\\)<\/span>; chia cho <span class=\"math inline\">\\(P(A)\\)<\/span> thay vì <span class=\"math inline\">\\(P(B)\\)<\/span>.", "sol": "<p>Gọi <span class=\"math inline\">\\(A\\)<\/span> là biến cố “công ty thắng thầu dự án 1”, <span class=\"math inline\">\\(B\\)<\/span> là biến cố “công ty thắng thầu dự án 2”.<\/p>\n<p>Ta có <span class=\"math inline\">\\(A,B\\)<\/span> là 2 biến cố độc lập.<\/p>\n<p><strong>a)<\/strong> Xác suất công ty thắng thầu 1 dự án là<\/p>\n<p><span class=\"math inline\">\\(P\\left(A\\overline{B}\\right)+P\\left(\\overline{A}B\\right)=P\\left(A\\right).P\\left(\\overline{B}\\right)+P\\left(\\overline{A}\\right).P\\left(B\\right)\\)<\/span><span class=\"math inline\">\\(=0{,}6.0{,}3+0{,}4.0{,}7=0{,}46\\)<\/span>. Suy ra đúng<\/p>\n<p><strong>b)<\/strong> <span class=\"math inline\">\\(P\\left(B\\left|A\\right.\\right)=P\\left(B\\right)=0{,}7\\)<\/span>. Suy ra sai<\/p>\n<p><strong>c)<\/strong> <span class=\"math inline\">\\(P\\left(B\\left|\\overline{A}\\right.\\right)=P\\left(B\\right)=0{,}7\\)<\/span> Suy ra đúng<\/p>\n<p><strong>d)<\/strong> <span class=\"math inline\">\\(P\\left(AB\\right)=P\\left(A\\right).P\\left(B\\right)=0{,}6.0{,}7=0{,}42\\)<\/span>. Suy ra sai<\/p>", "subs": ["Xác suất công ty thắng thầu 1 dự án là <span class=\"math inline\">\\(0{,}46\\)<\/span>.", "Biết công ty thắng thầu dự án 1, xác suất để công ty thắng thầu dự án 2 là <span class=\"math inline\">\\(0{,}42\\)<\/span>.", "Nếu công ty không thắng thầu dự án 1 thì xác suất để công ty thắng thầu dự án 2 là <span class=\"math inline\">\\(0{,}7\\)<\/span>.", "Xác suất để công ty thắng thầu cả 2 dự án là <span class=\"math inline\">\\(1\\)<\/span>."], "answers": [true, false, true, false]}, {"n": 3, "stem": "<p>Cho hai biến cố <span class=\"math inline\">\\(A\\)<\/span> và <span class=\"math inline\">\\(B\\)<\/span> với <span class=\"math inline\">\\(P\\left(A\\right)=0{,}6\\)<\/span>, <span class=\"math inline\">\\(P\\left(B\\right)=0{,}7\\)<\/span>, <span class=\"math inline\">\\(P\\left(AB\\right)=0{,}3\\)<\/span>.<\/p>", "hint": "Xét riêng từng ý. Dùng <span class=\"math inline\">\\(P(A|B)=\\dfrac{P(AB)}{P(B)}\\)<\/span> (<span class=\"math inline\">\\(P(B)&gt;0\\)<\/span>) và <span class=\"math inline\">\\(P(AB)=P(B)\\,P(A|B)\\)<\/span>; <span class=\"math inline\">\\(P(\\overline{A}|B)=1-P(A|B)\\)<\/span>.", "mistake": "Nhầm <span class=\"math inline\">\\(P(A|B)\\)<\/span> với <span class=\"math inline\">\\(P(B|A)\\)<\/span> hoặc với <span class=\"math inline\">\\(P(AB)\\)<\/span>; chia cho <span class=\"math inline\">\\(P(A)\\)<\/span> thay vì <span class=\"math inline\">\\(P(B)\\)<\/span>.", "sol": "<p><strong>a)<\/strong> <span class=\"math inline\">\\(P\\left(A\\left|B\\right.\\right)=\\frac{P\\left(AB\\right)}{P\\left(B\\right)}=\\frac{0{,}3}{0{,}7}=\\frac{3}{7}\\)<\/span>. Suy ra đúng<\/p>\n<p><strong>b)<\/strong> <span class=\"math inline\">\\(P\\left(B\\left|A\\right.\\right)=\\frac{P\\left(BA\\right)}{P\\left(A\\right)}=\\frac{0{,}3}{0{,}6}=\\frac{1}{2}\\)<\/span>. Suy ra sai<\/p>\n<p><strong>c)<\/strong> <span class=\"math inline\">\\(P\\left(\\overline{A}B\\right)=P\\left(\\overline{A}\\left|B\\right.\\right).P\\left(B\\right)\\)<\/span> mà <span class=\"math inline\">\\(P\\left(\\overline{A}\\left|B\\right.\\right)=1-P\\left(A\\left|B\\right.\\right)=1-\\frac{P\\left(AB\\right)}{P\\left(B\\right)}=1-\\frac{0{,}3}{0{,}7}=\\frac{4}{7}\\)<\/span><\/p>\n<p>nên <span class=\"math inline\">\\(P\\left(\\overline{A}B\\right)=P\\left(\\overline{A}\\left|B\\right.\\right).P\\left(B\\right)\\)<\/span><span class=\"math inline\">\\(=\\frac{4}{7}.0{,}7=\\frac{2}{5}\\)<\/span>. Suy ra đúng<\/p>\n<p><strong>d)<\/strong> <span class=\"math inline\">\\(P\\left(\\overline{B}\\left|A\\right.\\right)=1-P\\left(B\\left|A\\right.\\right)=1-\\frac{P\\left(BA\\right)}{P\\left(A\\right)}=1-\\frac{0{,}3}{0{,}6}=\\frac{1}{2}\\)<\/span>. Suy ra đúng<\/p>", "subs": ["<span class=\"math inline\">\\(P\\left(A\\left|B\\right.\\right)=\\frac{3}{7}\\)<\/span>.", "<span class=\"math inline\">\\(P\\left(B\\left|A\\right.\\right)=\\frac{6}{7}\\)<\/span>.", "<span class=\"math inline\">\\(P\\left(\\overline{A}B\\right)=\\frac{2}{5}\\)<\/span>.", "<span class=\"math inline\">\\(P\\left(\\overline{B}\\left|A\\right.\\right)=\\frac{1}{2}\\)<\/span>."], "answers": [true, false, true, true]}, {"n": 4, "stem": "<p>Một lớp có <span class=\"math inline\">\\(30\\)<\/span> học sinh gồm <span class=\"math inline\">\\(17\\)<\/span> học sinh nữ và <span class=\"math inline\">\\(13\\)<\/span> học sinh nam. Có 3 bạn tên Hiền, trong đó có 1 bạn nữ và 2 bạn nam. Gọi ngẫu nhiên 1 bạn lên bảng.<\/p>", "hint": "Xét riêng từng ý. Dùng <span class=\"math inline\">\\(P(A|B)=\\dfrac{P(AB)}{P(B)}\\)<\/span> (<span class=\"math inline\">\\(P(B)&gt;0\\)<\/span>) và <span class=\"math inline\">\\(P(AB)=P(B)\\,P(A|B)\\)<\/span>; <span class=\"math inline\">\\(P(\\overline{A}|B)=1-P(A|B)\\)<\/span>.", "mistake": "Nhầm <span class=\"math inline\">\\(P(A|B)\\)<\/span> với <span class=\"math inline\">\\(P(B|A)\\)<\/span> hoặc với <span class=\"math inline\">\\(P(AB)\\)<\/span>; chia cho <span class=\"math inline\">\\(P(A)\\)<\/span> thay vì <span class=\"math inline\">\\(P(B)\\)<\/span>.", "sol": "<p>Gọi <span class=\"math inline\">\\(A\\)<\/span> là biến cố “Bạn có tên là Hiền”, <span class=\"math inline\">\\(B\\)<\/span> là biến cố “bạn đó là bạn nữ”.<\/p>\n<p>Có <span class=\"math inline\">\\(P\\left(A\\right)=\\frac{3}{30}=\\frac{1}{10}\\)<\/span>, <span class=\"math inline\">\\(P\\left(B\\right)=\\frac{17}{30}\\)<\/span>, <span class=\"math inline\">\\(P\\left(AB\\right)=\\frac{1}{30}\\)<\/span>.<\/p>\n<p><strong>a)<\/strong> Xác suất để có bạn tên Hiền là <span class=\"math inline\">\\(\\frac{3}{30}=\\frac{1}{10}\\)<\/span>. Suy ra đúng<\/p>\n<p><strong>b)<\/strong> <span class=\"math inline\">\\(P\\left(A\\left|B\\right.\\right)=\\frac{P\\left(AB\\right)}{P\\left(B\\right)}=\\frac{\\frac{1}{30}}{\\frac{17}{30}}=\\frac{1}{17}\\)<\/span>. Suy ra sai<\/p>\n<p><strong>c)<\/strong> <span class=\"math inline\">\\(P\\left(A\\left|\\overline{B}\\right.\\right)=\\frac{P\\left(A\\overline{B}\\right)}{P\\left(\\overline{B}\\right)}=\\frac{\\frac{2}{30}}{\\frac{13}{30}}=\\frac{2}{13}\\)<\/span>. Suy ra đúng<\/p>\n<p><strong>d)<\/strong> Có 1 bạn nữ tên Hiền nên xác suất là <span class=\"math inline\">\\(\\frac{1}{3}\\)<\/span>. Suy ra sai<\/p>\n<p><em>Lưu ý ý c):<\/em> đề in “xác suất để có tên Hiền và bạn đó là nam là <span class=\"math inline\">\\(\\frac{2}{13}\\)<\/span>”. Lời giải gốc hiểu đó là xác suất có điều kiện “biết bạn đó là nam, bạn đó tên Hiền”: <span class=\"math inline\">\\(P(A|\\overline{B})=\\frac{2}{13}\\)<\/span> nên ý c) đúng. Nếu hiểu theo xác suất đồng thời thì chỉ là <span class=\"math inline\">\\(\\frac{2}{30}=\\frac{1}{15}\\)<\/span>. Trang này giữ đáp án gốc (đúng).<\/p>", "subs": ["Xác suất để có bạn tên Hiền là <span class=\"math inline\">\\(\\frac{1}{10}\\)<\/span>.", "Xác suất để có tên Hiền và bạn đó là nữ là <span class=\"math inline\">\\(\\frac{3}{17}\\)<\/span>.", "Xác suất để có tên Hiền và bạn đó là nam là <span class=\"math inline\">\\(\\frac{2}{13}\\)<\/span>.", "Nếu thầy giáo gọi bạn tên Hiền lên bảng thì xác suất để bạn đó là nữ là <span class=\"math inline\">\\(\\frac{3}{17}\\)<\/span>."], "answers": [true, false, true, false]}]}, {"kind": "sa", "title": "Phần III. Trắc nghiệm trả lời ngắn (Câu 1–6)", "note": "Nhập đáp số vào ô trả lời", "questions": [{"n": 1, "stem": "<p>Một hộp chứa <span class=\"math inline\">\\(6\\)<\/span> bi trắng và <span class=\"math inline\">\\(2\\)<\/span> bi đỏ. Bốc lần lượt từng bi, không hoàn lại. Giả sử lần đầu bốc được bi trắng. Tính xác suất để lần hai bốc được bi đỏ (làm tròn kết quả đến hàng phần trăm)?<\/p>", "hint": "Khi lấy không hoàn lại, sau lần thứ nhất số phần tử còn lại giảm 1 nên <span class=\"math inline\">\\(P(B|A)\\)<\/span> tính trên số phần tử còn lại; <span class=\"math inline\">\\(P(AB)=P(A)\\,P(B|A)\\)<\/span>. Nếu cần <span class=\"math inline\">\\(P(B)\\)<\/span>, phân hai trường hợp theo kết quả lần thứ nhất rồi dùng công thức xác suất toàn phần.", "mistake": "Giữ nguyên tổng số phần tử (quên rằng sau lần đầu đã lấy đi một phần tử) hoặc nhầm <span class=\"math inline\">\\(P(B|A)\\)<\/span> với <span class=\"math inline\">\\(P(AB)\\)<\/span>.", "sol": "<p>Giả sử lần đầu bốc được bi trắng. Khi đó trong hộp còn <span class=\"math inline\">\\(7\\)<\/span>bi gồm<span class=\"math inline\">\\(5\\)<\/span> bi trắng và <span class=\"math inline\">\\(2\\)<\/span> bi đỏ.<\/p>", "answer": "0,29", "tol": 0.005}, {"n": 2, "stem": "<p>Một sản phẩm xuất khẩu sang Mỹ phải qua 2 lần kiểm tra, nếu cả 2 lần đều đạt thì sản phẩm đó mới đủ tiêu chuẩn xuất khẩu. Biết rằng bình quân <span class=\"math inline\">\\(98\\%\\)<\/span> sản phẩm làm ra qua được lần kiểm tra thứ nhất và <span class=\"math inline\">\\(95\\%\\)<\/span> số sản phẩm qua lần kiểm tra đầu tiên sẽ tiếp tục qua được lần kiểm tra thứ hai. Xác suất để sản phẩm đó đủ tiêu chuẩn xuất khẩu là <span class=\"math inline\">\\(\\frac{a}{b}\\)<\/span> (<span class=\"math inline\">\\(\\frac{a}{b}\\)<\/span> là phân số tối giản). Tính <span class=\"math inline\">\\(b-a\\)<\/span>.<\/p>", "hint": "Quy tắc nhân: <span class=\"math inline\">\\(P(AB)=P(A)\\,P(B|A)\\)<\/span> (nếu <span class=\"math inline\">\\(A,B\\)<\/span> độc lập thì <span class=\"math inline\">\\(P(AB)=P(A)\\,P(B)\\)<\/span>); với \"ít nhất một\", \"đúng một\" hãy dùng biến cố đối hoặc chia trường hợp rồi cộng các xác suất xung khắc.", "mistake": "Cộng các xác suất thay vì nhân, hoặc dùng <span class=\"math inline\">\\(P(B)\\)<\/span> thay cho <span class=\"math inline\">\\(P(B|A)\\)<\/span> khi hai lần không độc lập.", "sol": "<p>Gọi <span class=\"math inline\">\\(A\\)<\/span> là biến cố “qua được lần kiểm tra đầu tiên”, suy ra <span class=\"math inline\">\\(P\\left(A\\right)=0{,}98\\)<\/span>.<\/p>\n<p>Gọi <span class=\"math inline\">\\(B\\)<\/span> là biến cố “qua được lần kiểm tra thứ hai”, suy ra <span class=\"math inline\">\\(P\\left(B\\left|A\\right.\\right)=0{,}95\\)<\/span>.<\/p>\n<p>Sản phẩm đủ tiêu chuẩn xuất khẩu phải qua được cả 2 lần kiểm tra nên ta cần tính <span class=\"math inline\">\\(P\\left(AB\\right)\\)<\/span>.<\/p>\n<p>Ta có <span class=\"math inline\">\\(P\\left(B\\left|A\\right.\\right)=\\frac{P\\left(AB\\right)}{P\\left(A\\right)}\\Rightarrow P\\left(AB\\right)=P\\left(A\\right).P\\left(B\\left|A\\right.\\right)=0{,}98.0{,}95=0{,}931=\\frac{931}{1000}\\)<\/span>.<\/p>\n<p>Khi đó <span class=\"math inline\">\\(a=931,b=1000\\Rightarrow b-a=69\\)<\/span>.<\/p>", "answer": "69", "tol": 0}, {"n": 3, "stem": "<p>Khảo sát một câu lạc bộ thể thao của trường THPT X gồm các bạn thích chơi bộ môn bóng chuyền hoặc bộ môn bóng rổ, người ta có kết quả : có 64% số học sinh thích bóng chuyền, 49% học sinh thích bóng rổ và 26% học sinh thích cả hai bộ môn. Chọn ngẫu nhiên một bạn trong nhóm khảo sát. Tính xác suất để học sinh được chọn thích chơi bóng chuyền biết bạn học sinh đó thích chơi bóng rổ (làm tròn kết quả đến hàng phần trăm)?<\/p>", "hint": "Dùng <span class=\"math inline\">\\(P(A|B)=\\dfrac{P(AB)}{P(B)}\\)<\/span> (<span class=\"math inline\">\\(P(B)&gt;0\\)<\/span>) và <span class=\"math inline\">\\(P(AB)=P(B)\\,P(A|B)\\)<\/span>; <span class=\"math inline\">\\(P(\\overline{A}|B)=1-P(A|B)\\)<\/span>.", "mistake": "Nhầm <span class=\"math inline\">\\(P(A|B)\\)<\/span> với <span class=\"math inline\">\\(P(B|A)\\)<\/span> hoặc với <span class=\"math inline\">\\(P(AB)\\)<\/span>; chia cho <span class=\"math inline\">\\(P(A)\\)<\/span> thay vì <span class=\"math inline\">\\(P(B)\\)<\/span>.", "sol": "<p>Gọi A là biến cố: “Học sinh thích bóng chuyền”, theo đề bài ta có <span class=\"math inline\">\\(P\\left(A\\right)=0{,}64\\)<\/span>.<\/p>\n<p>Gọi B là biến cố: “Học sinh thích bóng rổ”, theo đề bài ta có <span class=\"math inline\">\\(P\\left(B\\right)=0{,}49\\)<\/span>.<\/p>\n<p>Ta có AB là biến cố: “Học sinh thích chơi cả hai bộ môn”, theo đề bài ta có <span class=\"math inline\">\\(P\\left(AB\\right)=0{,}26\\)<\/span>.<\/p>\n<p>Ta có <span class=\"math inline\">\\(P\\left(A\\mid B\\right)=\\frac{P\\left(AB\\right)}{P\\left(B\\right)}=\\frac{0{,}26}{0{,}49}\\approx 0{,}53\\)<\/span>.<\/p>", "answer": "0,53", "tol": 0.005}, {"n": 4, "stem": "<p>Một doanh nghiệp xuất khẩu quả sầu riêng sau khi thu mua tại các nhà vườn đạt các tiêu chuẩn về vệ sinh an toàn thực phẩm sẽ tiếp tục thực hiện hai lần kiểm tra chất lượng sản phẩm, nếu cả hai lần kiểm tra đều đạt thì trái sầu riêng đó mới đạt tiêu chuẩn xuất khẩu. Biết rằng bình quân 97% sản phẩm qua được lần kiểm tra thứ nhất và 94% sản phẩm đã qua được lần kiểm tra thứ nhất qua được lần kiểm tra thứ hai. Tính xác suất để một quả sầu riêng đủ tiêu chuẩn xuất khẩu(làm tròn kết quả đến hàng phần trăm)?<\/p>", "hint": "Quy tắc nhân: <span class=\"math inline\">\\(P(AB)=P(A)\\,P(B|A)\\)<\/span> (nếu <span class=\"math inline\">\\(A,B\\)<\/span> độc lập thì <span class=\"math inline\">\\(P(AB)=P(A)\\,P(B)\\)<\/span>); với \"ít nhất một\", \"đúng một\" hãy dùng biến cố đối hoặc chia trường hợp rồi cộng các xác suất xung khắc.", "mistake": "Cộng các xác suất thay vì nhân, hoặc dùng <span class=\"math inline\">\\(P(B)\\)<\/span> thay cho <span class=\"math inline\">\\(P(B|A)\\)<\/span> khi hai lần không độc lập.", "sol": "<p>Gọi <span class=\"math inline\">\\(A\\)<\/span>: “sản phẩm qua lần kiểm tra thứ nhất”, <span class=\"math inline\">\\(P(A)=0{,}97\\)<\/span>; <span class=\"math inline\">\\(B\\)<\/span>: “sản phẩm qua lần kiểm tra thứ hai”, <span class=\"math inline\">\\(P(B|A)=0{,}94\\)<\/span>.<\/p>\n<p>Quả sầu riêng đạt tiêu chuẩn xuất khẩu khi qua cả hai lần kiểm tra, tức là xảy ra <span class=\"math inline\">\\(AB\\)<\/span>:<\/p>\n<p><span class=\"math inline\">\\(P(AB)=P(A)\\,P(B|A)=0{,}97\\cdot 0{,}94=0{,}9118\\approx 0{,}91\\)<\/span>.<\/p>", "answer": "0,91", "tol": 0.005}, {"n": 5, "stem": "<p>Một công ty đấu thầu hai dự án. Khả năng thắng thầu của các dự án 1 là 0,4 và dự án 2 là 0,5. Khả năng thắng thầu của cả hai dự án là 0,3. Tính xác xuất để công ty thắng dự án 2 biết công ty không thắng thầu dự án 1 (làm tròn kết quả đến hàng phần trăm)?<\/p>", "hint": "Dùng <span class=\"math inline\">\\(P(B)=P(AB)+P(\\overline{A}B)\\)<\/span> (hai biến cố <span class=\"math inline\">\\(AB\\)<\/span> và <span class=\"math inline\">\\(\\overline{A}B\\)<\/span> xung khắc và hợp của chúng là <span class=\"math inline\">\\(B\\)<\/span>); tương tự <span class=\"math inline\">\\(P(A)=P(AB)+P(A\\overline{B})\\)<\/span>. Từ đó suy ra xác suất còn thiếu. Dùng <span class=\"math inline\">\\(P(A|B)=\\dfrac{P(AB)}{P(B)}\\)<\/span> (<span class=\"math inline\">\\(P(B)&gt;0\\)<\/span>) và <span class=\"math inline\">\\(P(AB)=P(B)\\,P(A|B)\\)<\/span>; <span class=\"math inline\">\\(P(\\overline{A}|B)=1-P(A|B)\\)<\/span>.", "mistake": "Cho rằng <span class=\"math inline\">\\(P(AB)=P(A)\\,P(B)\\)<\/span> khi đề không nói <span class=\"math inline\">\\(A,B\\)<\/span> độc lập, hoặc quên hai biến cố <span class=\"math inline\">\\(AB\\)<\/span> và <span class=\"math inline\">\\(\\overline{A}B\\)<\/span> cộng lại ra <span class=\"math inline\">\\(B\\)<\/span>. Nhầm <span class=\"math inline\">\\(P(A|B)\\)<\/span> với <span class=\"math inline\">\\(P(B|A)\\)<\/span> hoặc với <span class=\"math inline\">\\(P(AB)\\)<\/span>; chia cho <span class=\"math inline\">\\(P(A)\\)<\/span> thay vì <span class=\"math inline\">\\(P(B)\\)<\/span>.", "sol": "<p>Gọi A là biến cố: “Công ty thắng thầu dự án 1”, theo đề bài ta có <span class=\"math inline\">\\(P\\left(A\\right)=0{,}4\\Rightarrow P\\left(\\overline{A}\\right)=0{,}6\\)<\/span><\/p>\n<p>Gọi B là biến cố: “Công ty thắng thầu dự án 2”, theo đề bài ta có <span class=\"math inline\">\\(P\\left(B\\right)=0{,}5\\)<\/span>, ta có <span class=\"math inline\">\\(P\\left(AB\\right)=0{,}3\\)<\/span><\/p>\n<p>Gọi C là biến cố “Công ty thắng dự án 2 biết không thắng dự án 1”, ta có<\/p>\n<p><span class=\"math inline\">\\(C=B/\\overline{A}\\Rightarrow P\\left(C\\right)=P\\left(B\\mid \\overline{A}\\right)=\\frac{P\\left(\\overline{A}B\\right)}{P\\left(\\overline{A}\\right)}\\)<\/span><\/p>\n<p>Do <span class=\"math inline\">\\(B=AB\\cap \\overline{A}B\\Rightarrow P\\left(B\\right)=P\\left(AB\\cap \\overline{A}B\\right)=P\\left(AB\\right)+P\\left(\\overline{A}B\\right)\\Rightarrow P\\left(\\overline{A}B\\right)=P\\left(B\\right)-P\\left(AB\\right)=0{,}5-0{,}3=0{,}2\\)<\/span><\/p>\n<p><span class=\"math inline\">\\(\\Rightarrow P\\left(C\\right)=P\\left(B\\mid \\overline{A}\\right)=\\frac{P\\left(\\overline{A}B\\right)}{P\\left(\\overline{A}\\right)}=\\frac{0{,}2}{0{,}6}=\\frac{1}{3}\\approx 0{,}33\\)<\/span>.<\/p>", "answer": "0,33", "tol": 0.005}, {"n": 6, "stem": "<p>Bạn Minh làm hai bài tập kế tiếp. Xác suất Minh làm đúng bài thứ nhất là 0,7. Nếu Minh làm đúng bài thứ nhất thì khả năng làm đúng bài thứ hai là 0,8 nhưng nếu Minh làm sai bài thứ nhất thì khả năng làm đúng bài thứ hai là 0,2. Tính xác suất để Minh làm đúng bài thứ nhất biết rằng Minh làm đúng bài thứ hai (làm tròn kết quả đến hàng phần chục)?<\/p>\n<p>**<\/p>", "hint": "Bài toán ngược (biết kết quả, tìm nguyên nhân): đặt <span class=\"math inline\">\\(A\\)<\/span> là nguyên nhân, <span class=\"math inline\">\\(B\\)<\/span> là kết quả đã biết, rồi dùng Bayes <span class=\"math inline\">\\(P(A|B)=\\dfrac{P(A)\\,P(B|A)}{P(A)\\,P(B|A)+P(\\overline{A})\\,P(B|\\overline{A})}\\)<\/span>. Tính mẫu số bằng công thức xác suất toàn phần.", "mistake": "Nhầm <span class=\"math inline\">\\(P(A|B)\\)<\/span> với <span class=\"math inline\">\\(P(B|A)\\)<\/span>, hoặc quên tính mẫu số <span class=\"math inline\">\\(P(B)\\)<\/span> bằng công thức xác suất toàn phần (chỉ chia cho một số hạng).", "sol": "<div class=\"tree-box\"><div class=\"tt\">🌳 Sơ đồ cây<\/div><table class=\"tree\"><thead><tr><th>Bài thứ nhất<\/th><th>Bài thứ hai<\/th><th>Xác suất đường đi<\/th><\/tr><\/thead><tbody><tr class=\"hit num\"><td class=\"n1\" rowspan=\"2\"><div class=\"sy\">\\(A\\)<\/div><div class=\"ds\">Làm đúng bài 1<\/div><div class=\"pb\">\\(P(A)=0{,}7\\)<\/div><\/td><td class=\"n2\"><div class=\"sy\">\\(B\\)<\/div><div class=\"ds\">đúng bài 2<\/div><div class=\"pb\">\\(P(B\\mid A)=0{,}8\\)<\/div><\/td><td class=\"pth\"><div class=\"ev\">\\(A\\,B\\)<\/div><div class=\"calc\">\\(0{,}7\\cdot 0{,}8\\)<\/div><div class=\"calc\">\\(=0{,}56\\)<\/div><\/td><\/tr><tr><td class=\"n2\"><div class=\"sy\">\\(\\overline{B}\\)<\/div><div class=\"ds\">sai bài 2<\/div><div class=\"pb\">\\(P(\\overline{B}\\mid A)=0{,}2\\)<\/div><\/td><td class=\"pth\"><div class=\"ev\">\\(A\\,\\overline{B}\\)<\/div><div class=\"calc\">\\(0{,}7\\cdot 0{,}2\\)<\/div><div class=\"calc\">\\(=0{,}14\\)<\/div><\/td><\/tr><tr class=\"hit\"><td class=\"n1\" rowspan=\"2\"><div class=\"sy\">\\(\\overline{A}\\)<\/div><div class=\"ds\">Làm sai bài 1<\/div><div class=\"pb\">\\(P(\\overline{A})=0{,}3\\)<\/div><\/td><td class=\"n2\"><div class=\"sy\">\\(B\\)<\/div><div class=\"ds\">đúng bài 2<\/div><div class=\"pb\">\\(P(B\\mid \\overline{A})=0{,}2\\)<\/div><\/td><td class=\"pth\"><div class=\"ev\">\\(\\overline{A}\\,B\\)<\/div><div class=\"calc\">\\(0{,}3\\cdot 0{,}2\\)<\/div><div class=\"calc\">\\(=0{,}06\\)<\/div><\/td><\/tr><tr><td class=\"n2\"><div class=\"sy\">\\(\\overline{B}\\)<\/div><div class=\"ds\">sai bài 2<\/div><div class=\"pb\">\\(P(\\overline{B}\\mid \\overline{A})=0{,}8\\)<\/div><\/td><td class=\"pth\"><div class=\"ev\">\\(\\overline{A}\\,\\overline{B}\\)<\/div><div class=\"calc\">\\(0{,}3\\cdot 0{,}8\\)<\/div><div class=\"calc\">\\(=0{,}24\\)<\/div><\/td><\/tr><\/tbody><\/table><div class=\"tsum\">Cộng các đường đi dẫn đến \\(B\\) – làm đúng bài thứ hai (các dòng tô vàng):\\[P(B)=0{,}56+0{,}06=0{,}62\\]<\/div><div class=\"tsum\">Công thức Bayes: lấy đường đi qua \\(A\\) và \\(B\\) (dòng viền xanh) chia cho \\(P(B)\\):\\[P(A\\mid B)=\\dfrac{0{,}56}{0{,}62}\\approx 0{,}903\\]<\/div><div class=\"tleg\"><span style=\"background:#fff3c4;padding:0 5px;border-radius:4px\">tô vàng<\/span>: đường đi dẫn đến biến cố đang xét · <span style=\"background:#e3f6ea;padding:0 5px;border-radius:4px;outline:1.5px solid #1a8f4a\">viền xanh<\/span>: đường đi ở tử số (công thức Bayes)<\/div><\/div><p>Gọi A là biến cố: “Minh làm đúng bài thứ nhất”, theo đề bài ta có <span class=\"math inline\">\\(P\\left(A\\right)=0{,}7\\)<\/span><\/p>\n<p>Gọi B là biến cố: “Minh làm đúng bài thứ hai”, theo đề bài ta có <span class=\"math inline\">\\(P\\left(B\\mid A\\right)=0{,}8;P\\left(B\\mid \\overline{A}\\right)=0{,}2.\\)<\/span><\/p>\n<p>Gọi C là biến cố “Minh làm đúng bài thứ nhất biết rằng Minh làm đúng bài thứ hai”, ta có<\/p>\n<p><span class=\"math inline\">\\(P\\left(C\\right)=P\\left(A\\mid B\\right)=\\frac{P\\left(AB\\right)}{P\\left(B\\right)}=\\frac{P\\left(BA\\right)}{P\\left(B\\right)}=\\frac{P\\left(B\\mid A\\right).P\\left(A\\right)}{P\\left(B\\right)}\\)<\/span><\/p>\n<p>Theo đề bài ta có <span class=\"math inline\">\\(P\\left(A\\cup B\\right)=P\\left(A\\right)+P\\left(B\\right)-P\\left(AB\\right)=P\\left(A\\right)+P\\left(B\\right)-P\\left(B\\mid A\\right).P\\left(A\\right)\\)<\/span><\/p>\n<p>Mặt khác <span class=\"math inline\">\\(P\\left(A\\cup B\\right)=1-P\\left(\\overline{A}\\overline{B}\\right)=1-P\\left(\\overline{B}\\mid \\overline{A}\\right).P\\left(\\overline{A}\\right)=1-0{,}8.0{,}3=0{,}76\\)<\/span><\/p>\n<p><span class=\"math inline\">\\(P\\left(B\\right)=P\\left(A\\cup B\\right)-P\\left(A\\right)+P\\left(B\\mid A\\right).P\\left(A\\right)=0{,}76-0{,}7+0{,}8.0{,}7=0{,}62\\)<\/span><\/p>\n<p>Vậy <span class=\"math inline\">\\(P\\left(C\\right)=\\frac{P\\left(B\\mid A\\right).P\\left(A\\right)}{P\\left(B\\right)}=\\frac{0{,}8.0{,}7}{0{,}62}=\\frac{28}{31}\\approx 0{,}9\\)<\/span>.<\/p>", "tree": true, "answer": "0,9", "tol": 0.005}]}]};
+(function(){
+  var secs = DATA.sections, total = 0;
+  secs.forEach(function(s){ total += s.questions.length; });
+  document.getElementById('pTotal').textContent = total;
+  var quiz = document.getElementById('quiz');
+  var all = []; // {sec, q, st, el, api}
+  var submitted = false;
+
+  function el(tag, cls, html){ var e = document.createElement(tag); if(cls) e.className = cls; if(html !== undefined) e.innerHTML = html; return e; }
+  function typeset(node){
+    try{
+      if(window.MathJax && MathJax.typesetPromise){ return MathJax.typesetPromise(node ? [node] : undefined); }
+    }catch(e){}
+  }
+  function parseNum(s){
+    if(s === null || s === undefined) return NaN;
+    s = String(s).replace(/−/g,'-').replace(/\s+/g,'').replace(/°|º/g,'');
+    if(!s) return NaN;
+    var pct = false;
+    if(/%$/.test(s)){ pct = true; s = s.slice(0,-1); }
+    var v;
+    var m = s.match(/^([+-]?[\d.,]+)\/([+-]?[\d.,]+)$/);
+    if(m){
+      var a = parseFloat(m[1].replace(',','.')), b = parseFloat(m[2].replace(',','.'));
+      if(!isFinite(a) || !isFinite(b) || b === 0) return NaN;
+      v = a / b;
+    } else {
+      if(!/^[+-]?(\d+([.,]\d*)?|[.,]\d+)$/.test(s)) return NaN;
+      v = parseFloat(s.replace(',','.'));
+    }
+    if(pct) v = v / 100;
+    return v;
+  }
+  function fmtAns(a){ return String(a).replace('.',','); }
+
+  function updateBar(){
+    var checked = 0, ok = 0, bad = 0;
+    all.forEach(function(x){ if(x.st.locked){ checked++; if(x.st.ok) ok++; else bad++; } });
+    document.getElementById('pChecked').textContent = checked;
+    document.getElementById('pOk').textContent = ok;
+    document.getElementById('pBad').textContent = bad;
+    document.getElementById('pFill').style.width = (total ? 100*checked/total : 0) + '%';
+  }
+
+  function buildSolBlocks(card, q){
+    var box = card.querySelector('.after');
+    box.innerHTML = '';
+    return box;
+  }
+
+  function makeQuestion(sec, q, idx){
+    var card = el('div', 'q');
+    var st = {tries: 0, locked: false, ok: false, sel: null, tf: [null,null,null,null], val: ''};
+    card.appendChild(el('div', 'qhead', 'Câu ' + q.n));
+    card.appendChild(el('div', 'stem', q.stem));
+    var body = el('div');
+    card.appendChild(body);
+    var fb = el('div', 'fb');
+    var checkBtn = el('button', 'btn', 'Kiểm tra đáp án'); checkBtn.disabled = true;
+    var solBtn = el('button', 'btn ghost', 'Xem lời giải'); solBtn.style.display = 'none';
+    var acts = el('div', 'acts'); acts.appendChild(checkBtn); acts.appendChild(solBtn); acts.appendChild(fb);
+    card.appendChild(acts);
+    var hintBox = el('div', 'hint'); hintBox.style.display = 'none';
+    var misBox = el('div', 'mistake'); misBox.style.display = 'none';
+    var solBox = el('div', 'sol'); solBox.style.display = 'none';
+    card.appendChild(hintBox); card.appendChild(misBox); card.appendChild(solBox);
+
+    var api = {};
+    var optBtns = [], tfRows = [], input = null, corr = null;
+
+    function complete(){
+      if(sec.kind === 'mcq') return st.sel !== null;
+      if(sec.kind === 'tf') return st.tf.every(function(v){ return v !== null; });
+      return String(st.val).trim() !== '';
+    }
+    function isRight(){
+      if(sec.kind === 'mcq') return st.sel === q.answer;
+      if(sec.kind === 'tf') return st.tf.every(function(v,i){ return v === q.answers[i]; });
+      var raw = st.val;
+      if(q.pct) raw = String(raw).replace(/%\s*$/,'');
+      var x = parseNum(raw);
+      if(!isFinite(x)) return false;
+      var tol = (q.tol || 0) + 1e-9;
+      return [q.answer].concat(q.alt || []).some(function(a){
+        var k = parseNum(a);
+        return isFinite(k) && Math.abs(x - k) <= tol;
+      });
+    }
+    function refresh(){ checkBtn.disabled = st.locked || !complete(); }
+
+    if(sec.kind === 'mcq'){
+      var ob = el('div', 'opts');
+      q.options.forEach(function(html, i){
+        var L = 'ABCDEF'[i];
+        var b = el('button', 'opt'); b.type = 'button'; b.dataset.k = L;
+        b.innerHTML = '<span class="lab">' + L + '.</span><span class="txt">' + html + '</span>';
+        b.addEventListener('click', function(){
+          if(st.locked) return;
+          st.sel = L;
+          optBtns.forEach(function(x){ x.classList.toggle('sel', x.dataset.k === L); });
+          refresh();
+        });
+        optBtns.push(b); ob.appendChild(b);
+      });
+      body.appendChild(ob);
+    } else if(sec.kind === 'tf'){
+      var sb = el('div', 'subs');
+      q.subs.forEach(function(html, i){
+        var r = el('div', 'subrow');
+        r.appendChild(el('span', 'sl', 'abcd'[i] + ')'));
+        var s = el('div', 'sb', html);
+        r.appendChild(s);
+        var tf = el('div', 'tf');
+        [['Đ', true], ['S', false]].forEach(function(p){
+          var b = el('button', 'tfb', p[0]); b.type = 'button';
+          b.addEventListener('click', function(){
+            if(st.locked) return;
+            st.tf[i] = p[1];
+            Array.prototype.forEach.call(tf.children, function(c, ci){ c.classList.toggle('sel', st.tf[i] === (ci === 0)); });
+            refresh();
+          });
+          tf.appendChild(b);
+        });
+        r.appendChild(tf);
+        tfRows.push({row: r, tf: tf, sb: s});
+        sb.appendChild(r);
+      });
+      body.appendChild(sb);
+    } else {
+      var w = el('div', 'sa');
+      var lab = el('label', '', 'Đáp số:');
+      input = el('input'); input.type = 'text'; input.autocomplete = 'off'; input.setAttribute('autocapitalize','off'); input.spellcheck = false; input.placeholder = 'Nhập đáp số';
+      input.addEventListener('input', function(){ st.val = input.value; refresh(); });
+      input.addEventListener('keydown', function(e){ if(e.key === 'Enter' && !checkBtn.disabled){ checkBtn.click(); } });
+      corr = el('div', 'corr'); corr.style.display = 'none';
+      w.appendChild(lab); w.appendChild(input); w.appendChild(corr);
+      body.appendChild(w);
+    }
+
+    function lockUI(){
+      optBtns.forEach(function(b){ b.disabled = true; });
+      tfRows.forEach(function(r){ Array.prototype.forEach.call(r.tf.children, function(c){ c.disabled = true; }); });
+      if(input) input.disabled = true;
+      checkBtn.disabled = true;
+    }
+    function showAnswers(){
+      if(sec.kind === 'mcq'){
+        optBtns.forEach(function(b){
+          if(b.dataset.k === q.answer) b.classList.add('right');
+          else if(b.dataset.k === st.sel) b.classList.add('wrong');
+        });
+      } else if(sec.kind === 'tf'){
+        var n = 0;
+        tfRows.forEach(function(r, i){
+          var good = st.tf[i] === q.answers[i];
+          if(good) n++;
+          r.row.classList.add(good ? 'right' : 'wrong');
+          if(!good){
+            var a = el('span', 'ans', 'Đáp án đúng: ' + (q.answers[i] ? 'Đ' : 'S'));
+            r.sb.appendChild(a);
+          }
+        });
+        st.nRight = n;
+      } else {
+        input.classList.add(isRight() ? 'right' : 'wrong');
+        if(!isRight()){ corr.textContent = 'Đáp án đúng: ' + [q.answer].concat(q.alt || []).map(fmtAns).join(' (hoặc ') + ((q.alt && q.alt.length) ? ')'.repeat(q.alt.length) : ''); corr.style.display = 'block'; }
+      }
+    }
+    function fillAfter(withMistake){
+      hintBox.style.display = 'none';
+      if(withMistake && q.mistake){
+        misBox.innerHTML = '<b class="t">⚠️ Lỗi sai thường gặp</b><div>' + q.mistake + '</div>';
+        misBox.style.display = 'block';
+      }
+      solBox.innerHTML = '<h4>Hướng dẫn giải chi tiết</h4>' + (q.sol || '<p>Đáp án: ' + (sec.kind==='mcq' ? q.answer : sec.kind==='tf' ? q.answers.map(function(v,i){return 'abcd'[i]+') '+(v?'Đ':'S');}).join(', ') : fmtAns(q.answer)) + '</p>');
+      solBox.style.display = 'block';
+      typeset(card);
+    }
+    api.finish = function(ok, byAttempts){
+      st.locked = true; st.ok = ok;
+      card.classList.add(ok ? 'ok' : 'bad');
+      lockUI(); showAnswers();
+      if(ok){
+        fb.className = 'fb ok'; fb.textContent = '✓ Chính xác!';
+        solBtn.style.display = ''; solBtn.textContent = 'Xem lời giải';
+        misBox.style.display = 'none'; hintBox.style.display = 'none';
+        solBox.style.display = 'none';
+        solBox.innerHTML = '<h4>Hướng dẫn giải chi tiết</h4>' + (q.sol || '');
+      } else {
+        fb.className = 'fb bad';
+        if(sec.kind === 'tf') fb.textContent = '✗ Đúng ' + st.nRight + '/4 ý';
+        else fb.textContent = '✗ Chưa đúng';
+        solBtn.style.display = 'none';
+        fillAfter(true);
+      }
+      updateBar();
+    };
+    checkBtn.addEventListener('click', function(){
+      if(st.locked || !complete()) return;
+      st.tries++;
+      var ok = isRight();
+      if(ok){ api.finish(true); }
+      else if(st.tries === 1){
+        fb.className = 'fb info'; fb.textContent = 'Chưa đúng. Còn 1 lần thử.';
+        hintBox.innerHTML = '<b class="t">💡 Gợi ý</b><div>' + (q.hint || 'Đọc kĩ dữ kiện và áp dụng đúng công thức của bài.') + '</div>';
+        hintBox.style.display = 'block';
+        checkBtn.textContent = 'Kiểm tra lại';
+        typeset(hintBox);
+      } else { api.finish(false); }
+    });
+    solBtn.addEventListener('click', function(){
+      var open = solBox.style.display !== 'none';
+      if(open){ solBox.style.display = 'none'; solBtn.textContent = 'Xem lời giải'; }
+      else { solBox.style.display = 'block'; solBtn.textContent = 'Ẩn lời giải'; typeset(solBox); }
+    });
+    api.grade = function(){
+      // used on submit: grade current answers of an unlocked question
+      var ok = complete() && isRight();
+      st.tries = Math.max(st.tries, 1);
+      api.finish(ok);
+    };
+    api.card = card; api.st = st; api.sec = sec; api.q = q;
+    return api;
+  }
+
+  secs.forEach(function(sec, si){
+    var h = el('h2', 'part', sec.title + '<small>' + (sec.note || '') + '</small>');
+    quiz.appendChild(h);
+    sec.questions.forEach(function(q, qi){
+      var api = makeQuestion(sec, q, qi);
+      all.push({sec: sec, q: q, st: api.st, api: api});
+      quiz.appendChild(api.card);
+    });
+  });
+  updateBar();
+
+  document.getElementById('submitBtn').addEventListener('click', function(){
+    if(submitted) return;
+    var pending = all.filter(function(x){ return !x.st.locked; }).length;
+    var msg = pending ? ('Còn ' + pending + ' câu chưa kiểm tra (câu bỏ trống tính là sai). Bạn có chắc chắn muốn nộp bài?') : 'Bạn có chắc chắn muốn nộp bài?';
+    if(!window.confirm(msg)) return;
+    submitted = true;
+    all.forEach(function(x){ if(!x.st.locked) x.api.grade(); });
+    this.disabled = true;
+    var ok = 0, bad = 0, per = {};
+    all.forEach(function(x){
+      var k = x.sec.title;
+      per[k] = per[k] || {ok: 0, n: 0};
+      per[k].n++;
+      if(x.st.ok){ ok++; per[k].ok++; } else bad++;
+    });
+    var r = document.getElementById('result');
+    var html = '<div class="big">' + ok + ' / ' + total + ' câu đúng</div><div>Số câu sai: <b>' + bad + '</b></div>';
+    var keys = Object.keys(per);
+    if(keys.length >= 2){
+      html += '<table><tr><th>Phần</th><th>Đúng</th></tr>';
+      keys.forEach(function(k){ html += '<tr><td>' + k + '</td><td>' + per[k].ok + '/' + per[k].n + '</td></tr>'; });
+      html += '</table>';
+    }
+    r.innerHTML = html; r.style.display = 'block';
+    updateBar();
+    r.scrollIntoView({behavior: 'smooth', block: 'center'});
+    typeset();
+  });
+})();
+</script>
+</body>
+</html>
