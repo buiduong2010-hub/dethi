@@ -182,11 +182,11 @@
         <label>Gắn vào chương <span style="font-weight:normal;color:#888">(đăng nhiều file vào cùng một chương được)</span></label>
         <select id="adm_chap"></select>
     </div>
-    <label>File HTML</label>
-    <input type="file" id="adm_file" accept=".html,.htm">
+    <label>File HTML <span style="font-weight:normal;color:#888">(chọn được nhiều file cùng lúc: giữ Ctrl hoặc Shift khi bấm)</span></label>
+    <input type="file" id="adm_file" accept=".html,.htm" multiple>
     <div id="adm_nameWrap">
-        <label>Tên hiển thị <span style="font-weight:normal;color:#888">(VD: Bài tập 1 – Đơn điệu của hàm số)</span></label>
-        <input type="text" id="adm_name" placeholder="VD: Đề thi Sở Hà Nội">
+        <label>Tên hiển thị từng file <span style="font-weight:normal;color:#888">(mặc định là tên file, thầy sửa được)</span></label>
+        <div id="adm_names" style="color:#888;font-size:14px">Chưa chọn file.</div>
     </div>
     <button class="adm_btn" id="adm_go">⬆️ Đăng lên</button>
     <div id="adm_msg"></div>
@@ -455,46 +455,71 @@
         } catch (e) { msg('Lỗi: ' + e.message, false); }
     }
 
+    let pick = [];
+    $('adm_file').onchange = function () {
+        pick = Array.from(this.files).sort((x, y) => x.name.localeCompare(y.name, 'vi', { numeric: true }));
+        const box = $('adm_names'); box.innerHTML = '';
+        if (!pick.length) { box.textContent = 'Chưa chọn file.'; return; }
+        pick.forEach((f, i) => {
+            const inp = document.createElement('input'); inp.type = 'text'; inp.className = 'adm_nm';
+            inp.style.marginBottom = '6px';
+            inp.value = f.name.replace(/\.html?$/i, '');
+            inp.title = f.name; box.appendChild(inp);
+        });
+    };
     $('adm_go').onclick = async function () {
         if (needToken()) return;
-        const sec = $('adm_sec').value, f = $('adm_file').files[0], isCh = !!CHAPTER[sec];
-        if (!f) { msg('Chưa chọn file.', false); return; }
-        let name = $('adm_name').value.trim();
-        if (!name) { msg('Chưa nhập tên hiển thị.', false); return; }
+        const sec = $('adm_sec').value, isCh = !!CHAPTER[sec];
+        if (!pick.length) { msg('Chưa chọn file.', false); return; }
+        const names = Array.from(document.querySelectorAll('#adm_names .adm_nm')).map(i => i.value.trim());
+        if (names.some(n => !n)) { msg('Có file chưa nhập tên hiển thị.', false); return; }
         if (isCh && !$('adm_chap').value) { msg('Chưa chọn chương.', false); return; }
         const btn = this; btn.disabled = true;
+        const done = [], total = pick.length; let err = null;
+        for (let i = 0; i < pick.length; i++) {
+            const f = pick[i];
+            try {
+                msg('Đang tải file ' + (i + 1) + '/' + pick.length + ': ' + f.name + ' ...');
+                const content = await fileToB64(f);
+                const path = sec + '/' + cleanName(f.name);
+                const ex = await gh('GET', 'contents/' + path + '?ref=' + BRANCH);
+                const body = { message: 'Đăng: ' + path, content, branch: BRANCH };
+                if (ex.ok && ex.json && ex.json.sha) body.sha = ex.json.sha;
+                const up = await gh('PUT', 'contents/' + path, body);
+                if (!up.ok) {
+                    if (up.status === 401) throw new Error('Token sai hoặc hết hạn (401).');
+                    if (up.status === 403 || up.status === 404) throw new Error('Token không đủ quyền hoặc sai repo (' + up.status + '). Cần quyền Contents: Read and write cho repo dethi.');
+                    throw new Error('Mã ' + up.status + ': ' + ((up.json && up.json.message) || ''));
+                }
+                done.push([path, names[i]]);
+            } catch (e) { err = 'File "' + f.name + '": ' + e.message; break; }
+        }
         try {
-            msg('Đang đọc file...');
-            const content = await fileToB64(f);
-            const path = sec + '/' + cleanName(f.name);
-            msg('Đang tải file lên GitHub...');
-            const ex = await gh('GET', 'contents/' + path + '?ref=' + BRANCH);
-            const body = { message: 'Đăng: ' + path, content, branch: BRANCH };
-            if (ex.ok && ex.json && ex.json.sha) body.sha = ex.json.sha;
-            const up = await gh('PUT', 'contents/' + path, body);
-            if (!up.ok) {
-                if (up.status === 401) throw new Error('Token sai hoặc hết hạn (401).');
-                if (up.status === 403 || up.status === 404) throw new Error('Token không đủ quyền hoặc sai repo (' + up.status + '). Cần quyền Contents: Read and write cho repo dethi.');
-                throw new Error('Mã ' + up.status + ': ' + ((up.json && up.json.message) || ''));
+            if (done.length) {
+                msg('Đang cập nhật menu...');
+                const { data, sha } = await getDe();
+                if (isCh) {
+                    const it = data[sec][parseInt($('adm_chap').value, 10)];
+                    let files = chapFiles(it);
+                    done.forEach(([path, nm]) => {
+                        if (!/^\p{Extended_Pictographic}/u.test(nm)) nm = '📄 ' + nm;
+                        files = files.filter(x => x[0] !== path); files.push([path, nm]);
+                    });
+                    it[2] = files; it[0] = files[0][0];
+                } else {
+                    done.slice().reverse().forEach(([path, nm]) => {
+                        if (!/^\p{Extended_Pictographic}/u.test(nm)) nm = (sec === 'dgnl' ? '📑 ' : '📝 ') + nm;
+                        data[sec] = data[sec].filter(it => it[0] !== path);
+                        data[sec].unshift([path, nm]);
+                    });
+                }
+                await putDe(data, sha, 'Cập nhật menu: ' + sec + ' (' + done.length + ' file)');
+                renderMenu(data);
+                $('adm_file').value = ''; pick = []; $('adm_names').textContent = 'Chưa chọn file.';
             }
-            msg('Đang cập nhật menu...');
-            const { data, sha } = await getDe();
-            if (isCh) {
-                if (!/^\p{Extended_Pictographic}/u.test(name)) name = '📄 ' + name;
-                const it = data[sec][parseInt($('adm_chap').value, 10)];
-                const files = chapFiles(it).filter(x => x[0] !== path);
-                files.push([path, name]);
-                it[2] = files; it[0] = files[0][0];
-            } else {
-                if (!/^\p{Extended_Pictographic}/u.test(name)) name = (sec === 'dgnl' ? '📑 ' : '📝 ') + name;
-                data[sec] = data[sec].filter(it => it[0] !== path);
-                data[sec].unshift([path, name]);
-            }
-            await putDe(data, sha, 'Cập nhật menu: ' + sec);
-            renderMenu(data);
-            $('adm_file').value = ''; $('adm_name').value = '';
-            msg('✅ Đã đăng xong!\nFile: ' + path + '\nGitHub Pages cần 1–2 phút để cập nhật; sau đó bấm Ctrl+F5 để thấy menu mới.', true);
-        } catch (e) { msg('❌ Lỗi: ' + e.message, false); }
+            if (err) msg('⚠️ Đã đăng ' + done.length + '/' + total + ' file rồi dừng.\n' + err, false);
+            else msg('✅ Đã đăng xong ' + done.length + ' file!\nGitHub Pages cần 1–2 phút để cập nhật; sau đó bấm Ctrl+F5 để thấy menu mới.', true);
+        } catch (e) { msg('❌ Lỗi khi cập nhật menu: ' + e.message + '\n(File đã lên GitHub nhưng menu chưa cập nhật, thầy thử lại.)', false); }
         btn.disabled = false;
     };
 </script>
