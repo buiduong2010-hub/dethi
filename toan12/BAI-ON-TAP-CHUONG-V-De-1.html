@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ôn tập chương V: Phương pháp tọa độ trong không gian - Đề ôn tập số 1</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], processEscapes: true },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+:root{
+  --bg:#f4f6fb; --card:#fff; --ink:#1d2433; --muted:#5b6478; --line:#dfe4ef;
+  --pri:#2457d6; --pri-soft:#e8efff; --ok:#1a8f4a; --ok-soft:#e6f6ec; --bad:#c62f3d; --bad-soft:#fdebed;
+  --warn:#9a6700; --warn-soft:#fff6dd;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 14px 90px}
+header.top{padding:22px 0 6px}
+header.top h1{margin:0 0 4px;font-size:1.45rem;line-height:1.3}
+header.top .sub{color:var(--muted);font-size:.95rem}
+.guide{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:14px 0;font-size:.93rem;color:#33405a}
+.guide b{color:var(--ink)}
+.guide ul{margin:6px 0 0 18px;padding:0}
+#bar{position:sticky;top:0;z-index:20;background:rgba(244,246,251,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -14px;padding:8px 14px}
+#bar .row{display:flex;justify-content:space-between;gap:10px;font-size:.88rem;color:var(--muted);flex-wrap:wrap}
+#bar .row b{color:var(--ink)}
+.track{height:8px;background:#dde3f1;border-radius:99px;overflow:hidden;margin-top:6px}
+.fill{height:100%;width:0;background:var(--pri);transition:width .25s}
+h2.part{font-size:1.1rem;margin:28px 0 10px;padding:8px 12px;background:var(--pri-soft);border-left:4px solid var(--pri);border-radius:6px;line-height:1.4}
+h2.part small{display:block;font-weight:400;color:var(--muted);font-size:.85rem;margin-top:2px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0;box-shadow:0 1px 2px rgba(20,30,60,.04)}
+.q.ok{border-color:var(--ok);background:linear-gradient(0deg,#fff,#fff) padding-box}
+.q.bad{border-color:var(--bad)}
+.qhead{font-weight:700;color:var(--pri);margin-bottom:4px}
+.stem{margin-bottom:10px}
+.stem p,.sol p,.sub p{margin:.35em 0}
+.stem img,.sol img{max-width:100%;height:auto}
+.stem img.fig,.sol img.fig{display:block;margin:8px auto}
+img.eqimg{vertical-align:middle;max-width:none}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fbfcff;color:inherit;font:inherit;cursor:pointer;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--pri);background:var(--pri-soft)}
+.opt .lab{font-weight:700;min-width:1.4em;color:var(--pri)}
+.opt .txt{flex:1;min-width:0;overflow-x:auto}
+.opt .txt p{margin:0}
+.opt.sel{border-color:var(--pri);background:var(--pri-soft);box-shadow:0 0 0 2px rgba(36,87,214,.15)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt:disabled{cursor:default}
+.subs{display:flex;flex-direction:column;gap:10px}
+.subrow{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fbfcff}
+.subrow .sl{font-weight:700;color:var(--pri);min-width:1.4em}
+.subrow .sb{flex:1;min-width:0;overflow-x:auto}
+.subrow .tf{display:flex;gap:6px;flex-shrink:0}
+.tfb{width:42px;height:38px;border:1.5px solid var(--line);border-radius:8px;background:#fff;font:inherit;font-weight:700;cursor:pointer}
+.tfb:hover:not(:disabled){border-color:var(--pri)}
+.tfb.sel{background:var(--pri);color:#fff;border-color:var(--pri)}
+.tfb:disabled{cursor:default}
+.subrow.right{border-color:var(--ok);background:var(--ok-soft)}
+.subrow.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.subrow .ans{display:block;font-size:.85rem;color:var(--bad);margin-top:3px;font-weight:600}
+.sa{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sa label{font-weight:600}
+.sa input{flex:1;min-width:150px;max-width:260px;padding:9px 12px;font:inherit;border:1.5px solid var(--line);border-radius:10px}
+.sa input:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px rgba(36,87,214,.15)}
+.sa input.right{border-color:var(--ok);background:var(--ok-soft)}
+.sa input.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.sa .corr{width:100%;font-size:.92rem;color:var(--bad);font-weight:600}
+.acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.btn{padding:9px 16px;border-radius:10px;border:0;background:var(--pri);color:#fff;font:inherit;font-weight:600;cursor:pointer}
+.btn:disabled{background:#b9c3dc;cursor:not-allowed}
+.btn.ghost{background:#fff;color:var(--pri);border:1.5px solid var(--pri)}
+.btn.big{padding:12px 26px;font-size:1.05rem}
+.fb{font-weight:600}
+.fb.ok{color:var(--ok)} .fb.bad{color:var(--bad)} .fb.info{color:var(--warn)}
+.hint{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--warn-soft);border:1px solid #f0dca0;color:#5c4400}
+.mistake{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--bad-soft);border:1px solid #f1c3c8;color:#6b1b24}
+.sol{margin-top:10px;padding:10px 14px;border-radius:10px;background:#f6f8ff;border:1px solid var(--line);overflow-x:auto}
+.sol h4,.mistake b.t,.hint b.t{margin:0 0 4px;font-size:.95rem}
+.sol h4{color:var(--pri)}
+.sol table{border-collapse:collapse;margin:8px 0}
+.sol td,.sol th{border:1px solid var(--line);padding:4px 8px}
+mjx-container{max-width:100%}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden}
+.submitbox{margin:28px 0;text-align:center}
+#result{display:none;background:var(--card);border:2px solid var(--pri);border-radius:14px;padding:18px;margin:20px 0;text-align:center}
+#result .big{font-size:1.6rem;font-weight:800;color:var(--pri)}
+#result table{margin:12px auto 0;border-collapse:collapse;font-size:.95rem}
+#result td,#result th{border:1px solid var(--line);padding:5px 14px}
+@media (max-width:520px){
+  body{font-size:15.5px}
+  .q{padding:12px}
+  .subrow{flex-wrap:wrap}
+  .subrow .sb{flex:1 1 calc(100% - 2.6em)}
+  .subrow .tf{margin-left:auto}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Ôn tập chương V: Phương pháp tọa độ trong không gian - Đề ôn tập số 1</h1>
+    <div class="sub">Đề ôn tập số 1 · 22 câu: 12 trắc nghiệm, 4 đúng/sai, 6 trả lời ngắn</div>
+  </header>
+  <div class="guide">
+    <b>Cách làm bài:</b> chọn đáp án rồi bấm <b>Kiểm tra đáp án</b>.
+    <ul>
+      <li>Sai lần 1: chỉ hiện gợi ý, bạn được làm lại. Sai lần 2: hiện đáp án đúng và lời giải chi tiết.</li>
+      <li>Câu đúng sẽ được khoá; bấm <b>Xem lời giải</b> nếu muốn đối chiếu cách làm.</li>
+      <li>Câu trả lời ngắn: nhập số, có thể dùng dấu phẩy hoặc dấu chấm (ví dụ <b>-4</b>, <b>2,25</b>, <b>2.25</b>) hoặc phân số <b>a/b</b>. Khi đề yêu cầu làm tròn, hãy nhập đúng số đã làm tròn.</li>
+      <li>Bấm <b>Nộp bài</b> ở cuối trang để xem tổng số câu đúng và số câu sai.</li>
+    </ul>
+  </div>
+  <div id="bar">
+    <div class="row"><span>Đã kiểm tra <b id="pChecked">0</b>/<b id="pTotal">0</b> câu</span><span>Đúng: <b id="pOk" style="color:var(--ok)">0</b> · Sai: <b id="pBad" style="color:var(--bad)">0</b></span></div>
+    <div class="track"><div class="fill" id="pFill"></div></div>
+  </div>
+  <main id="quiz"></main>
+  <div class="submitbox"><button class="btn big" id="submitBtn">Nộp bài</button></div>
+  <div id="result"></div>
+</div>
+<script>
+const DATA = {"sections": [{"kind": "mcq", "title": "Phần I. Trắc nghiệm nhiều phương án lựa chọn (Câu 1–12)", "note": "Mỗi câu chỉ chọn một phương án", "questions": [{"n": 1, "stem": "<p>Trong không gian <span class=\"math inline\">\\(Oxyz\\)<\/span>, cho mặt cầu <span class=\"math inline\">\\(\\left(S\\right):\\left(x+3\\right)^{2}+\\left(y+1\\right)^{2}+\\left(z-1\\right)^{2}=2\\)<\/span>. Xác định tọa độ tâm của mặt cầu <span class=\"math inline\">\\(\\left(S\\right)\\)<\/span><\/p>", "hint": "Với <span class=\"math inline\">\\(\\left(x-a\\right)^2+\\left(y-b\\right)^2+\\left(z-c\\right)^2=R^2\\)<\/span>: tâm <span class=\"math inline\">\\(I\\left(a;b;c\\right)\\)<\/span> (đổi dấu số trong ngoặc), <span class=\"math inline\">\\(R=\\sqrt{\\text{vế phải}}\\)<\/span>, đường kính <span class=\"math inline\">\\(2R\\)<\/span>.", "mistake": "Lấy <span class=\"math inline\">\\(R\\)<\/span> bằng vế phải (quên khai căn) hoặc nhầm đường kính với bán kính.", "sol": "<p>Mặt cầu <span class=\"math inline\">\\(\\left(S\\right)\\)<\/span>có tâm là <span class=\"math inline\">\\(I\\left(-3;-1;1\\right)\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(I\\left(-3;1;-1\\right)\\)<\/span>.", "<span class=\"math inline\">\\(I\\left(3;1;-1\\right)\\)<\/span>.", "<span class=\"math inline\">\\(I\\left(-3;-1;1\\right)\\)<\/span>.", "<span class=\"math inline\">\\(I\\left(3;-1;1\\right)\\)<\/span>."], "answer": "C"}, {"n": 2, "stem": "<p>Trong không gian với hệ tọa độ <span class=\"math inline\">\\(\\text{Ox}yz\\)<\/span>, cho mặt cầu <span class=\"math inline\">\\(\\left(S\\right):x^{2}+y^{2}+z^{2}-8x+2y+1=0\\)<\/span>. Tìm tọa độ tâm và bán kính của mặt cầu <span class=\"math inline\">\\(\\left(S\\right)\\)<\/span>.<\/p>", "hint": "Với <span class=\"math inline\">\\(\\left(x-a\\right)^2+\\left(y-b\\right)^2+\\left(z-c\\right)^2=R^2\\)<\/span>: tâm <span class=\"math inline\">\\(I\\left(a;b;c\\right)\\)<\/span> (đổi dấu số trong ngoặc), <span class=\"math inline\">\\(R=\\sqrt{\\text{vế phải}}\\)<\/span>, đường kính <span class=\"math inline\">\\(2R\\)<\/span>.", "mistake": "Lấy <span class=\"math inline\">\\(R\\)<\/span> bằng vế phải (quên khai căn) hoặc nhầm đường kính với bán kính.", "sol": "<p>Ta có: <span class=\"math inline\">\\(x^{2}+y^{2}+z^{2}-8x+2y+1=0\\Leftrightarrow \\left(x-4\\right)^{2}+\\left(y+1\\right)^{2}+z^{2}=16.\\)<\/span><\/p>\n<p>Vậy mặt cầu <span class=\"math inline\">\\(\\left(S\\right)\\)<\/span> có tâm <span class=\"math inline\">\\(I\\left(4;-1;0\\right)\\)<\/span> và bán kính <span class=\"math inline\">\\(R=4.\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(I\\left(-4;1;0\\right),R=2.\\)<\/span>", "<span class=\"math inline\">\\(I\\left(-4;1;0\\right),R=4.\\)<\/span>", "<span class=\"math inline\">\\(I\\left(4;-1;0\\right),R=2.\\)<\/span>", "<span class=\"math inline\">\\(I\\left(4;-1;0\\right),R=4.\\)<\/span>"], "answer": "D"}, {"n": 3, "stem": "<p>Trong không gian với hệ tọa độ <span class=\"math inline\">\\(Oxyz\\)<\/span>, cho hai điểm <span class=\"math inline\">\\(A\\left(1;-2;7\\right),B\\left(-3;8;-1\\right)\\)<\/span>. Mặt cầu đường kính <span class=\"math inline\">\\(AB\\)<\/span> có phương trình là<\/p>", "hint": "Mặt cầu đường kính <span class=\"math inline\">\\(AB\\)<\/span> có tâm <span class=\"math inline\">\\(I\\)<\/span> là trung điểm của <span class=\"math inline\">\\(AB\\)<\/span> và bán kính <span class=\"math inline\">\\(R=\\dfrac{AB}{2}\\)<\/span>.", "mistake": "Lấy <span class=\"math inline\">\\(R=AB\\)<\/span> thay vì <span class=\"math inline\">\\(R=\\dfrac{AB}{2}\\)<\/span>, hoặc tính sai tọa độ trung điểm.", "sol": "<p>Gọi <span class=\"math inline\">\\(I\\)<\/span>là trung điểm <span class=\"math inline\">\\(AB\\)<\/span> ta có <span class=\"math inline\">\\(I\\left(-1;3;3\\right)\\)<\/span> là tâm mặt cầu.<\/p>\n<p>Bán kính <span class=\"math inline\">\\(R=IA=\\sqrt{\\left(1+1\\right)^{2}+\\left(-2-3\\right)^{2}+\\left(7-3\\right)^{2}}=\\sqrt{45}.\\)<\/span><\/p>\n<p>Vậy phương trình mặt cầu cần tìm là <span class=\"math inline\">\\(\\left(x+1\\right)^{2}+\\left(y-3\\right)^{2}+\\left(z-3\\right)^{2}=45\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(\\left(x+1\\right)^{2}+\\left(y-3\\right)^{2}+\\left(z-3\\right)^{2}=\\sqrt{45}\\)<\/span>.", "<span class=\"math inline\">\\(\\left(x-1\\right)^{2}+\\left(y+3\\right)^{2}+\\left(z+3\\right)^{2}=45\\)<\/span>.", "<span class=\"math inline\">\\(\\left(x-1\\right)^{2}+\\left(y-3\\right)^{2}+\\left(z+3\\right)^{2}=\\sqrt{45}\\)<\/span>.", "<span class=\"math inline\">\\(\\left(x+1\\right)^{2}+\\left(y-3\\right)^{2}+\\left(z-3\\right)^{2}=45\\)<\/span>."], "answer": "D"}, {"n": 4, "stem": "<p>Vectơ nào sau đây là một vectơ chỉ phương của đường thẳng <span class=\"math inline\">\\(\\frac{x+2}{3}=\\frac{y+1}{-2}=\\frac{z-3}{-1}\\)<\/span><\/p>", "hint": "Với <span class=\"math inline\">\\(d:\\dfrac{x-x_0}{a}=\\dfrac{y-y_0}{b}=\\dfrac{z-z_0}{c}\\)<\/span>: đi qua <span class=\"math inline\">\\(M\\left(x_0;y_0;z_0\\right)\\)<\/span>, vectơ chỉ phương <span class=\"math inline\">\\(\\left(a;b;c\\right)\\)<\/span>. Tham số: <span class=\"math inline\">\\(x=x_0+at,\\,y=y_0+bt,\\,z=z_0+ct\\)<\/span>.", "mistake": "Lấy điểm đi qua với tọa độ đảo dấu (ví dụ <span class=\"math inline\">\\(x+1\\)<\/span> thì điểm có <span class=\"math inline\">\\(x=-1\\)<\/span>).", "sol": "<p>Vectơ chỉ phương của đường thẳng là <span class=\"math inline\">\\(\\vec{u}=\\left(3;-2;-1\\right)=-1\\left(-3;2;1\\right)\\)<\/span> nên <span class=\"math inline\">\\(\\overrightarrow{u_{1}}=\\left(-3;2;1\\right)\\)<\/span> cũng là<\/p>\n<p>một vectơ chỉ phương của đường thẳng.<\/p>", "options": ["<span class=\"math inline\">\\(\\left(-2;1;-3\\right)\\)<\/span>.", "<span class=\"math inline\">\\(\\left(-3;2;1\\right)\\)<\/span>.", "<span class=\"math inline\">\\(\\left(3;-2;1\\right)\\)<\/span>.", "<span class=\"math inline\">\\(\\left(2;1;3\\right)\\)<\/span>."], "answer": "B"}, {"n": 5, "stem": "<p>Trong không gian với hệ tọa độ <span class=\"math inline\">\\(Oxyz\\)<\/span>, cho hai điểm <span class=\"math inline\">\\(M\\left(1;-2;1\\right)\\)<\/span>, <span class=\"math inline\">\\(N\\left(0;1;3\\right)\\)<\/span>. Phương trình đường thẳng qua hai điểm <span class=\"math inline\">\\(M\\)<\/span>, <span class=\"math inline\">\\(N\\)<\/span> là<\/p>", "hint": "Đường thẳng đi qua hai điểm <span class=\"math inline\">\\(A,B\\)<\/span> nhận <span class=\"math inline\">\\(\\overrightarrow{AB}\\)<\/span> làm vectơ chỉ phương và đi qua <span class=\"math inline\">\\(A\\)<\/span>.", "mistake": "Tính <span class=\"math inline\">\\(\\overrightarrow{AB}\\)<\/span> ngược (lấy <span class=\"math inline\">\\(A-B\\)<\/span> thay vì <span class=\"math inline\">\\(B-A\\)<\/span>) hoặc nhầm dấu trong phương trình chính tắc.", "sol": "<p><span class=\"math inline\">\\(\\overrightarrow{MN}=\\left(-1;3;2\\right)\\)<\/span>.<\/p>\n<p>Đường thẳng <span class=\"math inline\">\\(MN\\)<\/span> qua <span class=\"math inline\">\\(N\\left(0;1;3\\right)\\)<\/span> nhận <span class=\"math inline\">\\(\\overrightarrow{MN}=\\left(-1;3;2\\right)\\)<\/span> làm vectơ chỉ phương có phương trình<\/p>\n<p><strong><span class=\"math inline\">\\(\\frac{x}{-1}=\\frac{y-1}{3}=\\frac{z-3}{2}\\)<\/span>.<\/strong><\/p>", "options": ["<span class=\"math inline\">\\(\\frac{x+1}{-1}=\\frac{y-2}{3}=\\frac{z+1}{2}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{x+1}{1}=\\frac{y-3}{-2}=\\frac{z-2}{1}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{x}{-1}=\\frac{y-1}{3}=\\frac{z-3}{2}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{x}{1}=\\frac{y-1}{-2}=\\frac{z-3}{1}\\)<\/span>."], "answer": "C"}, {"n": 6, "stem": "<p>Trong không gian với hệ tọa độ <span class=\"math inline\">\\(Oxyz\\)<\/span>, cho đường thẳng<span class=\"math inline\">\\(\\displaystyle d:\\left\\{\\begin{array}{l}x=1+2t \\\\ y=3-t \\\\ z=1-t\\end{array}\\right.,\\)<\/span><span class=\"math inline\">\\(t\\in \\mathbb{R}\\)<\/span>và mặt phẳng<span class=\"math inline\">\\(\\left(P\\right):x+2y-3z+2=0.\\)<\/span>Tìm tọa độ của điểm<span class=\"math inline\">\\(A\\)<\/span>là giao điểm của đường thẳng<span class=\"math inline\">\\(d\\)<\/span>và mặt phẳng<span class=\"math inline\">\\(\\left(P\\right).\\)<\/span><\/p>", "hint": "Xác định đối tượng (mặt cầu, mặt phẳng hay đường thẳng) và các yếu tố cần có (tâm, bán kính, vectơ pháp tuyến, vectơ chỉ phương) rồi áp dụng công thức tương ứng.", "mistake": "Sai sót thường gặp ở dạng này là nhầm dấu khi thay số, tính sai tích có hướng/tích vô hướng hoặc dùng nhầm công thức. Hãy đối chiếu từng bước của bạn với lời giải bên dưới.", "sol": "<p>Vì<span class=\"math inline\">\\(A\\)<\/span>là giao điểm của đường thẳng<span class=\"math inline\">\\(d\\)<\/span>và mặt phẳng<span class=\"math inline\">\\(\\left(P\\right)\\)<\/span> nên<\/p>\n<p>+<span class=\"math inline\">\\(A\\in d\\Rightarrow A\\left(1+2t;3-t;1-t\\right).\\)<\/span><\/p>\n<p>+<span class=\"math inline\">\\(A\\in \\left(P\\right)\\Rightarrow \\left(1+2t\\right)+2\\left(3-t\\right)-3\\left(1-t\\right)+2=0\\Rightarrow t=-2.\\)<\/span><\/p>\n<p>Vậy tọa độ điểm<span class=\"math inline\">\\(A\\left(-3;5;3\\right).\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(A\\left(3;5;3\\right)\\)<\/span>.", "<span class=\"math inline\">\\(A\\left(1;3;1\\right)\\)<\/span>.", "<span class=\"math inline\">\\(A\\left(-3;5;3\\right)\\)<\/span>.", "<span class=\"math inline\">\\(A\\left(1;2;-3\\right)\\)<\/span>."], "answer": "C"}, {"n": 7, "stem": "<p>Trong không gian với hệ tọa độ <em>Oxyz<\/em> cho đường thẳng <span class=\"math inline\">\\(\\displaystyle d:\\left\\{\\begin{array}{c}x=1-t \\\\ y=2+2t \\\\ z=3+t\\end{array}\\right.\\)<\/span> và mặt phẳng <span class=\"math inline\">\\((P):x-y+3=0\\)<\/span>. Tính số đo góc giữa đường thẳng <em>d<\/em> và mặt phẳng <span class=\"math inline\">\\((P)\\)<\/span>.<\/p>", "hint": "Góc giữa đường thẳng và mặt phẳng: <span class=\"math inline\">\\(\\sin\\varphi=\\dfrac{\\left|\\vec{u}\\cdot\\vec{n}\\right|}{\\left|\\vec{u}\\right|\\left|\\vec{n}\\right|}\\)<\/span> (dùng <span class=\"math inline\">\\(\\sin\\)<\/span>, không phải <span class=\"math inline\">\\(\\cos\\)<\/span>).", "mistake": "Dùng <span class=\"math inline\">\\(\\cos\\)<\/span> thay cho <span class=\"math inline\">\\(\\sin\\)<\/span> khi tính góc giữa đường thẳng và mặt phẳng.", "sol": "<p>Đường thẳng <span class=\"math inline\">\\(d\\)<\/span>có véc tơ chỉ phương là <span class=\"math inline\">\\(\\vec{u}=\\left(-1;2;1\\right)\\)<\/span><\/p>\n<p>Mặt phẳng <span class=\"math inline\">\\(\\left(P\\right)\\)<\/span> có véc tơ pháp tuyến là <span class=\"math inline\">\\(\\vec{n}=\\left(1;-1;0\\right)\\)<\/span><\/p>\n<p>Gọi <span class=\"math inline\">\\(\\alpha\\)<\/span>là góc giữa đường thẳng <span class=\"math inline\">\\(d\\)<\/span>và mặt phẳng <span class=\"math inline\">\\(\\left(P\\right)\\)<\/span>. Khi đó ta có<\/p>\n<p><span class=\"math inline\">\\(\\sin \\alpha =\\frac{\\left|\\vec{u}.\\vec{n}\\right|}{\\left|\\vec{u}\\right|\\left|\\vec{n}\\right|}=\\frac{\\left|-1.1+2.\\left(-1\\right)+1.0\\right|}{\\sqrt{\\left(-1\\right)^{2}+2^{2}+1^{2}}.\\sqrt{1^{2}+\\left(-1\\right)^{2}+0^{2}}}=\\frac{3}{2\\sqrt{3}}=\\frac{\\sqrt{3}}{2}\\)<\/span><\/p>\n<p>Do đó <span class=\"math inline\">\\(\\alpha =60^{0}\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(60^{0}\\)<\/span>", "<span class=\"math inline\">\\(30^{0}\\)<\/span>", "<span class=\"math inline\">\\(120^{o}\\)<\/span>", "<span class=\"math inline\">\\(45^{0}\\)<\/span>"], "answer": "A"}, {"n": 8, "stem": "<p>Trong không gian<strong><span class=\"math inline\">\\(Oxyz\\)<\/span><\/strong>, cho hai đường thẳng <span class=\"math inline\">\\(d_{1}:\\frac{x-1}{2}=\\frac{y+2}{-1}=\\frac{z}{1}\\)<\/span> và <strong><span class=\"math inline\">\\(\\displaystyle d_{2}:\\left\\{\\begin{array}{l}x=1+4t \\\\ y=-1-2t \\\\ z=2+2t\\end{array}\\right.\\)<\/span><\/strong>.<\/p>\n<p>Khoảng cách giữa hai đường thẳng đã cho bằng?<\/p>", "hint": "Với hai đường thẳng chéo nhau: <span class=\"math inline\">\\(d=\\dfrac{\\left|\\left[\\vec{u}_1,\\vec{u}_2\\right]\\cdot\\overrightarrow{M_1M_2}\\right|}{\\left|\\left[\\vec{u}_1,\\vec{u}_2\\right]\\right|}\\)<\/span>.", "mistake": "Tính sai tích có hướng hoặc quên lấy giá trị tuyệt đối ở tử số.", "sol": "<p>Ta có: Đường thẳng <span class=\"math inline\">\\(d_{1}\\)<\/span> đi qua điểm <span class=\"math inline\">\\(M(1;-2;0)\\)<\/span> và nhận <span class=\"math inline\">\\(\\overrightarrow{u_{1}}=\\left(2;-1;1\\right)\\)<\/span> làm VTCP.<\/p>\n<p>Đường thẳng <span class=\"math inline\">\\(d_{2}\\)<\/span> đi qua điểm <span class=\"math inline\">\\(N(1;-1;2)\\)<\/span> và nhận <span class=\"math inline\">\\(\\overrightarrow{u_{2}}=\\left(4;-2;2\\right)\\)<\/span> làm VTCP.<\/p>\n<p>Dễ thấy: <span class=\"math inline\">\\(\\overrightarrow{u_{2}}=2.\\overrightarrow{u_{1}}\\)<\/span> nên đường thẳng <span class=\"math inline\">\\(d_{1}\\)<\/span> song song hoặc trùng với đường thẳng <span class=\"math inline\">\\(d_{2}\\)<\/span>.<\/p>\n<p>Lại có điểm <span class=\"math inline\">\\(M\\left(1;-2;0\\right)\\in d_{1}\\)<\/span> nhưng <span class=\"math inline\">\\(M\\left(1;-2;0\\right)\\notin d_{2}\\)<\/span> nên suy ra <span class=\"math inline\">\\(d_{1}\\text{ // }d_{2}\\)<\/span>.<\/p>\n<p>Vậy khoảng cách giữa hai đường thẳng đã cho bằng khoảng cách từ điểm <span class=\"math inline\">\\(M\\left(1;-2;0\\right)\\)<\/span> đến<\/p>\n<p>đường thẳng <span class=\"math inline\">\\(d_{2}\\)<\/span>.<\/p>\n<p><span class=\"math inline\">\\(\\text{d}\\left(M\\text{;}d_{2}\\right)=\\frac{\\left|\\left[\\overrightarrow{MN};\\overrightarrow{u_{2}}\\right]\\right|}{\\left|\\overrightarrow{u_{2}}\\right|}\\)<\/span>.<\/p>\n<p>Ta có <span class=\"math inline\">\\(\\overrightarrow{MN}=\\left(\\text{0};\\text{1};\\text{2}\\right)\\)<\/span>,<span class=\"math inline\">\\(\\left[\\overrightarrow{MN};\\overrightarrow{u_{2}}\\right]=\\left(6;8;-4\\right)\\)<\/span>.<\/p>\n<p><span class=\"math inline\">\\(\\Rightarrow d\\left(M;d_{2}\\right)=\\frac{\\sqrt{6^{2}+8^{2}+\\left(-4\\right)^{2}}}{\\sqrt{4^{2}+\\left(-2\\right)^{2}+2^{2}}}=\\frac{\\sqrt{174}}{6}\\Rightarrow d(d_{1};d_{2})=\\frac{\\sqrt{174}}{6}.\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(\\frac{\\sqrt{87}}{6}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{\\sqrt{174}}{6}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{\\sqrt{174}}{3}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{\\sqrt{87}}{3}\\)<\/span>."], "answer": "B"}, {"n": 9, "stem": "<p>Trong không gian <span class=\"math inline\">\\(Oxyz\\)<\/span>, cho hai đường thẳng chéo nhau <span class=\"math inline\">\\(d_{1}:\\frac{x-2}{2}=\\frac{y-6}{-2}=\\frac{z+2}{1}\\)<\/span> và <span class=\"math inline\">\\(d_{2}:\\frac{x-4}{1}=\\frac{y+1}{3}=\\frac{z+2}{-2}\\)<\/span>. Phương trình mặt phẳng <span class=\"math inline\">\\(\\left(P\\right)\\)<\/span> chứa <span class=\"math inline\">\\(d_{1}\\)<\/span> và <span class=\"math inline\">\\(\\left(P\\right)\\)<\/span>song song với đường thẳng <span class=\"math inline\">\\(d_{2}\\)<\/span> là<\/p>", "hint": "Với hai đường thẳng chéo nhau: <span class=\"math inline\">\\(d=\\dfrac{\\left|\\left[\\vec{u}_1,\\vec{u}_2\\right]\\cdot\\overrightarrow{M_1M_2}\\right|}{\\left|\\left[\\vec{u}_1,\\vec{u}_2\\right]\\right|}\\)<\/span>.", "mistake": "Tính sai tích có hướng hoặc quên lấy giá trị tuyệt đối ở tử số.", "sol": "<p>Đường thẳng <span class=\"math inline\">\\(d_{1}\\)<\/span> đi qua <span class=\"math inline\">\\(A\\left(2;6;-2\\right)\\)<\/span> và có một véc tơ chỉ phương <span class=\"math inline\">\\(\\overrightarrow{u_{1}}=\\left(2;-2;1\\right)\\)<\/span>.<\/p>\n<p>Đường thẳng <span class=\"math inline\">\\(d_{2}\\)<\/span> có một véc tơ chỉ phương <span class=\"math inline\">\\(\\overrightarrow{u_{2}}=\\left(1;3;-2\\right)\\)<\/span>.<\/p>\n<p>Gọi <span class=\"math inline\">\\(\\vec{n}\\)<\/span> là một véc tơ pháp tuyến của mặt phẳng <span class=\"math inline\">\\(\\left(P\\right)\\)<\/span>. Do mặt phẳng <span class=\"math inline\">\\(\\left(P\\right)\\)<\/span> chứa <span class=\"math inline\">\\(d_{1}\\)<\/span> và <span class=\"math inline\">\\(\\left(P\\right)\\)<\/span>song song với đường thẳng <span class=\"math inline\">\\(d_{2}\\)<\/span> nên <span class=\"math inline\">\\(\\vec{n}=\\left[\\overrightarrow{u_{1}},\\overrightarrow{u_{2}}\\right]=\\left(1;5;8\\right)\\)<\/span>.<\/p>\n<p>Vậy phương trình mặt phẳng <span class=\"math inline\">\\(\\left(P\\right)\\)<\/span> đi qua <span class=\"math inline\">\\(A\\left(2;6;-2\\right)\\)<\/span> và có một véc tơ pháp tuyến <span class=\"math inline\">\\(\\vec{n}=\\left(1;5;8\\right)\\)<\/span> là <span class=\"math inline\">\\(x+5y+8z-16=0\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(\\left(P\\right):x+5y+8z-16=0\\)<\/span>.", "<span class=\"math inline\">\\(\\left(P\\right):x+5y+8z+16=0\\)<\/span>.", "<span class=\"math inline\">\\(\\left(P\\right):x+4y+6z-12=0\\)<\/span>.", "<span class=\"math inline\">\\(\\left(P\\right):2x+y-6=0\\)<\/span>."], "answer": "A"}, {"n": 10, "stem": "<p>Trong không gian <span class=\"math inline\">\\(Oxyz\\)<\/span>, mặt phẳng <span class=\"math inline\">\\(\\left(P\\right)\\)<\/span> đi qua điểm <span class=\"math inline\">\\(M\\left(3;-1;4\\right)\\)<\/span>đồng thời vuông góc với giá của vectơ <span class=\"math inline\">\\(\\vec{a}=\\left(1;-1;2\\right)\\)<\/span> có phương trình là<\/p>", "hint": "Nếu mặt phẳng vuông góc với một đường thẳng (hoặc vectơ) thì vectơ chỉ phương của đường thẳng đó chính là vectơ pháp tuyến của mặt phẳng; ngược lại, đường thẳng vuông góc mặt phẳng nhận <span class=\"math inline\">\\(\\vec{n}\\)<\/span> làm <span class=\"math inline\">\\(\\vec{u}\\)<\/span>.", "mistake": "Nhầm vai trò của vectơ pháp tuyến và vectơ chỉ phương.", "sol": "<p><span class=\"math inline\">\\(\\left(P\\right)\\)<\/span> có dạng: <span class=\"math inline\">\\(1.\\left(x-3\\right)-1\\left(y+1\\right)+2\\left(z-4\\right)=0\\)<\/span><span class=\"math inline\">\\(\\Leftrightarrow \\ x-y+2z-12=0\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(3x-y+4z-12=0\\)<\/span>.", "<span class=\"math inline\">\\(3x-y+4z+12=0\\)<\/span>.", "<span class=\"math inline\">\\(x-y+2z-12=0\\)<\/span>.", "<span class=\"math inline\">\\(x-y+2z+12=0\\)<\/span>."], "answer": "C"}, {"n": 11, "stem": "<p>Trong không gian <span class=\"math inline\">\\(Oxyz\\)<\/span>, tính khoảng cách từ <span class=\"math inline\">\\(M\\left(1;2;-3\\right)\\)<\/span> đến mặt phẳng <span class=\"math inline\">\\(\\left(P\\right):x+2y+2\\text{z}-10=0\\)<\/span>.<\/p>", "hint": "Khoảng cách từ <span class=\"math inline\">\\(M\\left(x_0;y_0;z_0\\right)\\)<\/span> đến <span class=\"math inline\">\\(\\left(P\\right):Ax+By+Cz+D=0\\)<\/span> là <span class=\"math inline\">\\(\\dfrac{\\left|Ax_0+By_0+Cz_0+D\\right|}{\\sqrt{A^2+B^2+C^2}}\\)<\/span>.", "mistake": "Quên giá trị tuyệt đối ở tử số, hoặc nhầm dấu của <span class=\"math inline\">\\(D\\)<\/span> khi thay tọa độ.", "sol": "<p><span class=\"math inline\">\\(d\\left(M;\\left(P\\right)\\right)=\\frac{\\left|1+2.2+2.\\left(-3\\right)-10\\right|}{\\sqrt{1^{2}+2^{2}+2^{2}}}=\\frac{\\left|-11\\right|}{3}=\\frac{11}{3}\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(\\frac{11}{3}\\)<\/span>.", "<span class=\"math inline\">\\(3\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{7}{3}\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{4}{3}\\)<\/span>."], "answer": "A"}, {"n": 12, "stem": "<p>Trong không gian với hệ tọa độ <span class=\"math inline\">\\(Oxyz\\)<\/span>, cho ba điểm <span class=\"math inline\">\\(A\\left(2;0;0\\right)\\)<\/span>, <span class=\"math inline\">\\(B\\left(0;-1;0\\right)\\)<\/span>, <span class=\"math inline\">\\(C\\left(0;0;-3\\right)\\)<\/span>. Viết phương trình mặt phẳng <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span>.<\/p>", "hint": "Mặt phẳng <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span> nhận <span class=\"math inline\">\\(\\left[\\overrightarrow{AB},\\overrightarrow{AC}\\right]\\)<\/span> làm vectơ pháp tuyến; viết phương trình qua một trong ba điểm.", "mistake": "Tính sai tích có hướng hoặc thế sai tọa độ điểm khi tìm <span class=\"math inline\">\\(D\\)<\/span>.", "sol": "<p>Phương trình mặt phẳng <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span> là <span class=\"math inline\">\\(\\frac{x}{2}+\\frac{y}{-1}+\\frac{z}{-3}=1\\Leftrightarrow -3x+6y+2z+6=0\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(-3x+6y-2z+6=0\\)<\/span>.", "<span class=\"math inline\">\\(-3x-6y+2z+6=0\\)<\/span>.", "<span class=\"math inline\">\\(-3x+6y+2z+6=0\\)<\/span> .", "<span class=\"math inline\">\\(-3x-6y+2z-6=0\\)<\/span>."], "answer": "C"}]}, {"kind": "tf", "title": "Phần II. Trắc nghiệm đúng sai (Câu 1–4)", "note": "Trong mỗi câu, chọn Đúng (Đ) hoặc Sai (S) cho từng ý a), b), c), d); câu chỉ đúng khi cả bốn ý đúng", "questions": [{"n": 1, "stem": "<p>Trong không gian với hệ toạ độ <span class=\"math inline\">\\(Oxyz\\)<\/span>, cho ba điểm <span class=\"math inline\">\\(A\\left(1;-2;1\\right)\\)<\/span>, <span class=\"math inline\">\\(B\\left(-1;3;3\\right)\\)<\/span>, <span class=\"math inline\">\\(C\\left(2;-4;2\\right)\\)<\/span>.<\/p>", "hint": "Xét riêng từng ý. Mặt phẳng tọa độ: <span class=\"math inline\">\\(\\left(Oxy\\right):z=0\\)<\/span>, <span class=\"math inline\">\\(\\left(Oxz\\right):y=0\\)<\/span>, <span class=\"math inline\">\\(\\left(Oyz\\right):x=0\\)<\/span>; vectơ pháp tuyến lần lượt là <span class=\"math inline\">\\(\\vec{k}\\)<\/span>, <span class=\"math inline\">\\(\\vec{j}\\)<\/span>, <span class=\"math inline\">\\(\\vec{i}\\)<\/span>. Với <span class=\"math inline\">\\(\\left(P\\right):Ax+By+Cz+D=0\\)<\/span>, một vectơ pháp tuyến là <span class=\"math inline\">\\(\\left(A;B;C\\right)\\)<\/span>; mọi vectơ <span class=\"math inline\">\\(k\\left(A;B;C\\right)\\)<\/span> với <span class=\"math inline\">\\(k\\ne 0\\)<\/span> cũng là vectơ pháp tuyến.", "mistake": "Nhầm <span class=\"math inline\">\\(\\left(Oxy\\right)\\)<\/span> với <span class=\"math inline\">\\(x=0\\)<\/span> hoặc <span class=\"math inline\">\\(y=0\\)<\/span> (mặt phẳng chứa hai trục thì phương trình theo ẩn còn lại). Lấy cả hệ số tự do <span class=\"math inline\">\\(D\\)<\/span> vào vectơ pháp tuyến, hoặc nhầm dấu của các hệ số.", "sol": "<table style=\"width:97%;\">\n<colgroup>\n<col style=\"width: 37%\" />\n<col style=\"width: 59%\" />\n<\/colgroup>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: left;\">a)<\/th>\n<th style=\"text-align: left;\"><strong>Đ<\/strong><\/th>\n<\/tr>\n<\/thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">b)<\/td>\n<td style=\"text-align: left;\"><strong>S<\/strong><\/td>\n<\/tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">c)<\/td>\n<td style=\"text-align: left;\"><strong>Đ<\/strong><\/td>\n<\/tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">d)<\/td>\n<td style=\"text-align: left;\"><strong>Đ<\/strong><\/td>\n<\/tr>\n<\/tbody>\n<\/table>\n<p>a) Vì <span class=\"math inline\">\\(A,B,C\\in \\left(ABC\\right)\\)<\/span> nên <span class=\"math inline\">\\(\\overrightarrow{AB}\\)<\/span>và <span class=\"math inline\">\\(\\overrightarrow{AC}\\)<\/span> là cặp vectơ chỉ phương của mặt phẳng <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span> đúng.<\/p>\n<p>b) Ta có <span class=\"math inline\">\\(\\overrightarrow{AB}=\\left(-2;5;2\\right)\\)<\/span>, <span class=\"math inline\">\\(\\overrightarrow{AC}=\\left(1;-2;1\\right)\\)<\/span><span class=\"math inline\">\\(\\Rightarrow \\vec{n}=\\left[\\overrightarrow{AB},\\overrightarrow{AC}\\right]=\\left(9;4;-1\\right)\\)<\/span>.<\/p>\n<p><span class=\"math inline\">\\(\\vec{n}=\\left(9;4;1\\right)\\)<\/span>là một vectơ pháp tuyến của mặt phẳng <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span> Sai<\/p>\n<p>c) <span class=\"math inline\">\\(\\vec{n}=\\left[\\overrightarrow{AB},\\overrightarrow{AC}\\right]=\\left(9;4;-1\\right)\\Rightarrow \\overrightarrow{m=}-1\\vec{n}=\\left(-9;-4;1\\right)\\)<\/span> là một vectơ pháp tuyến của mặt phẳng <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span> đúng<\/p>\n<p>d) <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span> qua <span class=\"math inline\">\\(A\\left(1;-2;1\\right)\\)<\/span> và có vectơ pháp tuyến <span class=\"math inline\">\\(\\vec{n}=\\left[\\overrightarrow{AB},\\overrightarrow{AC}\\right]=\\left(9;4;-1\\right)\\)<\/span><\/p>\n<p><span class=\"math inline\">\\(\\Rightarrow \\left(ABC\\right):9x+4y-z=0\\)<\/span> đúng<\/p>", "subs": ["<span class=\"math inline\">\\(\\overrightarrow{AB}\\)<\/span>và <span class=\"math inline\">\\(\\overrightarrow{AC}\\)<\/span> là cặp vectơ chỉ phương của mặt phẳng <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span>.", "<span class=\"math inline\">\\(\\vec{n}=\\left(9;4;1\\right)\\)<\/span>là một vectơ pháp tuyến của mặt phẳng <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span>", "<span class=\"math inline\">\\(\\vec{m}=\\left(-9;-4;1\\right)\\)<\/span>là một vectơ pháp tuyến của mặt phẳng <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span>", "Phương trình mặt phẳng <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span> là <strong><span class=\"math inline\">\\(9x+4y-z=0\\)<\/span><\/strong>"], "answers": [true, false, true, true]}, {"n": 2, "stem": "<p>Trong không gian với hệ toạ độ<span class=\"math inline\">\\(Oxyz,\\)<\/span> đường thẳng <span class=\"math inline\">\\(\\displaystyle \\Delta :\\left\\{\\begin{array}{l}x=t \\\\ y=1-2t \\\\ z=2\\end{array}\\right.\\)<\/span>.<\/p>", "hint": "Xét riêng từng ý. Nếu mặt phẳng vuông góc với một đường thẳng (hoặc vectơ) thì vectơ chỉ phương của đường thẳng đó chính là vectơ pháp tuyến của mặt phẳng; ngược lại, đường thẳng vuông góc mặt phẳng nhận <span class=\"math inline\">\\(\\vec{n}\\)<\/span> làm <span class=\"math inline\">\\(\\vec{u}\\)<\/span>. Với <span class=\"math inline\">\\(d:\\dfrac{x-x_0}{a}=\\dfrac{y-y_0}{b}=\\dfrac{z-z_0}{c}\\)<\/span>: đi qua <span class=\"math inline\">\\(M\\left(x_0;y_0;z_0\\right)\\)<\/span>, vectơ chỉ phương <span class=\"math inline\">\\(\\left(a;b;c\\right)\\)<\/span>. Tham số: <span class=\"math inline\">\\(x=x_0+at,\\,y=y_0+bt,\\,z=z_0+ct\\)<\/span>.", "mistake": "Nhầm vai trò của vectơ pháp tuyến và vectơ chỉ phương. Lấy điểm đi qua với tọa độ đảo dấu (ví dụ <span class=\"math inline\">\\(x+1\\)<\/span> thì điểm có <span class=\"math inline\">\\(x=-1\\)<\/span>).", "sol": "<table style=\"width:97%;\">\n<colgroup>\n<col style=\"width: 37%\" />\n<col style=\"width: 59%\" />\n<\/colgroup>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: left;\">a)<\/th>\n<th style=\"text-align: left;\"><strong>Đ<\/strong><\/th>\n<\/tr>\n<\/thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">b)<\/td>\n<td style=\"text-align: left;\"><strong>S<\/strong><\/td>\n<\/tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">c)<\/td>\n<td style=\"text-align: left;\"><strong>Đ<\/strong><\/td>\n<\/tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">d)<\/td>\n<td style=\"text-align: left;\"><strong>S<\/strong><\/td>\n<\/tr>\n<\/tbody>\n<\/table>\n<p>a) Hệ phương trình trên được gọi là phương trình tham số của đường thẳng <span class=\"math inline\">\\(\\Delta\\)<\/span>. Đúng.<\/p>\n<p>b) Với <span class=\"math inline\">\\(t=1\\)<\/span>thì <span class=\"math inline\">\\(\\displaystyle \\left\\{\\begin{array}{l}x=1 \\\\ y=-1 \\\\ z=2\\end{array}\\right.\\)<\/span>. Vậy điểm <span class=\"math inline\">\\(A=\\left(1;-2;0\\right)\\)<\/span>là một điểm thuộc đường thẳng <span class=\"math inline\">\\(\\Delta\\)<\/span>. Sai<\/p>\n<p>c) Vì <span class=\"math inline\">\\(\\vec{u}=\\left(1;-2;0\\right)\\)<\/span> là một vectơ chỉ phương của đường thẳng <span class=\"math inline\">\\(\\Delta\\)<\/span>nên <span class=\"math inline\">\\(\\vec{a}=-2\\overrightarrow{u=}\\left(-2;4;0\\right)\\)<\/span> cũng là một vectơ chỉ phương của đường thẳng <span class=\"math inline\">\\(\\Delta\\)<\/span>. Đúng<\/p>\n<p>d) Ta có : <span class=\"math inline\">\\(1.2-2.2-0.3=-2\\ne 0\\)<\/span>. Đường thẳng <span class=\"math inline\">\\(\\Delta\\)<\/span> vuông góc với đường thẳng <span class=\"math inline\">\\(\\displaystyle d:\\left\\{\\begin{array}{l}x=2+2t \\\\ y=1+2t \\\\ z=1-3t\\end{array}\\right.\\)<\/span>. Sai<\/p>", "subs": ["Hệ phương trình trên được gọi là phương trình tham số của đường thẳng <span class=\"math inline\">\\(\\Delta\\)<\/span>.", "Điểm <span class=\"math inline\">\\(A=\\left(1;-2;0\\right)\\)<\/span>là một điểm thuộc đường thẳng <span class=\"math inline\">\\(\\Delta\\)<\/span>.", "<span class=\"math inline\">\\(\\vec{a}=\\left(-2;4;0\\right)\\)<\/span> là một vectơ chỉ phương của đường thẳng <span class=\"math inline\">\\(\\Delta\\)<\/span>.", "Đường thẳng <span class=\"math inline\">\\(\\Delta\\)<\/span> vuông góc với đường thẳng <span class=\"math inline\">\\(\\displaystyle d:\\left\\{\\begin{array}{l}x=2+2t \\\\ y=1+2t \\\\ z=1-3t\\end{array}\\right.\\)<\/span>"], "answers": [true, false, true, false]}, {"n": 3, "stem": "<p>Trong không gian với hệ toạ độ <span class=\"math inline\">\\(Oxyz\\)<\/span>, cho hai đường thẳng <span class=\"math inline\">\\(\\Delta _{1}:\\frac{x-1}{1}=\\frac{y-1}{-1}=\\frac{z-2}{-4}\\)<\/span> và <span class=\"math inline\">\\(\\displaystyle \\Delta _{2}:\\left\\{\\begin{array}{l}x=2t \\\\ y=1-2t \\\\ z=-1-8t\\end{array}\\right.\\)<\/span>.<\/p>", "hint": "Xét riêng từng ý. Góc giữa hai đường thẳng: <span class=\"math inline\">\\(\\cos\\varphi=\\dfrac{\\left|\\vec{u}_1\\cdot\\vec{u}_2\\right|}{\\left|\\vec{u}_1\\right|\\left|\\vec{u}_2\\right|}\\)<\/span> với <span class=\"math inline\">\\(0^\\circ\\le\\varphi\\le 90^\\circ\\)<\/span>. Chọn hệ trục tọa độ phù hợp, xác định vectơ chỉ phương/pháp tuyến rồi dùng công thức góc tương ứng (đường–đường: <span class=\"math inline\">\\(\\cos\\)<\/span>, mặt–mặt: <span class=\"math inline\">\\(\\cos\\)<\/span>, đường–mặt: <span class=\"math inline\">\\(\\sin\\)<\/span>).", "mistake": "Quên giá trị tuyệt đối nên được góc tù. Nhầm công thức góc giữa các đối tượng khác nhau hoặc quên lấy giá trị tuyệt đối.", "sol": "<table style=\"width:97%;\">\n<colgroup>\n<col style=\"width: 37%\" />\n<col style=\"width: 59%\" />\n<\/colgroup>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: left;\">a)<\/th>\n<th style=\"text-align: left;\"><strong>Đ<\/strong><\/th>\n<\/tr>\n<\/thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">b)<\/td>\n<td style=\"text-align: left;\"><strong>Đ<\/strong><\/td>\n<\/tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">c)<\/td>\n<td style=\"text-align: left;\"><strong>S<\/strong><\/td>\n<\/tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">d)<\/td>\n<td style=\"text-align: left;\"><strong>S<\/strong><\/td>\n<\/tr>\n<\/tbody>\n<\/table>\n<p>a) Phương trình đường thẳng <span class=\"math inline\">\\(\\Delta _{1}\\)<\/span> được gọi là phương trình chính tắc. Đúng<\/p>\n<p>b) <span class=\"math inline\">\\(\\vec{u}=\\left(1;-1;-4\\right)\\)<\/span> là một vectơ chỉ phương của đường thẳng <span class=\"math inline\">\\(\\Delta _{1}\\)<\/span>. Đúng<\/p>\n<p>c). Ta có <span class=\"math inline\">\\(\\displaystyle \\left\\{\\begin{array}{l}\\left[\\overrightarrow{u_{1}},\\overrightarrow{u_{2}}\\right]=\\vec{0} \\\\ \\left[\\overrightarrow{u_{1}},\\overrightarrow{u_{2}}\\right].\\overrightarrow{M_{1}M_{2}}\\ne 0\\end{array}\\right.\\)<\/span> nên <span class=\"math inline\">\\(\\Delta _{1}//\\Delta _{2}\\)<\/span>. Vậy <span class=\"math inline\">\\(\\Delta _{1}\\equiv \\Delta _{2}\\)<\/span> Sai<\/p>\n<p>d) Vì <span class=\"math inline\">\\(\\Delta _{1}//\\Delta _{2}\\)<\/span>nên góc giữa hai đường thẳng <span class=\"math inline\">\\(\\Delta _{1}\\)<\/span>và <span class=\"math inline\">\\(\\Delta _{2}\\)<\/span>bằng <span class=\"math inline\">\\(30^{0}\\)<\/span>. Sai<\/p>", "subs": ["Phương trình đường thẳng <span class=\"math inline\">\\(\\Delta _{1}\\)<\/span> được gọi là phương trình chính tắc.", "<span class=\"math inline\">\\(\\vec{u}=\\left(1;-1;-4\\right)\\)<\/span> là một vectơ chỉ phương của đường thẳng <span class=\"math inline\">\\(\\Delta _{1}\\)<\/span>", ". <span class=\"math inline\">\\(\\Delta _{1}\\equiv \\Delta _{2}\\)<\/span>", "Góc giữa hai đường thẳng <span class=\"math inline\">\\(\\Delta _{1}\\)<\/span>và <span class=\"math inline\">\\(\\Delta _{2}\\)<\/span>bằng <span class=\"math inline\">\\(30^{0}\\)<\/span>"], "answers": [true, true, false, false]}, {"n": 4, "stem": "<p>Cho mặt cầu (S): <span class=\"math inline\">\\(x^{2}+y^{2}+z^{2}-4x-4y-4z=0\\)<\/span> và điểm <span class=\"math inline\">\\(A\\left(1;-4;3\\right)\\)<\/span>.<\/p>", "hint": "Xét riêng từng ý. So sánh <span class=\"math inline\">\\(IM\\)<\/span> với <span class=\"math inline\">\\(R\\)<\/span> (hoặc thay tọa độ <span class=\"math inline\">\\(M\\)<\/span> vào vế trái): <span class=\"math inline\">\\(IM&lt;R\\)<\/span> điểm nằm trong, <span class=\"math inline\">\\(IM=R\\)<\/span> nằm trên, <span class=\"math inline\">\\(IM&gt;R\\)<\/span> nằm ngoài mặt cầu. Với <span class=\"math inline\">\\(\\left(x-a\\right)^2+\\left(y-b\\right)^2+\\left(z-c\\right)^2=R^2\\)<\/span>: tâm <span class=\"math inline\">\\(I\\left(a;b;c\\right)\\)<\/span> (lấy đối dấu trong ngoặc), bán kính <span class=\"math inline\">\\(R=\\sqrt{\\text{vế phải}}\\)<\/span>. Dạng khai triển: <span class=\"math inline\">\\(a=-\\dfrac{A}{2}\\)<\/span>, <span class=\"math inline\">\\(R=\\sqrt{a^2+b^2+c^2-d}\\)<\/span>.", "mistake": "Thay tọa độ vào mà quên đổi dấu trong ngoặc <span class=\"math inline\">\\(\\left(x-a\\right)\\)<\/span>, hoặc so sánh nhầm <span class=\"math inline\">\\(IM\\)<\/span> với <span class=\"math inline\">\\(R^2\\)<\/span>. Lấy tọa độ tâm cùng dấu với số trong ngoặc, hoặc lấy <span class=\"math inline\">\\(R\\)<\/span> bằng vế phải (chưa khai căn).", "sol": "<table style=\"width:97%;\">\n<colgroup>\n<col style=\"width: 37%\" />\n<col style=\"width: 59%\" />\n<\/colgroup>\n<thead>\n<tr class=\"header\">\n<th style=\"text-align: left;\">a)<\/th>\n<th style=\"text-align: left;\"><strong>S<\/strong><\/th>\n<\/tr>\n<\/thead>\n<tbody>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">b)<\/td>\n<td style=\"text-align: left;\"><strong>Đ<\/strong><\/td>\n<\/tr>\n<tr class=\"even\">\n<td style=\"text-align: left;\">c)<\/td>\n<td style=\"text-align: left;\"><strong>S<\/strong><\/td>\n<\/tr>\n<tr class=\"odd\">\n<td style=\"text-align: left;\">d)<\/td>\n<td style=\"text-align: left;\"><strong>Đ<\/strong><\/td>\n<\/tr>\n<\/tbody>\n<\/table>\n<p>Ta có : <span class=\"math inline\">\\(a=2,b=2,c=2,d=0\\)<\/span>. Vậy mặt cầu <span class=\"math inline\">\\(R=\\sqrt{2^{2}+2^{2}+2^{2}-0}=2\\sqrt{3}\\)<\/span> có tâm <span class=\"math inline\">\\(\\left(S\\right)\\)<\/span>. Bán kính <span class=\"math inline\">\\(R=\\sqrt{2^{2}+2^{2}+2^{2}-0}=2\\sqrt{3}\\)<\/span><\/p>\n<p>a) Mặt cầu <span class=\"math inline\">\\(\\left(S\\right)\\)<\/span> có tâm <span class=\"math inline\">\\(\\left(-2;-2;-2\\right)\\)<\/span>. Sai<\/p>\n<p>b) Mặt cầu <span class=\"math inline\">\\(\\left(S\\right)\\)<\/span> có bán kính <span class=\"math inline\">\\(R=2\\sqrt{3}\\)<\/span>. Đúng<\/p>\n<p>c) Vì <span class=\"math inline\">\\(IA=\\sqrt{\\left(1-2\\right)^{2}+\\left(-4-2\\right)^{2}+\\left(3-2\\right)^{2}}=\\sqrt{38}&gt;2\\sqrt{3}\\)<\/span>. Điểm A nằm trong mặt cầu <span class=\"math inline\">\\(\\left(S\\right)\\)<\/span>. Sai<\/p>\n<p>d) Phương trình của mặt cầu <span class=\"math inline\">\\(\\left(S_{1}\\right)\\)<\/span> có tâm <span class=\"math inline\">\\(A\\)<\/span> và bán kính <span class=\"math inline\">\\(R=3\\)<\/span>là <span class=\"math inline\">\\(\\left(x-1\\right)^{2}+\\left(y+4\\right)^{2}+\\left(z-3\\right)^{2}=9.\\)<\/span> Đúng<\/p>", "subs": ["Mặt cầu <span class=\"math inline\">\\(\\left(S\\right)\\)<\/span> có tâm <span class=\"math inline\">\\(\\left(-2;-2;-2\\right)\\)<\/span>.", "Mặt cầu <span class=\"math inline\">\\(\\left(S\\right)\\)<\/span> có bán kính <span class=\"math inline\">\\(R=2\\sqrt{3}\\)<\/span>", "Điểm A nằm trong mặt cầu <span class=\"math inline\">\\(\\left(S\\right)\\)<\/span>.", "Phương trình của mặt cầu <span class=\"math inline\">\\(\\left(S_{1}\\right)\\)<\/span> có tâm <span class=\"math inline\">\\(A\\)<\/span> và bán kính <span class=\"math inline\">\\(R=3\\)<\/span>là <span class=\"math inline\">\\(\\left(x-1\\right)^{2}+\\left(y+4\\right)^{2}+\\left(z-3\\right)^{2}=9.\\)<\/span>"], "answers": [false, true, false, true]}]}, {"kind": "sa", "title": "Phần III. Trắc nghiệm trả lời ngắn (Câu 1–6)", "note": "Nhập đáp số vào ô trả lời", "questions": [{"n": 1, "stem": "<p>Trong không gian <span class=\"math inline\">\\(Oxyz\\)<\/span>, có tất cả bao nhiêu giá nguyên của <span class=\"math inline\">\\(m\\)<\/span> để<\/p>\n<p><span class=\"math inline\">\\(x^{2}+y^{2}+z^{2}+2\\left(m+2\\right)x-2\\left(m-1\\right)z+3m^{2}-5=0\\)<\/span> là phương trình một mặt cầu?<\/p>", "hint": "Lập sơ đồ: từ dữ kiện tìm các yếu tố cần thiết (điểm, vectơ, tham số), tính từng bước rồi thay vào biểu thức đề yêu cầu. Xác định đối tượng (mặt cầu, mặt phẳng hay đường thẳng) và các yếu tố cần có (tâm, bán kính, vectơ pháp tuyến, vectơ chỉ phương) rồi áp dụng công thức tương ứng.", "mistake": "Sai sót thường gặp ở dạng này là nhầm dấu khi thay số, tính sai tích có hướng/tích vô hướng hoặc dùng nhầm công thức. Hãy đối chiếu từng bước của bạn với lời giải bên dưới.", "sol": "<p>Phương trình đã cho là phương trình mặt cầu khi và chỉ khi<\/p>\n<p><span class=\"math inline\">\\(\\displaystyle \\begin{array}{l}\\left(m+2\\right)^{2}+\\left(m-1\\right)^{2}-3m^{2}+5&gt;0 \\\\ \\Leftrightarrow m^{2}-2m-10&lt;0 \\\\ \\Leftrightarrow -1-\\sqrt{11}&lt;m&lt;1+\\sqrt{11}\\end{array}\\)<\/span><\/p>\n<p>Theo bài ra <span class=\"math inline\">\\(m\\in \\mathbb{Z}\\Rightarrow m=\\left\\{\\left.-2;-1;0;1;2;3;4\\right\\}\\right.\\Rightarrow\\)<\/span> có <span class=\"math inline\">\\(7\\)<\/span> giá trị của <span class=\"math inline\">\\(m\\)<\/span> nguyên thỏa mãn bài toán.<\/p>", "answer": "7", "tol": 0}, {"n": 2, "stem": "<p>Trong không gian với hệ trục tọa độ <span class=\"math inline\">\\(Oxyz\\)<\/span>, cho ba điểm <span class=\"math inline\">\\(A\\left(1;0;0\\right)\\)<\/span>, <span class=\"math inline\">\\(C\\left(0;0;3\\right)\\)<\/span>, <span class=\"math inline\">\\(B\\left(0;2;0\\right)\\)<\/span>. Tập hợp các điểm <span class=\"math inline\">\\(M\\)<\/span> thỏa mãn <span class=\"math inline\">\\(MA^{2}=MB^{2}+MC^{2}\\)<\/span> là mặt cầu có bán kính là:<\/p>", "hint": "Với <span class=\"math inline\">\\(\\left(x-a\\right)^2+\\left(y-b\\right)^2+\\left(z-c\\right)^2=R^2\\)<\/span>: tâm <span class=\"math inline\">\\(I\\left(a;b;c\\right)\\)<\/span> (lấy đối dấu trong ngoặc), bán kính <span class=\"math inline\">\\(R=\\sqrt{\\text{vế phải}}\\)<\/span>. Dạng khai triển: <span class=\"math inline\">\\(a=-\\dfrac{A}{2}\\)<\/span>, <span class=\"math inline\">\\(R=\\sqrt{a^2+b^2+c^2-d}\\)<\/span>.", "mistake": "Lấy tọa độ tâm cùng dấu với số trong ngoặc, hoặc lấy <span class=\"math inline\">\\(R\\)<\/span> bằng vế phải (chưa khai căn).", "sol": "<p>Giả sử <span class=\"math inline\">\\(M\\left(x;y;z\\right)\\)<\/span>.<\/p>\n<p>Ta có: <span class=\"math inline\">\\(MA^{2}=\\left(x-1\\right)^{2}+y^{2}+z^{2}\\)<\/span>; <span class=\"math inline\">\\(MB^{2}=x^{2}+\\left(y-2\\right)^{2}+z^{2}\\)<\/span>; <span class=\"math inline\">\\(MC^{2}=x^{2}+y^{2}+\\left(z-3\\right)^{2}\\)<\/span>. <span class=\"math inline\">\\(MA^{2}=MB^{2}+MC^{2}\\)<\/span><span class=\"math inline\">\\(\\Leftrightarrow \\left(x-1\\right)^{2}+y^{2}+z^{2}=x^{2}+\\left(y-2\\right)^{2}+z^{2}+x^{2}+y^{2}+\\left(z-3\\right)^{2}\\)<\/span><span class=\"math inline\">\\(\\Leftrightarrow -2x+1=\\left(y-2\\right)^{2}+x^{2}+\\left(z-3\\right)^{2}\\)<\/span><span class=\"math inline\">\\(\\Leftrightarrow \\left(x+1\\right)^{2}+\\left(y-2\\right)^{2}+\\left(z-3\\right)^{2}=2\\)<\/span>.<\/p>\n<p>Vậy tập hợp các điểm <span class=\"math inline\">\\(M\\)<\/span> thỏa mãn <span class=\"math inline\">\\(MA^{2}=MB^{2}+MC^{2}\\)<\/span> là mặt cầu có bán kính là <span class=\"math inline\">\\(R=\\sqrt{2}\\)<\/span>.<\/p>", "answer": "1,41", "tol": 0.005}, {"n": 3, "stem": "<p>Trong không gian <span class=\"math inline\">\\(Oxyz\\)<\/span>, gọi <span class=\"math inline\">\\(I\\left(a;b;c\\right)\\)<\/span> là tâm mặt cầu đi qua điểm <span class=\"math inline\">\\(A\\left(1;-1;4\\right)\\)<\/span> và tiếp xúc với tất cả các mặt phẳng tọa độ. Tính <span class=\"math inline\">\\(P=a-b+c\\)<\/span>.<\/p>", "hint": "Mặt cầu tâm <span class=\"math inline\">\\(I\\)<\/span> đi qua điểm <span class=\"math inline\">\\(M\\)<\/span> có bán kính <span class=\"math inline\">\\(R=IM\\)<\/span>. Viết phương trình <span class=\"math inline\">\\(\\left(x-a\\right)^2+\\left(y-b\\right)^2+\\left(z-c\\right)^2=R^2\\)<\/span>.", "mistake": "Viết vế phải là <span class=\"math inline\">\\(R\\)<\/span> thay vì <span class=\"math inline\">\\(R^2\\)<\/span>, hoặc nhầm dấu tọa độ tâm.", "sol": "<p>Vì mặt cầu tâm <span class=\"math inline\">\\(I\\)<\/span> tiếp xúc với các mặt phẳng tọa độ nên<\/p>\n<p><span class=\"math inline\">\\(d\\left(I,\\left(Oyz\\right)\\right)=d\\left(I,\\left(Ozx\\right)\\right)=d\\left(I,\\left(Oxy\\right)\\right)\\)<\/span> <span class=\"math inline\">\\(\\Leftrightarrow \\left|a\\right|=\\left|b\\right|=\\left|c\\right|\\)<\/span> <span class=\"math inline\">\\(\\displaystyle \\Leftrightarrow \\left[\\begin{array}{l}a=b=c \\\\ a=b=-c \\\\ a=-b=c \\\\ a=-b=-c\\end{array}\\right.\\)<\/span><\/p>\n<p>Nhận thấy chỉ có trường hợp <span class=\"math inline\">\\(a=-b=c\\)<\/span> thì phương trình <span class=\"math inline\">\\(AI=d\\left(I,\\left(Oxy\\right)\\right)\\)<\/span> có nghiệm, các trường hợp còn lại vô nghiệm.<\/p>\n<p>Thật vậy:<\/p>\n<p>Với <span class=\"math inline\">\\(a=-b=c\\)<\/span> thì <span class=\"math inline\">\\(I\\left(a;-a;a\\right)\\)<\/span><\/p>\n<p><span class=\"math inline\">\\(AI=d\\left(I,\\left(Oyx\\right)\\right)\\)<\/span><span class=\"math inline\">\\(\\Leftrightarrow \\left(a-1\\right)^{2}+\\left(a-1\\right)^{2}+\\left(a-4\\right)^{2}=a^{2}\\)<\/span> <span class=\"math inline\">\\(\\Leftrightarrow a^{2}-6a+9=0\\)<\/span> <span class=\"math inline\">\\(\\Leftrightarrow a=3\\)<\/span><\/p>\n<p>Khi đó <span class=\"math inline\">\\(P=a-b+c=9\\)<\/span>.<\/p>", "answer": "9", "tol": 0}, {"n": 4, "stem": "<p>Trong không gian với hệ tọa độ Oxyz, cho điểm <span class=\"math inline\">\\(M(-4;0;0)\\)<\/span>và đường thẳng <span class=\"math inline\">\\(\\displaystyle \\Delta :\\left\\{\\begin{array}{l}x=1-t \\\\ y=-2+3t \\\\ z=-2t\\end{array}\\right.\\)<\/span>. Gọi <span class=\"math inline\">\\(H(a;b;\\mathrm{c})\\)<\/span> là hình chiếu của <span class=\"math inline\">\\(M\\)<\/span> lên <span class=\"math inline\">\\(\\Delta\\)<\/span>. Tính <em>a+b+c<\/em>.<\/p>", "hint": "Hình chiếu của điểm lên mặt phẳng tọa độ: giữ nguyên hai tọa độ, đổi tọa độ còn lại bằng 0 (ví dụ lên <span class=\"math inline\">\\(\\left(Oyz\\right)\\)<\/span> thì <span class=\"math inline\">\\(x=0\\)<\/span>).", "mistake": "Triệt tiêu nhầm tọa độ (giữ <span class=\"math inline\">\\(x\\)<\/span> thay vì <span class=\"math inline\">\\(y,z\\)<\/span>).", "sol": "<p>Gọi <span class=\"math inline\">\\(H\\)<\/span> là hình chiếu của <span class=\"math inline\">\\(M\\)<\/span> lên <span class=\"math inline\">\\(\\Delta\\)<\/span> nên tọa độ của H có dạng <span class=\"math inline\">\\(H(1-t;-2+3t;-2t)\\)<\/span> và <span class=\"math inline\">\\(\\overrightarrow{MH}\\perp \\overrightarrow{u_{\\Delta }}\\)<\/span><\/p>\n<p><span class=\"math inline\">\\(\\overrightarrow{MH}.\\overrightarrow{u_{\\Delta }}=0\\Leftrightarrow 14t-11=0\\Leftrightarrow t=\\frac{11}{14}\\Rightarrow H(\\frac{3}{14};\\frac{5}{14};\\frac{-22}{14})\\Rightarrow a+b+c=-1\\)<\/span><\/p>", "answer": "-1", "tol": 0}, {"n": 5, "stem": "<p>Trong không gian <span class=\"math inline\">\\(Oxyz\\)<\/span>, cho hình thang cân <span class=\"math inline\">\\(ABCD\\)<\/span> có đáy là <span class=\"math inline\">\\(AB\\)<\/span> và <span class=\"math inline\">\\(CD\\)<\/span>. Biết <span class=\"math inline\">\\(A\\left(3;1;-2\\right)\\)<\/span>, <span class=\"math inline\">\\(B\\left(-1;3;2\\right)\\)<\/span>, <span class=\"math inline\">\\(C\\left(-6;3;6\\right)\\)<\/span> và <span class=\"math inline\">\\(D\\left(a;b;c\\right)\\)<\/span> với <span class=\"math inline\">\\(a,b,c\\in \\mathbb{R}\\)<\/span>. Giá trị của <span class=\"math inline\">\\(a+b+c\\)<\/span> bằng<\/p>", "hint": "Lập sơ đồ: từ dữ kiện tìm các yếu tố cần thiết (điểm, vectơ, tham số), tính từng bước rồi thay vào biểu thức đề yêu cầu. Xác định đối tượng (mặt cầu, mặt phẳng hay đường thẳng) và các yếu tố cần có (tâm, bán kính, vectơ pháp tuyến, vectơ chỉ phương) rồi áp dụng công thức tương ứng.", "mistake": "Sai sót thường gặp ở dạng này là nhầm dấu khi thay số, tính sai tích có hướng/tích vô hướng hoặc dùng nhầm công thức. Hãy đối chiếu từng bước của bạn với lời giải bên dưới.", "sol": "<p>Phương trình đường thẳng <span class=\"math inline\">\\(d\\)<\/span> qua <span class=\"math inline\">\\(C\\left(-6;3;6\\right)\\)<\/span> và song song với đường thẳng <span class=\"math inline\">\\(AB\\)<\/span> là<\/p>\n<p><span class=\"math inline\">\\(\\frac{x+6}{-2}=\\frac{y-3}{1}=\\frac{z-6}{2}\\)<\/span><\/p>\n<p>Điểm <span class=\"math inline\">\\(D\\)<\/span> thuộc đường thẳng <span class=\"math inline\">\\(d\\)<\/span> nên gọi tọa độ <span class=\"math inline\">\\(D\\)<\/span> là <span class=\"math inline\">\\(D\\left(-6-2t;3+t;6+2t\\right)\\)<\/span>.<\/p>\n<p>Tứ giác <span class=\"math inline\">\\(ABCD\\)<\/span> là hình thang cân nên ta có:<\/p>\n<p><span class=\"math inline\">\\(\\left|\\overrightarrow{AD}\\right|=\\left|\\overrightarrow{BC}\\right|\\)<\/span> <span class=\"math inline\">\\(\\Leftrightarrow t^{2}+8t+12=0\\)<\/span><span class=\"math inline\">\\(\\displaystyle \\Leftrightarrow \\left[\\begin{array}{c}t=-2 \\\\ t=-6\\end{array}\\right.\\)<\/span>.<\/p>\n<p>Với <span class=\"math inline\">\\(t=-2\\)<\/span> <span class=\"math inline\">\\(\\Rightarrow D_{1}\\left(-2;1;2\\right)\\)<\/span>, tứ giác là hình bình hành nên loại.<\/p>\n<p>Với <span class=\"math inline\">\\(t=-6\\)<\/span> <span class=\"math inline\">\\(\\Rightarrow D_{2}\\left(6;-3;-6\\right)\\)<\/span> thỏa mãn, nên <span class=\"math inline\">\\(6-3-6=-3\\)<\/span>.<\/p>", "answer": "-3", "tol": 0}, {"n": 6, "stem": "<p>Trong không gian với hệ tọa độ<span class=\"math inline\">\\(Oxyz\\)<\/span>, cho điểm <span class=\"math inline\">\\(A\\left(2;4;1\\right);B\\left(-1;1;3\\right)\\)<\/span> và mặt phẳng <span class=\"math inline\">\\(\\left(P\\right):x-3y+2z-5=0\\)<\/span>. Một mặt phẳng <span class=\"math inline\">\\(\\left(Q\\right)\\)<\/span> đi qua hai điểm <span class=\"math inline\">\\(A,B\\)<\/span> và vuông góc với mặt phẳng <span class=\"math inline\">\\(\\left(P\\right)\\)<\/span> có dạng <span class=\"math inline\">\\(ax+by+cz-11=0\\)<\/span>. Tính <span class=\"math inline\">\\(a+b+c=?\\)<\/span><\/p>", "hint": "Hai mặt phẳng vuông góc khi <span class=\"math inline\">\\(\\vec{n}_1\\cdot\\vec{n}_2=0\\)<\/span>. Mặt phẳng chứa hai điểm <span class=\"math inline\">\\(A,B\\)<\/span> và vuông góc <span class=\"math inline\">\\(\\left(P\\right)\\)<\/span> nhận <span class=\"math inline\">\\(\\left[\\overrightarrow{AB},\\vec{n}_P\\right]\\)<\/span> làm vectơ pháp tuyến.", "mistake": "Dùng tích vô hướng thay cho tích có hướng khi tìm vectơ pháp tuyến.", "sol": "<p>Vì <span class=\"math inline\">\\(\\left(Q\\right)\\)<\/span> vuông góc với <span class=\"math inline\">\\(\\left(P\\right)\\)<\/span> nên <span class=\"math inline\">\\(\\left(Q\\right)\\)<\/span> nhận vtpt <span class=\"math inline\">\\(\\vec{n}=\\left(1;-3;2\\right)\\)<\/span>của <span class=\"math inline\">\\(\\left(P\\right)\\)<\/span>làm vtcp<\/p>\n<p>Mặt khác <span class=\"math inline\">\\(\\left(Q\\right)\\)<\/span>đi qua <span class=\"math inline\">\\(A\\)<\/span> và <span class=\"math inline\">\\(B\\)<\/span> nên <span class=\"math inline\">\\(\\left(Q\\right)\\)<\/span>nhận <span class=\"math inline\">\\(\\overrightarrow{AB}=\\left(-3;-3;2\\right)\\)<\/span> làm vtcp<\/p>\n<p><span class=\"math inline\">\\(\\left(Q\\right)\\)<\/span> nhận <span class=\"math inline\">\\(\\overrightarrow{n_{Q}}=\\left[\\vec{n},\\overrightarrow{AB}\\right]=\\left(0;8;12\\right)\\)<\/span> làm vtpt<\/p>\n<p>Vậy phương trình mặt phẳng <span class=\"math inline\">\\(\\left(Q\\right):0(x+1)+8(y-1)+12(z-3)=0\\)<\/span>, hay <span class=\"math inline\">\\(\\left(Q\\right):2y+3z-11=0\\)<\/span><\/p>\n<p>Vậy <span class=\"math inline\">\\(a+b+c=5\\)<\/span>.<\/p>", "answer": "5", "tol": 0}]}]};
+(function(){
+  var secs = DATA.sections, total = 0;
+  secs.forEach(function(s){ total += s.questions.length; });
+  document.getElementById('pTotal').textContent = total;
+  var quiz = document.getElementById('quiz');
+  var all = []; // {sec, q, st, el, api}
+  var submitted = false;
+
+  function el(tag, cls, html){ var e = document.createElement(tag); if(cls) e.className = cls; if(html !== undefined) e.innerHTML = html; return e; }
+  function typeset(node){
+    try{
+      if(window.MathJax && MathJax.typesetPromise){ return MathJax.typesetPromise(node ? [node] : undefined); }
+    }catch(e){}
+  }
+  function parseNum(s){
+    if(s === null || s === undefined) return NaN;
+    s = String(s).replace(/−/g,'-').replace(/\s+/g,'').replace(/°|º/g,'');
+    if(!s) return NaN;
+    var pct = false;
+    if(/%$/.test(s)){ pct = true; s = s.slice(0,-1); }
+    var v;
+    var m = s.match(/^([+-]?[\d.,]+)\/([+-]?[\d.,]+)$/);
+    if(m){
+      var a = parseFloat(m[1].replace(',','.')), b = parseFloat(m[2].replace(',','.'));
+      if(!isFinite(a) || !isFinite(b) || b === 0) return NaN;
+      v = a / b;
+    } else {
+      if(!/^[+-]?(\d+([.,]\d*)?|[.,]\d+)$/.test(s)) return NaN;
+      v = parseFloat(s.replace(',','.'));
+    }
+    if(pct) v = v / 100;
+    return v;
+  }
+  function fmtAns(a){ return String(a).replace('.',','); }
+
+  function updateBar(){
+    var checked = 0, ok = 0, bad = 0;
+    all.forEach(function(x){ if(x.st.locked){ checked++; if(x.st.ok) ok++; else bad++; } });
+    document.getElementById('pChecked').textContent = checked;
+    document.getElementById('pOk').textContent = ok;
+    document.getElementById('pBad').textContent = bad;
+    document.getElementById('pFill').style.width = (total ? 100*checked/total : 0) + '%';
+  }
+
+  function buildSolBlocks(card, q){
+    var box = card.querySelector('.after');
+    box.innerHTML = '';
+    return box;
+  }
+
+  function makeQuestion(sec, q, idx){
+    var card = el('div', 'q');
+    var st = {tries: 0, locked: false, ok: false, sel: null, tf: [null,null,null,null], val: ''};
+    card.appendChild(el('div', 'qhead', 'Câu ' + q.n));
+    card.appendChild(el('div', 'stem', q.stem));
+    var body = el('div');
+    card.appendChild(body);
+    var fb = el('div', 'fb');
+    var checkBtn = el('button', 'btn', 'Kiểm tra đáp án'); checkBtn.disabled = true;
+    var solBtn = el('button', 'btn ghost', 'Xem lời giải'); solBtn.style.display = 'none';
+    var acts = el('div', 'acts'); acts.appendChild(checkBtn); acts.appendChild(solBtn); acts.appendChild(fb);
+    card.appendChild(acts);
+    var hintBox = el('div', 'hint'); hintBox.style.display = 'none';
+    var misBox = el('div', 'mistake'); misBox.style.display = 'none';
+    var solBox = el('div', 'sol'); solBox.style.display = 'none';
+    card.appendChild(hintBox); card.appendChild(misBox); card.appendChild(solBox);
+
+    var api = {};
+    var optBtns = [], tfRows = [], input = null, corr = null;
+
+    function complete(){
+      if(sec.kind === 'mcq') return st.sel !== null;
+      if(sec.kind === 'tf') return st.tf.every(function(v){ return v !== null; });
+      return String(st.val).trim() !== '';
+    }
+    function isRight(){
+      if(sec.kind === 'mcq') return st.sel === q.answer;
+      if(sec.kind === 'tf') return st.tf.every(function(v,i){ return v === q.answers[i]; });
+      var x = parseNum(st.val), k = parseNum(q.answer);
+      if(!isFinite(x) || !isFinite(k)) return false;
+      var tol = (q.tol || 0) + 1e-9;
+      return Math.abs(x - k) <= tol;
+    }
+    function refresh(){ checkBtn.disabled = st.locked || !complete(); }
+
+    if(sec.kind === 'mcq'){
+      var ob = el('div', 'opts');
+      q.options.forEach(function(html, i){
+        var L = 'ABCD'[i];
+        var b = el('button', 'opt'); b.type = 'button'; b.dataset.k = L;
+        b.innerHTML = '<span class="lab">' + L + '.</span><span class="txt">' + html + '</span>';
+        b.addEventListener('click', function(){
+          if(st.locked) return;
+          st.sel = L;
+          optBtns.forEach(function(x){ x.classList.toggle('sel', x.dataset.k === L); });
+          refresh();
+        });
+        optBtns.push(b); ob.appendChild(b);
+      });
+      body.appendChild(ob);
+    } else if(sec.kind === 'tf'){
+      var sb = el('div', 'subs');
+      q.subs.forEach(function(html, i){
+        var r = el('div', 'subrow');
+        r.appendChild(el('span', 'sl', 'abcd'[i] + ')'));
+        var s = el('div', 'sb', html);
+        r.appendChild(s);
+        var tf = el('div', 'tf');
+        [['Đ', true], ['S', false]].forEach(function(p){
+          var b = el('button', 'tfb', p[0]); b.type = 'button';
+          b.addEventListener('click', function(){
+            if(st.locked) return;
+            st.tf[i] = p[1];
+            Array.prototype.forEach.call(tf.children, function(c, ci){ c.classList.toggle('sel', st.tf[i] === (ci === 0)); });
+            refresh();
+          });
+          tf.appendChild(b);
+        });
+        r.appendChild(tf);
+        tfRows.push({row: r, tf: tf, sb: s});
+        sb.appendChild(r);
+      });
+      body.appendChild(sb);
+    } else {
+      var w = el('div', 'sa');
+      var lab = el('label', '', 'Đáp số:');
+      input = el('input'); input.type = 'text'; input.autocomplete = 'off'; input.setAttribute('autocapitalize','off'); input.spellcheck = false; input.placeholder = 'Nhập đáp số';
+      input.addEventListener('input', function(){ st.val = input.value; refresh(); });
+      input.addEventListener('keydown', function(e){ if(e.key === 'Enter' && !checkBtn.disabled){ checkBtn.click(); } });
+      corr = el('div', 'corr'); corr.style.display = 'none';
+      w.appendChild(lab); w.appendChild(input); w.appendChild(corr);
+      body.appendChild(w);
+    }
+
+    function lockUI(){
+      optBtns.forEach(function(b){ b.disabled = true; });
+      tfRows.forEach(function(r){ Array.prototype.forEach.call(r.tf.children, function(c){ c.disabled = true; }); });
+      if(input) input.disabled = true;
+      checkBtn.disabled = true;
+    }
+    function showAnswers(){
+      if(sec.kind === 'mcq'){
+        optBtns.forEach(function(b){
+          if(b.dataset.k === q.answer) b.classList.add('right');
+          else if(b.dataset.k === st.sel) b.classList.add('wrong');
+        });
+      } else if(sec.kind === 'tf'){
+        var n = 0;
+        tfRows.forEach(function(r, i){
+          var good = st.tf[i] === q.answers[i];
+          if(good) n++;
+          r.row.classList.add(good ? 'right' : 'wrong');
+          if(!good){
+            var a = el('span', 'ans', 'Đáp án đúng: ' + (q.answers[i] ? 'Đ' : 'S'));
+            r.sb.appendChild(a);
+          }
+        });
+        st.nRight = n;
+      } else {
+        input.classList.add(isRight() ? 'right' : 'wrong');
+        if(!isRight()){ corr.textContent = 'Đáp án đúng: ' + fmtAns(q.answer); corr.style.display = 'block'; }
+      }
+    }
+    function fillAfter(withMistake){
+      hintBox.style.display = 'none';
+      if(withMistake && q.mistake){
+        misBox.innerHTML = '<b class="t">⚠️ Lỗi sai thường gặp</b><div>' + q.mistake + '</div>';
+        misBox.style.display = 'block';
+      }
+      solBox.innerHTML = '<h4>Hướng dẫn giải chi tiết</h4>' + (q.sol || '<p>Đáp án: ' + (sec.kind==='mcq' ? q.answer : sec.kind==='tf' ? q.answers.map(function(v,i){return 'abcd'[i]+') '+(v?'Đ':'S');}).join(', ') : fmtAns(q.answer)) + '</p>');
+      solBox.style.display = 'block';
+      typeset(card);
+    }
+    api.finish = function(ok, byAttempts){
+      st.locked = true; st.ok = ok;
+      card.classList.add(ok ? 'ok' : 'bad');
+      lockUI(); showAnswers();
+      if(ok){
+        fb.className = 'fb ok'; fb.textContent = '✓ Chính xác!';
+        solBtn.style.display = ''; solBtn.textContent = 'Xem lời giải';
+        misBox.style.display = 'none'; hintBox.style.display = 'none';
+        solBox.style.display = 'none';
+        solBox.innerHTML = '<h4>Hướng dẫn giải chi tiết</h4>' + (q.sol || '');
+      } else {
+        fb.className = 'fb bad';
+        if(sec.kind === 'tf') fb.textContent = '✗ Đúng ' + st.nRight + '/4 ý';
+        else fb.textContent = '✗ Chưa đúng';
+        solBtn.style.display = 'none';
+        fillAfter(true);
+      }
+      updateBar();
+    };
+    checkBtn.addEventListener('click', function(){
+      if(st.locked || !complete()) return;
+      st.tries++;
+      var ok = isRight();
+      if(ok){ api.finish(true); }
+      else if(st.tries === 1){
+        fb.className = 'fb info'; fb.textContent = 'Chưa đúng. Còn 1 lần thử.';
+        hintBox.innerHTML = '<b class="t">💡 Gợi ý</b><div>' + (q.hint || 'Đọc kĩ dữ kiện và áp dụng đúng công thức của bài.') + '</div>';
+        hintBox.style.display = 'block';
+        checkBtn.textContent = 'Kiểm tra lại';
+        typeset(hintBox);
+      } else { api.finish(false); }
+    });
+    solBtn.addEventListener('click', function(){
+      var open = solBox.style.display !== 'none';
+      if(open){ solBox.style.display = 'none'; solBtn.textContent = 'Xem lời giải'; }
+      else { solBox.style.display = 'block'; solBtn.textContent = 'Ẩn lời giải'; typeset(solBox); }
+    });
+    api.grade = function(){
+      // used on submit: grade current answers of an unlocked question
+      var ok = complete() && isRight();
+      st.tries = Math.max(st.tries, 1);
+      api.finish(ok);
+    };
+    api.card = card; api.st = st; api.sec = sec; api.q = q;
+    return api;
+  }
+
+  secs.forEach(function(sec, si){
+    var h = el('h2', 'part', sec.title + '<small>' + (sec.note || '') + '</small>');
+    quiz.appendChild(h);
+    sec.questions.forEach(function(q, qi){
+      var api = makeQuestion(sec, q, qi);
+      all.push({sec: sec, q: q, st: api.st, api: api});
+      quiz.appendChild(api.card);
+    });
+  });
+  updateBar();
+
+  document.getElementById('submitBtn').addEventListener('click', function(){
+    if(submitted) return;
+    var pending = all.filter(function(x){ return !x.st.locked; }).length;
+    var msg = pending ? ('Còn ' + pending + ' câu chưa kiểm tra (câu bỏ trống tính là sai). Bạn có chắc chắn muốn nộp bài?') : 'Bạn có chắc chắn muốn nộp bài?';
+    if(!window.confirm(msg)) return;
+    submitted = true;
+    all.forEach(function(x){ if(!x.st.locked) x.api.grade(); });
+    this.disabled = true;
+    var ok = 0, bad = 0, per = {};
+    all.forEach(function(x){
+      var k = x.sec.title;
+      per[k] = per[k] || {ok: 0, n: 0};
+      per[k].n++;
+      if(x.st.ok){ ok++; per[k].ok++; } else bad++;
+    });
+    var r = document.getElementById('result');
+    var html = '<div class="big">' + ok + ' / ' + total + ' câu đúng</div><div>Số câu sai: <b>' + bad + '</b></div>';
+    var keys = Object.keys(per);
+    if(keys.length >= 2){
+      html += '<table><tr><th>Phần</th><th>Đúng</th></tr>';
+      keys.forEach(function(k){ html += '<tr><td>' + k + '</td><td>' + per[k].ok + '/' + per[k].n + '</td></tr>'; });
+      html += '</table>';
+    }
+    r.innerHTML = html; r.style.display = 'block';
+    updateBar();
+    r.scrollIntoView({behavior: 'smooth', block: 'center'});
+    typeset();
+  });
+})();
+</script>
+</body>
+</html>
