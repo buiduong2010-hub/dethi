@@ -63,6 +63,7 @@
         #adm_list .adm_x { background:#e74c3c; color:white; border:none; border-radius:6px; cursor:pointer; padding:4px 10px; }
         .menu-link.sub { padding-left:38px; font-size:13px; background:#fafcff; }
         .chap-files { border-bottom:1px solid #eef; }
+        .adm_i { background:#ecf0f1; border:1px solid #ccd; border-radius:6px; cursor:pointer; padding:4px 9px; }
     </style>
 </head>
 <body>
@@ -189,6 +190,20 @@
     </div>
     <button class="adm_btn" id="adm_go">⬆️ Đăng lên</button>
     <div id="adm_msg"></div>
+    <div id="adm_move" style="display:none;margin:18px 0 0;padding:14px;border:2px dashed #3498db;border-radius:10px;background:#f0f7ff">
+        <div id="adm_moveTxt" style="font-weight:600;margin-bottom:8px"></div>
+        <select id="adm_mvSec">
+            <option value="tnthpt">📜 TN-THPT</option>
+            <option value="dgnl">🚀 ĐGNL</option>
+            <option value="toan9">📝 Toán 9</option>
+            <option value="toan10">🎓 Toán 10 (theo chương)</option>
+            <option value="toan11">🎓 Toán 11 (theo chương)</option>
+            <option value="toan12">🎓 Toán 12 (theo chương)</option>
+        </select>
+        <select id="adm_mvChap" style="display:none;margin-top:8px"></select>
+        <button class="adm_btn" id="adm_mvGo" style="padding:8px 20px">Chuyển</button>
+        <button class="adm_btn2" id="adm_mvCancel" style="margin-left:6px">Hủy</button>
+    </div>
     <h4 style="margin:22px 0 6px">Đang có trong mục này <span style="font-weight:normal;color:#888;font-size:13px">(✕ chỉ gỡ khỏi menu, không xóa file)</span></h4>
     <div id="adm_list"></div>
 </div>
@@ -354,6 +369,10 @@
             const row = document.createElement('div'); row.className = 'adm_row';
             const sp = document.createElement('span'); sp.textContent = text; if (bold) sp.style.fontWeight = '700'; row.appendChild(sp);
             if (path) {
+                const e1 = document.createElement('button'); e1.className = 'adm_i'; e1.textContent = '✏️'; e1.title = 'Đổi tên';
+                e1.onclick = () => admRename(sec, path, name); row.appendChild(e1);
+                const e2 = document.createElement('button'); e2.className = 'adm_i'; e2.textContent = '↗'; e2.title = 'Chuyển sang mục/chương khác';
+                e2.onclick = () => admStartMove(sec, path, name); row.appendChild(e2);
                 const x = document.createElement('button'); x.className = 'adm_x'; x.textContent = '✕'; x.title = 'Gỡ khỏi menu';
                 x.onclick = () => admRemove(sec, path, name); row.appendChild(x);
             }
@@ -370,14 +389,67 @@
     $('adm_sec').onchange = admRenderList;
     admRenderList();
 
+    function removeEntry(data, sec, path) {
+        if (CHAPTER[sec]) data[sec].forEach(it => { const f = chapFiles(it).filter(x => x[0] !== path); it[2] = f; it[0] = f.length ? f[0][0] : null; });
+        else data[sec] = data[sec].filter(it => it[0] !== path);
+    }
+    function addEntry(data, sec, idx, path, name) {
+        if (CHAPTER[sec]) { const it = data[sec][idx]; const f = chapFiles(it).filter(x => x[0] !== path); f.push([path, name]); it[2] = f; it[0] = f[0][0]; }
+        else { data[sec] = data[sec].filter(it => it[0] !== path); data[sec].unshift([path, name]); }
+    }
+    function renameEntry(data, sec, path, nn) {
+        if (CHAPTER[sec]) data[sec].forEach(it => { const f = chapFiles(it); if (f.some(x => x[0] === path)) { it[2] = f.map(x => x[0] === path ? [x[0], nn] : x); it[0] = it[2][0][0]; } });
+        else data[sec].forEach(it => { if (it[0] === path) it[1] = nn; });
+    }
+    async function admRename(sec, path, name) {
+        if (needToken()) return;
+        const nn = prompt('Tên mới:', name);
+        if (!nn || !nn.trim() || nn.trim() === name) return;
+        try {
+            msg('Đang đổi tên...');
+            const { data, sha } = await getDe();
+            renameEntry(data, sec, path, nn.trim());
+            await putDe(data, sha, 'Đổi tên: ' + nn.trim());
+            renderMenu(data); msg('✅ Đã đổi tên.', true);
+        } catch (e) { msg('❌ Lỗi: ' + e.message, false); }
+    }
+    let moving = null;
+    function mvFillChap() {
+        const sec = $('adm_mvSec').value, sel = $('adm_mvChap'); sel.innerHTML = '';
+        if (CHAPTER[sec]) { (currentData[sec] || []).forEach((it, i) => { const o = document.createElement('option'); o.value = i; o.textContent = it[1]; sel.appendChild(o); }); sel.style.display = 'block'; }
+        else sel.style.display = 'none';
+    }
+    $('adm_mvSec').onchange = mvFillChap;
+    function admStartMove(sec, path, name) {
+        moving = { sec, path, name };
+        $('adm_moveTxt').textContent = 'Chuyển "' + name + '" sang:';
+        $('adm_mvSec').value = sec; mvFillChap();
+        $('adm_move').style.display = 'block';
+        $('adm_move').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    $('adm_mvCancel').onclick = () => { moving = null; $('adm_move').style.display = 'none'; };
+    $('adm_mvGo').onclick = async function () {
+        if (!moving || needToken()) return;
+        const dsec = $('adm_mvSec').value, didx = CHAPTER[dsec] ? parseInt($('adm_mvChap').value, 10) : -1;
+        if (CHAPTER[dsec] && isNaN(didx)) { msg('Chưa chọn chương.', false); return; }
+        const m = moving;
+        try {
+            msg('Đang chuyển...');
+            const { data, sha } = await getDe();
+            removeEntry(data, m.sec, m.path);
+            addEntry(data, dsec, didx, m.path, m.name);
+            await putDe(data, sha, 'Chuyển menu: ' + m.name);
+            renderMenu(data); moving = null; $('adm_move').style.display = 'none';
+            msg('✅ Đã chuyển. (File vẫn nằm nguyên chỗ cũ trong repo, chỉ menu thay đổi.)', true);
+        } catch (e) { msg('❌ Lỗi: ' + e.message, false); }
+    };
     async function admRemove(sec, path, name) {
         if (needToken()) return;
         if (!confirm('Gỡ "' + name + '" khỏi menu? (file vẫn còn trong repo)')) return;
         try {
             msg('Đang gỡ...');
             const { data, sha } = await getDe();
-            if (CHAPTER[sec]) data[sec].forEach(it => { const f = chapFiles(it).filter(x => x[0] !== path); it[2] = f; it[0] = f.length ? f[0][0] : null; });
-            else data[sec] = data[sec].filter(it => it[0] !== path);
+            removeEntry(data, sec, path);
             await putDe(data, sha, 'Gỡ khỏi menu: ' + name);
             renderMenu(data); msg('Đã gỡ khỏi menu.', true);
         } catch (e) { msg('Lỗi: ' + e.message, false); }
