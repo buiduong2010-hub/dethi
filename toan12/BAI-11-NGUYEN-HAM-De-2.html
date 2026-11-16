@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 11: Nguyên hàm - Đề số 2</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], processEscapes: true },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+:root{
+  --bg:#f4f6fb; --card:#fff; --ink:#1d2433; --muted:#5b6478; --line:#dfe4ef;
+  --pri:#2457d6; --pri-soft:#e8efff; --ok:#1a8f4a; --ok-soft:#e6f6ec; --bad:#c62f3d; --bad-soft:#fdebed;
+  --warn:#9a6700; --warn-soft:#fff6dd;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 14px 90px}
+header.top{padding:22px 0 6px}
+header.top h1{margin:0 0 4px;font-size:1.45rem;line-height:1.3}
+header.top .sub{color:var(--muted);font-size:.95rem}
+.guide{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:14px 0;font-size:.93rem;color:#33405a}
+.guide b{color:var(--ink)}
+.guide ul{margin:6px 0 0 18px;padding:0}
+#bar{position:sticky;top:0;z-index:20;background:rgba(244,246,251,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -14px;padding:8px 14px}
+#bar .row{display:flex;justify-content:space-between;gap:10px;font-size:.88rem;color:var(--muted);flex-wrap:wrap}
+#bar .row b{color:var(--ink)}
+.track{height:8px;background:#dde3f1;border-radius:99px;overflow:hidden;margin-top:6px}
+.fill{height:100%;width:0;background:var(--pri);transition:width .25s}
+h2.part{font-size:1.1rem;margin:28px 0 10px;padding:8px 12px;background:var(--pri-soft);border-left:4px solid var(--pri);border-radius:6px;line-height:1.4}
+h2.part small{display:block;font-weight:400;color:var(--muted);font-size:.85rem;margin-top:2px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0;box-shadow:0 1px 2px rgba(20,30,60,.04)}
+.q.ok{border-color:var(--ok);background:linear-gradient(0deg,#fff,#fff) padding-box}
+.q.bad{border-color:var(--bad)}
+.qhead{font-weight:700;color:var(--pri);margin-bottom:4px}
+.stem{margin-bottom:10px;overflow-x:auto;overflow-y:hidden}
+.hint,.mistake{overflow-x:auto}
+.stem p,.sol p,.sub p{margin:.35em 0}
+.stem img,.sol img{max-width:100%;height:auto}
+.stem img.fig,.sol img.fig{display:block;margin:8px auto}
+img.eqimg{vertical-align:middle;max-width:none}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fbfcff;color:inherit;font:inherit;cursor:pointer;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--pri);background:var(--pri-soft)}
+.opt .lab{font-weight:700;min-width:1.4em;color:var(--pri)}
+.opt .txt{flex:1;min-width:0;overflow-x:auto}
+.opt .txt p{margin:0}
+.opt.sel{border-color:var(--pri);background:var(--pri-soft);box-shadow:0 0 0 2px rgba(36,87,214,.15)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt:disabled{cursor:default}
+.subs{display:flex;flex-direction:column;gap:10px}
+.subrow{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fbfcff}
+.subrow .sl{font-weight:700;color:var(--pri);min-width:1.4em}
+.subrow .sb{flex:1;min-width:0;overflow-x:auto}
+.subrow .tf{display:flex;gap:6px;flex-shrink:0}
+.tfb{width:42px;height:38px;border:1.5px solid var(--line);border-radius:8px;background:#fff;font:inherit;font-weight:700;cursor:pointer}
+.tfb:hover:not(:disabled){border-color:var(--pri)}
+.tfb.sel{background:var(--pri);color:#fff;border-color:var(--pri)}
+.tfb:disabled{cursor:default}
+.subrow.right{border-color:var(--ok);background:var(--ok-soft)}
+.subrow.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.subrow .ans{display:block;font-size:.85rem;color:var(--bad);margin-top:3px;font-weight:600}
+.sa{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sa label{font-weight:600}
+.sa input{flex:1;min-width:150px;max-width:260px;padding:9px 12px;font:inherit;border:1.5px solid var(--line);border-radius:10px}
+.sa input:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px rgba(36,87,214,.15)}
+.sa input.right{border-color:var(--ok);background:var(--ok-soft)}
+.sa input.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.sa .corr{width:100%;font-size:.92rem;color:var(--bad);font-weight:600}
+.acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.btn{padding:9px 16px;border-radius:10px;border:0;background:var(--pri);color:#fff;font:inherit;font-weight:600;cursor:pointer}
+.btn:disabled{background:#b9c3dc;cursor:not-allowed}
+.btn.ghost{background:#fff;color:var(--pri);border:1.5px solid var(--pri)}
+.btn.big{padding:12px 26px;font-size:1.05rem}
+.fb{font-weight:600}
+.fb.ok{color:var(--ok)} .fb.bad{color:var(--bad)} .fb.info{color:var(--warn)}
+.hint{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--warn-soft);border:1px solid #f0dca0;color:#5c4400}
+.mistake{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--bad-soft);border:1px solid #f1c3c8;color:#6b1b24}
+.sol{margin-top:10px;padding:10px 14px;border-radius:10px;background:#f6f8ff;border:1px solid var(--line);overflow-x:auto}
+.sol h4,.mistake b.t,.hint b.t{margin:0 0 4px;font-size:.95rem}
+.sol h4{color:var(--pri)}
+.sol table{border-collapse:collapse;margin:8px 0}
+.sol td,.sol th{border:1px solid var(--line);padding:4px 8px}
+mjx-container{max-width:100%}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden}
+.submitbox{margin:28px 0;text-align:center}
+#result{display:none;background:var(--card);border:2px solid var(--pri);border-radius:14px;padding:18px;margin:20px 0;text-align:center}
+#result .big{font-size:1.6rem;font-weight:800;color:var(--pri)}
+#result table{margin:12px auto 0;border-collapse:collapse;font-size:.95rem}
+#result td,#result th{border:1px solid var(--line);padding:5px 14px}
+@media (max-width:520px){
+  body{font-size:15.5px}
+  .q{padding:12px}
+  .subrow{flex-wrap:wrap}
+  .subrow .sb{flex:1 1 calc(100% - 2.6em)}
+  .subrow .tf{margin-left:auto}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Bài 11: Nguyên hàm - Đề số 2</h1>
+    <div class="sub">Đề số 2 · 22 câu: 12 trắc nghiệm, 4 đúng/sai, 6 trả lời ngắn</div>
+  </header>
+  <div class="guide">
+    <b>Cách làm bài:</b> chọn đáp án rồi bấm <b>Kiểm tra đáp án</b>.
+    <ul>
+      <li>Sai lần 1: chỉ hiện gợi ý, bạn được làm lại. Sai lần 2: hiện đáp án đúng và lời giải chi tiết.</li>
+      <li>Câu đúng sẽ được khoá; bấm <b>Xem lời giải</b> nếu muốn đối chiếu cách làm.</li>
+      <li>Câu trả lời ngắn: nhập số, có thể dùng dấu phẩy hoặc dấu chấm (ví dụ <b>-4</b>, <b>2,25</b>, <b>2.25</b>) hoặc phân số <b>a/b</b>. Khi đề yêu cầu làm tròn, hãy nhập đúng số đã làm tròn.</li>
+      <li>Bấm <b>Nộp bài</b> ở cuối trang để xem tổng số câu đúng và số câu sai.</li>
+    </ul>
+  </div>
+  <div id="bar">
+    <div class="row"><span>Đã kiểm tra <b id="pChecked">0</b>/<b id="pTotal">0</b> câu</span><span>Đúng: <b id="pOk" style="color:var(--ok)">0</b> · Sai: <b id="pBad" style="color:var(--bad)">0</b></span></div>
+    <div class="track"><div class="fill" id="pFill"></div></div>
+  </div>
+  <main id="quiz"></main>
+  <div class="submitbox"><button class="btn big" id="submitBtn">Nộp bài</button></div>
+  <div id="result"></div>
+</div>
+<script>
+const DATA = {"sections": [{"kind": "mcq", "title": "Phần I. Trắc nghiệm nhiều phương án lựa chọn (Câu 1–12)", "note": "Mỗi câu chỉ chọn một phương án", "questions": [{"n": 1, "stem": "<p>Họ nguyên hàm của hàm số <span class=\"math inline\">\\(f(x)=3x^{2}+1\\)<\/span> là<\/p>", "hint": "Biến đổi hàm số về tổng các hàm cơ bản (chia phân thức, đưa căn về lũy thừa), dùng bảng nguyên hàm <span class=\"math inline\">\\(\\int x^ndx=\\frac{x^{n+1}}{n+1}+C\\)<\/span> <span class=\"math inline\">\\((n\\ne-1)\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{x}=\\ln|x|+C\\)<\/span>, rồi (với tích phân) tính <span class=\"math inline\">\\(F(b)-F(a)\\)<\/span>.", "mistake": "Nhầm <span class=\"math inline\">\\(\\int x^ndx\\)<\/span> thành <span class=\"math inline\">\\(x^{n+1}\\)<\/span> (quên chia <span class=\"math inline\">\\(n+1\\)<\/span>), quên hằng số <span class=\"math inline\">\\(C\\)<\/span>, hoặc tính <span class=\"math inline\">\\(F(a)-F(b)\\)<\/span> thay vì <span class=\"math inline\">\\(F(b)-F(a)\\)<\/span>.", "sol": "<p><span class=\"math inline\">\\(\\int \\left(3x^{2}+1\\right)dx=x^{3}+x+C.\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(x^{3}+C\\)<\/span>", "<span class=\"math inline\">\\(\\frac{x^{3}}{3}+x+C\\)<\/span>", "<span class=\"math inline\">\\(6x+C\\)<\/span>", "<span class=\"math inline\">\\(x^{3}+x+C\\)<\/span>"], "answer": "D"}, {"n": 2, "stem": "<p>Hàm số nào sau đây là một nguyên hàm của hàm số <span class=\"math inline\">\\(y=12x^{5}\\)<\/span>.<\/p>", "hint": "<span class=\"math inline\">\\(F(x)\\)<\/span> là nguyên hàm của <span class=\"math inline\">\\(f(x)\\)<\/span> khi <span class=\"math inline\">\\(F&#39;(x)=f(x)\\)<\/span>. Đạo hàm từng phương án (hoặc tự tìm nguyên hàm rồi so sánh, chú ý hằng số <span class=\"math inline\">\\(C\\)<\/span>).", "mistake": "Lấy nguyên hàm thay vì đạo hàm, hoặc quên đạo hàm của <span class=\"math inline\">\\(a^x\\)<\/span> là <span class=\"math inline\">\\(a^x\\ln a\\)<\/span>.", "sol": "<p>Ta có <span class=\"math inline\">\\(\\int 12x^{5}\\text{d}x\\)<\/span><span class=\"math inline\">\\(=12.\\frac{x^{6}}{6}+C\\)<\/span><span class=\"math inline\">\\(=2x^{6}+C\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(y=12x^{4}\\)<\/span>.", "<span class=\"math inline\">\\(y=60x^{4}\\)<\/span>.", "<span class=\"math inline\">\\(y=12x^{6}+5\\)<\/span>.", "<span class=\"math inline\">\\(y=2x^{6}+3\\)<\/span>."], "answer": "D"}, {"n": 3, "stem": "<p>Tìm họ nguyên hàm <span class=\"math inline\">\\(F\\left(x\\right)\\)<\/span> của hàm số <span class=\"math inline\">\\(f\\left(x\\right)=\\frac{1}{x}\\)<\/span>.<\/p>", "hint": "Biến đổi hàm số về tổng các hàm cơ bản (chia phân thức, đưa căn về lũy thừa), dùng bảng nguyên hàm <span class=\"math inline\">\\(\\int x^ndx=\\frac{x^{n+1}}{n+1}+C\\)<\/span> <span class=\"math inline\">\\((n\\ne-1)\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{x}=\\ln|x|+C\\)<\/span>, rồi (với tích phân) tính <span class=\"math inline\">\\(F(b)-F(a)\\)<\/span>.", "mistake": "Nhầm <span class=\"math inline\">\\(\\int x^ndx\\)<\/span> thành <span class=\"math inline\">\\(x^{n+1}\\)<\/span> (quên chia <span class=\"math inline\">\\(n+1\\)<\/span>), quên hằng số <span class=\"math inline\">\\(C\\)<\/span>, hoặc tính <span class=\"math inline\">\\(F(a)-F(b)\\)<\/span> thay vì <span class=\"math inline\">\\(F(b)-F(a)\\)<\/span>.", "sol": "<p>Áp dụng công thức nguyên hàm của hàm số ta có <span class=\"math inline\">\\(\\int \\frac{1}{x}\\text{d}x=\\ln \\left|x\\right|+C\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(F\\left(x\\right)=\\ln \\left|x\\right|+C\\)<\/span>.", "<span class=\"math inline\">\\(F\\left(x\\right)=\\ln x+C\\)<\/span>.", "<span class=\"math inline\">\\(F\\left(x\\right)=\\ln \\left|x\\right|\\)<\/span>.", "<span class=\"math inline\">\\(F\\left(x\\right)=-\\frac{1}{x^{2}}+C\\)<\/span>."], "answer": "A"}, {"n": 4, "stem": "<p>Mệnh đề nào sai trong các mệnh đề sau?<\/p>", "hint": "Kiểm tra lần lượt từng mệnh đề: đạo hàm vế phải xem có bằng hàm dưới dấu nguyên hàm không, và đối chiếu với các tính chất <span class=\"math inline\">\\(\\int\\left[f\\pm g\\right]=\\int f\\pm\\int g\\)<\/span>, <span class=\"math inline\">\\(\\int kf=k\\int f\\)<\/span> <span class=\"math inline\">\\((k\\ne 0)\\)<\/span>, <span class=\"math inline\">\\(\\left(\\int f\\right)^{\\prime}=f\\)<\/span>; với tích phân: <span class=\"math inline\">\\(\\int_a^bf=-\\int_b^af\\)<\/span>, <span class=\"math inline\">\\(\\int_a^bf=\\int_a^cf+\\int_c^bf\\)<\/span>. Mệnh đề sai thường nhầm dấu nguyên hàm lượng giác hoặc dùng tính chất cho tích/thương.", "mistake": "Nhầm <span class=\"math inline\">\\(\\int\\sin x\\,dx=\\cos x+C\\)<\/span> (đúng là <span class=\"math inline\">\\(-\\cos x+C\\)<\/span>), cho rằng <span class=\"math inline\">\\(\\int f\\cdot g=\\int f\\cdot\\int g\\)<\/span>, hoặc quên điều kiện <span class=\"math inline\">\\(k\\ne 0\\)<\/span>.", "sol": "<p>Từ bảng nguyên hàm của các hàm cơ bản suy ra B sai.<\/p>", "options": ["<span class=\"math inline\">\\(\\int \\cos x\\text{d}x=\\sin x+C\\)<\/span>.", "<span class=\"math inline\">\\(\\int \\sin x\\text{d}x=\\cos x+C\\)<\/span>.", "<span class=\"math inline\">\\(\\int \\frac{1}{\\cos ^{2}x}\\text{d}x=\\tan x+C\\)<\/span>.", "<span class=\"math inline\">\\(\\int \\frac{1}{\\sin ^{2}x}\\text{d}x=-\\cot x+C\\)<\/span>."], "answer": "B"}, {"n": 5, "stem": "<p>Tìm nguyên hàm của hàm số <span class=\"math inline\">\\(f\\left(x\\right)=7^{x}\\)<\/span>.<\/p>", "hint": "Nguyên hàm mũ và logarit: <span class=\"math inline\">\\(\\int e^xdx=e^x+C\\)<\/span>, <span class=\"math inline\">\\(\\int a^xdx=\\frac{a^x}{\\ln a}+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{x}=\\ln|x|+C\\)<\/span>, <span class=\"math inline\">\\(\\int e^{kx}dx=\\frac{1}{k}e^{kx}+C\\)<\/span>.", "mistake": "Quên chia cho <span class=\"math inline\">\\(\\ln a\\)<\/span> khi lấy nguyên hàm của <span class=\"math inline\">\\(a^x\\)<\/span>, hoặc quên hệ số <span class=\"math inline\">\\(\\frac{1}{k}\\)<\/span> khi nguyên hàm của <span class=\"math inline\">\\(e^{kx}\\)<\/span>.", "sol": "<p>Áp dụng công thức nguyên <span class=\"math inline\">\\(\\int a^{x}\\text{d}x=\\frac{a^{x}}{\\ln a}+C\\)<\/span><span class=\"math inline\">\\(\\Rightarrow \\int 7^{x}\\text{d}x=\\frac{7^{x}}{\\ln 7}+C\\)<\/span><\/p>", "options": ["<span class=\"math inline\">\\(\\int 7^{x}\\text{d}x=\\frac{7^{x+1}}{x+1}+C\\)<\/span>", "<span class=\"math inline\">\\(\\int 7^{x}\\text{d}x=7^{x}\\ln 7+C\\)<\/span>", "<span class=\"math inline\">\\(\\int 7^{x}\\text{d}x=\\frac{7^{x}}{\\ln 7}+C\\)<\/span>", "<span class=\"math inline\">\\(\\int 7^{x}\\text{d}x=7^{x+1}+C\\)<\/span>"], "answer": "C"}, {"n": 6, "stem": "<p>Nguyên hàm của hàm số <span class=\"math inline\">\\(f\\left(x\\right)=2^{x}+x\\)<\/span> là<\/p>", "hint": "Nguyên hàm mũ và logarit: <span class=\"math inline\">\\(\\int e^xdx=e^x+C\\)<\/span>, <span class=\"math inline\">\\(\\int a^xdx=\\frac{a^x}{\\ln a}+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{x}=\\ln|x|+C\\)<\/span>, <span class=\"math inline\">\\(\\int e^{kx}dx=\\frac{1}{k}e^{kx}+C\\)<\/span>.", "mistake": "Quên chia cho <span class=\"math inline\">\\(\\ln a\\)<\/span> khi lấy nguyên hàm của <span class=\"math inline\">\\(a^x\\)<\/span>, hoặc quên hệ số <span class=\"math inline\">\\(\\frac{1}{k}\\)<\/span> khi nguyên hàm của <span class=\"math inline\">\\(e^{kx}\\)<\/span>.", "sol": "<p>Ta có <span class=\"math inline\">\\(\\int \\left(2^{x}+x\\right)\\text{d}x=\\frac{2^{x}}{\\ln 2}+\\frac{1}{2}x^{2}+C\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(2^{x}+\\frac{x^{2}}{2}+C\\)<\/span>.", "<span class=\"math inline\">\\(2^{x}+x^{2}+C\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{2^{x}}{\\ln 2}+x^{2}+C\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{2^{x}}{\\ln 2}+\\frac{x^{2}}{2}+C\\)<\/span>."], "answer": "D"}, {"n": 7, "stem": "<p><span class=\"math inline\">\\(\\int \\left(3^{x}+4^{x}\\right)\\text{d}x\\)<\/span>bằng<\/p>", "hint": "Nguyên hàm mũ và logarit: <span class=\"math inline\">\\(\\int e^xdx=e^x+C\\)<\/span>, <span class=\"math inline\">\\(\\int a^xdx=\\frac{a^x}{\\ln a}+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{x}=\\ln|x|+C\\)<\/span>, <span class=\"math inline\">\\(\\int e^{kx}dx=\\frac{1}{k}e^{kx}+C\\)<\/span>.", "mistake": "Quên chia cho <span class=\"math inline\">\\(\\ln a\\)<\/span> khi lấy nguyên hàm của <span class=\"math inline\">\\(a^x\\)<\/span>, hoặc quên hệ số <span class=\"math inline\">\\(\\frac{1}{k}\\)<\/span> khi nguyên hàm của <span class=\"math inline\">\\(e^{kx}\\)<\/span>.", "sol": "<p>Áp dụng công thức <span class=\"math inline\">\\(\\int a^{x}\\text{d}x=\\frac{a^{x}}{\\ln a}+C.\\)<\/span>Ta có <span class=\"math inline\">\\(\\int \\left(3^{x}+4^{x}\\right)\\text{d}x=\\int 3^{x}\\text{d}x+\\int 4^{x}\\text{d}x=\\frac{3^{x}}{\\ln 3}+\\frac{4^{x}}{\\ln 4}+C\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(\\frac{3^{x}}{\\ln 3}+\\frac{4^{x}}{\\ln 4}+C\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{3^{x}}{\\ln 4}+\\frac{4^{x}}{\\ln 3}+C\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{4^{x}}{\\ln 3}-\\frac{3^{x}}{\\ln 4}+C\\)<\/span>.", "<span class=\"math inline\">\\(\\frac{3^{x}}{\\ln 3}-\\frac{4^{x}}{\\ln 4}+C\\)<\/span>."], "answer": "A"}, {"n": 8, "stem": "<p>Họ nguyên hàm của hàm số<span class=\"math inline\">\\(f(x)=e^{x}+2x\\)<\/span> là<\/p>", "hint": "Nguyên hàm mũ và logarit: <span class=\"math inline\">\\(\\int e^xdx=e^x+C\\)<\/span>, <span class=\"math inline\">\\(\\int a^xdx=\\frac{a^x}{\\ln a}+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{x}=\\ln|x|+C\\)<\/span>, <span class=\"math inline\">\\(\\int e^{kx}dx=\\frac{1}{k}e^{kx}+C\\)<\/span>.", "mistake": "Quên chia cho <span class=\"math inline\">\\(\\ln a\\)<\/span> khi lấy nguyên hàm của <span class=\"math inline\">\\(a^x\\)<\/span>, hoặc quên hệ số <span class=\"math inline\">\\(\\frac{1}{k}\\)<\/span> khi nguyên hàm của <span class=\"math inline\">\\(e^{kx}\\)<\/span>.", "sol": "<p>Ta có<span class=\"math inline\">\\(\\int \\left(e^{x}+2x\\right)\\text{d}x=\\int e^{x}\\text{d}x+\\int 2x\\text{d}x=e^{x}+x^{2}+C\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(\\frac{1}{x+1}e^{x}+x^{2}+C\\)<\/span>.", "<span class=\"math inline\">\\(e^{x}+2x^{2}+C\\)<\/span>.", "<span class=\"math inline\">\\(e^{x}+x^{2}+C\\)<\/span>.", "<span class=\"math inline\">\\(e^{x}+\\frac{1}{2}x^{2}+C\\)<\/span>."], "answer": "C"}, {"n": 9, "stem": "<p>Trong các mệnh đề sau, mệnh đề nào sai?<\/p>", "hint": "Kiểm tra lần lượt từng mệnh đề: đạo hàm vế phải xem có bằng hàm dưới dấu nguyên hàm không, và đối chiếu với các tính chất <span class=\"math inline\">\\(\\int\\left[f\\pm g\\right]=\\int f\\pm\\int g\\)<\/span>, <span class=\"math inline\">\\(\\int kf=k\\int f\\)<\/span> <span class=\"math inline\">\\((k\\ne 0)\\)<\/span>, <span class=\"math inline\">\\(\\left(\\int f\\right)^{\\prime}=f\\)<\/span>; với tích phân: <span class=\"math inline\">\\(\\int_a^bf=-\\int_b^af\\)<\/span>, <span class=\"math inline\">\\(\\int_a^bf=\\int_a^cf+\\int_c^bf\\)<\/span>. Mệnh đề sai thường nhầm dấu nguyên hàm lượng giác hoặc dùng tính chất cho tích/thương.", "mistake": "Nhầm <span class=\"math inline\">\\(\\int\\sin x\\,dx=\\cos x+C\\)<\/span> (đúng là <span class=\"math inline\">\\(-\\cos x+C\\)<\/span>), cho rằng <span class=\"math inline\">\\(\\int f\\cdot g=\\int f\\cdot\\int g\\)<\/span>, hoặc quên điều kiện <span class=\"math inline\">\\(k\\ne 0\\)<\/span>.", "sol": "<p>Ta có <span class=\"math inline\">\\(\\int \\sin x\\text{d}x=-\\cos x+C\\)<\/span>, nên mệnh đề <span class=\"math inline\">\\(\\int \\sin x\\text{d}x=\\cos x+C\\)<\/span> sai; ba mệnh đề còn lại đều đúng theo bảng nguyên hàm.<\/p>", "options": ["<span class=\"math inline\">\\(\\int \\sin x\\text{d}x=\\cos x+C\\)<\/span>.", "<span class=\"math inline\">\\(\\int 2x\\text{d}x=x^{2}+C\\)<\/span>.", "<span class=\"math inline\">\\(\\int e^{x}\\text{d}x=e^{x}+C\\)<\/span>.", "<span class=\"math inline\">\\(\\int \\frac{1}{x}\\text{d}x=\\ln \\left|x\\right|+C\\)<\/span>."], "answer": "A"}, {"n": 10, "stem": "<p>Khẳng định nào sau đây là sai?<\/p>", "hint": "Kiểm tra lần lượt từng mệnh đề: đạo hàm vế phải xem có bằng hàm dưới dấu nguyên hàm không, và đối chiếu với các tính chất <span class=\"math inline\">\\(\\int\\left[f\\pm g\\right]=\\int f\\pm\\int g\\)<\/span>, <span class=\"math inline\">\\(\\int kf=k\\int f\\)<\/span> <span class=\"math inline\">\\((k\\ne 0)\\)<\/span>, <span class=\"math inline\">\\(\\left(\\int f\\right)^{\\prime}=f\\)<\/span>; với tích phân: <span class=\"math inline\">\\(\\int_a^bf=-\\int_b^af\\)<\/span>, <span class=\"math inline\">\\(\\int_a^bf=\\int_a^cf+\\int_c^bf\\)<\/span>. Mệnh đề sai thường nhầm dấu nguyên hàm lượng giác hoặc dùng tính chất cho tích/thương.", "mistake": "Nhầm <span class=\"math inline\">\\(\\int\\sin x\\,dx=\\cos x+C\\)<\/span> (đúng là <span class=\"math inline\">\\(-\\cos x+C\\)<\/span>), cho rằng <span class=\"math inline\">\\(\\int f\\cdot g=\\int f\\cdot\\int g\\)<\/span>, hoặc quên điều kiện <span class=\"math inline\">\\(k\\ne 0\\)<\/span>.", "sol": "<p><span class=\"math inline\">\\(\\int x^{\\alpha }\\text{d}x=\\frac{x^{\\alpha +1}}{\\alpha +1}+C\\)<\/span> (<span class=\"math inline\">\\(C\\)<\/span> là hằng số, <span class=\"math inline\">\\(\\alpha\\)<\/span> là hằng số và <span class=\"math inline\">\\(\\alpha \\ne -1\\)<\/span>).<\/p>", "options": ["Mọi hàm số <span class=\"math inline\">\\(f\\left(x\\right)\\)<\/span> liên tục trên đoạn <span class=\"math inline\">\\(\\left[a;b\\right]\\)<\/span> đều có nguyên hàm trên đoạn <span class=\"math inline\">\\(\\left[a;b\\right]\\)<\/span>.", "<span class=\"math inline\">\\(\\int x^{\\alpha }\\text{d}x=\\frac{x^{\\alpha +1}}{\\alpha +1}+C\\)<\/span> (<span class=\"math inline\">\\(C\\)<\/span> là hằng số, <span class=\"math inline\">\\(\\alpha\\)<\/span> là hằng số).", "<span class=\"math inline\">\\(\\int e^{x}\\text{d}x=e^{x}+C\\)<\/span> (<span class=\"math inline\">\\(C\\)<\/span> là hằng số).", "<span class=\"math inline\">\\(\\int \\frac{1}{x}\\text{d}x=\\ln \\left|x\\right|+C\\)<\/span> (<span class=\"math inline\">\\(C\\)<\/span> là hằng số) với <span class=\"math inline\">\\(x\\ne 0\\)<\/span>."], "answer": "B"}, {"n": 11, "stem": "<p>Hàm số nào dưới đây là một nguyên hàm của hàm số <span class=\"math inline\">\\(f\\left(x\\right)=\\sqrt{x}-1\\)<\/span>trên <span class=\"math inline\">\\(\\left(0;+\\infty \\right)\\)<\/span>.<\/p>", "hint": "<span class=\"math inline\">\\(F(x)\\)<\/span> là nguyên hàm của <span class=\"math inline\">\\(f(x)\\)<\/span> khi <span class=\"math inline\">\\(F&#39;(x)=f(x)\\)<\/span>. Đạo hàm từng phương án (hoặc tự tìm nguyên hàm rồi so sánh, chú ý hằng số <span class=\"math inline\">\\(C\\)<\/span>).", "mistake": "Lấy nguyên hàm thay vì đạo hàm, hoặc quên đạo hàm của <span class=\"math inline\">\\(a^x\\)<\/span> là <span class=\"math inline\">\\(a^x\\ln a\\)<\/span>.", "sol": "<p>Ta có : <span class=\"math inline\">\\(\\int \\left(\\sqrt{x}-1\\right)\\text{d}x=\\frac{2}{3}\\sqrt{x^{3}}-x+C\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(F\\left(x\\right)=\\frac{1}{2\\sqrt{x}}\\)<\/span>.", "<span class=\"math inline\">\\(F\\left(x\\right)=\\frac{1}{2\\sqrt{x}}-x\\)<\/span>.", "<span class=\"math inline\">\\(F\\left(x\\right)=\\frac{2}{3}\\sqrt[3]{x^{2}}-x+1\\)<\/span>.", "<span class=\"math inline\">\\(F\\left(x\\right)=\\frac{2}{3}\\sqrt{x^{3}}-x+2\\)<\/span>."], "answer": "D"}, {"n": 12, "stem": "<p>Một vật chuyển động với gia tốc <span class=\"math inline\">\\(a(t)=\\frac{3}{t+1}(m/s^{2})\\)<\/span>, trong đó t là khoảng thời gian tính từ thời điểm ban đầu. Vận tốc ban đầu của vật là <span class=\"math inline\">\\(6(m/s)\\)<\/span>. Hỏi vận tốc của vật tại giây thứ <span class=\"math inline\">\\(8\\)<\/span> là bao nhiêu?<\/p>", "hint": "Vận tốc là một nguyên hàm của gia tốc, <span class=\"math inline\">\\(v(t)=\\int a(t)\\,dt\\)<\/span>; quãng đường <span class=\"math inline\">\\(s(t)=\\int v(t)\\,dt\\)<\/span> hoặc <span class=\"math inline\">\\(s=\\int_{t_1}^{t_2}|v(t)|dt\\)<\/span>. Dùng điều kiện ban đầu để tìm <span class=\"math inline\">\\(C\\)<\/span>; vật dừng hẳn khi <span class=\"math inline\">\\(v(t)=0\\)<\/span>; đổi đơn vị (km/h ra m/s) trước khi tính; nếu <span class=\"math inline\">\\(v(t)\\)<\/span> cho bởi nhiều công thức thì tính từng đoạn.", "mistake": "Quên tìm hằng số <span class=\"math inline\">\\(C\\)<\/span> từ điều kiện ban đầu, quên đổi đơn vị (km/h sang m/s), hoặc quên cộng quãng đường đi được trong thời gian phản ứng.", "sol": "<p>Vận tốc của vật tại thời điểm t được tính theo công thức <span class=\"math inline\">\\(v(t)=\\int a(t)dt=\\int \\frac{3}{t+1}dt=3.\\ln (t+1)+C.\\)<\/span><\/p>\n<p>Do vận tốc ban đầu của vật bằng <span class=\"math inline\">\\(6(m/s)\\)<\/span> nên ta có:<\/p>\n<p><span class=\"math inline\">\\(v(0)=3.\\ln (0+1)+C=6\\Rightarrow C=6\\Rightarrow v(t)=3\\ln (t+1)+6\\)<\/span><\/p>\n<p>Vận tốc chuyển động của vật tại giây thứ <span class=\"math inline\">\\(8\\)<\/span> là: <span class=\"math inline\">\\(v(8)=3\\ln (8+1)+6=3\\ln 9+6\\approx 12,6(m/s)\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(12,6(m/s)\\)<\/span>", "<span class=\"math inline\">\\(12,2(m/s)\\)<\/span>", "<span class=\"math inline\">\\(6,6(m/s)\\)<\/span>", "<span class=\"math inline\">\\(12,4(m/s)\\)<\/span>"], "answer": "A"}]}, {"kind": "tf", "title": "Phần II. Trắc nghiệm đúng sai (Câu 1–4)", "note": "Trong mỗi câu, chọn Đúng (Đ) hoặc Sai (S) cho từng ý a), b), c), d); câu chỉ đúng khi cả bốn ý đúng", "questions": [{"n": 1, "stem": "<p>Cho hàm số <span class=\"math inline\">\\(f\\left(x\\right)=\\sin \\frac{x}{2}\\)<\/span> và hàm số <span class=\"math inline\">\\(g\\left(x\\right)=\\cos \\frac{x}{2}\\)<\/span> .<\/p>", "hint": "Xét riêng từng ý. Nguyên hàm lượng giác: <span class=\"math inline\">\\(\\int\\sin x\\,dx=-\\cos x+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\cos x\\,dx=\\sin x+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{\\cos^2x}=\\tan x+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{\\sin^2x}=-\\cot x+C\\)<\/span>. Với <span class=\"math inline\">\\(f(kx+m)\\)<\/span> nhớ chia cho <span class=\"math inline\">\\(k\\)<\/span>. Biến đổi hàm số về tổng các hàm cơ bản (chia phân thức, đưa căn về lũy thừa), dùng bảng nguyên hàm <span class=\"math inline\">\\(\\int x^ndx=\\frac{x^{n+1}}{n+1}+C\\)<\/span> <span class=\"math inline\">\\((n\\ne-1)\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{x}=\\ln|x|+C\\)<\/span>, rồi (với tích phân) tính <span class=\"math inline\">\\(F(b)-F(a)\\)<\/span>.", "mistake": "Nhầm dấu ở nguyên hàm của <span class=\"math inline\">\\(\\sin x\\)<\/span> (là <span class=\"math inline\">\\(-\\cos x\\)<\/span>) và của <span class=\"math inline\">\\(\\frac{1}{\\sin^2x}\\)<\/span> (là <span class=\"math inline\">\\(-\\cot x\\)<\/span>). Nhầm <span class=\"math inline\">\\(\\int x^ndx\\)<\/span> thành <span class=\"math inline\">\\(x^{n+1}\\)<\/span> (quên chia <span class=\"math inline\">\\(n+1\\)<\/span>), quên hằng số <span class=\"math inline\">\\(C\\)<\/span>, hoặc tính <span class=\"math inline\">\\(F(a)-F(b)\\)<\/span> thay vì <span class=\"math inline\">\\(F(b)-F(a)\\)<\/span>.", "sol": "<p>a) Vì <span class=\"math inline\">\\(F&#39;\\left(x\\right)=-\\sin \\left(\\frac{x}{2}\\right)\\forall x\\in R\\)<\/span> nên <span class=\"math inline\">\\(F\\left(x\\right)=2\\cos \\frac{x}{2}\\)<\/span> không là một nguyên hàm của hàm số <span class=\"math inline\">\\(f\\left(x\\right)\\)<\/span> trên <span class=\"math inline\">\\(R\\)<\/span>. <strong>Sai<\/strong><\/p>\n<p>b) Vì <span class=\"math inline\">\\(G&#39;\\left(x\\right)=\\cos \\left(\\frac{x}{2}\\right)\\forall x\\in R\\)<\/span> nên <span class=\"math inline\">\\(G\\left(x\\right)=2\\sin \\frac{x}{2}+\\frac{1}{2}\\)<\/span> là một nguyên hàm của hàm số <span class=\"math inline\">\\(g\\left(x\\right)\\)<\/span> trên <span class=\"math inline\">\\(R\\)<\/span>. <strong>Đúng<\/strong><\/p>\n<ol start=\"3\" type=\"a\">\n<li><span class=\"math inline\">\\(\\int \\left[f\\left(x\\right)-g\\left(x\\right)\\right]^{2}dx=\\int \\left(\\sin\\frac{x}{2}-\\cos\\frac{x}{2}\\right)^{2}dx=\\int \\left(\\sin ^{2}\\frac{x}{2}-2\\sin\\frac{x}{2}\\cos\\frac{x}{2}+\\cos ^{2}\\frac{x}{2}\\right)dx=\\int \\left(1-\\sin x\\right)dx=x+\\cos x+C\\)<\/span>. <strong>Đúng<\/strong><\/li>\n<\/ol>\n<p>d) <span class=\"math inline\">\\(\\int \\frac{1}{\\left[2f\\left(x\\right).g\\left(x\\right)\\right]^{2}}dx=\\int \\frac{1}{\\left(2sin\\frac{x}{2}cos\\frac{x}{2}\\right)^{2}}dx=\\int \\frac{1}{\\sin ^{2}x}dx=-cotx+C\\)<\/span>. <strong>Đúng<\/strong><\/p>\n<p><em>Lưu ý:<\/em> bảng đáp án gốc ghi ý c) là Sai, nhưng <span class=\"math inline\">\\(\\left(\\sin\\frac{x}{2}-\\cos\\frac{x}{2}\\right)^{2}=1-\\sin x\\)<\/span> nên nguyên hàm là <span class=\"math inline\">\\(x+\\cos x+C\\)<\/span> và mệnh đề <strong>đúng<\/strong>; đã hiệu chỉnh.<\/p>", "subs": ["<span class=\"math inline\">\\(F\\left(x\\right)=2\\cos \\frac{x}{2}\\)<\/span> là một nguyên hàm của hàm số <span class=\"math inline\">\\(f\\left(x\\right)\\)<\/span>.", "<span class=\"math inline\">\\(G\\left(x\\right)=2\\sin \\frac{x}{2}+\\frac{1}{2}\\)<\/span> là một nguyên hàm của hàm số <span class=\"math inline\">\\(g\\left(x\\right)\\)<\/span>.", "<span class=\"math inline\">\\(\\int \\left[f\\left(x\\right)-g\\left(x\\right)\\right]^{2}dx=x+cosx+C\\)<\/span> (<span class=\"math inline\">\\(C\\)<\/span> là một hằng số).", "<span class=\"math inline\">\\(\\int \\frac{1}{\\left[2f\\left(x\\right).g\\left(x\\right)\\right]^{2}}dx=-cotx+C\\)<\/span> (<span class=\"math inline\">\\(C\\)<\/span> là một hằng số)."], "answers": [false, true, true, true]}, {"n": 2, "stem": "<p>Cho hàm số <span class=\"math inline\">\\(f\\left(x\\right)=\\frac{1}{x}\\)<\/span> và <span class=\"math inline\">\\(F\\left(x\\right)=\\ln x+C_{1}\\)<\/span>, <span class=\"math inline\">\\(G\\left(x\\right)=\\ln \\left(-x\\right)+C_{2}\\)<\/span> (<span class=\"math inline\">\\(C_{1},C_{2}\\)<\/span> là các hằng số).<\/p>", "hint": "Xét riêng từng ý. Nguyên hàm mũ và logarit: <span class=\"math inline\">\\(\\int e^xdx=e^x+C\\)<\/span>, <span class=\"math inline\">\\(\\int a^xdx=\\frac{a^x}{\\ln a}+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{x}=\\ln|x|+C\\)<\/span>, <span class=\"math inline\">\\(\\int e^{kx}dx=\\frac{1}{k}e^{kx}+C\\)<\/span>. Biến đổi hàm số về tổng các hàm cơ bản (chia phân thức, đưa căn về lũy thừa), dùng bảng nguyên hàm <span class=\"math inline\">\\(\\int x^ndx=\\frac{x^{n+1}}{n+1}+C\\)<\/span> <span class=\"math inline\">\\((n\\ne-1)\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{x}=\\ln|x|+C\\)<\/span>, rồi (với tích phân) tính <span class=\"math inline\">\\(F(b)-F(a)\\)<\/span>.", "mistake": "Quên chia cho <span class=\"math inline\">\\(\\ln a\\)<\/span> khi lấy nguyên hàm của <span class=\"math inline\">\\(a^x\\)<\/span>, hoặc quên hệ số <span class=\"math inline\">\\(\\frac{1}{k}\\)<\/span> khi nguyên hàm của <span class=\"math inline\">\\(e^{kx}\\)<\/span>. Nhầm <span class=\"math inline\">\\(\\int x^ndx\\)<\/span> thành <span class=\"math inline\">\\(x^{n+1}\\)<\/span> (quên chia <span class=\"math inline\">\\(n+1\\)<\/span>), quên hằng số <span class=\"math inline\">\\(C\\)<\/span>, hoặc tính <span class=\"math inline\">\\(F(a)-F(b)\\)<\/span> thay vì <span class=\"math inline\">\\(F(b)-F(a)\\)<\/span>.", "sol": "<p>a) Vì <span class=\"math inline\">\\(H&#39;\\left(x\\right)=\\frac{1}{x}=f\\left(x\\right)\\ \\forall x\\in \\left(0;+\\infty \\right)\\)<\/span> nên <span class=\"math inline\">\\(H\\left(x\\right)\\)<\/span> là một nguyên hàm của hàm số <span class=\"math inline\">\\(f\\left(x\\right)\\)<\/span> trên (<span class=\"math inline\">\\(0,+\\infty\\)<\/span>). <strong>Đúng<\/strong><\/p>\n<p>b) <span class=\"math inline\">\\(\\int f\\left(x\\right)dx=\\int \\frac{1}{x}dx=\\ln \\left(\\left|x\\right|\\right)+C_{2}=\\text{ln}\\left(-x\\right)+C_{2},\\ \\forall x\\in \\left(-\\infty ;0\\right)\\)<\/span>. <strong>Đúng<\/strong><\/p>\n<p>c) <span class=\"math inline\">\\(\\int f\\left(x\\right)dx=\\int \\frac{1}{x}dx=\\ln \\left(\\left|x\\right|\\right)+C_{1}=\\text{ln}x+C_{1},\\ \\forall x\\in \\left(0;+\\infty \\right)\\)<\/span>. <strong>Đúng<\/strong><\/p>\n<p>d) <span class=\"math inline\">\\(\\int \\left[f\\left(x\\right)+f^{2}\\left(x\\right)\\right]dx=\\int \\left(\\frac{1}{x}+\\frac{1}{x^{2}}\\right)dx=\\ln \\left(\\left|x\\right|\\right)-\\frac{1}{x}+C_{3}=\\ln \\left(\\left|x\\right|\\right)-\\frac{1}{x}+ln3+C=\\ln \\left(3\\left|x\\right|\\right)-\\frac{1}{x}+C\\)<\/span>. <strong>Đúng<\/strong><\/p>", "subs": ["Trên (0;<span class=\"math inline\">\\(+\\infty\\)<\/span>), một nguyên hàm của hàm số <span class=\"math inline\">\\(f\\left(x\\right)\\)<\/span> là <span class=\"math inline\">\\(H\\left(x\\right)=\\ln \\left(x\\right)+e\\)<\/span>.", "Trên (<span class=\"math inline\">\\(-\\infty ;0\\)<\/span>), nguyên hàm của hàm số <span class=\"math inline\">\\(f\\left(x\\right)\\)<\/span> là <span class=\"math inline\">\\(G\\left(x\\right)\\)<\/span>.", "Trên (0;<span class=\"math inline\">\\(+\\infty\\)<\/span>), nguyên hàm của hàm số <span class=\"math inline\">\\(f\\left(x\\right)\\)<\/span> là <span class=\"math inline\">\\(F\\left(x\\right)\\)<\/span>.", "<span class=\"math inline\">\\(\\int \\left[f\\left(x\\right)+f^{2}\\left(x\\right)\\right]dx=\\text{ln}\\left(3\\left|x\\right|\\right)-\\frac{1}{x}+C\\)<\/span> (<span class=\"math inline\">\\(C\\)<\/span> là một hằng số)."], "answers": [true, true, true, true]}, {"n": 3, "stem": "<p>Cho hàm số <span class=\"math inline\">\\(f\\left(x\\right)=cosx\\)<\/span> và hàm số <span class=\"math inline\">\\(g\\left(x\\right)=sinx\\)<\/span>.<\/p>", "hint": "Xét riêng từng ý. Nguyên hàm lượng giác: <span class=\"math inline\">\\(\\int\\sin x\\,dx=-\\cos x+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\cos x\\,dx=\\sin x+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{\\cos^2x}=\\tan x+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{\\sin^2x}=-\\cot x+C\\)<\/span>. Với <span class=\"math inline\">\\(f(kx+m)\\)<\/span> nhớ chia cho <span class=\"math inline\">\\(k\\)<\/span>. Biến đổi hàm số về tổng các hàm cơ bản (chia phân thức, đưa căn về lũy thừa), dùng bảng nguyên hàm <span class=\"math inline\">\\(\\int x^ndx=\\frac{x^{n+1}}{n+1}+C\\)<\/span> <span class=\"math inline\">\\((n\\ne-1)\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{x}=\\ln|x|+C\\)<\/span>, rồi (với tích phân) tính <span class=\"math inline\">\\(F(b)-F(a)\\)<\/span>.", "mistake": "Nhầm dấu ở nguyên hàm của <span class=\"math inline\">\\(\\sin x\\)<\/span> (là <span class=\"math inline\">\\(-\\cos x\\)<\/span>) và của <span class=\"math inline\">\\(\\frac{1}{\\sin^2x}\\)<\/span> (là <span class=\"math inline\">\\(-\\cot x\\)<\/span>). Nhầm <span class=\"math inline\">\\(\\int x^ndx\\)<\/span> thành <span class=\"math inline\">\\(x^{n+1}\\)<\/span> (quên chia <span class=\"math inline\">\\(n+1\\)<\/span>), quên hằng số <span class=\"math inline\">\\(C\\)<\/span>, hoặc tính <span class=\"math inline\">\\(F(a)-F(b)\\)<\/span> thay vì <span class=\"math inline\">\\(F(b)-F(a)\\)<\/span>.", "sol": "<p>a) Vì <span class=\"math inline\">\\(F&#39;\\left(x\\right)=cosx=f\\left(x\\right)\\ \\forall x\\in R\\)<\/span> nên <span class=\"math inline\">\\(F\\left(x\\right)\\)<\/span> là một nguyên hàm của hàm số <span class=\"math inline\">\\(f\\left(x\\right)\\)<\/span> trên <span class=\"math inline\">\\(R\\)<\/span>. <strong>Đúng<\/strong><\/p>\n<p>b) Vì <span class=\"math inline\">\\(G&#39;\\left(x\\right)=sinx.e^{-cosx}\\ne e^{sinx}\\ \\forall x\\in R\\)<\/span> nên <span class=\"math inline\">\\(G\\left(x\\right)\\)<\/span> không là một nguyên hàm của hàm số <span class=\"math inline\">\\(e^{g\\left(x\\right)}\\)<\/span> trên <span class=\"math inline\">\\(R\\)<\/span>. <strong>Sai<\/strong><\/p>\n<p>c) <span class=\"math inline\">\\(\\int \\left[5f\\left(x\\right)+6g\\left(x\\right)\\right]dx=\\int \\left(5cosx+6sinx\\right)dx=5sinx-6cosx+C\\)<\/span>. <strong>Đúng<\/strong><\/p>\n<p>d) <span class=\"math inline\">\\(\\int \\left[2+\\left(\\frac{g\\left(x\\right)}{f\\left(x\\right)}\\right)^{2}\\right]dx=\\int (2+\\frac{\\sin ^{2}x}{\\cos ^{2}x})dx=\\int \\left(1+\\frac{\\sin ^{2}x+\\cos ^{2}x}{\\cos ^{2}x}\\right)dx=\\int \\left(1+\\frac{1}{\\cos ^{2}x}\\right)dx=x+tanx+C\\)<\/span>. <strong>Đúng<\/strong><\/p>", "subs": ["<span class=\"math inline\">\\(F\\left(x\\right)=sinx+e\\)<\/span> là một nguyên hàm của hàm số <span class=\"math inline\">\\(f\\left(x\\right)\\)<\/span> trên <span class=\"math inline\">\\(R\\)<\/span>.", "<span class=\"math inline\">\\(G\\left(x\\right)=e^{-cosx}+ln3\\)<\/span> là một nguyên hàm của hàm số <span class=\"math inline\">\\(e^{g\\left(x\\right)}\\)<\/span> trên <span class=\"math inline\">\\(R\\)<\/span>.", "<span class=\"math inline\">\\(\\int \\left[5f\\left(x\\right)+6g\\left(x\\right)\\right]dx=5sinx-6cosx+C\\)<\/span> (<span class=\"math inline\">\\(C\\)<\/span> là một hằng số).", "<span class=\"math inline\">\\(\\int \\left[2+\\left(\\frac{g\\left(x\\right)}{f\\left(x\\right)}\\right)^{2}\\right]dx=x+tanx+C\\)<\/span> (<span class=\"math inline\">\\(C\\)<\/span> là một hằng số)."], "answers": [true, false, true, true]}, {"n": 4, "stem": "<p>Cho hàm số <span class=\"math inline\">\\(f\\left(x\\right)=3^{2x}\\)<\/span> và hàm số <span class=\"math inline\">\\(g\\left(x\\right)=tanx\\)<\/span>.<\/p>", "hint": "Xét riêng từng ý. Nguyên hàm lượng giác: <span class=\"math inline\">\\(\\int\\sin x\\,dx=-\\cos x+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\cos x\\,dx=\\sin x+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{\\cos^2x}=\\tan x+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{\\sin^2x}=-\\cot x+C\\)<\/span>. Với <span class=\"math inline\">\\(f(kx+m)\\)<\/span> nhớ chia cho <span class=\"math inline\">\\(k\\)<\/span>. Nguyên hàm mũ và logarit: <span class=\"math inline\">\\(\\int e^xdx=e^x+C\\)<\/span>, <span class=\"math inline\">\\(\\int a^xdx=\\frac{a^x}{\\ln a}+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{x}=\\ln|x|+C\\)<\/span>, <span class=\"math inline\">\\(\\int e^{kx}dx=\\frac{1}{k}e^{kx}+C\\)<\/span>.", "mistake": "Nhầm dấu ở nguyên hàm của <span class=\"math inline\">\\(\\sin x\\)<\/span> (là <span class=\"math inline\">\\(-\\cos x\\)<\/span>) và của <span class=\"math inline\">\\(\\frac{1}{\\sin^2x}\\)<\/span> (là <span class=\"math inline\">\\(-\\cot x\\)<\/span>). Quên chia cho <span class=\"math inline\">\\(\\ln a\\)<\/span> khi lấy nguyên hàm của <span class=\"math inline\">\\(a^x\\)<\/span>, hoặc quên hệ số <span class=\"math inline\">\\(\\frac{1}{k}\\)<\/span> khi nguyên hàm của <span class=\"math inline\">\\(e^{kx}\\)<\/span>.", "sol": "<p>a) Vì <span class=\"math inline\">\\(F&#39;\\left(x\\right)=\\frac{2.3^{2x}.\\ln ^{2}3}{2}=3^{2x}.\\ln ^{2}3\\ne f\\left(x\\right)\\ \\forall x\\in R\\)<\/span> nên <span class=\"math inline\">\\(F\\left(x\\right)\\)<\/span> không là một nguyên hàm của hàm số <span class=\"math inline\">\\(f\\left(x\\right)\\)<\/span> trên <span class=\"math inline\">\\(R\\)<\/span>. <strong>Sai<\/strong><\/p>\n<p>b) Vì <span class=\"math inline\">\\(G&#39;\\left(x\\right)=-\\frac{-3sinx}{3cosx}=tanx=g\\left(x\\right)\\ \\forall x\\in \\left(-\\frac{\\pi }{2};\\frac{\\pi }{2}\\right)\\)<\/span> nên <span class=\"math inline\">\\(G\\left(x\\right)\\)<\/span> là một nguyên hàm của hàm số <span class=\"math inline\">\\(g\\left(x\\right)\\)<\/span> trên <span class=\"math inline\">\\(\\left(-\\frac{\\pi }{2};\\frac{\\pi }{2}\\right)\\)<\/span>. <strong>Đúng<\/strong><\/p>\n<p>c) <span class=\"math inline\">\\(\\int 3f\\left(x\\right)dx=\\int 3\\ .\\ 3^{2x}dx=3\\ .\\ 9^{x}dx=3\\ .\\ \\ \\frac{9^{x}}{ln9\\ }+C=\\frac{3\\ .\\ \\ 3^{2x}}{ln9}+C=\\frac{3^{2x+1}}{ln9}+C\\)<\/span>. <strong>Đúng<\/strong><\/p>\n<p>d) <span class=\"math inline\">\\(\\int \\left[f\\left(x\\right)+g\\left(x\\right)^{2}\\right]dx=\\int (3^{2x}+\\tan ^{2}x)dx=\\int (9^{x}-1+1+\\tan ^{2}x)dx=\\int (9^{x}-1+\\frac{1}{\\cos ^{2}x})dx\\)<\/span><\/p>\n<p><span class=\"math inline\">\\(=\\frac{9^{x}}{ln9}-x+tanx+C=\\frac{9^{x}}{2ln3}-x+tanx+C\\)<\/span>. <strong>Đúng<\/strong><\/p>", "subs": ["<span class=\"math inline\">\\(F\\left(x\\right)=\\ \\frac{3^{2x}\\ .\\ \\ ln3}{2}\\)<\/span> là một nguyên hàm của hàm số <span class=\"math inline\">\\(f\\left(x\\right)\\)<\/span> trên <span class=\"math inline\">\\(R\\)<\/span>", "<span class=\"math inline\">\\(G\\left(x\\right)=-\\text{ln}\\left(3cosx\\right)\\)<\/span> là một nguyên hàm của hàm số <span class=\"math inline\">\\(g\\left(x\\right)\\)<\/span> trên <span class=\"math inline\">\\(\\left(-\\frac{\\pi }{2};\\frac{\\pi }{2}\\right)\\)<\/span>.", "<span class=\"math inline\">\\(\\int 3f\\left(x\\right)dx=\\frac{3^{2x+1}}{ln9}+C\\)<\/span> (<span class=\"math inline\">\\(C\\)<\/span> là một hằng số).", "<span class=\"math inline\">\\(\\int \\left[f\\left(x\\right)+g\\left(x\\right)^{2}\\right]dx=\\frac{9^{x}}{2ln3}-x+tanx+C\\)<\/span> (<span class=\"math inline\">\\(C\\)<\/span> là một hằng số)."], "answers": [false, true, true, true]}]}, {"kind": "sa", "title": "Phần III. Trắc nghiệm trả lời ngắn (Câu 1–6)", "note": "Nhập đáp số vào ô trả lời", "questions": [{"n": 1, "stem": "<p>Giả sử hàm số <span class=\"math inline\">\\(y=f(x)\\)<\/span> liên tục và thỏa mãn:<span class=\"math inline\">\\(f(1)=1\\)<\/span> và<span class=\"math inline\">\\(f&#39;(x)\\sqrt[3]{x^{-1}}=1\\)<\/span>,với mọi <span class=\"math inline\">\\(x&gt;0\\)<\/span>. Tính <span class=\"math inline\">\\(4f\\left(8\\right)\\)<\/span>?<\/p>", "hint": "Đọc kỹ đề, đặt ẩn hoặc hàm cần tìm, lập biểu thức nguyên hàm/tích phân tương ứng, tính từng bước rồi làm tròn đúng yêu cầu của đề. Xác định dạng hàm cần lấy nguyên hàm, dùng bảng nguyên hàm cơ bản (lũy thừa, lượng giác, mũ, logarit), nhớ thêm hằng số <span class=\"math inline\">\\(C\\)<\/span> và kiểm tra lại bằng cách lấy đạo hàm kết quả.", "mistake": "Quên cộng hằng số <span class=\"math inline\">\\(C\\)<\/span>, nhầm dấu nguyên hàm lượng giác hoặc quên hệ số <span class=\"math inline\">\\(\\frac{1}{k}\\)<\/span> khi hàm có dạng <span class=\"math inline\">\\(f(kx+m)\\)<\/span>.", "sol": "<p>Ta có <span class=\"math inline\">\\(f^{\\prime}\\left(x\\right)=\\frac{1}{\\sqrt[3]{x^{-1}}}=x^{\\frac{1}{3}}\\Rightarrow f\\left(x\\right)=\\int x^{\\frac{1}{3}}\\text{d}x=\\frac{3}{4}x^{\\frac{4}{3}}+C=\\frac{3}{4}\\sqrt[3]{x^{4}}+C\\)<\/span>.<\/p>\n<p><span class=\"math inline\">\\(f\\left(1\\right)=1\\Rightarrow\\frac{3}{4}+C=1\\Rightarrow C=\\frac{1}{4}\\Rightarrow f\\left(x\\right)=\\frac{3}{4}\\sqrt[3]{x^{4}}+\\frac{1}{4}\\)<\/span>.<\/p>\n<p><span class=\"math inline\">\\(f\\left(8\\right)=\\frac{3}{4}\\cdot 16+\\frac{1}{4}=\\frac{49}{4}\\Rightarrow 4f\\left(8\\right)=49\\)<\/span>.<\/p>\n<p><em>Lưu ý:<\/em> đáp án gốc ghi 47 do lấy <span class=\"math inline\">\\(C=-\\frac{1}{4}\\)<\/span>; tính đúng <span class=\"math inline\">\\(C=\\frac{1}{4}\\)<\/span> nên đáp số là 49, đã hiệu chỉnh.<\/p>", "answer": "49", "tol": 0}, {"n": 2, "stem": "<p>Một ô tô đang chạy với vận tốc <span class=\"math inline\">\\(10\\)<\/span>(m/s) thì người lái xe đạp phanh. Từ thời điểm đó, ô tô chuyển động chậm dần đều với vận tốc <span class=\"math inline\">\\(v\\left(t\\right)=10-2t\\)<\/span> (m/s), trong đó <span class=\"math inline\">\\(t\\)<\/span> là khoảng thời gian tính bằng giây kể từ lúc đạp phanh. Tính quãng đường ô tô di chuyển được trong <span class=\"math inline\">\\(8\\)<\/span> giây cuối cùng.<\/p>", "hint": "Vận tốc là một nguyên hàm của gia tốc, <span class=\"math inline\">\\(v(t)=\\int a(t)\\,dt\\)<\/span>; quãng đường <span class=\"math inline\">\\(s(t)=\\int v(t)\\,dt\\)<\/span> hoặc <span class=\"math inline\">\\(s=\\int_{t_1}^{t_2}|v(t)|dt\\)<\/span>. Dùng điều kiện ban đầu để tìm <span class=\"math inline\">\\(C\\)<\/span>; vật dừng hẳn khi <span class=\"math inline\">\\(v(t)=0\\)<\/span>; đổi đơn vị (km/h ra m/s) trước khi tính; nếu <span class=\"math inline\">\\(v(t)\\)<\/span> cho bởi nhiều công thức thì tính từng đoạn.", "mistake": "Quên tìm hằng số <span class=\"math inline\">\\(C\\)<\/span> từ điều kiện ban đầu, quên đổi đơn vị (km/h sang m/s), hoặc quên cộng quãng đường đi được trong thời gian phản ứng.", "sol": "<p>Chọn mốc thời gian và gốc tọa lúc ô tô bắt đầu đạp phanh. Có <span class=\"math inline\">\\(t=0;s=0\\)<\/span>.<\/p>\n<p><span class=\"math inline\">\\(s\\left(t\\right)=\\int v\\left(t\\right)\\text{dt}=\\int \\left(10-2t\\right)\\text{dt}=10t-t^{2}+C\\)<\/span><strong>,<\/strong> <span class=\"math inline\">\\(s\\left(0\\right)=0\\Rightarrow C=0\\)<\/span> <span class=\"math inline\">\\(\\Rightarrow s\\left(t\\right)=10t-t^{2}\\)<\/span><\/p>\n<p>Ô tô dừng hẳn khi <span class=\"math inline\">\\(v\\left(t\\right)=0\\Leftrightarrow 10-2t=0\\Leftrightarrow t=5\\)<\/span>.<\/p>\n<p>Trong <span class=\"math inline\">\\(8\\)<\/span> giây cuối: ô tô chuyển động đều với vận tốc <span class=\"math inline\">\\(10\\)<\/span>(m/s) trong<span class=\"math inline\">\\(3\\)<\/span> giây đầu và chuyển động chậm dần đều trong <span class=\"math inline\">\\(5\\)<\/span> giây cuối. Quảng đường ô tô di chuyển là: <span class=\"math inline\">\\(s=3.10+10.5-5^{2}=55\\text{m}\\)<\/span><\/p>", "answer": "55", "tol": 0}, {"n": 3, "stem": "<p>Gọi <span class=\"math inline\">\\(F\\left(x\\right)\\)<\/span> là một nguyên hàm của hàm số <span class=\"math inline\">\\(f\\left(x\\right)=3^{2x+1}.2^{1+3x}\\)<\/span>, biết <span class=\"math inline\">\\(F\\left(0\\right)=\\frac{8}{\\ln 72}\\)<\/span>. Tính <span class=\"math inline\">\\(F\\left(-2\\right)\\)<\/span> (làm tròn kết quả đến hàng phần trăm).<\/p>", "hint": "Nguyên hàm mũ và logarit: <span class=\"math inline\">\\(\\int e^xdx=e^x+C\\)<\/span>, <span class=\"math inline\">\\(\\int a^xdx=\\frac{a^x}{\\ln a}+C\\)<\/span>, <span class=\"math inline\">\\(\\int\\frac{dx}{x}=\\ln|x|+C\\)<\/span>, <span class=\"math inline\">\\(\\int e^{kx}dx=\\frac{1}{k}e^{kx}+C\\)<\/span>.", "mistake": "Quên chia cho <span class=\"math inline\">\\(\\ln a\\)<\/span> khi lấy nguyên hàm của <span class=\"math inline\">\\(a^x\\)<\/span>, hoặc quên hệ số <span class=\"math inline\">\\(\\frac{1}{k}\\)<\/span> khi nguyên hàm của <span class=\"math inline\">\\(e^{kx}\\)<\/span>.", "sol": "<p>Ta có: <span class=\"math inline\">\\(F\\left(x\\right)=\\int \\left(3^{2x+1}.2^{1+3x}\\right)dx=\\int \\left(3.3^{2x}.2.2^{3x}\\right)dx=\\int \\left(6.9^{x}.8^{x}\\right)dx=6\\int 72^{x}dx=6.\\frac{72^{x}}{\\ln 72}+C\\)<\/span>.<\/p>\n<p>Theo giả thiết, <span class=\"math inline\">\\(F\\left(0\\right)=\\frac{8}{\\ln 72}\\Rightarrow 6.\\frac{72^{0}}{\\ln 72}+C=\\frac{8}{\\ln 72}\\Rightarrow C=\\frac{2}{\\ln 72}\\)<\/span><\/p>\n<p><span class=\"math inline\">\\(\\Rightarrow F\\left(x\\right)=6.\\frac{72^{x}}{\\ln 72}+\\frac{2}{\\ln 72}\\Rightarrow F\\left(-2\\right)=6.\\frac{72^{-2}}{\\ln 72}+\\frac{2}{\\ln 72}\\approx 0,47\\)<\/span>.<\/p>", "answer": "0,47", "tol": 0.005}, {"n": 4, "stem": "<p>Một viên đạn được bắn thẳng đứng lên từ độ cao 1,5 mét so với mặt đất. Giả sử tại thời điểm <span class=\"math inline\">\\(t\\)<\/span> giây (coi <span class=\"math inline\">\\(t=0\\)<\/span> là thời điểm viên đạn được bắn lên), vận tốc của nó được cho bởi <span class=\"math inline\">\\(v\\left(t\\right)=170-9,8t\\left(m/s\\right)\\)<\/span>.Tìm độ cao lớn nhất của viên đạn (làm tròn kết quả đến hàng đơn vị).<\/p>", "hint": "Vận tốc là một nguyên hàm của gia tốc, <span class=\"math inline\">\\(v(t)=\\int a(t)\\,dt\\)<\/span>; quãng đường <span class=\"math inline\">\\(s(t)=\\int v(t)\\,dt\\)<\/span> hoặc <span class=\"math inline\">\\(s=\\int_{t_1}^{t_2}|v(t)|dt\\)<\/span>. Dùng điều kiện ban đầu để tìm <span class=\"math inline\">\\(C\\)<\/span>; vật dừng hẳn khi <span class=\"math inline\">\\(v(t)=0\\)<\/span>; đổi đơn vị (km/h ra m/s) trước khi tính; nếu <span class=\"math inline\">\\(v(t)\\)<\/span> cho bởi nhiều công thức thì tính từng đoạn.", "mistake": "Quên tìm hằng số <span class=\"math inline\">\\(C\\)<\/span> từ điều kiện ban đầu, quên đổi đơn vị (km/h sang m/s), hoặc quên cộng quãng đường đi được trong thời gian phản ứng.", "sol": "<p>Gọi <span class=\"math inline\">\\(h\\left(t\\right)\\)<\/span> là độ cao của viên đạn tại thời điểm <span class=\"math inline\">\\(t\\)<\/span> giây sau khi bắn. Ta có:<\/p>\n<p><span class=\"math inline\">\\(h\\left(t\\right)=\\int v\\left(t\\right)dt=\\int \\left(170-9,8t\\right)dt=170t-4,9t^{2}+C\\)<\/span>.<\/p>\n<p>Từ giả thiết suy ra: <span class=\"math inline\">\\(h\\left(0\\right)=1,5\\Rightarrow C=1,5\\)<\/span><\/p>\n<p><span class=\"math inline\">\\(\\Rightarrow h\\left(t\\right)=170t-4,9t^{2}+1,5\\)<\/span>.<\/p>\n<p>Viên đạn đạt độ cao lớn nhất khi <span class=\"math inline\">\\(v\\left(t\\right)=0\\Leftrightarrow 170-9,8t=0\\Leftrightarrow t=\\frac{850}{49}\\)<\/span>.<\/p>\n<p>Khi đó, độ cao lớn nhất của viên đạn là: <span class=\"math inline\">\\(h\\left(\\frac{850}{49}\\right)=170.\\frac{850}{49}-4,9\\left(\\frac{850}{49}\\right)^{2}+1,5=\\frac{144647}{98}\\approx 1476\\)<\/span> (m).<\/p>", "answer": "1476", "tol": 0.5}, {"n": 5, "stem": "<p>Một chiếc cốc chứa nước ở <span class=\"math inline\">\\(95^{0}C\\)<\/span>được đặt trong phòng có nhiệt độ <span class=\"math inline\">\\(20^{0}C\\)<\/span>. Theo định luật làm mát của Newton, nhiệt độ của nước trong cốc sau <span class=\"math inline\">\\(t\\)<\/span> phút (xem <span class=\"math inline\">\\(t=0\\)<\/span> là thời điểm nước ở <span class=\"math inline\">\\(95^{0}C\\)<\/span>) là một hàm số <span class=\"math inline\">\\(T\\left(t\\right)\\)<\/span>. Tốc độ giảm nhiệt độ của nước trong cốc tại thời điểm <em>t<\/em> phút được xác định bởi <span class=\"math inline\">\\(T&#39;\\left(t\\right)=-\\frac{3}{2}e^{-\\frac{t}{50}}\\)<\/span> (<span class=\"math inline\">\\({}^{0}C/\\)<\/span>phút). (nguồn:<em><a href=\"https://amsi\" class=\"uri\">https://amsi<\/a>.org.au/ESA_Senior_ Years/SeniorTopic/3e/3e_4history_ 3.html).<\/em> Tính nhiệt độ của nước tại thời điểm <span class=\"math inline\">\\(t=40\\)<\/span> phút (làm tròn kết quả đến hàng phần chục).<\/p>", "hint": "Tốc độ thay đổi của một đại lượng chính là đạo hàm của đại lượng đó, nên đại lượng cần tìm là một nguyên hàm của tốc độ: <span class=\"math inline\">\\(P(t)=\\int P^{\\prime}(t)\\,dt\\)<\/span>. Dùng điều kiện ban đầu để tìm hằng số <span class=\"math inline\">\\(C\\)<\/span>, rồi thay giá trị đề yêu cầu.", "mistake": "Quên điều kiện ban đầu (hằng số <span class=\"math inline\">\\(C\\)<\/span>), nhầm đơn vị thời gian hoặc làm tròn sai chữ số.", "sol": "<p>Ta có: <span class=\"math inline\">\\(T\\left(t\\right)=\\int T&#39;\\left(t\\right)dt=\\int \\left(-\\frac{3}{2}e^{-\\frac{t}{50}}\\right)dt=-\\frac{3}{2}\\int \\left(e^{-\\frac{1}{50}}\\right)^{t}dt=-\\frac{3}{2}.\\frac{\\left(e^{-\\frac{1}{50}}\\right)^{t}}{\\ln \\left(e^{-\\frac{1}{50}}\\right)}+C=75\\left(e^{-\\frac{1}{50}}\\right)^{t}+C\\)<\/span>.<\/p>\n<p>Vì <span class=\"math inline\">\\(t=0\\)<\/span> là thời điểm nước ở <span class=\"math inline\">\\(95^{0}C\\)<\/span> nên <span class=\"math inline\">\\(T\\left(0\\right)=95\\Rightarrow 75\\left(e^{-\\frac{1}{50}}\\right)^{0}+C=95\\Rightarrow C=20\\)<\/span>.<\/p>\n<p>Suy ra <span class=\"math inline\">\\(T\\left(t\\right)=75\\left(e^{-\\frac{1}{50}}\\right)^{t}+20\\)<\/span>.<\/p>\n<p>Do đó, nhiệt độ của nước tại thời điểm <span class=\"math inline\">\\(t=40\\)<\/span> phút là: <span class=\"math inline\">\\(T\\left(40\\right)=75\\left(e^{-\\frac{1}{50}}\\right)^{40}+20\\approx 53,7\\)<\/span> (<span class=\"math inline\">\\({}^{0}C\\)<\/span>).<\/p>", "answer": "53,7", "tol": 0.05}, {"n": 6, "stem": "<p>Doanh thu bán hàng của một công ty khi bán một loại sản phẩm là số tiền <span class=\"math inline\">\\(R\\left(x\\right)\\)<\/span> (triệu đồng) thu được khi <span class=\"math inline\">\\(x\\)<\/span> đơn vị sản phẩm được bán ra. Tốc độ biến động (thay đổi) của doanh thu khi <span class=\"math inline\">\\(x\\)<\/span> đơn vị sản phẩm đã được bán là hàm số <span class=\"math inline\">\\(M_{R}\\left(x\\right)=R&#39;\\left(x\\right)\\)<\/span><em>.<\/em> Một công ty công nghệ cho biết, tốc độ biến đổi của doanh thu khi bán một loại con chip của hãng được cho bởi <span class=\"math inline\">\\(M_{R}\\left(x\\right)=40-0,1x\\)<\/span>, ở đó <span class=\"math inline\">\\(x\\)<\/span> là số lượng chip đã bán. Hỏi doanh thu của công ty khi đã bán 500 con chip bằng bao nhiêu tỉ đồng?<\/p>", "hint": "Tốc độ thay đổi của một đại lượng chính là đạo hàm của đại lượng đó, nên đại lượng cần tìm là một nguyên hàm của tốc độ: <span class=\"math inline\">\\(P(t)=\\int P^{\\prime}(t)\\,dt\\)<\/span>. Dùng điều kiện ban đầu để tìm hằng số <span class=\"math inline\">\\(C\\)<\/span>, rồi thay giá trị đề yêu cầu.", "mistake": "Quên điều kiện ban đầu (hằng số <span class=\"math inline\">\\(C\\)<\/span>), nhầm đơn vị thời gian hoặc làm tròn sai chữ số.", "sol": "<p>Vì <span class=\"math inline\">\\(R&#39;\\left(x\\right)=M_{R}\\left(x\\right)\\)<\/span> nên doanh thu <span class=\"math inline\">\\(R\\left(x\\right)\\)<\/span> là một nguyên hàm của <span class=\"math inline\">\\(M_{R}\\left(x\\right)\\)<\/span>.<\/p>\n<p>Ta có: <span class=\"math inline\">\\(R\\left(x\\right)=\\int M_{R}\\left(x\\right)dx=\\int \\left(40-0,1x\\right)dx=40x-0,05x^{2}+C\\)<\/span>.<\/p>\n<p>Khi <span class=\"math inline\">\\(x=0\\)<\/span>, tức là chưa bán chip nào thì doanh thu sẽ bằng 0 (triệu đồng), nên <span class=\"math inline\">\\(R\\left(0\\right)=0\\Rightarrow C=0\\)<\/span>.<\/p>\n<p>Suy ra <span class=\"math inline\">\\(R\\left(x\\right)=40x-0,05x^{2}\\)<\/span>.<\/p>\n<p>Do đó, doanh thu của công ty khi đã bán 500 con chip là:<\/p>\n<p><span class=\"math inline\">\\(R\\left(500\\right)=40.500-0,05.\\left(500\\right)^{2}=7500\\)<\/span>(triệu đồng) <span class=\"math inline\">\\(=7,5\\)<\/span> (tỉ đồng).<\/p>", "answer": "7,5", "tol": 0}]}]};
+(function(){
+  var secs = DATA.sections, total = 0;
+  secs.forEach(function(s){ total += s.questions.length; });
+  document.getElementById('pTotal').textContent = total;
+  var quiz = document.getElementById('quiz');
+  var all = []; // {sec, q, st, el, api}
+  var submitted = false;
+
+  function el(tag, cls, html){ var e = document.createElement(tag); if(cls) e.className = cls; if(html !== undefined) e.innerHTML = html; return e; }
+  function typeset(node){
+    try{
+      if(window.MathJax && MathJax.typesetPromise){ return MathJax.typesetPromise(node ? [node] : undefined); }
+    }catch(e){}
+  }
+  function parseNum(s){
+    if(s === null || s === undefined) return NaN;
+    s = String(s).replace(/−/g,'-').replace(/\s+/g,'').replace(/°|º/g,'');
+    if(!s) return NaN;
+    var pct = false;
+    if(/%$/.test(s)){ pct = true; s = s.slice(0,-1); }
+    var v;
+    var m = s.match(/^([+-]?[\d.,]+)\/([+-]?[\d.,]+)$/);
+    if(m){
+      var a = parseFloat(m[1].replace(',','.')), b = parseFloat(m[2].replace(',','.'));
+      if(!isFinite(a) || !isFinite(b) || b === 0) return NaN;
+      v = a / b;
+    } else {
+      if(!/^[+-]?(\d+([.,]\d*)?|[.,]\d+)$/.test(s)) return NaN;
+      v = parseFloat(s.replace(',','.'));
+    }
+    if(pct) v = v / 100;
+    return v;
+  }
+  function fmtAns(a){ return String(a).replace('.',','); }
+
+  function updateBar(){
+    var checked = 0, ok = 0, bad = 0;
+    all.forEach(function(x){ if(x.st.locked){ checked++; if(x.st.ok) ok++; else bad++; } });
+    document.getElementById('pChecked').textContent = checked;
+    document.getElementById('pOk').textContent = ok;
+    document.getElementById('pBad').textContent = bad;
+    document.getElementById('pFill').style.width = (total ? 100*checked/total : 0) + '%';
+  }
+
+  function buildSolBlocks(card, q){
+    var box = card.querySelector('.after');
+    box.innerHTML = '';
+    return box;
+  }
+
+  function makeQuestion(sec, q, idx){
+    var card = el('div', 'q');
+    var st = {tries: 0, locked: false, ok: false, sel: null, tf: [null,null,null,null], val: ''};
+    card.appendChild(el('div', 'qhead', 'Câu ' + q.n));
+    card.appendChild(el('div', 'stem', q.stem));
+    var body = el('div');
+    card.appendChild(body);
+    var fb = el('div', 'fb');
+    var checkBtn = el('button', 'btn', 'Kiểm tra đáp án'); checkBtn.disabled = true;
+    var solBtn = el('button', 'btn ghost', 'Xem lời giải'); solBtn.style.display = 'none';
+    var acts = el('div', 'acts'); acts.appendChild(checkBtn); acts.appendChild(solBtn); acts.appendChild(fb);
+    card.appendChild(acts);
+    var hintBox = el('div', 'hint'); hintBox.style.display = 'none';
+    var misBox = el('div', 'mistake'); misBox.style.display = 'none';
+    var solBox = el('div', 'sol'); solBox.style.display = 'none';
+    card.appendChild(hintBox); card.appendChild(misBox); card.appendChild(solBox);
+
+    var api = {};
+    var optBtns = [], tfRows = [], input = null, corr = null;
+
+    function complete(){
+      if(sec.kind === 'mcq') return st.sel !== null;
+      if(sec.kind === 'tf') return st.tf.every(function(v){ return v !== null; });
+      return String(st.val).trim() !== '';
+    }
+    function isRight(){
+      if(sec.kind === 'mcq') return st.sel === q.answer;
+      if(sec.kind === 'tf') return st.tf.every(function(v,i){ return v === q.answers[i]; });
+      var x = parseNum(st.val);
+      if(!isFinite(x)) return false;
+      var tol = (q.tol || 0) + 1e-9;
+      return [q.answer].concat(q.alt || []).some(function(a){
+        var k = parseNum(a);
+        return isFinite(k) && Math.abs(x - k) <= tol;
+      });
+    }
+    function refresh(){ checkBtn.disabled = st.locked || !complete(); }
+
+    if(sec.kind === 'mcq'){
+      var ob = el('div', 'opts');
+      q.options.forEach(function(html, i){
+        var L = 'ABCDEF'[i];
+        var b = el('button', 'opt'); b.type = 'button'; b.dataset.k = L;
+        b.innerHTML = '<span class="lab">' + L + '.</span><span class="txt">' + html + '</span>';
+        b.addEventListener('click', function(){
+          if(st.locked) return;
+          st.sel = L;
+          optBtns.forEach(function(x){ x.classList.toggle('sel', x.dataset.k === L); });
+          refresh();
+        });
+        optBtns.push(b); ob.appendChild(b);
+      });
+      body.appendChild(ob);
+    } else if(sec.kind === 'tf'){
+      var sb = el('div', 'subs');
+      q.subs.forEach(function(html, i){
+        var r = el('div', 'subrow');
+        r.appendChild(el('span', 'sl', 'abcd'[i] + ')'));
+        var s = el('div', 'sb', html);
+        r.appendChild(s);
+        var tf = el('div', 'tf');
+        [['Đ', true], ['S', false]].forEach(function(p){
+          var b = el('button', 'tfb', p[0]); b.type = 'button';
+          b.addEventListener('click', function(){
+            if(st.locked) return;
+            st.tf[i] = p[1];
+            Array.prototype.forEach.call(tf.children, function(c, ci){ c.classList.toggle('sel', st.tf[i] === (ci === 0)); });
+            refresh();
+          });
+          tf.appendChild(b);
+        });
+        r.appendChild(tf);
+        tfRows.push({row: r, tf: tf, sb: s});
+        sb.appendChild(r);
+      });
+      body.appendChild(sb);
+    } else {
+      var w = el('div', 'sa');
+      var lab = el('label', '', 'Đáp số:');
+      input = el('input'); input.type = 'text'; input.autocomplete = 'off'; input.setAttribute('autocapitalize','off'); input.spellcheck = false; input.placeholder = 'Nhập đáp số';
+      input.addEventListener('input', function(){ st.val = input.value; refresh(); });
+      input.addEventListener('keydown', function(e){ if(e.key === 'Enter' && !checkBtn.disabled){ checkBtn.click(); } });
+      corr = el('div', 'corr'); corr.style.display = 'none';
+      w.appendChild(lab); w.appendChild(input); w.appendChild(corr);
+      body.appendChild(w);
+    }
+
+    function lockUI(){
+      optBtns.forEach(function(b){ b.disabled = true; });
+      tfRows.forEach(function(r){ Array.prototype.forEach.call(r.tf.children, function(c){ c.disabled = true; }); });
+      if(input) input.disabled = true;
+      checkBtn.disabled = true;
+    }
+    function showAnswers(){
+      if(sec.kind === 'mcq'){
+        optBtns.forEach(function(b){
+          if(b.dataset.k === q.answer) b.classList.add('right');
+          else if(b.dataset.k === st.sel) b.classList.add('wrong');
+        });
+      } else if(sec.kind === 'tf'){
+        var n = 0;
+        tfRows.forEach(function(r, i){
+          var good = st.tf[i] === q.answers[i];
+          if(good) n++;
+          r.row.classList.add(good ? 'right' : 'wrong');
+          if(!good){
+            var a = el('span', 'ans', 'Đáp án đúng: ' + (q.answers[i] ? 'Đ' : 'S'));
+            r.sb.appendChild(a);
+          }
+        });
+        st.nRight = n;
+      } else {
+        input.classList.add(isRight() ? 'right' : 'wrong');
+        if(!isRight()){ corr.textContent = 'Đáp án đúng: ' + [q.answer].concat(q.alt || []).map(fmtAns).join(' (hoặc ') + ((q.alt && q.alt.length) ? ')'.repeat(q.alt.length) : ''); corr.style.display = 'block'; }
+      }
+    }
+    function fillAfter(withMistake){
+      hintBox.style.display = 'none';
+      if(withMistake && q.mistake){
+        misBox.innerHTML = '<b class="t">⚠️ Lỗi sai thường gặp</b><div>' + q.mistake + '</div>';
+        misBox.style.display = 'block';
+      }
+      solBox.innerHTML = '<h4>Hướng dẫn giải chi tiết</h4>' + (q.sol || '<p>Đáp án: ' + (sec.kind==='mcq' ? q.answer : sec.kind==='tf' ? q.answers.map(function(v,i){return 'abcd'[i]+') '+(v?'Đ':'S');}).join(', ') : fmtAns(q.answer)) + '</p>');
+      solBox.style.display = 'block';
+      typeset(card);
+    }
+    api.finish = function(ok, byAttempts){
+      st.locked = true; st.ok = ok;
+      card.classList.add(ok ? 'ok' : 'bad');
+      lockUI(); showAnswers();
+      if(ok){
+        fb.className = 'fb ok'; fb.textContent = '✓ Chính xác!';
+        solBtn.style.display = ''; solBtn.textContent = 'Xem lời giải';
+        misBox.style.display = 'none'; hintBox.style.display = 'none';
+        solBox.style.display = 'none';
+        solBox.innerHTML = '<h4>Hướng dẫn giải chi tiết</h4>' + (q.sol || '');
+      } else {
+        fb.className = 'fb bad';
+        if(sec.kind === 'tf') fb.textContent = '✗ Đúng ' + st.nRight + '/4 ý';
+        else fb.textContent = '✗ Chưa đúng';
+        solBtn.style.display = 'none';
+        fillAfter(true);
+      }
+      updateBar();
+    };
+    checkBtn.addEventListener('click', function(){
+      if(st.locked || !complete()) return;
+      st.tries++;
+      var ok = isRight();
+      if(ok){ api.finish(true); }
+      else if(st.tries === 1){
+        fb.className = 'fb info'; fb.textContent = 'Chưa đúng. Còn 1 lần thử.';
+        hintBox.innerHTML = '<b class="t">💡 Gợi ý</b><div>' + (q.hint || 'Đọc kĩ dữ kiện và áp dụng đúng công thức của bài.') + '</div>';
+        hintBox.style.display = 'block';
+        checkBtn.textContent = 'Kiểm tra lại';
+        typeset(hintBox);
+      } else { api.finish(false); }
+    });
+    solBtn.addEventListener('click', function(){
+      var open = solBox.style.display !== 'none';
+      if(open){ solBox.style.display = 'none'; solBtn.textContent = 'Xem lời giải'; }
+      else { solBox.style.display = 'block'; solBtn.textContent = 'Ẩn lời giải'; typeset(solBox); }
+    });
+    api.grade = function(){
+      // used on submit: grade current answers of an unlocked question
+      var ok = complete() && isRight();
+      st.tries = Math.max(st.tries, 1);
+      api.finish(ok);
+    };
+    api.card = card; api.st = st; api.sec = sec; api.q = q;
+    return api;
+  }
+
+  secs.forEach(function(sec, si){
+    var h = el('h2', 'part', sec.title + '<small>' + (sec.note || '') + '</small>');
+    quiz.appendChild(h);
+    sec.questions.forEach(function(q, qi){
+      var api = makeQuestion(sec, q, qi);
+      all.push({sec: sec, q: q, st: api.st, api: api});
+      quiz.appendChild(api.card);
+    });
+  });
+  updateBar();
+
+  document.getElementById('submitBtn').addEventListener('click', function(){
+    if(submitted) return;
+    var pending = all.filter(function(x){ return !x.st.locked; }).length;
+    var msg = pending ? ('Còn ' + pending + ' câu chưa kiểm tra (câu bỏ trống tính là sai). Bạn có chắc chắn muốn nộp bài?') : 'Bạn có chắc chắn muốn nộp bài?';
+    if(!window.confirm(msg)) return;
+    submitted = true;
+    all.forEach(function(x){ if(!x.st.locked) x.api.grade(); });
+    this.disabled = true;
+    var ok = 0, bad = 0, per = {};
+    all.forEach(function(x){
+      var k = x.sec.title;
+      per[k] = per[k] || {ok: 0, n: 0};
+      per[k].n++;
+      if(x.st.ok){ ok++; per[k].ok++; } else bad++;
+    });
+    var r = document.getElementById('result');
+    var html = '<div class="big">' + ok + ' / ' + total + ' câu đúng</div><div>Số câu sai: <b>' + bad + '</b></div>';
+    var keys = Object.keys(per);
+    if(keys.length >= 2){
+      html += '<table><tr><th>Phần</th><th>Đúng</th></tr>';
+      keys.forEach(function(k){ html += '<tr><td>' + k + '</td><td>' + per[k].ok + '/' + per[k].n + '</td></tr>'; });
+      html += '</table>';
+    }
+    r.innerHTML = html; r.style.display = 'block';
+    updateBar();
+    r.scrollIntoView({behavior: 'smooth', block: 'center'});
+    typeset();
+  });
+})();
+</script>
+</body>
+</html>
