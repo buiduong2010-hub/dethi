@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BÀI 14: PHƯƠNG TRÌNH MẶT PHẲNG - ĐỀ LUYỆN TẬP TOÁN 12</title>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f7f9; padding: 20px; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
+        .quiz-container { width: 100%; max-width: 850px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; border-top: 8px solid #1a73e8; }
+        .exam-code { position: absolute; top: 20px; right: 20px; border: 2px solid #333; padding: 5px 15px; font-weight: bold; background: #fff; z-index: 10; }
+        .header-box { text-align: center; margin-bottom: 30px; border-bottom: 2px dashed #ddd; padding-bottom: 25px; }
+        .student-info { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
+        .info-input { padding: 10px 15px; border: 2px solid #ccc; border-radius: 8px; font-size: 1.05rem; width: 220px; outline: none; transition: 0.3s border-color; font-family: inherit; }
+        .info-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }
+        .part-title { background: #1a73e8; color: white; padding: 12px; border-radius: 8px; margin: 35px 0 20px 0; font-weight: bold; text-transform: uppercase; }
+        .storage { counter-reset: cauNum; min-height: 100px; }
+        .question-card { background: #fff; padding: 22px; border: 1px solid #eee; border-radius: 12px; margin-bottom: 25px; display: block; }
+        .q-text { font-weight: bold; font-size: 1.1rem; margin-bottom: 15px; color: #2c3e50; line-height: 1.6; }
+        .q-text::before { counter-increment: cauNum; content: "Câu " counter(cauNum) ": "; color: #1a73e8; }
+        mjx-container { display: inline-block !important; white-space: nowrap !important; vertical-align: middle; }
+        .options-list { counter-reset: optNum; list-style: none; padding: 0; }
+        .option-item { display: flex; align-items: center; padding: 10px; border: 1px solid #e8e8e8; border-radius: 10px; margin-bottom: 8px; cursor: pointer; }
+        .option-item:hover { background: #f0f7ff; border-color: #1a73e8; }
+        .label-badge::before { counter-increment: optNum; content: counter(optNum, upper-alpha) "."; }
+        .label-badge { font-weight: bold; min-width: 30px; height: 30px; background: #f0f0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; }
+        .tf-table { width: 100%; border-collapse: collapse; }
+        .statement { padding: 10px 0; width: 65%; font-size: 1rem; color: #34495e; font-weight: normal; }
+        .choice-group { display: flex; gap: 15px; justify-content: flex-end; }
+        .short-answer-input { width: 100%; max-width: 250px; padding: 12px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 1.1rem; margin-top: 10px; outline: none; transition: 0.3s border-color; font-weight: bold; color: #1a73e8; }
+        .short-answer-input:focus { border-color: #1a73e8; box-shadow: 0 0 8px rgba(26,115,232,0.2); }
+        .submit-btn { width: 100%; padding: 20px; background: #28a745; color: white; border: none; border-radius: 12px; font-size: 1.3rem; font-weight: bold; cursor: pointer; margin-top: 40px; }
+        .explanation { margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-left: 5px solid #ff9800; border-radius: 8px; display: none; font-size: 1.05rem; color: #333; line-height: 1.7; box-shadow: inset 0 0 10px rgba(0,0,0,0.03); }
+        .step-title { color: #d84315; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #d84315; padding-bottom: 3px; display: inline-block; margin-bottom: 8px;}
+        .formula-box { background: #fff3e0; padding: 5px 10px; border-radius: 5px; display: inline-block; font-weight: bold; color: #e65100; margin: 5px 0; border: 1px dashed #ffb74d;}
+        
+        /* Tùy chỉnh hiển thị hình ảnh */
+        .img-container { text-align: center; margin: 40px 0; } 
+        .img-container img { transform: scale(1.5); max-width: 60%; height: auto; border-radius: 5px; border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .img-container.xl-zoom { margin: 80px 0; }
+        .img-container.xl-zoom img { transform: scale(2.2); max-width: 40%; }
+        .img-container.high-res { margin: 60px 0; }
+        .img-container.high-res img { transform: scale(1.8); max-width: 50%; box-shadow: none; border: none; }
+
+        /* Tùy chỉnh hiển thị bảng dữ liệu (Table) */
+        .data-table-wrapper { overflow-x: auto; margin: 25px 0; border-radius: 8px; border: 1px solid #e0e0e0; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .data-table { width: 100%; border-collapse: collapse; text-align: center; background: #fff; font-size: 1.05rem; }
+        .data-table th, .data-table td { border: 1px solid #e0e0e0; padding: 12px 10px; }
+        .data-table th { background-color: #f0f7ff; color: #1a73e8; font-weight: bold; white-space: nowrap; }
+        .data-table tr:hover { background-color: #fcfcfc; }
+        
+
+        /* ===== Kiểm tra đáp án từng câu ===== */
+        .check-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+        .check-btn { padding: 10px 18px; background: #1a73e8; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; font-family: inherit; }
+        .check-btn:disabled { background: #b8c7dc; cursor: not-allowed; }
+        .check-hint { color: #888; font-size: .92rem; }
+        .verdict { font-weight: bold; font-size: 1.05rem; padding: 8px 14px; border-radius: 8px; }
+        .verdict.ok { background: #e6f4ea; color: #1e7e34; }
+        .verdict.bad { background: #fdecea; color: #c62828; }
+        .verdict.part { background: #fff4e5; color: #b26a00; }
+        .toggle-exp { background: none; border: 1px solid #ccc; border-radius: 8px; padding: 8px 14px; cursor: pointer; font-family: inherit; font-size: .95rem; color: #555; }
+        .question-card.is-ok { border: 2px solid #34a853; }
+        .question-card.is-bad { border: 2px solid #e53935; }
+        .question-card.is-part { border: 2px solid #ff9800; }
+        .option-item.opt-right { background: #e6f4ea; border-color: #34a853; }
+        .option-item.opt-right .label-badge { background: #34a853; color: #fff; }
+        .option-item.opt-wrong { background: #fdecea; border-color: #e53935; }
+        .option-item.opt-wrong .label-badge { background: #e53935; color: #fff; }
+        .option-item.locked { cursor: default; }
+        .option-item.locked:hover { background: inherit; }
+        .option-item.opt-right.locked:hover { background: #e6f4ea; }
+        .option-item.opt-wrong.locked:hover { background: #fdecea; }
+        .tf-table tr.row-right td { background: #e6f4ea; }
+        .tf-table tr.row-wrong td { background: #fdecea; }
+        .tf-key { display: inline-block; margin-left: 8px; font-size: .85rem; font-weight: bold; padding: 2px 8px; border-radius: 6px; }
+        .tf-key.ok { background: #34a853; color: #fff; }
+        .tf-key.bad { background: #e53935; color: #fff; }
+        .short-key { display: inline-block; margin-left: 10px; font-weight: bold; padding: 6px 12px; border-radius: 8px; background: #e6f4ea; color: #1e7e34; }
+        .short-answer-input.right { border-color: #34a853; background: #f3fbf5; }
+        .short-answer-input.wrong { border-color: #e53935; background: #fff6f5; color: #c62828; }
+        .progress-bar { position: sticky; top: 0; z-index: 20; width: 100%; max-width: 850px; background: #fff; border-radius: 0 0 12px 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); padding: 10px 18px; display: flex; gap: 18px; align-items: center; flex-wrap: wrap; font-size: .98rem; box-sizing: border-box; margin-bottom: 12px; }
+        .progress-bar b { color: #1a73e8; }
+        .progress-track { flex: 1 1 160px; height: 8px; background: #e8eef6; border-radius: 99px; overflow: hidden; min-width: 120px; }
+        .progress-track i { display: block; height: 100%; background: #34a853; width: 0; transition: width .3s; }
+        .result-panel { margin-top: 30px; padding: 24px; border-radius: 12px; background: #f0f7ff; border: 2px solid #1a73e8; display: none; }
+        .result-panel h2 { margin: 0 0 6px; color: #1a73e8; }
+        .result-panel .big { font-size: 2.6rem; font-weight: bold; color: #1a73e8; }
+        .result-panel ul { margin: 10px 0 0; padding-left: 20px; line-height: 1.8; }
+        .form-error { color: #c62828; font-weight: bold; text-align: center; margin-top: 12px; display: none; }
+
+        /* ===== Nút chọn to, dễ bấm ===== */
+        .option-item input[type=radio] { width: 22px; height: 22px; accent-color: #1a73e8; margin: 0 10px 0 0; flex: 0 0 auto; cursor: pointer; }
+        .option-item:has(input:checked) { background: #e8f1ff; border-color: #1a73e8; }
+        .choice-group { gap: 12px; }
+        .choice-group label { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-width: 84px; padding: 12px 18px; border: 2px solid #cfd8e6; border-radius: 12px; font-size: 1.2rem; font-weight: bold; cursor: pointer; user-select: none; background: #fff; transition: .15s; }
+        .choice-group label:hover { background: #f0f7ff; border-color: #1a73e8; }
+        .choice-group input[type=radio] { width: 26px; height: 26px; accent-color: #1a73e8; margin: 0; cursor: pointer; }
+        .choice-group label:has(input:checked) { background: #e3efff; border-color: #1a73e8; color: #1a73e8; box-shadow: 0 0 0 3px rgba(26,115,232,.15); }
+        .choice-group label:has(input:disabled), .option-item.locked, .option-item.locked input { cursor: default; }
+        .tf-table tr { border-bottom: 1px solid #f0f0f0; }
+        .tf-table td { padding: 8px 0; }
+
+        /* ===== Các bước giải: Gợi ý -> Lỗi sai -> Lời giải -> Điểm mấu chốt ===== */
+        .exp-label { display: block; font-weight: bold; margin-bottom: 4px; }
+        .exp-hint { background: #e8f5e9; border-left: 5px solid #34a853; border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; }
+        .exp-hint .exp-label { color: #1e7e34; }
+        .exp-mistake { background: #fdecea; border-left: 5px solid #e53935; border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; }
+        .exp-mistake .exp-label { color: #c62828; }
+        .exp-note { background: #fff8e1; border: 2px dashed #f9a825; border-radius: 10px; padding: 12px 14px; margin-top: 16px; }
+        .exp-note .exp-label { color: #b26a00; }
+        .more-exp { display: block; width: 100%; margin: 4px 0 6px; padding: 12px 16px; background: #1a73e8; color: #fff; border: none; border-radius: 10px; font-size: 1.05rem; font-weight: bold; cursor: pointer; font-family: inherit; }
+        .explanation.staged:not(.open) .exp-full { display: none; }
+        .explanation.hint-only .exp-mistake, .explanation.hint-only .exp-full { display: none; }
+        .explanation.solved .exp-hint, .explanation.solved .exp-mistake { display: none; }
+        .question-card.is-retry { border: 2px solid #ff9800; }
+        .try-note { font-size: .92rem; color: #b26a00; font-weight: bold; }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .quiz-container { padding: 22px 16px; }
+            .exam-code { position: static; display: inline-block; margin-bottom: 12px; }
+            .statement { width: auto; }
+            .question-card { overflow-x: auto; padding: 16px 12px; }
+            .q-text, .option-item, .statement { overflow-wrap: anywhere; }
+            .tf-table, .tf-table tbody, .tf-table tr, .tf-table td { display: block; width: auto; }
+            .tf-table tr { padding: 8px 0 10px; }
+            .choice-group { justify-content: flex-start; margin-top: 6px; }
+            .choice-group label { flex: 1 1 0; min-width: 0; }
+        }
+    </style>
+</head>
+<body>
+<div class="progress-bar" id="progress"><span>Đã kiểm tra <b id="pg-done">0</b>/<b id="pg-total">0</b> câu</span><span class="progress-track"><i id="pg-fill"></i></span><span>Đúng: <b id="pg-right" style="color:#1e7e34">0</b> · Sai: <b id="pg-wrong" style="color:#c62828">0</b></span></div>
+<div class="quiz-container">
+    
+    <div class="header-box">
+        <p style="margin:0;font-weight:bold;color:#555">PHIẾU BÀI HỌC THEO CẤU TRÚC BỘ 2025<br>MÔN: TOÁN 12</p>
+        <h1 style="margin:10px 0;color:#1a73e8;font-size:1.7rem">BÀI 14: PHƯƠNG TRÌNH MẶT PHẲNG</h1>
+        <p>24 câu trắc nghiệm · 8 câu đúng/sai · 12 câu trả lời ngắn</p>
+    </div>
+
+    <!-- PHẦN 1 -->
+    <div class="part-title">PHẦN I. Câu trắc nghiệm nhiều phương án lựa chọn (Câu 1–24) (24 câu)</div>
+    <div id="part1-storage" class="storage">
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), phương trình nào trong các phương trình sau là phương trình tổng quát của một mặt phẳng?</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \(x^2+2y^2-3z^2+1=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \(\frac{1}{x}+\frac{2}{y}+\frac{3}{z}+2=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q1" data-answer="true"> <span class="label-badge"></span> &nbsp; \(x-y+1=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q1"> <span class="label-badge"></span> &nbsp; \(xy+5=0\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Phương trình mặt phẳng phải là phương trình bậc nhất đối với \(x,y,z\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Quên điều kiện \(A^2+B^2+C^2\neq 0\) hoặc nhầm phương trình có \(x^2\), \(\frac1x\), \(xy\) là mặt phẳng.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> Phương trình tổng quát có dạng \(Ax+By+Cz+D=0\) với \(A^2+B^2+C^2\ne 0\).<br>
+                ✍️ <b>Bước 2:</b> Các phương án A, B, D chứa \(x^2\), \(\frac1x\), \(xy\) nên không phải bậc nhất.<br>
+                ✍️ <b>Bước 3:</b> Phương án C: \(x-y+1=0\) có \(A=1,B=-1,C=0\) thỏa mãn.<br>
+                🎯 <b>Kết luận:</b> Chọn C.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho mặt phẳng \((P):2x+y-z+3=0\). Vectơ nào dưới đây là một vectơ pháp tuyến của \((P)\)?</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \(\vec n_3=(1;-1;3)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \(\vec n_4=(2;-1;3)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q2" data-answer="true"> <span class="label-badge"></span> &nbsp; \(\vec n_2=(2;1;-1)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q2"> <span class="label-badge"></span> &nbsp; \(\vec n_1=(2;1;3)\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Vectơ pháp tuyến lấy từ các hệ số của \(x,y,z\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Lấy cả hệ số tự do hoặc đổi dấu một hệ số.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> Mặt phẳng \(Ax+By+Cz+D=0\) có vectơ pháp tuyến \((A;B;C)\).<br>
+                ✍️ <b>Bước 2:</b> Với \((P):2x+y-z+3=0\) ta có \(\vec n=(2;1;-1)\).<br>
+                🎯 <b>Kết luận:</b> Chọn C.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), mặt phẳng nào sau đây nhận vectơ \(\vec n=(1;2;3)\) làm vectơ pháp tuyến.</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q3" data-answer="true"> <span class="label-badge"></span> &nbsp; \(2x+4y+6z+1=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \(x-2y+3z+1=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \(x+2y-3z-1=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q3"> <span class="label-badge"></span> &nbsp; \(2x-4z+6=0\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Vectơ pháp tuyến của mặt phẳng \(ax+by+cz+d=0\) là \((a;b;c)\), các hệ số phải lấy đúng.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Chọn phương án có hệ số tỉ lệ nhưng khác dấu một hệ số; hoặc quên rằng \(\vec n\) cho trước phải khớp (hoặc tỉ lệ) với \((a;b;c)\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> Phương án A: \(2x+4y+6z+1=0\) có vectơ pháp tuyến \((2;4;6)=2(1;2;3)\), cùng phương với \(\vec n\).<br>
+                ✍️ <b>Bước 2:</b> B có \((1;-2;3)\), C có \((1;2;-3)\), D có \((2;0;-4)\) đều không cùng phương với \((1;2;3)\).<br>
+                🎯 <b>Kết luận:</b> Chọn A.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), phương trình mặt phẳng \((Oxy)\) là</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \(y=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q4" data-answer="true"> <span class="label-badge"></span> &nbsp; \(z=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \(x+y+z=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q4"> <span class="label-badge"></span> &nbsp; \(x=0\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Mặt phẳng \((Oxy)\) chứa trục \(Ox\), \(Oy\); mọi điểm của nó có cùng một tọa độ bằng \(0\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Nhầm \((Oxy)\) với \(y=0\) (đó là \((Oxz)\)).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> Mọi điểm \(M(x;y;z)\in(Oxy)\) có cao độ \(z=0\).<br>
+                ✍️ <b>Bước 2:</b> Vậy \((Oxy):z=0\).<br>
+                🎯 <b>Kết luận:</b> Chọn B.<br>
+                <div class="exp-note"><span class="exp-label">🔑 Ghi chú điểm mấu chốt</span>\((Oyz):x=0\), \((Oxz):y=0\), \((Oxy):z=0\).</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho mặt phẳng \((P):x-2y+z-1=0\). Điểm nào sau đây <b>không thuộc</b> mặt phẳng \((P)\)?</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; \(E(0;0;1)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; \(F(1;0;0)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q5" data-answer="true"> <span class="label-badge"></span> &nbsp; \(N(2;-1;3)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q5"> <span class="label-badge"></span> &nbsp; \(M(3;2;2)\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Thay tọa độ từng điểm vào vế trái của phương trình mặt phẳng.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Tính sai dấu khi thay \(y\) âm, hoặc tìm điểm thuộc thay vì không thuộc.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(E\): \(0-0+1-1=0\) (thuộc).<br>
+                ✍️ <b>Bước 2:</b> \(F\): \(1-0+0-1=0\) (thuộc).<br>
+                ✍️ <b>Bước 3:</b> \(N\): \(2-2(-1)+3-1=6\ne 0\) (không thuộc).<br>
+                ✍️ <b>Bước 4:</b> \(M\): \(3-4+2-1=0\) (thuộc).<br>
+                🎯 <b>Kết luận:</b> Chọn C.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), vectơ nào dưới đây là một vectơ pháp tuyến của mặt phẳng \((Oxy)\)?</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; \(\vec n=(1;1;0)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; \(\vec j=(0;1;0)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q6"> <span class="label-badge"></span> &nbsp; \(\vec i=(1;0;0)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q6" data-answer="true"> <span class="label-badge"></span> &nbsp; \(\vec k=(0;0;1)\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>\((Oxy)\) vuông góc với trục nào?</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Chọn \(\vec i\) hay \(\vec j\) vì nhầm tên trục.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \((Oxy):z=0\) nên có vectơ pháp tuyến \((0;0;1)=\vec k\).<br>
+                🎯 <b>Kết luận:</b> Chọn D.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), điểm \(A(1;2;3)\) thuộc mặt phẳng có phương trình nào dưới đây?</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q7" data-answer="true"> <span class="label-badge"></span> &nbsp; \(x-2y+z=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \(x+2y+3z=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \(x-2y+3z=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q7"> <span class="label-badge"></span> &nbsp; \(x+2y+3z=1\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Thay tọa độ \(A\) vào từng phương trình.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Thay nhầm thứ tự tọa độ.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> A: \(1-2\cdot2+3=0\) đúng.<br>
+                ✍️ <b>Bước 2:</b> B: \(1+4+9=14\ne0\); C: \(1-4+9=6\ne0\); D: \(1+4+9=14\ne1\) đều sai.<br>
+                🎯 <b>Kết luận:</b> Chọn A.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho mặt phẳng \((P)\) đi qua điểm \(M(0;0;1)\) và có vectơ pháp tuyến \(\vec n=(0;1;-2)\). Viết phương trình mặt phẳng \((P)\).</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; \(x-y+2z-2=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; \(y-2z+1=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q8" data-answer="true"> <span class="label-badge"></span> &nbsp; \(y-2z+2=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q8"> <span class="label-badge"></span> &nbsp; \(y+2z-2=0\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Dùng \(a(x-x_0)+b(y-y_0)+c(z-z_0)=0\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Quên đổi dấu hằng số khi khai triển \(-2(z-1)\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \((P):0(x-0)+1(y-0)-2(z-1)=0\).<br>
+                ✍️ <b>Bước 2:</b> Khai triển: \(y-2z+2=0\).<br>
+                🎯 <b>Kết luận:</b> Chọn C.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), phương trình mặt phẳng đi qua điểm \(A(1;0;-1)\) và song song với mặt phẳng \(x-y+z+2=0\) là</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; \(x-y+z+1=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; \(x-y+z+2=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q9"> <span class="label-badge"></span> &nbsp; \(x-y+z-1=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q9" data-answer="true"> <span class="label-badge"></span> &nbsp; \(x-y+z=0\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Mặt phẳng song song có cùng vectơ pháp tuyến, chỉ khác hệ số tự do.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Giữ nguyên hằng số \(+2\) (khi đó trùng mặt phẳng đã cho, không đi qua \(A\)).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> Mặt phẳng cần tìm có dạng \(x-y+z+d=0\), \(d\ne2\).<br>
+                ✍️ <b>Bước 2:</b> Đi qua \(A\): \(1-0-1+d=0\Rightarrow d=0\).<br>
+                ✍️ <b>Bước 3:</b> Vậy \(x-y+z=0\).<br>
+                🎯 <b>Kết luận:</b> Chọn D.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho hai điểm \(A(4;1;0)\) và \(B(2;-1;2)\). Phương trình mặt phẳng trung trực của đoạn thẳng \(AB\) là</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; \(x+y-z-4=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; \(3x+z-4=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q10"> <span class="label-badge"></span> &nbsp; \(3x+z-2=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q10" data-answer="true"> <span class="label-badge"></span> &nbsp; \(x+y-z-2=0\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Mặt phẳng trung trực đi qua trung điểm \(AB\) và nhận \(\overrightarrow{AB}\) làm vectơ pháp tuyến.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Dùng điểm \(A\) hoặc \(B\) thay cho trung điểm.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> Trung điểm \(I(3;0;1)\), \(\overrightarrow{AB}=(-2;-2;2)\) cùng phương \((1;1;-1)\).<br>
+                ✍️ <b>Bước 2:</b> \((x-3)+y-(z-1)=0\Leftrightarrow x+y-z-2=0\).<br>
+                🎯 <b>Kết luận:</b> Chọn D.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho ba điểm \(A(1;2;0)\), \(B(2;1;1)\) và \(C(1;2;3)\). Mặt phẳng đi qua \(A\) và vuông góc với \(BC\) có phương trình là</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; \(x-y-2z-3=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; \(x+y-2z-3=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q11"> <span class="label-badge"></span> &nbsp; \(x+y-2z+1=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q11" data-answer="true"> <span class="label-badge"></span> &nbsp; \(x-y-2z+1=0\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Mặt phẳng vuông góc với \(BC\) nhận \(\overrightarrow{BC}\) làm vectơ pháp tuyến.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Dùng \(\overrightarrow{CB}\) rồi quên đổi dấu, hoặc dùng \(\overrightarrow{AB}\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(\overrightarrow{BC}=(-1;1;2)\).<br>
+                ✍️ <b>Bước 2:</b> \(-(x-1)+(y-2)+2z=0\Leftrightarrow -x+y+2z-1=0\Leftrightarrow x-y-2z+1=0\).<br>
+                🎯 <b>Kết luận:</b> Chọn D.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), phương trình mặt phẳng cắt tia \(Ox,Oy,Oz\) lần lượt tại \(A,B,C\) và nhận \(G(673;674;675)\) làm trọng tâm của tam giác \(ABC\) là</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q12" data-answer="true"> <span class="label-badge"></span> &nbsp; \(\frac{x}{2019}+\frac{y}{2022}+\frac{z}{2025}=1\).</label>
+                <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \(\frac{x}{2019}+\frac{y}{2022}+\frac{z}{2025}=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \(\frac{x}{673}+\frac{y}{674}+\frac{z}{675}=1\).</label>
+                <label class="option-item"><input type="radio" name="p1_q12"> <span class="label-badge"></span> &nbsp; \(\frac{x}{673}+\frac{y}{674}+\frac{z}{675}=0\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Nếu \(A(a;0;0),B(0;b;0),C(0;0;c)\) thì trọng tâm có tọa độ \(\left(\frac a3;\frac b3;\frac c3\right)\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Dùng ngay tọa độ \(G\) làm các đoạn chắn, quên nhân 3.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> Gọi \(A(a;0;0),B(0;b;0),C(0;0;c)\). Trọng tâm \(G\left(\frac a3;\frac b3;\frac c3\right)=(673;674;675)\).<br>
+                ✍️ <b>Bước 2:</b> Suy ra \(a=2019,b=2022,c=2025\).<br>
+                ✍️ <b>Bước 3:</b> Phương trình đoạn chắn: \(\frac{x}{2019}+\frac{y}{2022}+\frac{z}{2025}=1\).<br>
+                🎯 <b>Kết luận:</b> Chọn A.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho mặt phẳng \((P):x-y+3=0\). Vectơ nào sau đây <b>không phải</b> là vectơ pháp tuyến của mặt phẳng \((P)\)?</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q13"> <span class="label-badge"></span> &nbsp; \(\vec a=(3;-3;0)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q13" data-answer="true"> <span class="label-badge"></span> &nbsp; \(\vec a=(1;-1;3)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q13"> <span class="label-badge"></span> &nbsp; \(\vec a=(1;-1;0)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q13"> <span class="label-badge"></span> &nbsp; \(\vec a=(-1;1;0)\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Vectơ pháp tuyến phải cùng phương với \((1;-1;0)\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Đưa cả hệ số tự do \(3\) vào vectơ pháp tuyến.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \((P)\) có vectơ pháp tuyến \((1;-1;0)\); mọi vectơ pháp tuyến đều có dạng \(k(1;-1;0)\), \(k\ne0\).<br>
+                ✍️ <b>Bước 2:</b> \((3;-3;0)=3(1;-1;0)\), \((-1;1;0)=-(1;-1;0)\) đều đúng.<br>
+                ✍️ <b>Bước 3:</b> \((1;-1;3)\) không cùng phương nên không phải vectơ pháp tuyến.<br>
+                🎯 <b>Kết luận:</b> Chọn B.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho ba điểm \(A(-2;0;0),B(0;3;0)\) và \(C(0;0;4)\). Mặt phẳng \((ABC)\) có phương trình là</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q14"> <span class="label-badge"></span> &nbsp; \(\frac{x}{2}+\frac{y}{-3}+\frac{z}{4}=1\).</label>
+                <label class="option-item"><input type="radio" name="p1_q14" data-answer="true"> <span class="label-badge"></span> &nbsp; \(\frac{x}{-2}+\frac{y}{3}+\frac{z}{4}=1\).</label>
+                <label class="option-item"><input type="radio" name="p1_q14"> <span class="label-badge"></span> &nbsp; \(\frac{x}{2}+\frac{y}{3}+\frac{z}{-4}=1\).</label>
+                <label class="option-item"><input type="radio" name="p1_q14"> <span class="label-badge"></span> &nbsp; \(\frac{x}{2}+\frac{y}{3}+\frac{z}{4}=1\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Ba điểm nằm trên ba trục: dùng phương trình mặt phẳng theo đoạn chắn.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Bỏ qua dấu âm của đoạn chắn \(-2\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> Các điểm \(A,B,C\) lần lượt nằm trên \(Ox,Oy,Oz\) với đoạn chắn \(-2,3,4\).<br>
+                ✍️ <b>Bước 2:</b> \((ABC):\frac{x}{-2}+\frac{y}{3}+\frac{z}{4}=1\).<br>
+                🎯 <b>Kết luận:</b> Chọn B.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho hai vectơ \(\vec u=(1;2;3),\vec v=(0;-1;1)\). Tích có hướng của hai vectơ \(\vec u\) và \(\vec v\) là vectơ có tọa độ bằng</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q15"> <span class="label-badge"></span> &nbsp; \((5;1;-1)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q15" data-answer="true"> <span class="label-badge"></span> &nbsp; \((5;-1;-1)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q15"> <span class="label-badge"></span> &nbsp; \((-1;-1;-1)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q15"> <span class="label-badge"></span> &nbsp; \((-1;-1;5)\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Dùng công thức tích có hướng bằng ba định thức cấp hai.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Sai dấu ở thành phần thứ hai của tích có hướng.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \([\vec u,\vec v]=\left(\begin{vmatrix}2&3\\-1&1\end{vmatrix};\begin{vmatrix}3&1\\1&0\end{vmatrix};\begin{vmatrix}1&2\\0&-1\end{vmatrix}\right)\).<br>
+                ✍️ <b>Bước 2:</b> \(=(2+3;\,0-1;\,-1-0)=(5;-1;-1)\).<br>
+                🎯 <b>Kết luận:</b> Chọn B.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho điểm \(A(1;3;-2)\) và mặt phẳng \((P):2x+y-2z-3=0\). Khoảng cách từ điểm \(A\) đến mặt phẳng \((P)\) bằng</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q16"> <span class="label-badge"></span> &nbsp; \(1\).</label>
+                <label class="option-item"><input type="radio" name="p1_q16" data-answer="true"> <span class="label-badge"></span> &nbsp; \(2\).</label>
+                <label class="option-item"><input type="radio" name="p1_q16"> <span class="label-badge"></span> &nbsp; \(\frac23\).</label>
+                <label class="option-item"><input type="radio" name="p1_q16"> <span class="label-badge"></span> &nbsp; \(3\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Dùng \(d(A,(P))=\dfrac{|ax_0+by_0+cz_0+d|}{\sqrt{a^2+b^2+c^2}}\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Quên chia cho \(\sqrt{a^2+b^2+c^2}=3\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(d=\dfrac{|2\cdot1+3-2(-2)-3|}{\sqrt{4+1+4}}=\dfrac{|2+3+4-3|}{3}=\dfrac63=2\).<br>
+                🎯 <b>Kết luận:</b> Chọn B.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), hình chiếu vuông góc của điểm \(M(2;3;-4)\) trên mặt phẳng \((Oyz)\) có tọa độ là</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q17"> <span class="label-badge"></span> &nbsp; \((2;3;0)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q17"> <span class="label-badge"></span> &nbsp; \((0;3;0)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q17" data-answer="true"> <span class="label-badge"></span> &nbsp; \((0;3;-4)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q17"> <span class="label-badge"></span> &nbsp; \((2;0;-4)\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Chiếu lên \((Oyz)\) thì tọa độ nào bằng 0?</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Nhầm với hình chiếu lên \((Oxy)\) hoặc lên trục \(Oy\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> Hình chiếu lên \((Oyz)\) giữ nguyên \(y,z\) và cho \(x=0\).<br>
+                ✍️ <b>Bước 2:</b> Hình chiếu là \((0;3;-4)\).<br>
+                🎯 <b>Kết luận:</b> Chọn C.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho điểm \(M(2024;0;-1)\). Mệnh đề nào dưới đây đúng?</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q18"> <span class="label-badge"></span> &nbsp; \(M\in Oy\).</label>
+                <label class="option-item"><input type="radio" name="p1_q18"> <span class="label-badge"></span> &nbsp; \(M\in(Oyz)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q18" data-answer="true"> <span class="label-badge"></span> &nbsp; \(M\in(Oxz)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q18"> <span class="label-badge"></span> &nbsp; \(M\in(Oxy)\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Điểm có tung độ \(y=0\) nằm trên mặt phẳng nào?</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Nhầm \((Oxz)\) với \((Oyz)\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(M\) có \(y=0\), mà \((Oxz):y=0\).<br>
+                ✍️ <b>Bước 2:</b> Do \(x\ne0\) nên \(M\notin(Oyz)\); do \(z\ne0\) nên \(M\notin(Oxy)\); do \(x,z\ne0\) nên \(M\notin Oy\).<br>
+                🎯 <b>Kết luận:</b> Chọn C.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho ba điểm \(A(2;0;0),B(0;-3;0),C(0;0;1)\). Một vectơ pháp tuyến của mặt phẳng \((ABC)\) là</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q19"> <span class="label-badge"></span> &nbsp; \(\vec n=(2;-3;1)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q19" data-answer="true"> <span class="label-badge"></span> &nbsp; \(\vec n=(3;-2;6)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q19"> <span class="label-badge"></span> &nbsp; \(\vec n=(2;3;1)\).</label>
+                <label class="option-item"><input type="radio" name="p1_q19"> <span class="label-badge"></span> &nbsp; \(\vec n=(2;-3;-1)\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Dùng \([\overrightarrow{AB},\overrightarrow{AC}]\) hoặc phương trình đoạn chắn.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Lấy luôn các đoạn chắn \(2,-3,1\) làm vectơ pháp tuyến.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \((ABC):\frac x2+\frac y{-3}+\frac z1=1\).<br>
+                ✍️ <b>Bước 2:</b> Nhân hai vế với 6: \(3x-2y+6z=6\).<br>
+                ✍️ <b>Bước 3:</b> Vectơ pháp tuyến: \((3;-2;6)\).<br>
+                🎯 <b>Kết luận:</b> Chọn B.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho hai điểm \(A(1;2;-1),B(-1;0;1)\) và mặt phẳng \((P):x+2y-z+1=0\). Viết phương trình mặt phẳng \((Q)\) qua \(A,B\) và vuông góc với \((P)\).</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q20"> <span class="label-badge"></span> &nbsp; \((Q):-x+y+z=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q20"> <span class="label-badge"></span> &nbsp; \((Q):2x-y+3=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q20"> <span class="label-badge"></span> &nbsp; \((Q):3x-y+z=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q20" data-answer="true"> <span class="label-badge"></span> &nbsp; \((Q):x+z=0\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>\(\vec n_Q=[\overrightarrow{AB},\vec n_P]\) vì \((Q)\) chứa \(AB\) và vuông góc \((P)\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Tích có hướng tính sai dấu thành phần giữa.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(\overrightarrow{AB}=(-2;-2;2)\), \(\vec n_P=(1;2;-1)\).<br>
+                ✍️ <b>Bước 2:</b> \(\vec n_Q=[\overrightarrow{AB},\vec n_P]=(-2;0;-2)\), chọn \((1;0;1)\).<br>
+                ✍️ <b>Bước 3:</b> \((Q)\) đi qua \(A\): \(1(x-1)+0+1(z+1)=0\Leftrightarrow x+z=0\).<br>
+                🎯 <b>Kết luận:</b> Chọn D.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho ba điểm \(A(1;-1;0),B(-1;0;1),C(2;1;-1)\). Phương trình mặt phẳng \((ABC)\) là</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q21"> <span class="label-badge"></span> &nbsp; \(x+3y+z+2=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q21" data-answer="true"> <span class="label-badge"></span> &nbsp; \(3x+y+5z-2=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q21"> <span class="label-badge"></span> &nbsp; \(3x+y+5z+2=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q21"> <span class="label-badge"></span> &nbsp; \(3x-y+5z-2=0\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Tính \([\overrightarrow{AB},\overrightarrow{AC}]\) rồi viết phương trình qua \(A\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Sai dấu khi tính tích có hướng hoặc khi khai triển hằng số.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(\overrightarrow{AB}=(-2;1;1)\), \(\overrightarrow{AC}=(1;2;-1)\).<br>
+                ✍️ <b>Bước 2:</b> \([\overrightarrow{AB},\overrightarrow{AC}]=(-3;-1;-5)\), chọn \(\vec n=(3;1;5)\).<br>
+                ✍️ <b>Bước 3:</b> \(3(x-1)+(y+1)+5z=0\Leftrightarrow 3x+y+5z-2=0\).<br>
+                🎯 <b>Kết luận:</b> Chọn B.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho mặt phẳng \((P):x-z+3=0\). Mặt phẳng nào sau đây vuông góc với mặt phẳng \((P)\)?</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q22"> <span class="label-badge"></span> &nbsp; \((R):2x+y-2z=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q22" data-answer="true"> <span class="label-badge"></span> &nbsp; \((\alpha):2x-y+2z=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q22"> <span class="label-badge"></span> &nbsp; \((\beta):2x-y-2z=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q22"> <span class="label-badge"></span> &nbsp; \((Q):-2x-y+2z=0\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Hai mặt phẳng vuông góc khi tích vô hướng hai vectơ pháp tuyến bằng 0.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Chọn mặt phẳng song song (hai vectơ pháp tuyến cùng phương) thay vì vuông góc.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(\vec n_P=(1;0;-1)\).<br>
+                ✍️ <b>Bước 2:</b> (R): \(2+0+2=4\ne0\); (\(\alpha\)): \(2+0-2=0\) ✔; (\(\beta\)): \(2+2=4\ne0\); (Q): \(-2+0-2=-4\ne0\).<br>
+                🎯 <b>Kết luận:</b> Chọn B.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho mặt phẳng \((\alpha):2x+2y+z+m=0\) (\(m\) là tham số). Tìm giá trị của tham số \(m\) dương để khoảng cách từ gốc tọa độ đến mặt phẳng \((\alpha)\) bằng 1.</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q23"> <span class="label-badge"></span> &nbsp; \(-3\).</label>
+                <label class="option-item"><input type="radio" name="p1_q23" data-answer="true"> <span class="label-badge"></span> &nbsp; \(3\).</label>
+                <label class="option-item"><input type="radio" name="p1_q23"> <span class="label-badge"></span> &nbsp; \(6\).</label>
+                <label class="option-item"><input type="radio" name="p1_q23"> <span class="label-badge"></span> &nbsp; \(-6\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>\(d(O,(\alpha))=\dfrac{|m|}{\sqrt{2^2+2^2+1^2}}\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Chỉ lấy \(m=-3\) mà quên điều kiện \(m>0\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(d(O,(\alpha))=\dfrac{|m|}{3}=1\Leftrightarrow |m|=3\Leftrightarrow m=\pm3\).<br>
+                ✍️ <b>Bước 2:</b> Vì \(m>0\) nên \(m=3\).<br>
+                🎯 <b>Kết luận:</b> Chọn B.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\) với điểm \(M(-3;1;4)\) và gọi \(A,B,C\) lần lượt là hình chiếu của \(M\) lên các trục \(Ox,Oy,Oz\). Phương trình nào dưới đây là phương trình mặt phẳng song song với mặt phẳng \((ABC)\)?</div>
+            <div class="options-list">
+                <label class="option-item"><input type="radio" name="p1_q24"> <span class="label-badge"></span> &nbsp; \(4x-12y+3z-12=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q24"> <span class="label-badge"></span> &nbsp; \(4x+12y-3z-12=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q24"> <span class="label-badge"></span> &nbsp; \(4x-12y-3z+12=0\).</label>
+                <label class="option-item"><input type="radio" name="p1_q24" data-answer="true"> <span class="label-badge"></span> &nbsp; \(4x-12y-3z-12=0\).</label>
+            </div>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Tìm \(A,B,C\), viết \((ABC)\) bằng đoạn chắn, rồi tìm mặt phẳng có cùng vectơ pháp tuyến nhưng khác hằng số.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Chọn đúng \((ABC)\) (trùng, không phải song song) hoặc đổi dấu một hệ số.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(A(-3;0;0),B(0;1;0),C(0;0;4)\): \((ABC):\frac x{-3}+y+\frac z4=1\Leftrightarrow 4x-12y-3z+12=0\).<br>
+                ✍️ <b>Bước 2:</b> Mặt phẳng song song có dạng \(4x-12y-3z+D=0\), \(D\ne12\).<br>
+                ✍️ <b>Bước 3:</b> Chỉ phương án D thỏa: \(4x-12y-3z-12=0\).<br>
+                🎯 <b>Kết luận:</b> Chọn D.<br>
+                <div class="exp-note"><span class="exp-label">🔑 Ghi chú điểm mấu chốt</span>Phương án C chính là \((ABC)\) nên trùng chứ không song song.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PHẦN 2 -->
+    <div class="part-title">PHẦN II. Câu trắc nghiệm đúng sai (Câu 1–8) (8 câu)</div>
+    <div id="part2-storage" class="storage">
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho mặt phẳng \((\alpha):2x+y-2z+6=0\). Các mệnh đề sau đúng hay sai?</div>
+            <table class="tf-table">
+                <tr><td class="statement">a) Một véc-tơ pháp tuyến của mặt phẳng \((\alpha)\) là \(\vec n=(2;1;-2)\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_a" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q1_a"> S</label></div></td></tr>
+                <tr><td class="statement">b) Điểm \(A(-1;-2;1)\) thuộc mặt phẳng \((\alpha)\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_b" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q1_b"> S</label></div></td></tr>
+                <tr><td class="statement">c) Với \(m=-1\) để \(B(2m+1;-2;m-4)\) thuộc mặt phẳng \((\alpha)\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_c"> Đ</label> <label><input type="radio" name="p2_q1_c" data-answer="true"> S</label></div></td></tr>
+                <tr><td class="statement">d) Mặt phẳng \((P):-2x+y+2z-6=0\) song song với mặt phẳng \((\alpha)\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q1_d"> Đ</label> <label><input type="radio" name="p2_q1_d" data-answer="true"> S</label></div></td></tr>
+            </table>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Đọc vectơ pháp tuyến từ hệ số; thay tọa độ điểm vào phương trình; hai mặt phẳng song song khi hệ số \((a,b,c)\) tỉ lệ nhưng \(d\) không tỉ lệ cùng tỉ số.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Ý d): chỉ thấy các số giống nhau mà quên rằng dấu của \(y\) không đổi trong khi \(x,z\) đổi dấu thì không tỉ lệ.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                <b>Ý a:</b> \((\alpha):2x+y-2z+6=0\) có \(\vec n=(2;1;-2)\) <b>(ĐÚNG)</b><br>
+                <b>Ý b:</b> \(2(-1)+(-2)-2\cdot1+6=0\) nên \(A\in(\alpha)\) <b>(ĐÚNG)</b><br>
+                <b>Ý c:</b> \(m=-1\Rightarrow B(-1;-2;-5)\): \(-2-2+10+6=12\ne0\) nên \(B\notin(\alpha)\) <b>(SAI)</b><br>
+                <b>Ý d:</b> \(\vec n_P=(-2;1;2)\) không cùng phương với \((2;1;-2)\) nên \((P)\) không song song \((\alpha)\) <b>(SAI)</b><br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho mặt phẳng \((\alpha):3x+4y-z+6=0\). Các mệnh đề sau đúng hay sai?</div>
+            <table class="tf-table">
+                <tr><td class="statement">a) Điểm \(A(0;0;6)\) thuộc mặt phẳng \((\alpha)\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_a" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q2_a"> S</label></div></td></tr>
+                <tr><td class="statement">b) Khoảng cách từ điểm \(M(1;2;-9)\) đến mặt phẳng \((\alpha)\) bằng \(26\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_b"> Đ</label> <label><input type="radio" name="p2_q2_b" data-answer="true"> S</label></div></td></tr>
+                <tr><td class="statement">c) Với \(m=-3\) thì mặt phẳng \((\alpha)\) vuông góc với mặt phẳng \((P):2x+3y-(m+1)z-1=0\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_c"> Đ</label> <label><input type="radio" name="p2_q2_c" data-answer="true"> S</label></div></td></tr>
+                <tr><td class="statement">d) Khoảng cách giữa hai mặt phẳng \((\alpha)\) và \((P):3x+4y-z-7=0\) là \(d=\frac{\sqrt{26}}{2}\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q2_d" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q2_d"> S</label></div></td></tr>
+            </table>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Dùng công thức khoảng cách từ điểm đến mặt phẳng; hai mặt phẳng vuông góc khi \(\vec n_1\cdot\vec n_2=0\); khoảng cách hai mặt phẳng song song lấy một điểm của mặt này.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Quên chia cho \(\sqrt{a^2+b^2+c^2}=\sqrt{26}\) (ý b); với \(m=-3\) thì \(-(m+1)=2\), dễ nhầm dấu (ý c).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                <b>Ý a:</b> \(0+0-6+6=0\) nên \(A\in(\alpha)\) <b>(ĐÚNG)</b><br>
+                <b>Ý b:</b> \(d=\dfrac{|3+8+9+6|}{\sqrt{26}}=\dfrac{26}{\sqrt{26}}=\sqrt{26}\ne26\) <b>(SAI)</b><br>
+                <b>Ý c:</b> \(m=-3\Rightarrow(P):2x+3y+2z-1=0\), \(\vec n_P=(2;3;2)\). \(\vec n_\alpha\cdot\vec n_P=6+12-2=16\ne0\) nên không vuông góc <b>(SAI)</b><br>
+                <b>Ý d:</b> \((\alpha)\parallel(P)\). Lấy \(A(0;0;6)\in(\alpha)\): \(d=d(A,(P))=\dfrac{|-6-7|}{\sqrt{26}}=\dfrac{13}{\sqrt{26}}=\dfrac{\sqrt{26}}2\) <b>(ĐÚNG)</b><br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho mặt phẳng \((P):2x+5y-4z+20=0\). Các mệnh đề sau đúng hay sai?</div>
+            <table class="tf-table">
+                <tr><td class="statement">a) Một véc-tơ pháp tuyến của \((P)\) là \(\vec a=(4;10;8)\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_a"> Đ</label> <label><input type="radio" name="p2_q3_a" data-answer="true"> S</label></div></td></tr>
+                <tr><td class="statement">b) Mặt phẳng \((Q)\) qua \(A(1;1;-1)\), song song với mặt phẳng \((P)\) có phương trình là \(2x+5y-4z-11=0\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_b" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q3_b"> S</label></div></td></tr>
+                <tr><td class="statement">c) Mặt phẳng \((P)\) cắt trục \(Ox\) tại điểm \(N(-10;0;0)\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_c" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q3_c"> S</label></div></td></tr>
+                <tr><td class="statement">d) Mặt phẳng \((P)\) vuông góc với mặt phẳng \((R):x-3y+7z-9=0\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q3_d"> Đ</label> <label><input type="radio" name="p2_q3_d" data-answer="true"> S</label></div></td></tr>
+            </table>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Cùng phương với \((2;5;-4)\) thì mới là vectơ pháp tuyến; giao với \(Ox\) ứng với \(y=z=0\); vuông góc \(\Leftrightarrow\) tích vô hướng bằng 0.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Ý a): \((4;10;8)\) chỉ \(2\) thành phần tỉ lệ, thành phần \(z\) bị đổi dấu.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                <b>Ý a:</b> \((4;10;8)\) không cùng phương \((2;5;-4)\) (do \(8\ne-8\)) <b>(SAI)</b><br>
+                <b>Ý b:</b> \((Q):2x+5y-4z+d=0\), qua \(A\): \(2+5+4+d=0\Rightarrow d=-11\) <b>(ĐÚNG)</b><br>
+                <b>Ý c:</b> Cho \(y=z=0\): \(2x+20=0\Rightarrow x=-10\) nên \(N(-10;0;0)\) <b>(ĐÚNG)</b><br>
+                <b>Ý d:</b> \(\vec n_P\cdot\vec n_R=2-15-28=-41\ne0\) nên không vuông góc <b>(SAI)</b><br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho mặt phẳng \((\alpha):x-3y-6=0\). Các mệnh đề sau đúng hay sai?</div>
+            <table class="tf-table">
+                <tr><td class="statement">a) Điểm \(A(0;2;0)\) thuộc mặt phẳng \((\alpha)\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_a"> Đ</label> <label><input type="radio" name="p2_q4_a" data-answer="true"> S</label></div></td></tr>
+                <tr><td class="statement">b) Khoảng cách từ điểm \(M(2;2;-9)\) đến mặt phẳng \((\alpha)\) bằng \(\sqrt{10}\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_b" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q4_b"> S</label></div></td></tr>
+                <tr><td class="statement">c) Mặt phẳng \((P):-x+3y+1=0\) song song với mặt phẳng \((\alpha)\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_c" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q4_c"> S</label></div></td></tr>
+                <tr><td class="statement">d) Khoảng cách giữa hai mặt phẳng \((\alpha)\) và \((P):-x+3y-14=0\) là \(d=\frac{4\sqrt5}{5}\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q4_d"> Đ</label> <label><input type="radio" name="p2_q4_d" data-answer="true"> S</label></div></td></tr>
+            </table>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Mặt phẳng \((\alpha)\) không có \(z\): nó song song với trục \(Oz\). Khi so sánh song song, đưa hệ số \(x,y\) về cùng dấu và so hằng số.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Ý d): quên đưa \((P)\) về cùng vectơ pháp tuyến với \((\alpha)\) trước khi lấy hiệu hai hằng số.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                <b>Ý a:</b> \(0-6-6=-12\ne0\) nên \(A\notin(\alpha)\) <b>(SAI)</b><br>
+                <b>Ý b:</b> \(d=\dfrac{|2-6-6|}{\sqrt{1+9}}=\dfrac{10}{\sqrt{10}}=\sqrt{10}\) <b>(ĐÚNG)</b><br>
+                <b>Ý c:</b> \((P):-x+3y+1=0\Leftrightarrow x-3y-1=0\) có hệ số \(x,y,z\) trùng \((\alpha)\) nhưng hằng số \(-1\ne-6\) nên song song <b>(ĐÚNG)</b><br>
+                <b>Ý d:</b> \((P):x-3y+14=0\). \(d=\dfrac{|-6-14|}{\sqrt{10}}=\dfrac{20}{\sqrt{10}}=2\sqrt{10}\ne\dfrac{4\sqrt5}{5}\) <b>(SAI)</b><br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian với hệ tọa độ \(Oxyz\), cho \(A(1;2;-1)\); \(B(-1;0;1)\) và mặt phẳng \((P):x+2y-z+1=0\). Các mệnh đề sau đúng hay sai?</div>
+            <table class="tf-table">
+                <tr><td class="statement">a) Mặt phẳng \((P)\) có một vectơ pháp tuyến là \(\vec n(1;2;-1)\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q5_a" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q5_a"> S</label></div></td></tr>
+                <tr><td class="statement">b) Khi \(m=-4\) thì mặt phẳng \((Q):2x-my+3=0\) vuông góc với mặt phẳng \((P)\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q5_b"> Đ</label> <label><input type="radio" name="p2_q5_b" data-answer="true"> S</label></div></td></tr>
+                <tr><td class="statement">c) Mặt phẳng \((Q)\) qua \(A,B\) và vuông góc với \((P)\) có phương trình là \(x+z=0\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q5_c" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q5_c"> S</label></div></td></tr>
+                <tr><td class="statement">d) Biết điểm \(M\) nằm trên tia \(Ox\) mà khoảng cách từ \(M\) đến mặt phẳng \((P)\) bằng \(\sqrt6\). Khi đó hoành độ điểm \(M\) là \(x_M=5\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q5_d" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q5_d"> S</label></div></td></tr>
+            </table>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>\((Q)\perp(P)\Leftrightarrow\vec n_Q\cdot\vec n_P=0\). Điểm trên tia \(Ox\) có dạng \(M(t;0;0)\) với \(t>0\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Ý d): giải \(|t+1|=6\) được \(t=5\) hoặc \(t=-7\) nhưng quên loại \(t=-7\) vì \(M\) nằm trên <b>tia</b> \(Ox\) (\(t>0\)).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                <b>Ý a:</b> \((P):x+2y-z+1=0\) có \(\vec n=(1;2;-1)\) <b>(ĐÚNG)</b><br>
+                <b>Ý b:</b> \(m=-4\Rightarrow\vec n_Q=(2;4;0)\). \(\vec n_Q\cdot\vec n_P=2+8=10\ne0\) nên không vuông góc (cần \(2-2m=0\Leftrightarrow m=1\)) <b>(SAI)</b><br>
+                <b>Ý c:</b> \(\overrightarrow{AB}=(-2;-2;2)\), \([\overrightarrow{AB},\vec n_P]=(-2;0;-2)\). \((Q):-2(x-1)-2(z+1)=0\Leftrightarrow x+z=0\) <b>(ĐÚNG)</b><br>
+                <b>Ý d:</b> \(M(t;0;0)\), \(t>0\): \(\dfrac{|t+1|}{\sqrt6}=\sqrt6\Leftrightarrow t+1=\pm6\Leftrightarrow t=5\) (loại \(t=-7\)). Vậy \(x_M=5\) <b>(ĐÚNG)</b><br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho hai mặt phẳng \((\alpha):3x-2y+2z+7=0\) và \((\beta):5x-4y+3z+1=0\). Các mệnh đề sau đúng hay sai?</div>
+            <table class="tf-table">
+                <tr><td class="statement">a) Điểm \(A(1;2;-1)\) nằm trên mặt phẳng \((\alpha)\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q6_a"> Đ</label> <label><input type="radio" name="p2_q6_a" data-answer="true"> S</label></div></td></tr>
+                <tr><td class="statement">b) Hai mặt phẳng \((\alpha),(\beta)\) song song với nhau.</td><td><div class="choice-group"><label><input type="radio" name="p2_q6_b"> Đ</label> <label><input type="radio" name="p2_q6_b" data-answer="true"> S</label></div></td></tr>
+                <tr><td class="statement">c) Phương trình mặt phẳng qua \(O\), đồng thời vuông góc với cả \((\alpha)\) và \((\beta)\) có phương trình là \(2x+y-2z=0\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q6_c" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q6_c"> S</label></div></td></tr>
+                <tr><td class="statement">d) Mặt phẳng \((\gamma)\) đi qua \(N(1;-2;0)\), song song với trục \(Oy\) và vuông góc với \((Q):4x-4y+2z-21=0\) có phương trình dạng \(2x+by+cz+d=0\). Khi đó giá trị \(b-c+d=2\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q6_d" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q6_d"> S</label></div></td></tr>
+            </table>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Hai mặt phẳng song song khi vectơ pháp tuyến cùng phương. Mặt phẳng vuông góc cả hai mặt phẳng nhận tích có hướng hai vectơ pháp tuyến làm pháp tuyến. Song song trục \(Oy\) thì hệ số \(b=0\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Ý d): quên rằng \(\parallel Oy\) nghĩa là \(\vec n\cdot\vec j=0\Rightarrow b=0\); hoặc tính \(\vec n\cdot\vec n_Q=0\) sai.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                <b>Ý a:</b> \(3\cdot1-2\cdot2+2(-1)+7=4\ne0\) nên \(A\notin(\alpha)\) <b>(SAI)</b><br>
+                <b>Ý b:</b> \(\frac35\ne\frac{-2}{-4}\) nên \((\alpha),(\beta)\) cắt nhau <b>(SAI)</b><br>
+                <b>Ý c:</b> \(\vec n=[\vec n_\alpha,\vec n_\beta]=(2;1;-2)\). Mặt phẳng qua \(O\): \(2x+y-2z=0\) <b>(ĐÚNG)</b><br>
+                <b>Ý d:</b> \(\vec n=(2;b;c)\). \(\parallel Oy\Rightarrow b=0\). \(\perp(Q)\Rightarrow 2\cdot4+c\cdot2=0\Rightarrow c=-4\). Qua \(N(1;-2;0)\): \(2+d=0\Rightarrow d=-2\). Vậy \(b-c+d=0+4-2=2\) <b>(ĐÚNG)</b><br>
+                <div class="exp-note"><span class="exp-label">🔑 Ghi chú điểm mấu chốt</span>Trong đề gốc, phương trình của \((Q)\) ở ý d) bị thiếu; mình lấy \((Q):4x-4y+2z-21=0\) theo lời giải gốc.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian với hệ tọa độ \(Oxyz\), cho hai điểm \(A(1;2;1)\) và \(B(3;-1;5)\). Các mệnh đề sau đúng hay sai?</div>
+            <table class="tf-table">
+                <tr><td class="statement">a) Vectơ \(\overrightarrow{AB}\) là một vectơ pháp tuyến của mặt phẳng \((\alpha):2x+3y+4z-2=0\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q7_a"> Đ</label> <label><input type="radio" name="p2_q7_a" data-answer="true"> S</label></div></td></tr>
+                <tr><td class="statement">b) Phương trình mặt phẳng trung trực của đoạn thẳng \(AB\) là: \(2x-3y+4z-\frac{29}{2}=0\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q7_b" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q7_b"> S</label></div></td></tr>
+                <tr><td class="statement">c) Điểm \(N(1;2;-1)\) đối xứng với \(A(1;2;1)\) qua mặt phẳng \((Oyz)\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q7_c"> Đ</label> <label><input type="radio" name="p2_q7_c" data-answer="true"> S</label></div></td></tr>
+                <tr><td class="statement">d) Mặt phẳng \((P)\) vuông góc với đường thẳng \(AB\) và cắt các trục \(Ox\), \(Oy\) và \(Oz\) lần lượt tại các điểm \(D\), \(E\) và \(F\). Khi thể tích của tứ diện \(ODEF\) bằng \(\frac32\), phương trình mặt phẳng \((P)\) là \(2x-3y+4z\pm6=0\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q7_d" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q7_d"> S</label></div></td></tr>
+            </table>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Mặt phẳng trung trực của \(AB\) đi qua trung điểm và nhận \(\overrightarrow{AB}\) làm pháp tuyến. Tứ diện \(ODEF\) vuông tại \(O\): \(V=\frac16 OD\cdot OE\cdot OF\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Ý c): đối xứng qua \((Oyz)\) thì đổi dấu \(x\); đối xứng qua \((Oxy)\) mới đổi dấu \(z\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                <b>Ý a:</b> \(\overrightarrow{AB}=(2;-3;4)\) không cùng phương \((2;3;4)\) <b>(SAI)</b><br>
+                <b>Ý b:</b> Trung điểm \(I\left(2;\frac12;3\right)\), \(\vec n=(2;-3;4)\): \(2(x-2)-3\left(y-\frac12\right)+4(z-3)=0\Leftrightarrow 2x-3y+4z-\frac{29}2=0\) <b>(ĐÚNG)</b><br>
+                <b>Ý c:</b> Đối xứng của \(A(1;2;1)\) qua \((Oyz)\) là \((-1;2;1)\ne N\) (đó là đối xứng qua \((Oxy)\)) <b>(SAI)</b><br>
+                <b>Ý d:</b> \((P):2x-3y+4z+d=0\) cắt trục tại \(D\left(-\frac d2;0;0\right),E\left(0;\frac d3;0\right),F\left(0;0;-\frac d4\right)\). \(V=\frac16\cdot\frac{|d|}2\cdot\frac{|d|}3\cdot\frac{|d|}4=\frac{|d|^3}{144}=\frac32\Rightarrow|d|=6\). Vậy \(2x-3y+4z\pm6=0\) <b>(ĐÚNG)</b><br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian với hệ trục tọa độ \(Oxyz\), cho hai điểm \(A(1;2;3)\), \(B(3;4;4)\) và mặt phẳng \((\alpha):2x+y+mz-1=0\). Các mệnh đề sau đúng hay sai?</div>
+            <table class="tf-table">
+                <tr><td class="statement">a) Khi \(B\in(\alpha)\): \(2x+y+mz-1=0\) thì \(m=-2\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q8_a"> Đ</label> <label><input type="radio" name="p2_q8_a" data-answer="true"> S</label></div></td></tr>
+                <tr><td class="statement">b) Mặt phẳng đi qua 3 điểm là hình chiếu vuông góc của \(A(1;2;3)\) lên ba trục tọa độ có phương trình là \(6x+3y+2z-6=0\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q8_b" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q8_b"> S</label></div></td></tr>
+                <tr><td class="statement">c) Biết mặt phẳng \((\beta):4x+(n-2)y+z-3=0\) song song với mặt phẳng \((\alpha)\). Khi đó \(2m+n=5\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q8_c" data-answer="true"> Đ</label> <label><input type="radio" name="p2_q8_c"> S</label></div></td></tr>
+                <tr><td class="statement">d) Điểm \(A\) cách đều mặt phẳng \(2x+y+mz-1=0\) và điểm \(B\) khi \(m=-2\).</td><td><div class="choice-group"><label><input type="radio" name="p2_q8_d"> Đ</label> <label><input type="radio" name="p2_q8_d" data-answer="true"> S</label></div></td></tr>
+            </table>
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Thay tọa độ \(B\) vào \((\alpha)\); dùng phương trình đoạn chắn; hai mặt phẳng song song khi các hệ số tỉ lệ (hằng số khác tỉ lệ).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Ý c): quên tìm hệ số tỉ lệ từ \(2:4\) rồi suy ra \(m\) từ \(m:1\). Ý d): quên rằng phải so \(AB\) với khoảng cách từ \(A\) tới \((\alpha)\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                <b>Ý a:</b> \(B\in(\alpha)\Leftrightarrow 6+4+4m-1=0\Leftrightarrow m=-\frac94\ne-2\) <b>(SAI)</b><br>
+                <b>Ý b:</b> Hình chiếu của \(A\) lên các trục: \((1;0;0),(0;2;0),(0;0;3)\). Phương trình: \(x+\frac y2+\frac z3=1\Leftrightarrow6x+3y+2z-6=0\) <b>(ĐÚNG)</b><br>
+                <b>Ý c:</b> \(\frac24=\frac1{n-2}=\frac m1\ne\frac{-1}{-3}\Rightarrow n-2=2,\ m=\frac12\Rightarrow n=4\). Vậy \(2m+n=1+4=5\) <b>(ĐÚNG)</b><br>
+                <b>Ý d:</b> \(AB=3\); \(d(A,(\alpha))=\dfrac{|3+3m|}{\sqrt{5+m^2}}\). Cho bằng 3: \(9(5+m^2)=9(m+1)^2\Rightarrow m=2\), không phải \(m=-2\) <b>(SAI)</b><br>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PHẦN 3 -->
+    <div class="part-title">PHẦN III. Câu trắc nghiệm trả lời ngắn (Câu 1–12) (12 câu)</div>
+    <div id="part3-storage" class="storage">
+        <div class="question-card">
+            <div class="q-text">Trong không gian với hệ tọa độ \(Oxyz\), cho hai điểm \(A(2;4;1)\), \(B(-1;1;3)\) và mặt phẳng \((P):x-3y+2z-5=0\). Một mặt phẳng \((Q)\) đi qua hai điểm \(A,B\) và vuông góc với \((P)\) có phương trình là \(ax+by+cz-11=0\). Tính \(P=a+b+c\).</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="5">
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>\((Q)\) chứa \(AB\) và vuông góc \((P)\) nên \(\vec n_Q=[\overrightarrow{AB},\vec n_P]\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Tính sai tích có hướng hoặc không chuẩn hóa hằng số về \(-11\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(\overrightarrow{AB}=(-3;-3;2)\), \(\vec n_P=(1;-3;2)\).<br>
+                ✍️ <b>Bước 2:</b> \(\vec n_Q=[\overrightarrow{AB},\vec n_P]=(0;8;12)=4(0;2;3)\).<br>
+                ✍️ <b>Bước 3:</b> \((Q):2(y-4)+3(z-1)=0\Leftrightarrow 2y+3z-11=0\), nên \(a=0,b=2,c=3\).<br>
+                🎯 <b>Kết luận:</b> \(P=0+2+3=5\). Đáp số: 5.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho điểm \(M(1;2;3)\). Mặt phẳng \((P)\) đi qua \(M\) và cắt các trục tọa độ \(Ox,Oy,Oz\) lần lượt tại các điểm \(A,B,C\) không trùng với gốc tọa độ sao cho \(M\) là trực tâm tam giác \(ABC\). Khi đó phương trình mặt phẳng \((P)\) có dạng \(ax+by+cz-14=0\). Tính giá trị biểu thức \(S=2a+3b-4c\).</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="-4">
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Với tứ diện \(OABC\) vuông tại \(O\), trực tâm \(H\) của \(\triangle ABC\) thỏa \(OH\perp(ABC)\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Giải hệ \(AM\perp BC,\ BM\perp AC\) sai, hoặc quên điều kiện \(M\in(P)\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> Vì \(OABC\) vuông tại \(O\) và \(M\) là trực tâm \(\triangle ABC\) nên \(OM\perp(ABC)\).<br>
+                ✍️ <b>Bước 2:</b> Do đó \(\vec n=\overrightarrow{OM}=(1;2;3)\): \((P):x+2y+3z+d=0\), qua \(M\): \(1+4+9+d=0\Rightarrow d=-14\).<br>
+                ✍️ <b>Bước 3:</b> Vậy \(a=1,b=2,c=3\).<br>
+                🎯 <b>Kết luận:</b> \(S=2\cdot1+3\cdot2-4\cdot3=-4\). Đáp số: \(-4\).<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian với hệ tọa độ \(Oxyz\), cho ba điểm \(A(0;1;2)\), \(B(2;-2;1)\), \(C(-2;1;0)\). Khi đó, phương trình mặt phẳng \((ABC)\) là \(ax+y-z+d=0\). Tính \(T=a-d\).</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="0">
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Tìm \([\overrightarrow{AB},\overrightarrow{AC}]\) rồi chọn vectơ pháp tuyến có hệ số của \(y\) bằng \(1\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Quên chia vectơ pháp tuyến để hệ số \(y\) bằng 1.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(\overrightarrow{AB}=(2;-3;-1)\), \(\overrightarrow{AC}=(-2;0;-2)\).<br>
+                ✍️ <b>Bước 2:</b> \([\overrightarrow{AB},\overrightarrow{AC}]=(6;6;-6)\), chọn \(\vec n=\frac16(6;6;-6)=(1;1;-1)\).<br>
+                ✍️ <b>Bước 3:</b> \((ABC):x+(y-1)-(z-2)=0\Leftrightarrow x+y-z+1=0\), nên \(a=1,d=1\).<br>
+                🎯 <b>Kết luận:</b> \(T=a-d=0\). Đáp số: 0.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho hai điểm \(A(4;0;1)\) và \(B(-2;2;3)\). Mặt phẳng trung trực của đoạn thẳng \(AB\) có phương trình \(3x+my+nz=0\). Khi đó \(m+n\) bằng:</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="-2">
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Mặt phẳng trung trực đi qua trung điểm \(I\) của \(AB\) và nhận \(\overrightarrow{AB}\) làm pháp tuyến.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Quên đưa hệ số của \(x\) về \(3\) (chia vectơ pháp tuyến cho \(-2\)).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(\overrightarrow{AB}=(-6;2;2)\), trung điểm \(I(1;1;2)\).<br>
+                ✍️ <b>Bước 2:</b> \(-6(x-1)+2(y-1)+2(z-2)=0\Leftrightarrow -6x+2y+2z=0\Leftrightarrow 3x-y-z=0\).<br>
+                ✍️ <b>Bước 3:</b> Suy ra \(m=-1,n=-1\).<br>
+                🎯 <b>Kết luận:</b> \(m+n=-2\). Đáp số: \(-2\).<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian với hệ trục tọa độ \(Oxyz\), cho \(A(1;2;3)\), \(B(3;4;4)\). Tìm giá trị của tham số \(m\) sao cho khoảng cách từ điểm \(A\) đến mặt phẳng \(2x+y+mz-1=0\) bằng độ dài đoạn thẳng \(AB\).</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="2">
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Tính \(AB\) và \(d(A,(P))\) rồi cho hai biểu thức bằng nhau.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Bình phương hai vế sai hoặc quên \(\sqrt{5+m^2}\) ở mẫu.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(AB=\sqrt{2^2+2^2+1^2}=3\).<br>
+                ✍️ <b>Bước 2:</b> \(d(A,(P))=\dfrac{|2+2+3m-1|}{\sqrt{5+m^2}}=\dfrac{|3m+3|}{\sqrt{5+m^2}}\).<br>
+                ✍️ <b>Bước 3:</b> \(\dfrac{|3m+3|}{\sqrt{5+m^2}}=3\Leftrightarrow 9(5+m^2)=9(m+1)^2\Leftrightarrow 45=9+18m\Leftrightarrow m=2\).<br>
+                🎯 <b>Kết luận:</b> Đáp số: \(m=2\).<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian với hệ tọa độ \(Oxyz\), cho hai mặt phẳng \((P):2x+m^2y-2z+1=0\) và \((Q):m^2x-y+(m^2-2)z+2=0\). Tổng tất cả các giá trị của \(m\) để \((P)\) vuông góc với \((Q)\) là</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="0">
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>\((P)\perp(Q)\Leftrightarrow\vec n_P\cdot\vec n_Q=0\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Giải \(m^2=4\) chỉ lấy \(m=2\), bỏ \(m=-2\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(\vec n_P=(2;m^2;-2)\), \(\vec n_Q=(m^2;-1;m^2-2)\).<br>
+                ✍️ <b>Bước 2:</b> \(\vec n_P\cdot\vec n_Q=2m^2-m^2-2(m^2-2)=-m^2+4=0\Leftrightarrow m=\pm2\).<br>
+                🎯 <b>Kết luận:</b> Tổng \(2+(-2)=0\). Đáp số: 0.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian với hệ tọa độ \(Oxyz\), cho mặt cầu \((S):(x-1)^2+(y+1)^2+z^2=11\) và hai vectơ \(\vec u_1(1;1;2)\), \(\vec u_2(1;2;1)\). Biết phương trình mặt phẳng tiếp xúc với mặt cầu \((S)\) đồng thời song song với giá của hai vectơ \(\vec u_1,\vec u_2\) có dạng: \(3x+by+cz+d=0\) (\(b,c,d\in\mathbb Z\)). Khi đó \(b+c+d\) bằng bao nhiêu?</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="5|-17">
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Pháp tuyến của mặt phẳng song song với giá của \(\vec u_1,\vec u_2\) là \([\vec u_1,\vec u_2]\). Sau đó dùng điều kiện tiếp xúc \(d(I,(P))=R\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Chỉ tìm một giá trị \(d\) mà quên đối chiếu điều kiện đề bài (đề gốc còn dữ kiện hai đường thẳng \(d_1,d_2\) để loại một mặt phẳng).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \([\vec u_1,\vec u_2]=(-3;1;1)\), nên pháp tuyến cùng phương \((3;-1;-1)\): \(b=-1,c=-1\).<br>
+                ✍️ <b>Bước 2:</b> Mặt cầu có tâm \(I(1;-1;0)\), \(R=\sqrt{11}\).<br>
+                ✍️ <b>Bước 3:</b> \(d(I,(P))=\dfrac{|3+1+d|}{\sqrt{11}}=\sqrt{11}\Leftrightarrow|d+4|=11\Leftrightarrow d=7\) hoặc \(d=-15\).<br>
+                ✍️ <b>Bước 4:</b> Theo lời giải gốc (mặt phẳng không chứa các đường thẳng \(d_1,d_2\)) chọn \(d=7\): \(b+c+d=-1-1+7=5\).<br>
+                🎯 <b>Kết luận:</b> Đáp số: 5 (nếu lấy \(d=-15\) thì \(b+c+d=-17\); trang này cũng chấp nhận).<br>
+                <div class="exp-note"><span class="exp-label">🔑 Ghi chú điểm mấu chốt</span>Đề in chưa nêu điều kiện loại nghiệm nên có hai mặt phẳng tiếp xúc; đáp án gốc là 5.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Từ mặt nước trong một bể nước, tại ba vị trí đôi một cách nhau 2 m, người ta lần lượt thả dây dọi để quả dọi chạm đáy bể. Phần dây dọi (thẳng) nằm trong nước tại ba vị trí đó lần lượt có độ dài 4 m; 4,4 m; 4,8 m. Biết đáy bể là phẳng. Hỏi đáy bể nghiêng so với mặt phẳng nằm ngang một góc bao nhiêu độ (làm tròn đến hàng phần chục)?</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="21.8">
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Đặt hệ trục sao cho mặt nước là \((Oxy)\), ba vị trí thả dây là tam giác đều cạnh 2; ba quả dọi có cao độ \(-4;-4{,}4;-4{,}8\). Góc giữa đáy bể và mặt nước là góc giữa hai mặt phẳng.</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Quên đổi dấu cao độ hoặc quên lấy \(|\cos|\); đổi radian ra độ sai.</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> Chọn \(O\) là trung điểm \(BC\) (tam giác \(ABC\) đều cạnh 2), \(OB=OC=1\), \(OA=\sqrt3\). Ta có \(A'(\sqrt3;0;-4),B'(0;1;-4{,}4),C'(0;-1;-4{,}8)\).<br>
+                ✍️ <b>Bước 2:</b> \(\overrightarrow{A'B'}=(-\sqrt3;1;-0{,}4)\), \(\overrightarrow{A'C'}=(-\sqrt3;-1;-0{,}8)\).<br>
+                ✍️ <b>Bước 3:</b> \(\vec n=[\overrightarrow{A'B'},\overrightarrow{A'C'}]=0{,}4\sqrt3(\sqrt3;1;5)\); mặt nước có \(\vec k=(0;0;1)\).<br>
+                ✍️ <b>Bước 4:</b> \(\cos\varphi=\dfrac{5}{\sqrt{3+1+25}}=\dfrac5{\sqrt{29}}\Rightarrow\varphi\approx21{,}8^\circ\).<br>
+                🎯 <b>Kết luận:</b> Đáp số: \(21{,}8\) độ.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian với hệ trục \(Oxyz\), cho ba điểm \(A(1;2;1)\), \(B(2;-1;0)\), \(C(1;1;3)\). Viết phương trình mặt phẳng đi qua ba điểm \(A,B,C\) có dạng \(ax+by+cz-12=0\). Khi đó, \(a-b-2c\) bằng</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="3">
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Tìm vectơ pháp tuyến bằng \([\overrightarrow{AB},\overrightarrow{AC}]\), viết phương trình rồi đưa hằng số về \(-12\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Tích có hướng sai dấu, hoặc quên nhân/chia để hằng số bằng \(-12\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(\overrightarrow{AB}=(1;-3;-1)\), \(\overrightarrow{AC}=(0;-1;2)\), \([\overrightarrow{AB},\overrightarrow{AC}]=(-7;-2;-1)\), chọn \(\vec n=(7;2;1)\).<br>
+                ✍️ <b>Bước 2:</b> \(7(x-1)+2(y-2)+(z-1)=0\Leftrightarrow7x+2y+z-12=0\).<br>
+                ✍️ <b>Bước 3:</b> Vậy \(a=7,b=2,c=1\).<br>
+                🎯 <b>Kết luận:</b> \(a-b-2c=7-2-2=3\). Đáp số: 3.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho mặt cầu \((S):(x+1)^2+(y-2)^2+(z-3)^2=8\) và điểm \(A(1;3;2)\). Mặt phẳng \((P)\) đi qua \(A\) và cắt \((S)\) theo giao tuyến là đường tròn có bán kính nhỏ nhất. Biết phương trình của \((P)\) có dạng \(ax+by+cz+6=0\). Tính \(a+b+c\).</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="-4">
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Điểm \(A\) nằm trong mặt cầu. Đường tròn giao tuyến nhỏ nhất khi \(d(I,(P))\) lớn nhất, tức \((P)\perp IA\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Dùng \(\overrightarrow{AI}\) rồi quên chuẩn hóa hằng số về \(+6\).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> Tâm \(I(-1;2;3)\), \(IA^2=4+1+1=6<8\) nên \(A\) nằm trong \((S)\).<br>
+                ✍️ <b>Bước 2:</b> Bán kính đường tròn nhỏ nhất khi \(d(I,(P))\) lớn nhất \(=IA\), khi đó \((P)\perp IA\): \(\vec n=\overrightarrow{IA}=(2;1;-1)\).<br>
+                ✍️ <b>Bước 3:</b> \((P):2(x-1)+(y-3)-(z-2)=0\Leftrightarrow2x+y-z-3=0\). Nhân với \(-2\): \(-4x-2y+2z+6=0\).<br>
+                🎯 <b>Kết luận:</b> \(a=-4,b=-2,c=2\Rightarrow a+b+c=-4\). Đáp số: \(-4\).<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Trong không gian \(Oxyz\), cho hai điểm \(A(2;-3;1)\), \(B(-1;1;0)\) và mặt phẳng \((P):x-y+z-2=0\). Một mặt phẳng \((Q)\) đi qua hai điểm \(A,B\) và vuông góc với \((P)\) có dạng \(ax+by+cz+2=0\). Tính \(a^2+b^2+c^2\).</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="56">
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>\(\vec n_Q=[\overrightarrow{AB},\vec n_P]\), sau đó đưa hằng số về \(+2\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Quên nhân hệ số để hằng số bằng \(2\) (bị lẻ \(a,b,c\)).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \(\overrightarrow{AB}=(-3;4;-1)\), \(\vec n_P=(1;-1;1)\), \([\overrightarrow{AB},\vec n_P]=(3;2;-1)\).<br>
+                ✍️ <b>Bước 2:</b> \((Q):3(x-2)+2(y+3)-(z-1)=0\Leftrightarrow3x+2y-z+1=0\). Nhân 2: \(6x+4y-2z+2=0\).<br>
+                🎯 <b>Kết luận:</b> \(a=6,b=4,c=-2\Rightarrow a^2+b^2+c^2=36+16+4=56\). Đáp số: 56.<br>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="q-text">Biết rằng trong không gian với hệ tọa độ \(Oxyz\) có hai mặt phẳng \((P)\) và \((Q)\) cùng thỏa mãn các điều kiện sau: đi qua hai điểm \(A(1;1;1)\) và \(B(0;-2;2)\), đồng thời cắt các trục tọa độ \(Ox,Oy\) tại hai điểm cách đều \(O\). Giả sử \((P)\) có phương trình \(x+b_1y+c_1z+d_1=0\) và \((Q)\) có phương trình \(x+b_2y+c_2z+d_2=0\). Tính giá trị biểu thức \(b_1b_2+c_1c_2\).</div>
+            <input type="text" class="short-answer-input" placeholder="Nhập đáp án..." data-answer="-9">
+            <div class="explanation staged">
+                <div class="exp-hint"><span class="exp-label">💡 Gợi ý</span>Dùng \(A,B\in\) mặt phẳng để biểu diễn \(c,d\) theo \(b\), rồi dùng điều kiện hai giao điểm trên \(Ox,Oy\) cách đều \(O\).</div>
+                <div class="exp-mistake"><span class="exp-label">⚠️ Lỗi sai thường gặp</span>Quên loại trường hợp \(d=0\) (mặt phẳng qua \(O\)).</div>
+                <div class="exp-full">
+                <span class="step-title">Hướng dẫn giải chi tiết:</span><br>
+                ✍️ <b>Bước 1:</b> \((P):x+by+cz+d=0\). Qua \(A\): \(1+b+c+d=0\). Qua \(B\): \(-2b+2c+d=0\). Suy ra \(c=3b+1\), \(d=-4b-2\).<br>
+                ✍️ <b>Bước 2:</b> Giao với \(Ox\): \(M(-d;0;0)\); giao với \(Oy\): \(N\left(0;-\frac db;0\right)\). \(OM=ON\Rightarrow|d|=\left|\frac db\right|\Rightarrow|b|=1\) (\(d\ne0\)).<br>
+                ✍️ <b>Bước 3:</b> \(b=1\): \(c=4\); \(b=-1\): \(c=-2\).<br>
+                🎯 <b>Kết luận:</b> \(b_1b_2+c_1c_2=1\cdot(-1)+4\cdot(-2)=-9\). Đáp số: \(-9\).<br>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button class="submit-btn" id="submit-btn" onclick="tinhDiem()">NỘP BÀI XEM KẾT QUẢ VÀ LỜI GIẢI</button>
+    <div class="result-panel" id="result"></div>
+</div>
+
+<script>
+/* ===== KIỂM TRA ĐÁP ÁN TỪNG CÂU =====
+   Mỗi câu có nút "Kiểm tra đáp án". Bấm xong:
+   - Câu bị khoá (không đổi đáp án được nữa), điểm câu đó được tính luôn.
+   - Đúng: báo "Chính xác", có nút xem lời giải nếu muốn.
+   - Sai lần 1: chỉ hiện GỢI Ý, chưa khoá, cho làm lại 1 lần.
+   - Sai lần 2: khoá, tô đáp án đúng và TỰ MỞ lời giải chi tiết. */
+const TF_LADDER = [0, 0.1, 0.25, 0.5, 1];
+const cards = [];
+
+function partOf(card) {
+    const id = card.closest('.storage') ? card.closest('.storage').id : '';
+    return id === 'part1-storage' ? 1 : id === 'part2-storage' ? 2 : 3;
+}
+function normNum(s) { return String(s || '').trim().replace(/\s+/g, '').replace(/,/g, '.').toLowerCase(); }
+function sameAnswer(user, key) {
+    const u = normNum(user); if (!u) return false;
+    return String(key).split('|').some(k => {
+        const kk = normNum(k);
+        if (u === kk) return true;
+        const a = Number(u), b = Number(kk);
+        return Number.isFinite(a) && Number.isFinite(b) && Math.abs(a - b) < 1e-9;
+    });
+}
+function isAnswered(card) {
+    const p = partOf(card);
+    if (p === 1) return !!card.querySelector('input[type="radio"]:checked');
+    if (p === 2) { const rows = card.querySelectorAll('.tf-table tr'); return rows.length > 0 && Array.from(rows).every(r => r.querySelector('input[type="radio"]:checked')); }
+    const inp = card.querySelector('.short-answer-input'); return !!(inp && inp.value.trim());
+}
+// chấm một câu: { score, max, ok, right (số ý đúng ở phần II) }
+function gradeCard(card) {
+    const p = partOf(card);
+    if (p === 1) {
+        const c = card.querySelector('input[type="radio"]:checked');
+        const ok = !!c && c.getAttribute('data-answer') === 'true';
+        return { score: ok ? 0.25 : 0, max: 0.25, ok };
+    }
+    if (p === 2) {
+        const rows = Array.from(card.querySelectorAll('.tf-table tr'));
+        let right = 0;
+        rows.forEach(r => { const c = r.querySelector('input[type="radio"]:checked'); if (c && c.getAttribute('data-answer') === 'true') right++; });
+        const score = rows.length === 4 ? TF_LADDER[right] : right / rows.length;
+        return { score, max: 1, ok: right === rows.length, right, total: rows.length };
+    }
+    const inp = card.querySelector('.short-answer-input');
+    const ok = !!inp && sameAnswer(inp.value, inp.getAttribute('data-answer'));
+    return { score: ok ? 0.5 : 0, max: 0.5, ok };
+}
+
+function showCardResult(card, fromSubmit) {
+    const p = partOf(card);
+    const g = gradeCard(card);
+    // Lần 1 sai: chỉ hiện GỢI Ý, chưa khoá, cho làm lại
+    if (!fromSubmit && !g.ok && card.dataset.attempts !== '1') {
+        card.dataset.attempts = '1';
+        card.classList.add('is-retry');
+        const row1 = card.querySelector('.check-row');
+        const exp1 = card.querySelector('.explanation');
+        row1.innerHTML = '<span class="verdict bad">✘ Chưa đúng — hãy đọc gợi ý bên dưới rồi làm lại</span><button type="button" class="check-btn" disabled>Kiểm tra lại</button><span class="try-note">Còn 1 lần thử</span>';
+        const b1 = row1.querySelector('.check-btn');
+        const refresh1 = () => { if (card.dataset.checked !== '1') b1.disabled = !isAnswered(card); };
+        card.addEventListener('change', refresh1);
+        card.addEventListener('input', refresh1);
+        b1.addEventListener('click', () => { showCardResult(card, false); });
+        const inp1 = card.querySelector('.short-answer-input');
+        if (inp1) inp1.addEventListener('keydown', e => { if (e.key === 'Enter' && !b1.disabled) b1.click(); });
+        if (exp1) {
+            exp1.style.display = 'block';
+            exp1.classList.add('hint-only');
+            exp1.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        updateProgress();
+        return;
+    }
+    const retried = card.dataset.attempts === '1';
+    card.classList.remove('is-retry');
+    card.dataset.checked = '1';
+    card.dataset.score = g.score;
+    card.dataset.ok = g.ok ? '1' : '0';
+    // khoá câu
+    card.querySelectorAll('input').forEach(i => { i.disabled = true; });
+    card.querySelectorAll('.option-item').forEach(l => l.classList.add('locked'));
+    // tô màu
+    if (p === 1) {
+        card.querySelectorAll('.option-item').forEach(l => {
+            const inp = l.querySelector('input');
+            if (inp.getAttribute('data-answer') === 'true') l.classList.add('opt-right');
+            else if (inp.checked) l.classList.add('opt-wrong');
+        });
+    } else if (p === 2) {
+        card.querySelectorAll('.tf-table tr').forEach(r => {
+            const key = r.querySelector('input[data-answer="true"]');
+            const chosen = r.querySelector('input[type="radio"]:checked');
+            const ok = chosen && chosen === key;
+            r.classList.add(ok ? 'row-right' : 'row-wrong');
+            const keyText = key ? key.parentElement.textContent.trim() : '';
+            const st = r.querySelector('.statement');
+            if (st && !st.querySelector('.tf-key')) {
+                const tag = document.createElement('span');
+                tag.className = 'tf-key ' + (ok ? 'ok' : 'bad');
+                tag.textContent = (keyText === 'Đ' ? 'Đúng' : 'Sai') + (ok ? ' ✓' : '');
+                st.appendChild(tag);
+            }
+        });
+    } else {
+        const inp = card.querySelector('.short-answer-input');
+        inp.classList.add(g.ok ? 'right' : 'wrong');
+        if (!g.ok && !card.querySelector('.short-key')) {
+            const k = document.createElement('span');
+            k.className = 'short-key';
+            k.textContent = 'Đáp án: ' + String(inp.getAttribute('data-answer')).split('|')[0];
+            inp.insertAdjacentElement('afterend', k);
+        }
+    }
+    card.classList.add(g.ok ? 'is-ok' : (p === 2 && g.right > 0 ? 'is-part' : 'is-bad'));
+    // nhận xét + lời giải
+    const row = card.querySelector('.check-row');
+    const exp = card.querySelector('.explanation');
+    let text, cls;
+    if (!isAnsweredFlag(card)) { text = '✘ Bỏ trống — xem gợi ý bên dưới'; cls = 'bad'; }
+    else if (g.ok) { text = retried ? '✔ Chính xác! (đúng ở lần làm lại)' : '✔ Chính xác!'; cls = 'ok'; }
+    else if (p === 2) { text = `Đúng ${g.right}/${g.total} ý (+${String(g.score).replace('.', ',')} điểm) — ${retried ? 'xem lời giải chi tiết bên dưới' : 'xem gợi ý bên dưới'}`; cls = g.right ? 'part' : 'bad'; }
+    else if (retried) { text = '✘ Vẫn chưa đúng — xem lời giải chi tiết bên dưới'; cls = 'bad'; }
+    else { text = '✘ Chưa đúng — xem gợi ý bên dưới'; cls = 'bad'; }
+    row.innerHTML = `<span class="verdict ${cls}">${text}</span>`;
+    if (exp) {
+        const staged = exp.classList.contains('staged');
+        if (g.ok) {
+            // làm đúng: lời giải ẩn, bấm nút mới xem
+            exp.style.display = 'none';
+            exp.classList.remove('hint-only');
+            exp.classList.add('solved');
+            const t = document.createElement('button');
+            t.type = 'button'; t.className = 'toggle-exp'; t.textContent = 'Xem lời giải';
+            t.onclick = () => { const open = exp.style.display === 'block'; exp.style.display = open ? 'none' : 'block'; if (!open) exp.classList.add('open'); t.textContent = open ? 'Xem lời giải' : 'Ẩn lời giải'; };
+            row.appendChild(t);
+        } else {
+            exp.style.display = 'block';
+            exp.classList.remove('hint-only');
+            const full = exp.querySelector('.exp-full');
+            if (retried) {
+                exp.classList.add('open');   // đã thử 2 lần: mở luôn lời giải chi tiết
+            } else if (staged && full) {
+                // làm sai: hiện Gợi ý + Lỗi sai thường gặp trước, bấm nút mới thấy lời giải chi tiết
+                const more = document.createElement('button');
+                more.type = 'button'; more.className = 'more-exp'; more.textContent = '📖 Xem lời giải chi tiết';
+                more.onclick = () => { exp.classList.add('open'); more.remove(); };
+                exp.insertBefore(more, full);
+            }
+            if (!fromSubmit) exp.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+    updateProgress();
+}
+function isAnsweredFlag(card) { return card.dataset.answered === '1'; }
+
+function updateProgress() {
+    const done = cards.filter(c => c.dataset.checked === '1');
+    const right = done.filter(c => c.dataset.ok === '1').length;
+    document.getElementById('pg-done').textContent = done.length;
+    document.getElementById('pg-total').textContent = cards.length;
+    document.getElementById('pg-right').textContent = right;
+    document.getElementById('pg-wrong').textContent = done.length - right;
+    document.getElementById('pg-fill').style.width = (cards.length ? done.length / cards.length * 100 : 0) + '%';
+}
+
+function setupCards() {
+    document.querySelectorAll('.storage .question-card').forEach(card => {
+        cards.push(card);
+        const row = document.createElement('div');
+        row.className = 'check-row';
+        row.innerHTML = '<button type="button" class="check-btn" disabled>Kiểm tra đáp án</button><span class="check-hint">Chọn đáp án để kiểm tra</span>';
+        const exp = card.querySelector('.explanation');
+        if (exp) card.insertBefore(row, exp); else card.appendChild(row);
+        const btn = row.querySelector('.check-btn');
+        const hint = row.querySelector('.check-hint');
+        const refresh = () => {
+            if (card.dataset.checked === '1') return;
+            const a = isAnswered(card);
+            btn.disabled = !a;
+            hint.textContent = a ? '' : (partOf(card) === 2 ? 'Chọn Đ hoặc S cho cả 4 ý để kiểm tra' : partOf(card) === 3 ? 'Nhập đáp số để kiểm tra' : 'Chọn đáp án để kiểm tra');
+        };
+        card.addEventListener('change', refresh);
+        card.addEventListener('input', refresh);
+        btn.addEventListener('click', () => { card.dataset.answered = '1'; showCardResult(card, false); });
+        const inp = card.querySelector('.short-answer-input');
+        if (inp) inp.addEventListener('keydown', e => { if (e.key === 'Enter' && !btn.disabled) btn.click(); });
+    });
+    updateProgress();
+}
+
+window.onload = function() {
+    setTimeout(() => {
+        setupCards();
+        if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise(); }
+    }, 150);
+};
+
+/* ===== NỘP CẢ BÀI ===== chấm những câu chưa kiểm tra, hiện bảng kết quả */
+function tinhDiem() {
+    cards.forEach(card => {
+        if (card.dataset.checked !== '1') { card.dataset.answered = isAnswered(card) || partialTF(card) ? '1' : '0'; showCardResult(card, true); }
+    });
+    const total = cards.length;
+    const right = cards.filter(c => gradeCard(c).ok).length;
+    const wrong = total - right;
+    const byPart = [1, 2, 3].map(p => { const cs = cards.filter(c => partOf(c) === p); return { n: cs.length, r: cs.filter(c => gradeCard(c).ok).length }; });
+    const names = ['Phần I (trắc nghiệm)', 'Phần II (đúng/sai)', 'Phần III (trả lời ngắn)'];
+    const lines = byPart.map((x, i) => x.n ? `<li>${names[i]}: đúng ${x.r}/${x.n} câu</li>` : '').join('');
+    const box = document.getElementById('result');
+    box.innerHTML = `<h2>Kết quả bài làm</h2>
+        <div class="big">${right} / ${total} câu đúng</div>
+        <p style="margin:6px 0 0;font-size:1.15rem"><b style="color:#1e7e34">Đúng: ${right} câu</b> &nbsp;·&nbsp; <b style="color:#c62828">Sai: ${wrong} câu</b></p>
+        ${byPart.filter(x => x.n).length > 1 ? `<ul>${lines}</ul>` : ''}
+        <p style="margin:12px 0 0">${wrong ? `Có <b>${wrong}</b> câu chưa đúng — hướng dẫn giải chi tiết đã mở ngay dưới từng câu đó (viền đỏ/cam).` : 'Xuất sắc! Bạn làm đúng tất cả các câu.'}</p>`;
+    box.style.display = 'block';
+    const btn = document.getElementById('submit-btn'); btn.disabled = true; btn.textContent = 'ĐÃ NỘP BÀI'; btn.style.background = '#8bc49a';
+    box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+function partialTF(card) { return partOf(card) === 2 && !!card.querySelector('input[type="radio"]:checked'); }
+function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+</script>
+</body>
+</html>
