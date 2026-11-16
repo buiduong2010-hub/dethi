@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 6: Vectơ trong không gian - Đề số 1</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], processEscapes: true },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+:root{
+  --bg:#f4f6fb; --card:#fff; --ink:#1d2433; --muted:#5b6478; --line:#dfe4ef;
+  --pri:#2457d6; --pri-soft:#e8efff; --ok:#1a8f4a; --ok-soft:#e6f6ec; --bad:#c62f3d; --bad-soft:#fdebed;
+  --warn:#9a6700; --warn-soft:#fff6dd;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 14px 90px}
+header.top{padding:22px 0 6px}
+header.top h1{margin:0 0 4px;font-size:1.45rem;line-height:1.3}
+header.top .sub{color:var(--muted);font-size:.95rem}
+.guide{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:14px 0;font-size:.93rem;color:#33405a}
+.guide b{color:var(--ink)}
+.guide ul{margin:6px 0 0 18px;padding:0}
+#bar{position:sticky;top:0;z-index:20;background:rgba(244,246,251,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -14px;padding:8px 14px}
+#bar .row{display:flex;justify-content:space-between;gap:10px;font-size:.88rem;color:var(--muted);flex-wrap:wrap}
+#bar .row b{color:var(--ink)}
+.track{height:8px;background:#dde3f1;border-radius:99px;overflow:hidden;margin-top:6px}
+.fill{height:100%;width:0;background:var(--pri);transition:width .25s}
+h2.part{font-size:1.1rem;margin:28px 0 10px;padding:8px 12px;background:var(--pri-soft);border-left:4px solid var(--pri);border-radius:6px;line-height:1.4}
+h2.part small{display:block;font-weight:400;color:var(--muted);font-size:.85rem;margin-top:2px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0;box-shadow:0 1px 2px rgba(20,30,60,.04)}
+.q.ok{border-color:var(--ok);background:linear-gradient(0deg,#fff,#fff) padding-box}
+.q.bad{border-color:var(--bad)}
+.qhead{font-weight:700;color:var(--pri);margin-bottom:4px}
+.stem{margin-bottom:10px;overflow-x:auto;overflow-y:hidden}
+.hint,.mistake{overflow-x:auto}
+.stem p,.sol p,.sub p{margin:.35em 0}
+.stem img,.sol img{max-width:100%;height:auto}
+.stem img.fig,.sol img.fig{display:block;margin:8px auto}
+img.eqimg{vertical-align:middle;max-width:none}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fbfcff;color:inherit;font:inherit;cursor:pointer;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--pri);background:var(--pri-soft)}
+.opt .lab{font-weight:700;min-width:1.4em;color:var(--pri)}
+.opt .txt{flex:1;min-width:0;overflow-x:auto}
+.opt .txt p{margin:0}
+.opt.sel{border-color:var(--pri);background:var(--pri-soft);box-shadow:0 0 0 2px rgba(36,87,214,.15)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt:disabled{cursor:default}
+.subs{display:flex;flex-direction:column;gap:10px}
+.subrow{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fbfcff}
+.subrow .sl{font-weight:700;color:var(--pri);min-width:1.4em}
+.subrow .sb{flex:1;min-width:0;overflow-x:auto}
+.subrow .tf{display:flex;gap:6px;flex-shrink:0}
+.tfb{width:42px;height:38px;border:1.5px solid var(--line);border-radius:8px;background:#fff;font:inherit;font-weight:700;cursor:pointer}
+.tfb:hover:not(:disabled){border-color:var(--pri)}
+.tfb.sel{background:var(--pri);color:#fff;border-color:var(--pri)}
+.tfb:disabled{cursor:default}
+.subrow.right{border-color:var(--ok);background:var(--ok-soft)}
+.subrow.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.subrow .ans{display:block;font-size:.85rem;color:var(--bad);margin-top:3px;font-weight:600}
+.sa{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sa label{font-weight:600}
+.sa input{flex:1;min-width:150px;max-width:260px;padding:9px 12px;font:inherit;border:1.5px solid var(--line);border-radius:10px}
+.sa input:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px rgba(36,87,214,.15)}
+.sa input.right{border-color:var(--ok);background:var(--ok-soft)}
+.sa input.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.sa .corr{width:100%;font-size:.92rem;color:var(--bad);font-weight:600}
+.acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.btn{padding:9px 16px;border-radius:10px;border:0;background:var(--pri);color:#fff;font:inherit;font-weight:600;cursor:pointer}
+.btn:disabled{background:#b9c3dc;cursor:not-allowed}
+.btn.ghost{background:#fff;color:var(--pri);border:1.5px solid var(--pri)}
+.btn.big{padding:12px 26px;font-size:1.05rem}
+.fb{font-weight:600}
+.fb.ok{color:var(--ok)} .fb.bad{color:var(--bad)} .fb.info{color:var(--warn)}
+.hint{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--warn-soft);border:1px solid #f0dca0;color:#5c4400}
+.mistake{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--bad-soft);border:1px solid #f1c3c8;color:#6b1b24}
+.sol{margin-top:10px;padding:10px 14px;border-radius:10px;background:#f6f8ff;border:1px solid var(--line);overflow-x:auto}
+.sol h4,.mistake b.t,.hint b.t{margin:0 0 4px;font-size:.95rem}
+.sol h4{color:var(--pri)}
+.sol table{border-collapse:collapse;margin:8px 0}
+.sol td,.sol th{border:1px solid var(--line);padding:4px 8px}
+.tree-box{margin:6px 0 12px;padding:10px 10px 8px;border:1px solid #cfd9f3;border-radius:10px;background:#fff;overflow-x:auto}
+.tree-box .tt{font-weight:700;color:var(--pri);margin-bottom:6px;font-size:.95rem}
+.sol table.tree{border-collapse:separate;border-spacing:0;width:100%;margin:0;font-size:.88rem;line-height:1.35}
+.sol table.tree th{background:var(--pri-soft);color:var(--pri);font-size:.8rem;padding:5px 6px;border:1px solid var(--line);text-align:center;font-weight:700}
+.sol table.tree td{border:1px solid var(--line);padding:5px 6px;vertical-align:middle;text-align:center;background:#fff}
+.sol table.tree td.n1{background:#f1f5ff;border-left:4px solid var(--pri)}
+.sol table.tree td.n2{border-left:3px solid #9db4ee}
+.sol table.tree .sy{font-weight:700;font-size:1rem}
+.sol table.tree .ds{font-size:.78rem;color:var(--muted);line-height:1.25}
+.sol table.tree .pb{font-size:.82rem;color:#243b7a;margin-top:2px}
+.sol table.tree .ev{font-weight:700}
+.sol table.tree .calc{font-size:.85rem}
+.sol table.tree tr.hit td.n2,.sol table.tree tr.hit td.pth{background:#fff3c4}
+.sol table.tree tr.hit td.pth{border-left:3px solid #e0a800}
+.sol table.tree tr.num td.pth{outline:2.5px solid var(--ok);outline-offset:-3px;background:#e3f6ea}
+.sol table.tree tr.num td.n2{background:#e3f6ea}
+.tree-box .tsum{margin-top:7px;padding:6px 9px;border-radius:8px;background:#f6f8ff;border:1px solid var(--line);font-size:.92rem;overflow-x:auto}
+.tree-box .tsum mjx-container[display="true"]{margin:.45em 0 .2em !important}
+.tree-box .tleg{margin-top:6px;font-size:.78rem;color:var(--muted)}
+mjx-container{max-width:100%}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden}
+.submitbox{margin:28px 0;text-align:center}
+#result{display:none;background:var(--card);border:2px solid var(--pri);border-radius:14px;padding:18px;margin:20px 0;text-align:center}
+#result .big{font-size:1.6rem;font-weight:800;color:var(--pri)}
+#result table{margin:12px auto 0;border-collapse:collapse;font-size:.95rem}
+#result td,#result th{border:1px solid var(--line);padding:5px 14px}
+@media (max-width:520px){
+  body{font-size:15.5px}
+  .tree-box{padding:8px 6px 6px}
+  .sol table.tree{font-size:.76rem}
+  .sol table.tree th{font-size:.7rem;padding:4px 3px}
+  .sol table.tree td{padding:4px 3px}
+  .sol table.tree .ds{font-size:.68rem}
+  .sol table.tree .pb,.sol table.tree .calc{font-size:.72rem}
+  .sol table.tree td.n1{border-left-width:3px}
+  .q{padding:12px}
+  .subrow{flex-wrap:wrap}
+  .subrow .sb{flex:1 1 calc(100% - 2.6em)}
+  .subrow .tf{margin-left:auto}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Bài 6: Vectơ trong không gian - Đề số 1</h1>
+    <div class="sub">Đề số 1 · 16 câu: 12 trắc nghiệm, 4 đúng/sai</div>
+  </header>
+  <div class="guide">
+    <b>Cách làm bài:</b> chọn đáp án rồi bấm <b>Kiểm tra đáp án</b>.
+    <ul>
+      <li>Sai lần 1: chỉ hiện gợi ý, bạn được làm lại. Sai lần 2: hiện đáp án đúng và lời giải chi tiết.</li>
+      <li>Câu đúng sẽ được khoá; bấm <b>Xem lời giải</b> nếu muốn đối chiếu cách làm.</li>
+      <li id="saGuide">Câu trả lời ngắn: nhập số, có thể dùng dấu phẩy hoặc dấu chấm (ví dụ <b>-4</b>, <b>2,25</b>, <b>2.25</b>) hoặc phân số <b>a/b</b>. Khi đề yêu cầu làm tròn, hãy nhập đúng số đã làm tròn.</li>
+      <li>Bấm <b>Nộp bài</b> ở cuối trang để xem tổng số câu đúng và số câu sai.</li>
+    </ul>
+  </div>
+  <div id="bar">
+    <div class="row"><span>Đã kiểm tra <b id="pChecked">0</b>/<b id="pTotal">0</b> câu</span><span>Đúng: <b id="pOk" style="color:var(--ok)">0</b> · Sai: <b id="pBad" style="color:var(--bad)">0</b></span></div>
+    <div class="track"><div class="fill" id="pFill"></div></div>
+  </div>
+  <main id="quiz"></main>
+  <div class="submitbox"><button class="btn big" id="submitBtn">Nộp bài</button></div>
+  <div id="result"></div>
+</div>
+<script>
+const DATA = {"sections": [{"kind": "mcq", "title": "Phần I. Trắc nghiệm nhiều phương án lựa chọn (Câu 1–12)", "note": "Mỗi câu chỉ chọn một phương án", "questions": [{"n": 1, "stem": "<p>Hai vectơ được gọi là bằng nhau khi và chỉ khi:<\/p>", "hint": "Hai vectơ cùng phương nếu giá của chúng song song hoặc trùng nhau; khi đó chúng cùng hướng hoặc ngược hướng. Hai vectơ bằng nhau khi cùng hướng và cùng độ dài; <span class=\"math inline\">\\(\\vec{0}\\)<\/span> cùng phương, cùng hướng với mọi vectơ và <span class=\"math inline\">\\(\\left|\\overrightarrow{AA}\\right|=0\\)<\/span>.", "mistake": "Cho rằng hai vectơ cùng phương thì phải cùng hướng, hoặc coi hai vectơ có cùng độ dài là bằng nhau (còn phải cùng hướng).", "sol": "<p>Hai vectơ bằng nhau khi và chỉ khi chúng <strong>cùng hướng<\/strong> và có <strong>độ dài bằng nhau<\/strong>. Chỉ có giá trùng nhau hoặc chỉ có độ dài bằng nhau thì chưa đủ (hai vectơ có thể ngược hướng hoặc khác phương).<\/p>", "options": ["Giá của chúng trùng nhau và độ dài của chúng bằng nhau.", "Chúng trùng với một trong các cặp cạnh đối của một hình bình hành.", "Chúng trùng với một trong các cặp cạnh đối của một tam giác đều.", "Chúng cùng hướng và độ dài của chúng bằng nhau."], "answer": "D"}, {"n": 2, "stem": "<p>Cho ba vectơ <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span>. Điều kiện nào sau đây không kết luận được ba vectơ đó đồng phẳng.<\/p>", "hint": "Ba vectơ đồng phẳng khi giá của chúng cùng song song với một mặt phẳng. Tìm mặt phẳng chứa (hoặc song song với) các vectơ trong bộ; tổng, hiệu của hai vectơ nằm trong một mặt phẳng vẫn nằm trong mặt phẳng đó (ví dụ <span class=\"math inline\">\\(\\overrightarrow{AC}=\\overrightarrow{AB}+\\overrightarrow{AD}\\)<\/span>). Nếu có hai vectơ cùng phương hoặc một vectơ bằng <span class=\"math inline\">\\(\\vec{0}\\)<\/span> thì ba vectơ luôn đồng phẳng.", "mistake": "Chỉ xét ba vectơ có chung điểm đầu rồi kết luận, hoặc cho rằng \"giá của ba vectơ cắt nhau từng đôi một\" là đủ để đồng phẳng (ba đường thẳng đồng quy vẫn có thể không đồng phẳng).", "sol": "<p>Nếu hai trong ba vecto đó cùng hướng thì ba vecto đồng phẳng; nếu hai trong ba vecto đó không cùng hướng thì chưa thể kết luận được ba vecto đó đồng phẳng.<\/p>", "options": ["Một trong ba vectơ đó bằng <span class=\"math inline\">\\(\\vec{0}\\)<\/span>.", "Có hai trong ba vectơ đó cùng phương.", "Có một vectơ không cùng hướng với hai vecto còn lại", "Có hai trong ba vectơ đó cùng hướng."], "answer": "C"}, {"n": 3, "stem": "<p>Ba vectơ <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> không đồng phẳng nếu?<\/p>", "hint": "Ba vectơ đồng phẳng khi giá của chúng cùng song song với một mặt phẳng. Tìm mặt phẳng chứa (hoặc song song với) các vectơ trong bộ; tổng, hiệu của hai vectơ nằm trong một mặt phẳng vẫn nằm trong mặt phẳng đó (ví dụ <span class=\"math inline\">\\(\\overrightarrow{AC}=\\overrightarrow{AB}+\\overrightarrow{AD}\\)<\/span>). Nếu có hai vectơ cùng phương hoặc một vectơ bằng <span class=\"math inline\">\\(\\vec{0}\\)<\/span> thì ba vectơ luôn đồng phẳng.", "mistake": "Chỉ xét ba vectơ có chung điểm đầu rồi kết luận, hoặc cho rằng \"giá của ba vectơ cắt nhau từng đôi một\" là đủ để đồng phẳng (ba đường thẳng đồng quy vẫn có thể không đồng phẳng).", "sol": "<p>Ba vectơ <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> đồng phẳng khi giá của chúng cùng song song với một mặt phẳng. Vì vậy ba vectơ <strong>không đồng phẳng<\/strong> khi ba đường thẳng chứa chúng không cùng song song với một mặt phẳng (phương án C). Phương án B và D cho ba vectơ đồng phẳng; phương án A chưa kết luận được, vì ba đường thẳng đôi một song song không cùng nằm trong một mặt phẳng nhưng ba vectơ tương ứng vẫn đồng phẳng.<\/p>", "options": ["Ba đường thẳng chứa chúng không cùng một mặt phẳng.", "Ba đường thẳng chứa chúng cùng thuộc một mặt phẳng.", "Ba đường thẳng chứa chúng không cùng song song với một mặt phẳng.", "Ba đường thẳng chứa chúng cùng song song với một mặt phẳng."], "answer": "C"}, {"n": 4, "stem": "<p>Trong không gian, cho vectơ <span class=\"math inline\">\\(\\vec{a}\\ne \\vec{0}\\)<\/span> <strong>k<\/strong>hẳng định nào <strong>sai<\/strong>?<\/p>", "hint": "Tích của số <span class=\"math inline\">\\(k\\)<\/span> với vectơ <span class=\"math inline\">\\(\\vec{a}\\neq\\vec{0}\\)<\/span>: <span class=\"math inline\">\\(k\\vec{a}\\)<\/span> cùng phương với <span class=\"math inline\">\\(\\vec{a}\\)<\/span>; cùng hướng khi <span class=\"math inline\">\\(k&gt;0\\)<\/span>, ngược hướng khi <span class=\"math inline\">\\(k&lt;0\\)<\/span>; <span class=\"math inline\">\\(\\left|k\\vec{a}\\right|=\\left|k\\right|\\left|\\vec{a}\\right|\\)<\/span>. Hai vectơ <span class=\"math inline\">\\(\\vec{a},\\vec{b}\\neq\\vec{0}\\)<\/span> cùng phương khi có số <span class=\"math inline\">\\(k\\)<\/span> để <span class=\"math inline\">\\(\\vec{a}=k\\vec{b}\\)<\/span>.", "mistake": "Nhầm điều kiện cùng hướng (<span class=\"math inline\">\\(k&gt;0\\)<\/span>) với ngược hướng (<span class=\"math inline\">\\(k&lt;0\\)<\/span>), hoặc quên rằng <span class=\"math inline\">\\(k\\vec{a}\\)<\/span> luôn cùng phương với <span class=\"math inline\">\\(\\vec{a}\\)<\/span>.", "sol": "<p>(Dựa vào định nghĩa tích của một số với một vectơ)<\/p>", "options": ["<span class=\"math inline\">\\(1.\\vec{a}=\\vec{a}\\)<\/span>", "<span class=\"math inline\">\\(k\\vec{a}\\)<\/span> và <span class=\"math inline\">\\(\\vec{a}\\)<\/span> cùng hướng khi <span class=\"math inline\">\\(k&gt;0\\)<\/span>", "<span class=\"math inline\">\\(k\\vec{a}\\)<\/span> và <span class=\"math inline\">\\(\\vec{a}\\)<\/span> cùng hướng khi <span class=\"math inline\">\\(k&lt;0\\)<\/span>", "Hai vectơ <span class=\"math inline\">\\(\\vec{a}\\)<\/span> và <span class=\"math inline\">\\(\\vec{b}\\ne \\vec{0}\\)<\/span> cùng phương khi có một số <span class=\"math inline\">\\(k\\)<\/span> để <span class=\"math inline\">\\(\\vec{a}=k\\vec{b}\\)<\/span>"], "answer": "C"}, {"n": 5, "stem": "<p>Chọn mệnh đề <strong>sai<\/strong> trong các mệnh đề sau đây:<\/p>", "hint": "Hai vectơ cùng phương nếu giá của chúng song song hoặc trùng nhau; khi đó chúng cùng hướng hoặc ngược hướng. Hai vectơ bằng nhau khi cùng hướng và cùng độ dài; <span class=\"math inline\">\\(\\vec{0}\\)<\/span> cùng phương, cùng hướng với mọi vectơ và <span class=\"math inline\">\\(\\left|\\overrightarrow{AA}\\right|=0\\)<\/span>.", "mistake": "Cho rằng hai vectơ cùng phương thì phải cùng hướng, hoặc coi hai vectơ có cùng độ dài là bằng nhau (còn phải cùng hướng).", "sol": "<p>Mệnh đề <span class=\"math inline\">\\(\\left|\\overrightarrow{AB}\\right|&gt;0\\)<\/span> là mệnh đề <strong>sai<\/strong>, vì khi <span class=\"math inline\">\\(A\\equiv B\\)<\/span> thì <span class=\"math inline\">\\(\\left|\\overrightarrow{AB}\\right|=0\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(\\vec{0}\\)<\/span> cùng hướng với mọi vectơ.", "<span class=\"math inline\">\\(\\vec{0}\\)<\/span> cùng phương với mọi vectơ.", "<span class=\"math inline\">\\(\\overrightarrow{AA}=\\vec{0}\\)<\/span>.", "<span class=\"math inline\">\\(\\left|\\overrightarrow{AB}\\right|&gt;0\\)<\/span>."], "answer": "D"}, {"n": 6, "stem": "<p>Trong không gian cho tứ diện đều <span class=\"math inline\">\\(ABCD\\)<\/span>, có bao nhiêu vectơ có điểm đầu là điểm <span class=\"math inline\">\\(A\\)<\/span>, điểm cuối là một trong các đỉnh còn lại của tứ diện?<\/p>", "hint": "Liệt kê lần lượt: vectơ có điểm đầu <span class=\"math inline\">\\(A\\)<\/span> và điểm cuối là mỗi đỉnh còn lại của tứ diện (không tính <span class=\"math inline\">\\(\\overrightarrow{AA}\\)<\/span>). Một vectơ nằm trong mặt phẳng <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span> khi cả điểm đầu và điểm cuối của nó thuộc mặt phẳng đó.", "mistake": "Đếm thiếu hoặc đếm thừa (tính cả <span class=\"math inline\">\\(\\overrightarrow{AA}\\)<\/span>), hoặc kể cả vectơ có một đầu mút nằm ngoài mặt phẳng.", "sol": "<p>Các vectơ có điểm đầu là <span class=\"math inline\">\\(A\\)<\/span> và điểm cuối là một trong các đỉnh còn lại của tứ diện <span class=\"math inline\">\\(ABCD\\)<\/span> là <span class=\"math inline\">\\(\\overrightarrow{AB},\\overrightarrow{AC},\\overrightarrow{AD}\\)<\/span>, tức là có <span class=\"math inline\">\\(3\\)<\/span> vectơ.<\/p>\n<p><em>Lưu ý:<\/em> đề trong file gốc bị lỗi hiển thị công thức; đã dựng lại \"tứ diện đều <span class=\"math inline\">\\(ABCD\\)<\/span>\" theo bản PDF của đề.<\/p>", "options": ["<ol start=\"4\" type=\"1\">\n<li><\/li>\n<\/ol>", "<ol start=\"2\" type=\"1\">\n<li><\/li>\n<\/ol>", "<ol start=\"3\" type=\"1\">\n<li><\/li>\n<\/ol>", "<ol start=\"6\" type=\"1\">\n<li><\/li>\n<\/ol>"], "answer": "C"}, {"n": 7, "stem": "<p>Trong không gian cho tứ diện đều <span class=\"math inline\">\\(ABCD\\)<\/span>, những vectơ nào nằm trong mặt phẳng <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span>?<\/p>", "hint": "Liệt kê lần lượt: vectơ có điểm đầu <span class=\"math inline\">\\(A\\)<\/span> và điểm cuối là mỗi đỉnh còn lại của tứ diện (không tính <span class=\"math inline\">\\(\\overrightarrow{AA}\\)<\/span>). Một vectơ nằm trong mặt phẳng <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span> khi cả điểm đầu và điểm cuối của nó thuộc mặt phẳng đó.", "mistake": "Đếm thiếu hoặc đếm thừa (tính cả <span class=\"math inline\">\\(\\overrightarrow{AA}\\)<\/span>), hoặc kể cả vectơ có một đầu mút nằm ngoài mặt phẳng.", "sol": "<p>Các vectơ <span class=\"math inline\">\\(\\overrightarrow{AB},\\overrightarrow{AC}\\)<\/span> có giá nằm trong mặt phẳng <span class=\"math inline\">\\(\\left(ABC\\right)\\)<\/span>; vectơ <span class=\"math inline\">\\(\\overrightarrow{AD}\\)<\/span> có giá là đường thẳng <span class=\"math inline\">\\(AD\\)<\/span> không nằm trong mặt phẳng này. Vậy chọn <span class=\"math inline\">\\(\\overrightarrow{AB},\\overrightarrow{AC}\\)<\/span>.<\/p>\n<p><em>Lưu ý:<\/em> đề trong file gốc bị lỗi hiển thị công thức; đã dựng lại \"tứ diện đều <span class=\"math inline\">\\(ABCD\\)<\/span>\" theo bản PDF của đề.<\/p>", "options": ["<span class=\"math inline\">\\(\\overrightarrow{AB},\\overrightarrow{AC}\\)<\/span>.", "<span class=\"math inline\">\\(\\overrightarrow{AB},\\overrightarrow{AC},\\overrightarrow{AD}\\)<\/span>", "<span class=\"math inline\">\\(\\overrightarrow{AB},\\overrightarrow{AD}\\)<\/span>.", "<span class=\"math inline\">\\(\\overrightarrow{AC},\\overrightarrow{AD}\\)<\/span>."], "answer": "A"}, {"n": 8, "stem": "<p>Trong không gian, với mỗi điểm O và một vectơ<span class=\"math inline\">\\(\\vec{a}\\)<\/span>có bao nhiêu điểm M thỏa mãn <strong><span class=\"math inline\">\\(\\overrightarrow{OM}=\\vec{a}\\)<\/span><\/strong>?<\/p>", "hint": "Cho trước điểm <span class=\"math inline\">\\(O\\)<\/span> và vectơ <span class=\"math inline\">\\(\\vec{a}\\)<\/span>: đặt vectơ <span class=\"math inline\">\\(\\vec{a}\\)<\/span> có điểm đầu tại <span class=\"math inline\">\\(O\\)<\/span> thì điểm cuối <span class=\"math inline\">\\(M\\)<\/span> được xác định duy nhất (<span class=\"math inline\">\\(\\overrightarrow{OM}=\\vec{a}\\)<\/span>).", "mistake": "Nhầm với trường hợp chỉ cho độ dài <span class=\"math inline\">\\(OM\\)<\/span> (khi đó có vô số điểm <span class=\"math inline\">\\(M\\)<\/span>).", "sol": "<p>Dựa vào tính chất và quy ước đối với vectơ không gian.<\/p>", "options": ["<ol type=\"1\">\n<li><\/li>\n<\/ol>", "<ol start=\"2\" type=\"1\">\n<li><\/li>\n<\/ol>", "<ol start=\"3\" type=\"1\">\n<li><\/li>\n<\/ol>", "vô số."], "answer": "A"}, {"n": 9, "stem": "<p>Trong các khẳng định sau, khẳng định nào <strong>sai?<\/strong><\/p>", "hint": "Ba vectơ đồng phẳng khi giá của chúng cùng song song với một mặt phẳng. Tìm mặt phẳng chứa (hoặc song song với) các vectơ trong bộ; tổng, hiệu của hai vectơ nằm trong một mặt phẳng vẫn nằm trong mặt phẳng đó (ví dụ <span class=\"math inline\">\\(\\overrightarrow{AC}=\\overrightarrow{AB}+\\overrightarrow{AD}\\)<\/span>). Nếu có hai vectơ cùng phương hoặc một vectơ bằng <span class=\"math inline\">\\(\\vec{0}\\)<\/span> thì ba vectơ luôn đồng phẳng.", "mistake": "Chỉ xét ba vectơ có chung điểm đầu rồi kết luận, hoặc cho rằng \"giá của ba vectơ cắt nhau từng đôi một\" là đủ để đồng phẳng (ba đường thẳng đồng quy vẫn có thể không đồng phẳng).", "sol": "<p>+ Nắm vững khái niệm ba véctơ đồng phẳng.<\/p>", "options": ["Nếu giá của ba vectơ <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> cắt nhau từng đôi một thì ba vectơ đó đồng phẳng.", "Nếu trong ba vectơ <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> có một vectơ <span class=\"math inline\">\\(\\vec{0}\\)<\/span> thì ba vectơ đó đồng phẳng.", "Nếu giá của ba vectơ <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> cùng song song với một mặt phẳng thì ba vectơ đó đồng phẳng.", "Nếu trong ba vectơ <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> có hai vectơ cùng phương thì ba vectơ đó đồng phẳng."], "answer": "A"}, {"n": 10, "stem": "<p>Vectơ có điểm đầu và điểm cuối là các đỉnh của hình lập phương <span class=\"math inline\">\\(ABCD.A&#39;B&#39;C&#39;D&#39;\\)<\/span> và bằng vectơ <span class=\"math inline\">\\(\\overrightarrow{AD}\\)<\/span> là:<\/p>", "hint": "Hai vectơ cùng phương nếu giá của chúng song song hoặc trùng nhau; khi đó chúng cùng hướng hoặc ngược hướng. Hai vectơ bằng nhau khi cùng hướng và cùng độ dài; <span class=\"math inline\">\\(\\vec{0}\\)<\/span> cùng phương, cùng hướng với mọi vectơ và <span class=\"math inline\">\\(\\left|\\overrightarrow{AA}\\right|=0\\)<\/span>.", "mistake": "Cho rằng hai vectơ cùng phương thì phải cùng hướng, hoặc coi hai vectơ có cùng độ dài là bằng nhau (còn phải cùng hướng).", "sol": "<p>Trong hình lập phương, mặt <span class=\"math inline\">\\(ADD&#39;A&#39;\\)<\/span> là hình vuông nên <span class=\"math inline\">\\(AD\\parallel A&#39;D&#39;\\)<\/span>, <span class=\"math inline\">\\(AD=A&#39;D&#39;\\)<\/span> và hai vectơ cùng hướng, suy ra <span class=\"math inline\">\\(\\overrightarrow{A&#39;D&#39;}=\\overrightarrow{AD}\\)<\/span>.<\/p>\n<p>Các phương án còn lại sai: <span class=\"math inline\">\\(\\overrightarrow{DA}\\)<\/span> ngược hướng với <span class=\"math inline\">\\(\\overrightarrow{AD}\\)<\/span>; <span class=\"math inline\">\\(\\overrightarrow{DC}\\)<\/span> và <span class=\"math inline\">\\(\\overrightarrow{AB}\\)<\/span> không cùng phương với <span class=\"math inline\">\\(\\overrightarrow{AD}\\)<\/span>.<\/p>", "options": ["<span class=\"math inline\">\\(\\overrightarrow{A&#39;D&#39;}\\)<\/span>.", "<span class=\"math inline\">\\(\\overrightarrow{DA}\\)<\/span>.", "<span class=\"math inline\">\\(\\overrightarrow{DC}\\)<\/span>.", "<span class=\"math inline\">\\(\\overrightarrow{AB}\\)<\/span>."], "answer": "A"}, {"n": 11, "stem": "<p>Cho ba vectơ <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> không đồng phẳng. Xét các vectơ<span class=\"math inline\">\\(\\vec{x}=2\\vec{a}-\\vec{b};\\vec{y}=-4\\vec{a}+2\\vec{b};\\vec{z}=-3\\vec{b}-2\\vec{c}\\)<\/span>. Chọn khẳng định đúng?<\/p>", "hint": "Với <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> không đồng phẳng, hai vectơ biểu diễn qua <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> cùng phương khi các hệ số tương ứng tỉ lệ; ba vectơ <span class=\"math inline\">\\(\\vec{x},\\vec{y},\\vec{z}\\)<\/span> đồng phẳng khi một vectơ là tổ hợp của hai vectơ còn lại (<span class=\"math inline\">\\(\\vec{z}=m\\vec{x}+n\\vec{y}\\)<\/span>), và luôn đồng phẳng nếu có hai vectơ cùng phương.", "mistake": "Chỉ so sánh một vài hệ số rồi kết luận cùng phương, hoặc quên rằng hai trong ba vectơ cùng phương thì ba vectơ đó đã đồng phẳng.", "sol": "<p>+ Nhận thấy: <span class=\"math inline\">\\(\\vec{y}=-2\\vec{x}\\)<\/span> nên hai vectơ <span class=\"math inline\">\\(\\vec{x};\\vec{y}\\)<\/span> cùng phương.<\/p>", "options": ["Hai vectơ <span class=\"math inline\">\\(\\vec{y};\\vec{z}\\)<\/span> cùng phương.", "Hai vectơ <span class=\"math inline\">\\(\\vec{x};\\vec{y}\\)<\/span> cùng phương.", "Hai vectơ <span class=\"math inline\">\\(\\vec{x};\\vec{z}\\)<\/span> cùng phương.", "Ba vectơ <span class=\"math inline\">\\(\\vec{x};\\vec{y};\\vec{z}\\)<\/span> không đồng phẳng."], "answer": "B"}, {"n": 12, "stem": "<p>Cho ba vectơ <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> không đồng phẳng. Xét các vectơ <span class=\"math inline\">\\(\\vec{x}=2\\vec{a}+\\vec{b};\\vec{y}=\\vec{a}-\\vec{b}-\\overrightarrow{\\mathrm{c}};\\vec{z}=-3\\vec{b}-2\\vec{c}\\)<\/span>. Chọn khẳng định đúng?<\/p>", "hint": "Với <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> không đồng phẳng, hai vectơ biểu diễn qua <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> cùng phương khi các hệ số tương ứng tỉ lệ; ba vectơ <span class=\"math inline\">\\(\\vec{x},\\vec{y},\\vec{z}\\)<\/span> đồng phẳng khi một vectơ là tổ hợp của hai vectơ còn lại (<span class=\"math inline\">\\(\\vec{z}=m\\vec{x}+n\\vec{y}\\)<\/span>), và luôn đồng phẳng nếu có hai vectơ cùng phương.", "mistake": "Chỉ so sánh một vài hệ số rồi kết luận cùng phương, hoặc quên rằng hai trong ba vectơ cùng phương thì ba vectơ đó đã đồng phẳng.", "sol": "<p>Ta có: <span class=\"math inline\">\\(\\vec{y}=\\frac{1}{2}\\left(\\vec{x}+\\vec{z}\\right)\\)<\/span> nên ba vectơ <span class=\"math inline\">\\(\\vec{x};\\vec{y};\\vec{z}\\)<\/span> đồng phẳng.<\/p>", "options": ["Ba vectơ <span class=\"math inline\">\\(\\vec{x};\\vec{y};\\vec{z}\\)<\/span> đồng phẳng.", "Hai vectơ <span class=\"math inline\">\\(\\vec{x};\\vec{a}\\)<\/span> cùng phương.", "Hai vectơ <span class=\"math inline\">\\(\\vec{x};\\vec{b}\\)<\/span> cùng phương.", "Ba vectơ <span class=\"math inline\">\\(\\vec{x};\\vec{y};\\vec{z}\\)<\/span> đôi một cùng phương."], "answer": "A"}]}, {"kind": "tf", "title": "Phần II. Trắc nghiệm đúng sai (Câu 1–4)", "note": "Trong mỗi câu, chọn Đúng (Đ) hoặc Sai (S) cho từng ý a), b), c), d); câu chỉ đúng khi cả bốn ý đúng", "questions": [{"n": 1, "stem": "<p>Trong không gian, cho hai vectơ <span class=\"math inline\">\\(\\vec{a},\\vec{b}\\)<\/span> và <span class=\"math inline\">\\(\\vec{c}\\)<\/span> phân biệt, và đều khác <span class=\"math inline\">\\(\\vec{0}\\)<\/span>.<\/p>", "hint": "Xét riêng từng ý. Hai vectơ cùng phương nếu giá của chúng song song hoặc trùng nhau; khi đó chúng cùng hướng hoặc ngược hướng. Hai vectơ bằng nhau khi cùng hướng và cùng độ dài; <span class=\"math inline\">\\(\\vec{0}\\)<\/span> cùng phương, cùng hướng với mọi vectơ và <span class=\"math inline\">\\(\\left|\\overrightarrow{AA}\\right|=0\\)<\/span>.", "mistake": "Cho rằng hai vectơ cùng phương thì phải cùng hướng, hoặc coi hai vectơ có cùng độ dài là bằng nhau (còn phải cùng hướng).", "sol": "<p>a) Đúng. Hai vectơ cùng hướng với một vectơ thứ ba thì cùng hướng với nhau.<\/p>\n<p>b) Đúng. Hai vectơ cùng ngược hướng với <span class=\"math inline\">\\(\\vec{c}\\)<\/span> thì cùng hướng với nhau (cùng hướng với <span class=\"math inline\">\\(-\\vec{c}\\)<\/span>).<\/p>\n<p>c) Sai. Hai vectơ cùng hướng với <span class=\"math inline\">\\(\\vec{c}\\)<\/span> thì cùng hướng với nhau, không thể ngược hướng.<\/p>\n<p>d) Sai. Hai vectơ cùng ngược hướng với <span class=\"math inline\">\\(\\vec{c}\\)<\/span> thì cùng hướng với nhau, không ngược hướng.<\/p>", "subs": ["Nếu <span class=\"math inline\">\\(\\vec{a}\\)<\/span> và <span class=\"math inline\">\\(\\vec{b}\\)<\/span> đều cùng hướng với <span class=\"math inline\">\\(\\vec{c}\\)<\/span> thì <span class=\"math inline\">\\(\\vec{a}\\)<\/span> và <span class=\"math inline\">\\(\\vec{b}\\)<\/span> cùng hướng.", "Nếu <span class=\"math inline\">\\(\\vec{a}\\)<\/span> và <span class=\"math inline\">\\(\\vec{b}\\)<\/span> đều ngược hướng với <span class=\"math inline\">\\(\\vec{c}\\)<\/span> thì <span class=\"math inline\">\\(\\vec{a}\\)<\/span> và <span class=\"math inline\">\\(\\vec{b}\\)<\/span> cùng hướng.", "Nếu <span class=\"math inline\">\\(\\vec{a}\\)<\/span> và <span class=\"math inline\">\\(\\vec{b}\\)<\/span> đều cùng hướng với <span class=\"math inline\">\\(\\vec{c}\\)<\/span> thì <span class=\"math inline\">\\(\\vec{a}\\)<\/span> và <span class=\"math inline\">\\(\\vec{b}\\)<\/span> ngược hướng.", "Nếu <span class=\"math inline\">\\(\\vec{a}\\)<\/span> và <span class=\"math inline\">\\(\\vec{b}\\)<\/span> đều ngược hướng với <span class=\"math inline\">\\(\\vec{c}\\)<\/span> thì <span class=\"math inline\">\\(\\vec{a}\\)<\/span> và <span class=\"math inline\">\\(\\vec{b}\\)<\/span> ngược hướng."], "answers": [true, true, false, false]}, {"n": 2, "stem": "<p>Cho hình bình hành <span class=\"math inline\">\\(ABCD\\)<\/span>.<\/p>", "hint": "Xét riêng từng ý. Với hình bình hành <span class=\"math inline\">\\(ABCD\\)<\/span>: <span class=\"math inline\">\\(\\overrightarrow{AB}=\\overrightarrow{DC}\\)<\/span>, <span class=\"math inline\">\\(\\overrightarrow{AD}=\\overrightarrow{BC}\\)<\/span> và <span class=\"math inline\">\\(\\overrightarrow{AB}+\\overrightarrow{AD}=\\overrightarrow{AC}\\)<\/span> (quy tắc hình bình hành); hai đường chéo <span class=\"math inline\">\\(\\overrightarrow{AC},\\overrightarrow{BD}\\)<\/span> không cùng phương nên không bằng nhau.", "mistake": "Coi hai vectơ cùng độ dài là bằng nhau (còn phải cùng hướng), hoặc viết <span class=\"math inline\">\\(\\overrightarrow{AB}=\\overrightarrow{CD}\\)<\/span> thay cho <span class=\"math inline\">\\(\\overrightarrow{AB}=\\overrightarrow{DC}\\)<\/span>.", "sol": "<p>a) <span class=\"math inline\">\\(\\overrightarrow{AB}+\\overrightarrow{BC}+\\overrightarrow{CD}+\\overrightarrow{DA}=\\vec{0}\\)<\/span>. Đúng<\/p>\n<p>b) <span class=\"math inline\">\\(\\overrightarrow{AB}=\\overrightarrow{CD}\\)<\/span>. Sai<\/p>\n<p>c) <span class=\"math inline\">\\(\\overrightarrow{AB}+\\overrightarrow{AD}=\\overrightarrow{AC}\\)<\/span>. Đúng<\/p>\n<p>d) <span class=\"math inline\">\\(\\overrightarrow{AD}=\\overrightarrow{BC}\\)<\/span>. Đúng<\/p>", "subs": ["<span class=\"math inline\">\\(\\overrightarrow{AB}+\\overrightarrow{BC}+\\overrightarrow{CD}+\\overrightarrow{DA}=\\vec{0}\\)<\/span>.", "<span class=\"math inline\">\\(\\overrightarrow{AB}=\\overrightarrow{CD}\\)<\/span>.", "<span class=\"math inline\">\\(\\overrightarrow{AB}+\\overrightarrow{AD}=\\overrightarrow{AC}\\)<\/span>.", "<span class=\"math inline\">\\(\\overrightarrow{AD}=\\overrightarrow{BC}\\)<\/span>."], "answers": [true, false, true, true]}, {"n": 3, "stem": "<p>Cho ba vectơ <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> không đồng phẳng. Xét các vectơ <span class=\"math inline\">\\(\\vec{x}=2\\vec{a}-\\vec{b},\\vec{y}=-4\\vec{a}+2\\vec{b},\\)<\/span><span class=\"math inline\">\\(\\vec{z}=-3\\vec{a}-2\\vec{c}\\)<\/span>.<\/p>", "hint": "Xét riêng từng ý. Với <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> không đồng phẳng, hai vectơ biểu diễn qua <span class=\"math inline\">\\(\\vec{a},\\vec{b},\\vec{c}\\)<\/span> cùng phương khi các hệ số tương ứng tỉ lệ; ba vectơ <span class=\"math inline\">\\(\\vec{x},\\vec{y},\\vec{z}\\)<\/span> đồng phẳng khi một vectơ là tổ hợp của hai vectơ còn lại (<span class=\"math inline\">\\(\\vec{z}=m\\vec{x}+n\\vec{y}\\)<\/span>), và luôn đồng phẳng nếu có hai vectơ cùng phương.", "mistake": "Chỉ so sánh một vài hệ số rồi kết luận cùng phương, hoặc quên rằng hai trong ba vectơ cùng phương thì ba vectơ đó đã đồng phẳng.", "sol": "<p>a) Sai<\/p>\n<p>b) Đúng. Ta thấy <span class=\"math inline\">\\(\\vec{y}=-2\\vec{x}\\)<\/span> nên <span class=\"math inline\">\\(\\vec{y},\\vec{x}\\)<\/span> cùng phương.<\/p>\n<p>c) Sai.<\/p>\n<p>d) Đúng. Do <span class=\"math inline\">\\(\\vec{y},\\vec{x}\\)<\/span> cùng phương nên ba vectơ <span class=\"math inline\">\\(\\vec{x},\\vec{y},\\vec{z}\\)<\/span> đồng phẳng.<\/p>", "subs": ["Hai vectơ <span class=\"math inline\">\\(\\vec{y},\\vec{z}\\)<\/span> cùng phương.", "Hai vectơ <span class=\"math inline\">\\(\\vec{y},\\vec{x}\\)<\/span> cùng phương.", "Hai vectơ <span class=\"math inline\">\\(\\vec{z},\\vec{x}\\)<\/span> cùng phương.", "Ba vectơ <span class=\"math inline\">\\(\\vec{x},\\vec{y},\\vec{z}\\)<\/span> đồng phẳng."], "answers": [false, true, false, true]}, {"n": 4, "stem": "<p>Cho hình chóp <span class=\"math inline\">\\(A.BCD\\)<\/span>. Gọi <span class=\"math inline\">\\(G\\)<\/span>là trọng tâm <span class=\"math inline\">\\(\\Delta BCD\\)<\/span>.<\/p>", "hint": "Xét riêng từng ý. Dùng quy tắc ba điểm <span class=\"math inline\">\\(\\overrightarrow{MN}+\\overrightarrow{NP}=\\overrightarrow{MP}\\)<\/span>, quy tắc hình bình hành, và với trung điểm <span class=\"math inline\">\\(I\\)<\/span> của <span class=\"math inline\">\\(AB\\)<\/span>: <span class=\"math inline\">\\(\\overrightarrow{MA}+\\overrightarrow{MB}=2\\overrightarrow{MI}\\)<\/span>; với trọng tâm <span class=\"math inline\">\\(G\\)<\/span> của tam giác <span class=\"math inline\">\\(ABC\\)<\/span>: <span class=\"math inline\">\\(\\overrightarrow{GA}+\\overrightarrow{GB}+\\overrightarrow{GC}=\\vec{0}\\)<\/span> và <span class=\"math inline\">\\(\\overrightarrow{MA}+\\overrightarrow{MB}+\\overrightarrow{MC}=3\\overrightarrow{MG}\\)<\/span>.", "mistake": "Xen sai điểm trung gian khi dùng quy tắc ba điểm (phải nối đúng \"điểm cuối của vectơ trước là điểm đầu của vectơ sau\"), hoặc viết <span class=\"math inline\">\\(\\overrightarrow{GA}+\\overrightarrow{GB}+\\overrightarrow{GC}=\\overrightarrow{GO}\\)<\/span> thay vì <span class=\"math inline\">\\(\\vec{0}\\)<\/span>.", "sol": "<p>a)<span class=\"math inline\">\\(\\overrightarrow{GD}+\\overrightarrow{GB}+\\overrightarrow{GC}=\\overrightarrow{GA}\\)<\/span>. Sai<\/p>\n<p>b)<span class=\"math inline\">\\(\\overrightarrow{AG}+\\overrightarrow{GB}=\\overrightarrow{AB}\\)<\/span>. Đúng<\/p>\n<p>c) <span class=\"math inline\">\\((\\overrightarrow{AG}+\\overrightarrow{GC})+(\\overrightarrow{AG}+\\overrightarrow{GB})=\\overrightarrow{AC}+\\overrightarrow{AD}\\)<\/span>. Sai<\/p>\n<p>d)<span class=\"math inline\">\\(3\\overrightarrow{AG}=\\overrightarrow{AB}+\\overrightarrow{AC}+\\overrightarrow{AD}\\)<\/span> . Đúng<\/p>", "subs": ["<span class=\"math inline\">\\(\\overrightarrow{GD}+\\overrightarrow{GB}+\\overrightarrow{GC}=\\overrightarrow{GA}\\)<\/span>.", "<span class=\"math inline\">\\(\\overrightarrow{AG}+\\overrightarrow{GB}=\\overrightarrow{AB}\\)<\/span>.", "<span class=\"math inline\">\\((\\overrightarrow{AG}+\\overrightarrow{GC})+(\\overrightarrow{AG}+\\overrightarrow{GB})=\\overrightarrow{AC}+\\overrightarrow{AD}\\)<\/span>.", "<span class=\"math inline\">\\(3\\overrightarrow{AG}=\\overrightarrow{AB}+\\overrightarrow{AC}+\\overrightarrow{AD}\\)<\/span> ."], "answers": [false, true, false, true]}]}]};
+(function(){
+  var secs = DATA.sections, total = 0;
+  secs.forEach(function(s){ total += s.questions.length; });
+  document.getElementById('pTotal').textContent = total;
+  if(!secs.some(function(s){ return s.kind === 'sa'; })){ var sg = document.getElementById('saGuide'); if(sg) sg.remove(); }
+  var quiz = document.getElementById('quiz');
+  var all = []; // {sec, q, st, el, api}
+  var submitted = false;
+
+  function el(tag, cls, html){ var e = document.createElement(tag); if(cls) e.className = cls; if(html !== undefined) e.innerHTML = html; return e; }
+  function typeset(node){
+    try{
+      if(window.MathJax && MathJax.typesetPromise){ return MathJax.typesetPromise(node ? [node] : undefined); }
+    }catch(e){}
+  }
+  function parseNum(s){
+    if(s === null || s === undefined) return NaN;
+    s = String(s).replace(/−/g,'-').replace(/\s+/g,'').replace(/°|º/g,'');
+    if(!s) return NaN;
+    var pct = false;
+    if(/%$/.test(s)){ pct = true; s = s.slice(0,-1); }
+    var v;
+    var m = s.match(/^([+-]?[\d.,]+)\/([+-]?[\d.,]+)$/);
+    if(m){
+      var a = parseFloat(m[1].replace(',','.')), b = parseFloat(m[2].replace(',','.'));
+      if(!isFinite(a) || !isFinite(b) || b === 0) return NaN;
+      v = a / b;
+    } else {
+      if(!/^[+-]?(\d+([.,]\d*)?|[.,]\d+)$/.test(s)) return NaN;
+      v = parseFloat(s.replace(',','.'));
+    }
+    if(pct) v = v / 100;
+    return v;
+  }
+  function fmtAns(a){ return String(a).replace('.',','); }
+
+  function updateBar(){
+    var checked = 0, ok = 0, bad = 0;
+    all.forEach(function(x){ if(x.st.locked){ checked++; if(x.st.ok) ok++; else bad++; } });
+    document.getElementById('pChecked').textContent = checked;
+    document.getElementById('pOk').textContent = ok;
+    document.getElementById('pBad').textContent = bad;
+    document.getElementById('pFill').style.width = (total ? 100*checked/total : 0) + '%';
+  }
+
+  function buildSolBlocks(card, q){
+    var box = card.querySelector('.after');
+    box.innerHTML = '';
+    return box;
+  }
+
+  function makeQuestion(sec, q, idx){
+    var card = el('div', 'q');
+    var st = {tries: 0, locked: false, ok: false, sel: null, tf: [null,null,null,null], val: ''};
+    card.appendChild(el('div', 'qhead', 'Câu ' + q.n));
+    card.appendChild(el('div', 'stem', q.stem));
+    var body = el('div');
+    card.appendChild(body);
+    var fb = el('div', 'fb');
+    var checkBtn = el('button', 'btn', 'Kiểm tra đáp án'); checkBtn.disabled = true;
+    var solBtn = el('button', 'btn ghost', 'Xem lời giải'); solBtn.style.display = 'none';
+    var acts = el('div', 'acts'); acts.appendChild(checkBtn); acts.appendChild(solBtn); acts.appendChild(fb);
+    card.appendChild(acts);
+    var hintBox = el('div', 'hint'); hintBox.style.display = 'none';
+    var misBox = el('div', 'mistake'); misBox.style.display = 'none';
+    var solBox = el('div', 'sol'); solBox.style.display = 'none';
+    card.appendChild(hintBox); card.appendChild(misBox); card.appendChild(solBox);
+
+    var api = {};
+    var optBtns = [], tfRows = [], input = null, corr = null;
+
+    function complete(){
+      if(sec.kind === 'mcq') return st.sel !== null;
+      if(sec.kind === 'tf') return st.tf.every(function(v){ return v !== null; });
+      return String(st.val).trim() !== '';
+    }
+    function isRight(){
+      if(sec.kind === 'mcq') return st.sel === q.answer;
+      if(sec.kind === 'tf') return st.tf.every(function(v,i){ return v === q.answers[i]; });
+      var raw = st.val;
+      if(q.pct) raw = String(raw).replace(/%\s*$/,'');
+      var x = parseNum(raw);
+      if(!isFinite(x)) return false;
+      var tol = (q.tol || 0) + 1e-9;
+      return [q.answer].concat(q.alt || []).some(function(a){
+        var k = parseNum(a);
+        return isFinite(k) && Math.abs(x - k) <= tol;
+      });
+    }
+    function refresh(){ checkBtn.disabled = st.locked || !complete(); }
+
+    if(sec.kind === 'mcq'){
+      var ob = el('div', 'opts');
+      q.options.forEach(function(html, i){
+        var L = 'ABCDEF'[i];
+        var b = el('button', 'opt'); b.type = 'button'; b.dataset.k = L;
+        b.innerHTML = '<span class="lab">' + L + '.</span><span class="txt">' + html + '</span>';
+        b.addEventListener('click', function(){
+          if(st.locked) return;
+          st.sel = L;
+          optBtns.forEach(function(x){ x.classList.toggle('sel', x.dataset.k === L); });
+          refresh();
+        });
+        optBtns.push(b); ob.appendChild(b);
+      });
+      body.appendChild(ob);
+    } else if(sec.kind === 'tf'){
+      var sb = el('div', 'subs');
+      q.subs.forEach(function(html, i){
+        var r = el('div', 'subrow');
+        r.appendChild(el('span', 'sl', 'abcd'[i] + ')'));
+        var s = el('div', 'sb', html);
+        r.appendChild(s);
+        var tf = el('div', 'tf');
+        [['Đ', true], ['S', false]].forEach(function(p){
+          var b = el('button', 'tfb', p[0]); b.type = 'button';
+          b.addEventListener('click', function(){
+            if(st.locked) return;
+            st.tf[i] = p[1];
+            Array.prototype.forEach.call(tf.children, function(c, ci){ c.classList.toggle('sel', st.tf[i] === (ci === 0)); });
+            refresh();
+          });
+          tf.appendChild(b);
+        });
+        r.appendChild(tf);
+        tfRows.push({row: r, tf: tf, sb: s});
+        sb.appendChild(r);
+      });
+      body.appendChild(sb);
+    } else {
+      var w = el('div', 'sa');
+      var lab = el('label', '', 'Đáp số:');
+      input = el('input'); input.type = 'text'; input.autocomplete = 'off'; input.setAttribute('autocapitalize','off'); input.spellcheck = false; input.placeholder = 'Nhập đáp số';
+      input.addEventListener('input', function(){ st.val = input.value; refresh(); });
+      input.addEventListener('keydown', function(e){ if(e.key === 'Enter' && !checkBtn.disabled){ checkBtn.click(); } });
+      corr = el('div', 'corr'); corr.style.display = 'none';
+      w.appendChild(lab); w.appendChild(input); w.appendChild(corr);
+      body.appendChild(w);
+    }
+
+    function lockUI(){
+      optBtns.forEach(function(b){ b.disabled = true; });
+      tfRows.forEach(function(r){ Array.prototype.forEach.call(r.tf.children, function(c){ c.disabled = true; }); });
+      if(input) input.disabled = true;
+      checkBtn.disabled = true;
+    }
+    function showAnswers(){
+      if(sec.kind === 'mcq'){
+        optBtns.forEach(function(b){
+          if(b.dataset.k === q.answer) b.classList.add('right');
+          else if(b.dataset.k === st.sel) b.classList.add('wrong');
+        });
+      } else if(sec.kind === 'tf'){
+        var n = 0;
+        tfRows.forEach(function(r, i){
+          var good = st.tf[i] === q.answers[i];
+          if(good) n++;
+          r.row.classList.add(good ? 'right' : 'wrong');
+          if(!good){
+            var a = el('span', 'ans', 'Đáp án đúng: ' + (q.answers[i] ? 'Đ' : 'S'));
+            r.sb.appendChild(a);
+          }
+        });
+        st.nRight = n;
+      } else {
+        input.classList.add(isRight() ? 'right' : 'wrong');
+        if(!isRight()){ corr.textContent = 'Đáp án đúng: ' + [q.answer].concat(q.alt || []).map(fmtAns).join(' (hoặc ') + ((q.alt && q.alt.length) ? ')'.repeat(q.alt.length) : ''); corr.style.display = 'block'; }
+      }
+    }
+    function fillAfter(withMistake){
+      hintBox.style.display = 'none';
+      if(withMistake && q.mistake){
+        misBox.innerHTML = '<b class="t">⚠️ Lỗi sai thường gặp</b><div>' + q.mistake + '</div>';
+        misBox.style.display = 'block';
+      }
+      solBox.innerHTML = '<h4>Hướng dẫn giải chi tiết</h4>' + (q.sol || '<p>Đáp án: ' + (sec.kind==='mcq' ? q.answer : sec.kind==='tf' ? q.answers.map(function(v,i){return 'abcd'[i]+') '+(v?'Đ':'S');}).join(', ') : fmtAns(q.answer)) + '</p>');
+      solBox.style.display = 'block';
+      typeset(card);
+    }
+    api.finish = function(ok, byAttempts){
+      st.locked = true; st.ok = ok;
+      card.classList.add(ok ? 'ok' : 'bad');
+      lockUI(); showAnswers();
+      if(ok){
+        fb.className = 'fb ok'; fb.textContent = '✓ Chính xác!';
+        solBtn.style.display = ''; solBtn.textContent = 'Xem lời giải';
+        misBox.style.display = 'none'; hintBox.style.display = 'none';
+        solBox.style.display = 'none';
+        solBox.innerHTML = '<h4>Hướng dẫn giải chi tiết</h4>' + (q.sol || '');
+      } else {
+        fb.className = 'fb bad';
+        if(sec.kind === 'tf') fb.textContent = '✗ Đúng ' + st.nRight + '/4 ý';
+        else fb.textContent = '✗ Chưa đúng';
+        solBtn.style.display = 'none';
+        fillAfter(true);
+      }
+      updateBar();
+    };
+    checkBtn.addEventListener('click', function(){
+      if(st.locked || !complete()) return;
+      st.tries++;
+      var ok = isRight();
+      if(ok){ api.finish(true); }
+      else if(st.tries === 1){
+        fb.className = 'fb info'; fb.textContent = 'Chưa đúng. Còn 1 lần thử.';
+        hintBox.innerHTML = '<b class="t">💡 Gợi ý</b><div>' + (q.hint || 'Đọc kĩ dữ kiện và áp dụng đúng công thức của bài.') + '</div>';
+        hintBox.style.display = 'block';
+        checkBtn.textContent = 'Kiểm tra lại';
+        typeset(hintBox);
+      } else { api.finish(false); }
+    });
+    solBtn.addEventListener('click', function(){
+      var open = solBox.style.display !== 'none';
+      if(open){ solBox.style.display = 'none'; solBtn.textContent = 'Xem lời giải'; }
+      else { solBox.style.display = 'block'; solBtn.textContent = 'Ẩn lời giải'; typeset(solBox); }
+    });
+    api.grade = function(){
+      // used on submit: grade current answers of an unlocked question
+      var ok = complete() && isRight();
+      st.tries = Math.max(st.tries, 1);
+      api.finish(ok);
+    };
+    api.card = card; api.st = st; api.sec = sec; api.q = q;
+    return api;
+  }
+
+  secs.forEach(function(sec, si){
+    var h = el('h2', 'part', sec.title + '<small>' + (sec.note || '') + '</small>');
+    quiz.appendChild(h);
+    sec.questions.forEach(function(q, qi){
+      var api = makeQuestion(sec, q, qi);
+      all.push({sec: sec, q: q, st: api.st, api: api});
+      quiz.appendChild(api.card);
+    });
+  });
+  updateBar();
+
+  document.getElementById('submitBtn').addEventListener('click', function(){
+    if(submitted) return;
+    var pending = all.filter(function(x){ return !x.st.locked; }).length;
+    var msg = pending ? ('Còn ' + pending + ' câu chưa kiểm tra (câu bỏ trống tính là sai). Bạn có chắc chắn muốn nộp bài?') : 'Bạn có chắc chắn muốn nộp bài?';
+    if(!window.confirm(msg)) return;
+    submitted = true;
+    all.forEach(function(x){ if(!x.st.locked) x.api.grade(); });
+    this.disabled = true;
+    var ok = 0, bad = 0, per = {};
+    all.forEach(function(x){
+      var k = x.sec.title;
+      per[k] = per[k] || {ok: 0, n: 0};
+      per[k].n++;
+      if(x.st.ok){ ok++; per[k].ok++; } else bad++;
+    });
+    var r = document.getElementById('result');
+    var html = '<div class="big">' + ok + ' / ' + total + ' câu đúng</div><div>Số câu sai: <b>' + bad + '</b></div>';
+    var keys = Object.keys(per);
+    if(keys.length >= 2){
+      html += '<table><tr><th>Phần</th><th>Đúng</th></tr>';
+      keys.forEach(function(k){ html += '<tr><td>' + k + '</td><td>' + per[k].ok + '/' + per[k].n + '</td></tr>'; });
+      html += '</table>';
+    }
+    r.innerHTML = html; r.style.display = 'block';
+    updateBar();
+    r.scrollIntoView({behavior: 'smooth', block: 'center'});
+    typeset();
+  });
+})();
+</script>
+</body>
+</html>
