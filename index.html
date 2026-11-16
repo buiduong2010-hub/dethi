@@ -61,6 +61,8 @@
         #adm_list .adm_row { display:flex; align-items:center; gap:8px; padding:6px 0; border-bottom:1px solid #eee; font-size:14px; }
         #adm_list .adm_row span { flex:1; }
         #adm_list .adm_x { background:#e74c3c; color:white; border:none; border-radius:6px; cursor:pointer; padding:4px 10px; }
+        .menu-link.sub { padding-left:38px; font-size:13px; background:#fafcff; }
+        .chap-files { border-bottom:1px solid #eef; }
     </style>
 </head>
 <body>
@@ -176,13 +178,13 @@
         <option value="toan12">🎓 Toán 12 (theo chương)</option>
     </select>
     <div id="adm_chapWrap" style="display:none">
-        <label>Gắn vào chương</label>
+        <label>Gắn vào chương <span style="font-weight:normal;color:#888">(đăng nhiều file vào cùng một chương được)</span></label>
         <select id="adm_chap"></select>
     </div>
     <label>File HTML</label>
     <input type="file" id="adm_file" accept=".html,.htm">
     <div id="adm_nameWrap">
-        <label>Tên hiển thị</label>
+        <label>Tên hiển thị <span style="font-weight:normal;color:#888">(VD: Bài tập 1 – Đơn điệu của hàm số)</span></label>
         <input type="text" id="adm_name" placeholder="VD: Đề thi Sở Hà Nội">
     </div>
     <button class="adm_btn" id="adm_go">⬆️ Đăng lên</button>
@@ -238,7 +240,7 @@
         window.open(shareUrl, '_blank', 'width=600,height=500');
     };
     window.onclick = function(event) {
-        if (!event.target.matches('.nav-link')) {
+        if (!event.target.matches('.nav-link') && !event.target.closest('.dropdown')) {
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
         }
     }
@@ -258,13 +260,29 @@
             });
         });
     }
+    function chapFiles(it) { return (it[2] && it[2].length) ? it[2] : (it[0] ? [[it[0], '📄 Tài liệu']] : []); }
     function renderMenu(data) {
         currentData = data;
         dropdowns().forEach((dd, i) => {
             const items = data[KEYS[i]];
             if (!items) return;
+            dd.querySelectorAll('.chap-files').forEach(a => a.remove());
             dd.querySelectorAll('a.menu-link').forEach(a => a.remove());
             items.forEach(it => {
+                if (CHAPTER[KEYS[i]]) {
+                    const files = chapFiles(it);
+                    if (files.length) {
+                        const h = document.createElement('a');
+                        h.className = 'menu-link'; h.href = '#';
+                        h.textContent = it[1] + '  ▾ (' + files.length + ')';
+                        const sub = document.createElement('div');
+                        sub.className = 'chap-files'; sub.style.display = 'none';
+                        files.forEach(f => { const b = document.createElement('a'); b.className = 'menu-link sub'; b.href = f[0]; b.textContent = f[1]; sub.appendChild(b); });
+                        h.onclick = e => { e.preventDefault(); sub.style.display = sub.style.display === 'none' ? 'block' : 'none'; };
+                        dd.appendChild(h); dd.appendChild(sub);
+                        return;
+                    }
+                }
                 const a = document.createElement('a');
                 a.className = 'menu-link';
                 a.href = it[0] || '#';
@@ -328,19 +346,25 @@
         const sec = $('adm_sec').value, items = currentData[sec] || [];
         const isCh = !!CHAPTER[sec];
         $('adm_chapWrap').style.display = isCh ? 'block' : 'none';
-        $('adm_nameWrap').style.display = isCh ? 'none' : 'block';
         const ch = $('adm_chap'), old = ch.value; ch.innerHTML = '';
-        if (isCh) items.forEach((it, i) => { const o = document.createElement('option'); o.value = i; o.textContent = it[1] + (it[0] ? '  ✔' : ''); ch.appendChild(o); });
+        if (isCh) items.forEach((it, i) => { const o = document.createElement('option'); o.value = i; o.textContent = it[1] + (chapFiles(it).length ? '  ✔ (' + chapFiles(it).length + ' file)' : ''); ch.appendChild(o); });
         if (old) ch.value = old;
         const box = $('adm_list'); box.innerHTML = '';
-        items.forEach(it => {
+        const addRow = (text, bold, path, name) => {
             const row = document.createElement('div'); row.className = 'adm_row';
-            const sp = document.createElement('span'); sp.textContent = it[1] + (it[0] ? '' : '  (chưa có file)'); row.appendChild(sp);
-            if (it[0]) {
+            const sp = document.createElement('span'); sp.textContent = text; if (bold) sp.style.fontWeight = '700'; row.appendChild(sp);
+            if (path) {
                 const x = document.createElement('button'); x.className = 'adm_x'; x.textContent = '✕'; x.title = 'Gỡ khỏi menu';
-                x.onclick = () => admRemove(sec, it[0], it[1]); row.appendChild(x);
+                x.onclick = () => admRemove(sec, path, name); row.appendChild(x);
             }
             box.appendChild(row);
+        };
+        items.forEach(it => {
+            if (isCh) {
+                const files = chapFiles(it);
+                addRow(it[1] + (files.length ? '' : '  (chưa có file)'), true);
+                files.forEach(f => { addRow('     ↳ ' + f[1], false, f[0], f[1]); });
+            } else addRow(it[1], false, it[0], it[1]);
         });
     }
     $('adm_sec').onchange = admRenderList;
@@ -352,7 +376,7 @@
         try {
             msg('Đang gỡ...');
             const { data, sha } = await getDe();
-            if (CHAPTER[sec]) data[sec].forEach(it => { if (it[0] === path) it[0] = null; });
+            if (CHAPTER[sec]) data[sec].forEach(it => { const f = chapFiles(it).filter(x => x[0] !== path); it[2] = f; it[0] = f.length ? f[0][0] : null; });
             else data[sec] = data[sec].filter(it => it[0] !== path);
             await putDe(data, sha, 'Gỡ khỏi menu: ' + name);
             renderMenu(data); msg('Đã gỡ khỏi menu.', true);
@@ -364,7 +388,7 @@
         const sec = $('adm_sec').value, f = $('adm_file').files[0], isCh = !!CHAPTER[sec];
         if (!f) { msg('Chưa chọn file.', false); return; }
         let name = $('adm_name').value.trim();
-        if (!isCh && !name) { msg('Chưa nhập tên hiển thị.', false); return; }
+        if (!name) { msg('Chưa nhập tên hiển thị.', false); return; }
         if (isCh && !$('adm_chap').value) { msg('Chưa chọn chương.', false); return; }
         const btn = this; btn.disabled = true;
         try {
@@ -384,7 +408,11 @@
             msg('Đang cập nhật menu...');
             const { data, sha } = await getDe();
             if (isCh) {
-                data[sec][parseInt($('adm_chap').value, 10)][0] = path;
+                if (!/^\p{Extended_Pictographic}/u.test(name)) name = '📄 ' + name;
+                const it = data[sec][parseInt($('adm_chap').value, 10)];
+                const files = chapFiles(it).filter(x => x[0] !== path);
+                files.push([path, name]);
+                it[2] = files; it[0] = files[0][0];
             } else {
                 if (!/^\p{Extended_Pictographic}/u.test(name)) name = (sec === 'dgnl' ? '📑 ' : '📝 ') + name;
                 data[sec] = data[sec].filter(it => it[0] !== path);
